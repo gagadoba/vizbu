@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ВИзбу — Живите в городе, дача в порядке</title>
+  <title>ВИзбу — Бытовые услуги для дачи и СНТ</title>
   <style>
     :root {
       --green:  #2D6A4F;
@@ -46,10 +46,16 @@
     }
     .nav-tab:hover { background: rgba(255,255,255,.1); color: #fff; }
     .nav-tab.active { background: rgba(255,255,255,.15); color: #fff; }
-    .hdr-phone {
-      color: #fff; font-weight: 700; font-size: .9rem;
-      text-decoration: none; white-space: nowrap; margin-left: auto; flex-shrink: 0;
+    .hdr-contacts { display:flex; align-items:center; gap:8px; margin-left:auto; flex-shrink:0; }
+    .hdr-phone { color:#fff; font-weight:700; font-size:.9rem; text-decoration:none; white-space:nowrap; }
+    .hdr-wa, .hdr-tg {
+      color:#fff; font-weight:800; font-size:.75rem;
+      border:1.5px solid rgba(255,255,255,.4); border-radius:6px;
+      padding:3px 8px; text-decoration:none; transition:background .15s;
     }
+    .hdr-wa:hover { background:#25D366; border-color:#25D366; }
+    .hdr-tg:hover { background:#2AABEE; border-color:#2AABEE; }
+    @media(max-width:600px){ .hdr-wa,.hdr-tg{ display:none; } }
     @media(max-width:680px){
       nav { display: none; }
       .mobile-tabs { display: flex; overflow-x: auto; gap: 4px;
@@ -389,7 +395,11 @@
       <button class="nav-tab" data-page="insurance">🛡️ ВИзбу Страхование</button>
       <button class="nav-tab" data-page="management">🔑 ВИзбу Управление</button>
     </nav>
-    <a href="tel:+7XXXXXXXXXX" class="hdr-phone">📞 +7 (XXX) XXX-XX-XX</a>
+    <div class="hdr-contacts">
+      <a href="tel:+79119507358" class="hdr-phone">📞 +7 911 950-73-58</a>
+      <a href="https://wa.me/79119507358" target="_blank" class="hdr-wa">WA</a>
+      <a href="https://t.me/karina_vizbu" target="_blank" class="hdr-tg">TG</a>
+    </div>
   </div>
   <div class="mobile-tabs">
     <button class="nav-tab active" data-page="services">🏡 Услуги</button>
@@ -406,8 +416,8 @@
   <!-- HERO -->
   <div class="hero">
     <div class="hero-tag">Сервис для загородной жизни · с 2026 года</div>
-    <h1>Живите в городе —<br/><em>дача в порядке</em></h1>
-    <div class="hero-slogan">Один звонок решает любую задачу на вашем участке</div>
+    <h1>Ваш участок<br/>в <em>надёжных руках</em></h1>
+    <div class="hero-slogan">Один звонок — и задача решена</div>
     <p>70+ услуг от проверенных местных мастеров. Покос, дрова, сантехник, электрик — и всё что между ними.</p>
     <div class="search-box">
       <span class="si">🔍</span>
@@ -416,7 +426,7 @@
   </div>
 
   <!-- О НАС -->
-  <section class="about">
+  <section class="about" id="about-section">
     <div class="about-inner">
       <div class="about-text">
         <div class="pretitle">Кто мы такие</div>
@@ -483,7 +493,7 @@
   </section>
 
   <!-- КАТАЛОГ -->
-  <div class="catalog-header">
+  <div class="catalog-header" id="catalog-section">
     <h2>Каталог услуг</h2>
     <div class="filter-row" id="filters">
       <button class="fbtn active" data-cat="Все">Все</button>
@@ -720,19 +730,154 @@
   </div>
 </div>
 
-<a href="tel:+7XXXXXXXXXX" class="ph-float">📞 Позвонить</a>
+<a href="tel:+79119507358" class="ph-float">📞 Позвонить</a>
+
+<!-- ── АДМИН-ПАНЕЛЬ ─────────────────────────────────── -->
+<div id="admin-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;overflow-y:auto;padding:20px;">
+  <div style="max-width:900px;margin:0 auto;background:#fff;border-radius:16px;overflow:hidden;">
+    <div style="background:#1b4332;color:#fff;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="font-size:1.2rem;font-weight:900;">🔐 ВИзбу — Панель заявок</div>
+        <div style="font-size:.8rem;opacity:.7;margin-top:2px;">Только для администратора</div>
+      </div>
+      <button onclick="closeAdmin()" style="background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:8px;padding:8px 14px;cursor:pointer;font-size:.9rem;">✕ Закрыть</button>
+    </div>
+    <div style="padding:20px 24px;">
+      <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+        <button onclick="filterAdmin('all')" id="af-all" style="padding:7px 16px;border-radius:999px;border:1.5px solid #2D6A4F;background:#2D6A4F;color:#fff;cursor:pointer;font-weight:600;font-size:.83rem;">Все</button>
+        <button onclick="filterAdmin('new')" id="af-new" style="padding:7px 16px;border-radius:999px;border:1.5px solid #E5EDE8;background:#fff;cursor:pointer;font-weight:600;font-size:.83rem;">🆕 Новые</button>
+        <button onclick="filterAdmin('work')" id="af-work" style="padding:7px 16px;border-radius:999px;border:1.5px solid #E5EDE8;background:#fff;cursor:pointer;font-weight:600;font-size:.83rem;">⏳ В работе</button>
+        <button onclick="filterAdmin('done')" id="af-done" style="padding:7px 16px;border-radius:999px;border:1.5px solid #E5EDE8;background:#fff;cursor:pointer;font-weight:600;font-size:.83rem;">✅ Выполнены</button>
+        <button onclick="clearDone()" style="padding:7px 16px;border-radius:999px;border:1.5px solid #fecaca;background:#fff;color:#dc2626;cursor:pointer;font-weight:600;font-size:.83rem;margin-left:auto;">🗑 Удалить выполненные</button>
+      </div>
+      <div id="admin-orders"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .order-card { border:1px solid #E2EBE6; border-radius:12px; padding:16px; margin-bottom:12px; background:#fff; }
+  .order-card.status-new { border-left:4px solid #F4A23A; }
+  .order-card.status-work { border-left:4px solid #2563EB; }
+  .order-card.status-done { border-left:4px solid #2D6A4F; opacity:.6; }
+  .order-head { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+  .order-svc { font-weight:800; font-size:1rem; color:#1A1A1A; }
+  .order-date { font-size:.75rem; color:#6B7280; }
+  .order-info { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+  .order-tag { font-size:.8rem; background:#F4F7F4; border-radius:6px; padding:3px 10px; color:#1A1A1A; }
+  .order-comm { font-size:.85rem; color:#6B7280; margin-bottom:12px; }
+  .order-actions { display:flex; gap:8px; flex-wrap:wrap; }
+  .btn-status { padding:6px 14px; border-radius:999px; border:1.5px solid #E2EBE6; background:#fff; cursor:pointer; font-size:.78rem; font-weight:700; font-family:inherit; transition:all .15s; }
+  .btn-status:hover { border-color:#2D6A4F; color:#2D6A4F; }
+  .btn-call { background:#2D6A4F; color:#fff; border:none; border-radius:999px; padding:6px 16px; font-weight:700; font-size:.78rem; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:5px; }
+  .btn-wa { background:#25D366; color:#fff; border:none; border-radius:999px; padding:6px 16px; font-weight:700; font-size:.78rem; cursor:pointer; text-decoration:none; }
+  .empty-state { text-align:center; padding:48px 20px; color:#6B7280; font-size:.95rem; }
+</style>
+
+<script>
+let adminFilter = 'all';
+
+function openAdmin() {
+  const pwd = prompt('Пароль:');
+  if (pwd !== 'vizbu2026') { alert('Неверный пароль'); return; }
+  document.getElementById('admin-overlay').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  renderAdmin();
+}
+function closeAdmin() {
+  document.getElementById('admin-overlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+function filterAdmin(f) {
+  adminFilter = f;
+  ['all','new','work','done'].forEach(x => {
+    const b = document.getElementById('af-'+x);
+    b.style.background = x === f ? '#2D6A4F' : '#fff';
+    b.style.color = x === f ? '#fff' : '#1A1A1A';
+    b.style.borderColor = x === f ? '#2D6A4F' : '#E5EDE8';
+  });
+  renderAdmin();
+}
+function setStatus(id, status) {
+  const orders = JSON.parse(localStorage.getItem('vizbu_orders') || '[]');
+  const o = orders.find(x => x.id === id);
+  if (o) { o.status = status; localStorage.setItem('vizbu_orders', JSON.stringify(orders)); }
+  renderAdmin();
+}
+function clearDone() {
+  if (!confirm('Удалить все выполненные заявки?')) return;
+  const orders = JSON.parse(localStorage.getItem('vizbu_orders') || '[]');
+  localStorage.setItem('vizbu_orders', JSON.stringify(orders.filter(o => o.status !== 'done')));
+  renderAdmin();
+}
+function renderAdmin() {
+  const orders = JSON.parse(localStorage.getItem('vizbu_orders') || '[]');
+  const filtered = adminFilter === 'all' ? orders : orders.filter(o =>
+    adminFilter === 'new' ? o.status === 'new' :
+    adminFilter === 'work' ? o.status === 'work' : o.status === 'done'
+  );
+  const statusLabel = { new:'🆕 Новая', work:'⏳ В работе', done:'✅ Выполнена' };
+  const container = document.getElementById('admin-orders');
+
+  if (!filtered.length) {
+    container.innerHTML = '<div class="empty-state">Заявок пока нет</div>';
+    return;
+  }
+  container.innerHTML = filtered.map(o => `
+    <div class="order-card status-${o.status}">
+      <div class="order-head">
+        <div>
+          <div class="order-svc">${o.svc}</div>
+          <div class="order-date">${o.date} · ${statusLabel[o.status] || o.status}</div>
+        </div>
+      </div>
+      <div class="order-info">
+        <span class="order-tag">👤 ${o.name}</span>
+        <span class="order-tag">📱 ${o.phone}</span>
+        ${o.addr ? `<span class="order-tag">📍 ${o.addr}</span>` : ''}
+      </div>
+      ${o.comm ? `<div class="order-comm">💬 ${o.comm}</div>` : ''}
+      <div class="order-actions">
+        <a href="tel:${o.phone.replace(/\D/g,'')}" class="btn-call">📞 Позвонить</a>
+        <a href="https://wa.me/${o.phone.replace(/\D/g,'').replace(/^8/,'7')}" target="_blank" class="btn-wa">WA</a>
+        ${o.status !== 'work' ? `<button class="btn-status" onclick="setStatus(${o.id},'work')">→ В работе</button>` : ''}
+        ${o.status !== 'done' ? `<button class="btn-status" onclick="setStatus(${o.id},'done')">✅ Выполнена</button>` : ''}
+        ${o.status !== 'new'  ? `<button class="btn-status" onclick="setStatus(${o.id},'new')">↩ Вернуть</button>` : ''}
+      </div>
+    </div>`).join('');
+}
+// Кликнуть логотип 3 раза — открыть админ
+let logoClicks = 0, logoTimer;
+document.querySelector('.logo').addEventListener('click', () => {
+  logoClicks++;
+  clearTimeout(logoTimer);
+  logoTimer = setTimeout(() => logoClicks = 0, 2000);
+  if (logoClicks >= 3) { logoClicks = 0; openAdmin(); }
+});
+</script>
 
 <footer>
-  <p><strong>ВИзбу</strong> — живите в городе, дача в порядке</p>
+  <p><strong>ВИзбу</strong> — ваш участок в надёжных руках</p>
   <div class="footer-products">
     <span>🏡 Услуги для дачи</span>
     <span>🛡️ ВИзбу Страхование</span>
     <span>🔑 ВИзбу Управление</span>
   </div>
-  <p style="margin-top:10px;"><a href="tel:+7XXXXXXXXXX">+7 (XXX) XXX-XX-XX</a> · 2026</p>
+  <p style="margin-top:10px;">
+    <a href="tel:+79119507358">+7 911 950-73-58</a> ·
+    <a href="https://wa.me/79119507358" target="_blank">WhatsApp</a> ·
+    <a href="https://t.me/karina_vizbu" target="_blank">Telegram</a> · 2026
+  </p>
+  <p style="margin-top:8px;font-size:.72rem;opacity:.4;cursor:pointer;" onclick="openAdmin()">Вход для администратора</p>
 </footer>
 
 <script>
+// ── TELEGRAM ───────────────────────────────────────────────────────
+// Инструкция:
+// 1. Напишите @BotFather → /newbot → получите BOT_TOKEN
+// 2. Напишите своему боту /start с аккаунта @karina_vizbu
+// 3. Откройте: https://api.telegram.org/bot{ВАШ_ТОКЕН}/getUpdates
+// 4. Скопируйте число из поля "id" — это ваш CHAT_ID
 const BOT_TOKEN = 'YOUR_BOT_TOKEN';
 const CHAT_ID   = 'YOUR_CHAT_ID';
 
@@ -1056,7 +1201,18 @@ document.getElementById('filters').addEventListener('click', e => {
   render();
 });
 
-searchEl.addEventListener('input', () => { query = searchEl.value; render(); });
+searchEl.addEventListener('input', () => {
+  query = searchEl.value;
+  render();
+  const aboutSection = document.getElementById('about-section');
+  const catalogSection = document.getElementById('catalog-section');
+  if (query.length > 0) {
+    aboutSection.style.display = 'none';
+    catalogSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+    aboutSection.style.display = '';
+  }
+});
 
 // ── МОДАЛКА ───────────────────────────────────────────────────────
 const overlay = document.getElementById('overlay');
@@ -1111,7 +1267,14 @@ document.getElementById('form').addEventListener('submit', async e => {
     }
   } catch {}
 
-  console.log('📋 Заявка:', { svc, name, phone, addr, comm });
+  // Сохраняем в localStorage для админ-панели
+  const order = { id: Date.now(), svc, name, phone, addr, comm,
+                  date: new Date().toLocaleString('ru-RU'), status: 'new' };
+  const orders = JSON.parse(localStorage.getItem('vizbu_orders') || '[]');
+  orders.unshift(order);
+  localStorage.setItem('vizbu_orders', JSON.stringify(orders));
+
+  console.log('📋 Заявка:', order);
   document.getElementById('m-form').style.display = 'none';
   document.getElementById('m-ok').style.display   = 'block';
   btn.textContent = 'Отправить заявку →'; btn.disabled = false;
