@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ВИзбу — Живите в городе, дача в порядке</title>
+  <style>
+    :root {
+      --green:  #2D6A4F;
+      --green2: #40916C;
+      --green3: #1b4332;
+      --accent: #F4A23A;
+      --blue:   #2563EB;
+      --blue2:  #1d4ed8;
+      --purple: #7C3AED;
+      --bg:     #F4F7F4;
+      --card:   #fff;
+      --border: #E2EBE6;
+      --text:   #1A1A1A;
+      --muted:  #6B7280;
+      --r:      14px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+           background: var(--bg); color: var(--text); line-height: 1.55; }
+
+    /* ───── HEADER ───── */
+    header {
+      background: var(--green3);
+      position: sticky; top: 0; z-index: 200;
+      box-shadow: 0 2px 16px rgba(0,0,0,.3);
+    }
+    .hdr {
+      max-width: 1200px; margin: 0 auto; padding: 0 20px;
+      display: flex; align-items: center; gap: 0; height: 60px;
+    }
+    .logo { font-size: 1.45rem; font-weight: 900; color: #fff;
+            letter-spacing: -.5px; margin-right: 32px; white-space: nowrap; flex-shrink: 0; }
+    .logo em { color: var(--accent); font-style: normal; }
+    nav { display: flex; gap: 2px; flex: 1; }
+    .nav-tab {
+      padding: 8px 16px; border-radius: 8px; border: none;
+      background: none; color: rgba(255,255,255,.7);
+      font-size: .88rem; font-weight: 600; cursor: pointer;
+      font-family: inherit; transition: all .15s; white-space: nowrap;
+    }
+    .nav-tab:hover { background: rgba(255,255,255,.1); color: #fff; }
+    .nav-tab.active { background: rgba(255,255,255,.15); color: #fff; }
+    .hdr-phone {
+      color: #fff; font-weight: 700; font-size: .9rem;
+      text-decoration: none; white-space: nowrap; margin-left: auto; flex-shrink: 0;
+    }
+    @media(max-width:680px){
+      nav { display: none; }
+      .mobile-tabs { display: flex; overflow-x: auto; gap: 4px;
+                     padding: 8px 16px; background: var(--green3); }
+    }
+    @media(min-width:681px){ .mobile-tabs { display: none; } }
+    .mobile-tabs .nav-tab { flex-shrink: 0; }
+
+    /* ───── PAGE SECTIONS ───── */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ───── HERO ───── */
+    .hero {
+      background: linear-gradient(140deg, var(--green3) 0%, var(--green2) 100%);
+      color: #fff; text-align: center; padding: 60px 20px 52px;
+    }
+    .hero-tag {
+      display: inline-block; background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.3); border-radius: 999px;
+      padding: 5px 16px; font-size: .8rem; font-weight: 600;
+      margin-bottom: 16px; letter-spacing: .3px;
+    }
+    .hero h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 900;
+               line-height: 1.15; margin-bottom: 12px; }
+    .hero h1 em { color: var(--accent); font-style: normal; }
+    .hero-slogan {
+      font-size: clamp(1rem, 2.5vw, 1.2rem); opacity: .9;
+      margin-bottom: 8px; font-weight: 500;
+    }
+    .hero p { opacity: .75; font-size: .95rem; max-width: 520px;
+              margin: 0 auto 34px; }
+    .search-box { max-width: 560px; margin: 0 auto; position: relative; }
+    .search-box input {
+      width: 100%; padding: 16px 20px 16px 52px;
+      border-radius: 999px; border: none; font-size: 1rem;
+      box-shadow: 0 6px 28px rgba(0,0,0,.25); outline: none; color: var(--text);
+    }
+    .search-box input::placeholder { color: #9ca3af; }
+    .si { position: absolute; left: 18px; top: 50%;
+          transform: translateY(-50%); font-size: 1.1rem; pointer-events: none; }
+
+    /* ───── ABOUT ───── */
+    .about { background: #fff; }
+    .about-inner {
+      max-width: 1200px; margin: 0 auto; padding: 72px 20px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;
+    }
+    @media(max-width:720px){ .about-inner{ grid-template-columns:1fr; gap:36px; padding:48px 20px; } }
+
+    .about-text .pretitle {
+      font-size: .75rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--green); margin-bottom: 10px;
+    }
+    .about-text h2 { font-size: clamp(1.5rem, 3.5vw, 2.1rem); font-weight: 900;
+                     line-height: 1.2; margin-bottom: 18px; }
+    .about-text h2 em { color: var(--green); font-style: normal; }
+    .about-text .lead {
+      font-size: 1.05rem; color: var(--text); margin-bottom: 16px; font-weight: 500;
+    }
+    .about-text p { color: var(--muted); font-size: .95rem; margin-bottom: 14px; }
+
+    .about-points { list-style: none; margin: 24px 0; display: flex; flex-direction: column; gap: 14px; }
+    .about-points li { display: flex; gap: 12px; align-items: flex-start; }
+    .chk {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--green); color: #fff; font-size: .72rem; font-weight: 900;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+    }
+    .about-points li div strong { display: block; font-size: .95rem; margin-bottom: 1px; }
+    .about-points li div span { font-size: .85rem; color: var(--muted); }
+
+    .about-right { display: flex; flex-direction: column; gap: 20px; }
+    .about-img { border-radius: 18px; overflow: hidden; height: 280px; }
+    .about-img img { width: 100%; height: 100%; object-fit: cover; }
+    .about-stats {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    .stat {
+      background: var(--bg); border-radius: 12px; padding: 20px 16px; text-align: center;
+      border: 1px solid var(--border);
+    }
+    .stat-n { font-size: 2rem; font-weight: 900; color: var(--green); line-height: 1; }
+    .stat-l { font-size: .78rem; color: var(--muted); margin-top: 4px; }
+
+    .about-quote {
+      background: var(--green); border-radius: 14px; padding: 22px 20px;
+      color: #fff; font-size: .95rem; line-height: 1.6;
+    }
+    .about-quote strong { color: var(--accent); }
+
+    /* ───── FILTERS ───── */
+    .catalog-header {
+      max-width: 1200px; margin: 0 auto; padding: 32px 20px 12px;
+    }
+    .catalog-header h2 { font-size: 1.5rem; font-weight: 900; margin-bottom: 16px; }
+    .filter-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .fbtn {
+      padding: 7px 16px; border-radius: 999px;
+      border: 1.5px solid var(--border); background: var(--card);
+      font-size: .82rem; cursor: pointer; font-family: inherit; color: var(--text);
+      transition: all .15s;
+    }
+    .fbtn.active, .fbtn:hover { background: var(--green); border-color: var(--green); color: #fff; }
+
+    /* ───── GRID ───── */
+    .grid-wrap { max-width: 1200px; margin: 0 auto; padding: 16px 20px 80px; }
+    .count { font-size: .84rem; color: var(--muted); margin-bottom: 16px; }
+    .sg { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 18px; }
+
+    /* ───── CARD ───── */
+    .card {
+      background: var(--card); border-radius: var(--r);
+      overflow: hidden; border: 1px solid var(--border);
+      box-shadow: 0 1px 6px rgba(0,0,0,.05);
+      transition: box-shadow .2s, transform .2s;
+      display: flex; flex-direction: column;
+    }
+    .card:hover { box-shadow: 0 8px 30px rgba(0,0,0,.1); transform: translateY(-4px); }
+    .card-photo { width: 100%; height: 175px; object-fit: cover; display: block; background: #d4e6db; }
+    .card-ph-fb {
+      width: 100%; height: 175px; display: none;
+      align-items: center; justify-content: center;
+      font-size: 3rem; background: linear-gradient(135deg, #e8f5ee, #d4e6db);
+    }
+    .card-body { padding: 15px; flex: 1; display: flex; flex-direction: column; }
+    .card-cat { font-size: .68rem; font-weight: 800; text-transform: uppercase;
+                letter-spacing: .6px; color: var(--green); margin-bottom: 3px; }
+    .card-name { font-size: 1rem; font-weight: 800; margin-bottom: 5px; }
+    .card-desc { font-size: .83rem; color: var(--muted); flex: 1; margin-bottom: 13px; }
+    .card-ft { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .card-price { font-size: .92rem; font-weight: 800; color: var(--green); }
+    .btn-req {
+      background: var(--accent); color: #fff; border: none; border-radius: 999px;
+      padding: 8px 16px; font-size: .8rem; font-weight: 700;
+      cursor: pointer; font-family: inherit; white-space: nowrap;
+      transition: background .15s, transform .1s;
+    }
+    .btn-req:hover { background: #e08f25; transform: scale(1.03); }
+
+    /* ───── NO RESULTS ───── */
+    .no-res { display:none; text-align:center; padding:60px 20px; color:var(--muted); }
+    .no-res .e { font-size:2.8rem; margin-bottom:10px; }
+
+    /* ───── INSURANCE PAGE ───── */
+    .ins-hero {
+      background: linear-gradient(135deg, #1e3a5f 0%, var(--blue) 100%);
+      color: #fff; padding: 64px 20px; text-align: center;
+    }
+    .ins-hero .badge { background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3);
+                       border-radius: 999px; padding: 5px 16px; font-size: .78rem;
+                       font-weight: 700; display: inline-block; margin-bottom: 16px; }
+    .ins-hero h1 { font-size: clamp(1.7rem, 4vw, 2.5rem); font-weight: 900;
+                   margin-bottom: 12px; line-height: 1.2; }
+    .ins-hero h1 em { color: #93C5FD; font-style: normal; }
+    .ins-hero p { opacity: .85; max-width: 520px; margin: 0 auto; font-size: 1rem; }
+
+    .ins-content { max-width: 1100px; margin: 0 auto; padding: 64px 20px; }
+    .ins-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-bottom: 56px; }
+    .ins-card {
+      background: #fff; border-radius: var(--r); padding: 28px 24px;
+      border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,.05);
+      transition: box-shadow .2s, transform .2s;
+    }
+    .ins-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,.1); transform: translateY(-3px); }
+    .ins-icon { font-size: 2.2rem; margin-bottom: 14px; }
+    .ins-card h3 { font-size: 1.05rem; font-weight: 800; margin-bottom: 8px; }
+    .ins-card p { font-size: .88rem; color: var(--muted); line-height: 1.55; margin-bottom: 14px; }
+    .ins-price { font-size: .82rem; font-weight: 700; color: var(--blue);
+                 background: #EFF6FF; padding: 4px 10px; border-radius: 999px; display: inline-block; }
+
+    .ins-how { background: #fff; border-radius: 20px; padding: 44px 36px;
+               border: 1px solid var(--border); margin-bottom: 32px; }
+    .ins-how h2 { font-size: 1.5rem; font-weight: 900; margin-bottom: 28px; text-align: center; }
+    .ins-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; }
+    .ins-step { text-align: center; }
+    .ins-step-n {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: var(--blue); color: #fff; font-weight: 900; font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 12px;
+    }
+    .ins-step h4 { font-size: .93rem; font-weight: 700; margin-bottom: 5px; }
+    .ins-step p { font-size: .82rem; color: var(--muted); }
+
+    .ins-cta { background: var(--blue); border-radius: 16px; padding: 36px 28px;
+               text-align: center; color: #fff; }
+    .ins-cta h3 { font-size: 1.4rem; font-weight: 900; margin-bottom: 8px; }
+    .ins-cta p { opacity: .85; margin-bottom: 24px; font-size: .95rem; }
+    .btn-blue {
+      background: #fff; color: var(--blue); border: none; border-radius: 999px;
+      padding: 14px 36px; font-size: 1rem; font-weight: 800;
+      cursor: pointer; font-family: inherit; transition: transform .15s, box-shadow .15s;
+      box-shadow: 0 4px 16px rgba(0,0,0,.15);
+    }
+    .btn-blue:hover { transform: scale(1.04); box-shadow: 0 6px 20px rgba(0,0,0,.2); }
+
+    /* ───── MANAGEMENT PAGE ───── */
+    .mgmt-hero {
+      background: linear-gradient(135deg, #2d1b69 0%, var(--purple) 100%);
+      color: #fff; padding: 64px 20px; text-align: center;
+    }
+    .mgmt-hero .badge { background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3);
+                        border-radius: 999px; padding: 5px 16px; font-size: .78rem;
+                        font-weight: 700; display: inline-block; margin-bottom: 16px; }
+    .mgmt-hero h1 { font-size: clamp(1.7rem, 4vw, 2.5rem); font-weight: 900;
+                    margin-bottom: 12px; line-height: 1.2; }
+    .mgmt-hero h1 em { color: #C4B5FD; font-style: normal; }
+    .mgmt-hero p { opacity: .85; max-width: 540px; margin: 0 auto 28px; font-size: 1rem; }
+    .mgmt-hero-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+    .mgmt-hero-badges span { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25);
+                              border-radius: 999px; padding: 6px 16px; font-size: .83rem; }
+
+    .mgmt-content { max-width: 1100px; margin: 0 auto; padding: 64px 20px; }
+
+    .mgmt-intro {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+      align-items: center; margin-bottom: 60px;
+    }
+    @media(max-width:680px){ .mgmt-intro{ grid-template-columns:1fr; } .ins-how{ padding:32px 20px; } }
+    .mgmt-intro-img { border-radius: 18px; overflow: hidden; height: 300px; }
+    .mgmt-intro-img img { width:100%; height:100%; object-fit:cover; }
+    .mgmt-intro-text h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 900; margin-bottom: 14px; }
+    .mgmt-intro-text h2 em { color: var(--purple); font-style: normal; }
+    .mgmt-intro-text p { color: var(--muted); margin-bottom: 14px; font-size: .95rem; }
+
+    .mgmt-types { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 48px; }
+    @media(max-width:580px){ .mgmt-types{ grid-template-columns:1fr; } }
+    .mgmt-type {
+      border-radius: var(--r); padding: 28px 24px; border: 2px solid var(--border);
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .mgmt-type:hover { border-color: var(--purple); box-shadow: 0 6px 24px rgba(124,58,237,.1); }
+    .mgmt-type-icon { font-size: 2rem; margin-bottom: 12px; }
+    .mgmt-type h3 { font-size: 1.1rem; font-weight: 900; margin-bottom: 8px; }
+    .mgmt-type p { font-size: .88rem; color: var(--muted); margin-bottom: 16px; }
+    .mgmt-type ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .mgmt-type ul li { font-size: .85rem; display: flex; gap: 7px; }
+    .mgmt-type ul li::before { content: '→'; color: var(--purple); font-weight: 700; }
+    .mgmt-earn { background: var(--purple); color: #fff; border-radius: 12px; padding: 16px 20px; margin-top: 16px; }
+    .mgmt-earn span { font-size: .82rem; opacity: .8; }
+    .mgmt-earn strong { display: block; font-size: 1.4rem; font-weight: 900; }
+
+    .mgmt-how { background: #fff; border-radius: 20px; padding: 44px 36px;
+                border: 1px solid var(--border); margin-bottom: 32px; }
+    .mgmt-how h2 { font-size: 1.5rem; font-weight: 900; margin-bottom: 28px; text-align: center; }
+    .mgmt-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; }
+    .mgmt-step { text-align: center; padding: 20px 10px; }
+    .mgmt-step-n {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: var(--purple); color: #fff; font-weight: 900; font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 12px;
+    }
+    .mgmt-step h4 { font-size: .93rem; font-weight: 700; margin-bottom: 5px; }
+    .mgmt-step p { font-size: .82rem; color: var(--muted); }
+
+    .mgmt-cta { background: var(--purple); border-radius: 16px; padding: 40px 28px;
+                text-align: center; color: #fff; }
+    .mgmt-cta h3 { font-size: 1.4rem; font-weight: 900; margin-bottom: 8px; }
+    .mgmt-cta p { opacity: .85; margin-bottom: 24px; font-size: .95rem; }
+    .btn-purple {
+      background: #fff; color: var(--purple); border: none; border-radius: 999px;
+      padding: 14px 36px; font-size: 1rem; font-weight: 800;
+      cursor: pointer; font-family: inherit; transition: transform .15s, box-shadow .15s;
+      box-shadow: 0 4px 16px rgba(0,0,0,.15);
+    }
+    .btn-purple:hover { transform: scale(1.04); box-shadow: 0 6px 20px rgba(0,0,0,.2); }
+
+    /* ───── MODAL ───── */
+    .overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.55); z-index: 500;
+      align-items: center; justify-content: center; padding: 16px;
+    }
+    .overlay.open { display: flex; }
+    .modal {
+      background: #fff; border-radius: 20px;
+      width: 100%; max-width: 460px; padding: 32px 28px;
+      position: relative; max-height: 92vh; overflow-y: auto;
+      animation: su .2s ease;
+    }
+    @keyframes su { from { transform:translateY(24px); opacity:0; } to { transform:translateY(0); opacity:1; } }
+    .modal-x { position:absolute; top:14px; right:18px; background:none; border:none;
+               font-size:1.4rem; cursor:pointer; color:var(--muted); }
+    .m-cat { font-size:.7rem; font-weight:800; text-transform:uppercase;
+             letter-spacing:.5px; color:var(--green); margin-bottom:3px; }
+    .modal h2 { font-size:1.3rem; font-weight:900; margin-bottom:20px; }
+    .fr { margin-bottom:14px; }
+    .fr label { display:block; font-size:.83rem; font-weight:700; margin-bottom:5px; }
+    .fr input, .fr textarea {
+      width:100%; padding:11px 14px; border:1.5px solid var(--border);
+      border-radius:10px; font-size:.95rem; font-family:inherit; color:var(--text);
+      transition:border-color .15s;
+    }
+    .fr input:focus, .fr textarea:focus { outline:none; border-color:var(--green2); }
+    .fr textarea { resize:vertical; min-height:76px; }
+    .btn-send {
+      width:100%; padding:14px; background:var(--green); color:#fff;
+      border:none; border-radius:999px; font-size:1rem; font-weight:700;
+      cursor:pointer; font-family:inherit; transition:background .15s;
+    }
+    .btn-send:hover { background:var(--green2); }
+    .m-note { font-size:.72rem; color:var(--muted); text-align:center; margin-top:8px; }
+    .m-success { display:none; text-align:center; padding:16px 0; }
+    .m-success .si { font-size:3.5rem; margin-bottom:10px; }
+    .m-success h3 { font-weight:900; font-size:1.2rem; color:var(--green); margin-bottom:7px; }
+    .m-success p { color:var(--muted); font-size:.9rem; }
+
+    /* ───── PHONE FLOAT ───── */
+    .ph-float {
+      position:fixed; bottom:20px; right:20px; background:var(--green); color:#fff;
+      border-radius:999px; padding:12px 22px; font-weight:700; font-size:.88rem;
+      text-decoration:none; z-index:300; box-shadow:0 4px 20px rgba(0,0,0,.22);
+      display:flex; align-items:center; gap:7px; transition:transform .15s;
+    }
+    .ph-float:hover { transform:scale(1.04); }
+
+    /* ───── FOOTER ───── */
+    footer { background:#111; color:rgba(255,255,255,.5);
+             text-align:center; padding:28px 20px; font-size:.84rem; }
+    footer strong { color:#fff; }
+    footer a { color:var(--accent); text-decoration:none; }
+    .footer-products { display:flex; justify-content:center; gap:20px; flex-wrap:wrap;
+                       margin-top:10px; font-size:.8rem; }
+    .footer-products span { opacity:.6; }
+
+    @media(max-width:480px){ .modal{padding:24px 16px;} }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="hdr">
+    <div class="logo">ВИ<em>збу</em></div>
+    <nav>
+      <button class="nav-tab active" data-page="services">🏡 Услуги</button>
+      <button class="nav-tab" data-page="insurance">🛡️ ВИзбу Страхование</button>
+      <button class="nav-tab" data-page="management">🔑 ВИзбу Управление</button>
+    </nav>
+    <a href="tel:+7XXXXXXXXXX" class="hdr-phone">📞 +7 (XXX) XXX-XX-XX</a>
+  </div>
+  <div class="mobile-tabs">
+    <button class="nav-tab active" data-page="services">🏡 Услуги</button>
+    <button class="nav-tab" data-page="insurance">🛡️ Страхование</button>
+    <button class="nav-tab" data-page="management">🔑 Управление</button>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════
+     СТРАНИЦА: УСЛУГИ
+════════════════════════════════════════════════ -->
+<div class="page active" id="page-services">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">Сервис для загородной жизни · с 2026 года</div>
+    <h1>Живите в городе —<br/><em>дача в порядке</em></h1>
+    <div class="hero-slogan">Один звонок решает любую задачу на вашем участке</div>
+    <p>70+ услуг от проверенных местных мастеров. Покос, дрова, сантехник, электрик — и всё что между ними.</p>
+    <div class="search-box">
+      <span class="si">🔍</span>
+      <input id="search" type="text" placeholder="Найти услугу — покос, сантехник, дрова..." autocomplete="off"/>
+    </div>
+  </div>
+
+  <!-- О НАС -->
+  <section class="about">
+    <div class="about-inner">
+      <div class="about-text">
+        <div class="pretitle">Кто мы такие</div>
+        <h2>Мы — ваши <em>надёжные соседи</em></h2>
+        <p class="lead">ВИзбу родился из простой идеи: дача должна приносить радость, а не головную боль.</p>
+        <p>Мы сами живём в загородных посёлках и знаем, как это бывает: нужен сантехник — а найти некого. Нужен покос — мастер берёт трубку через неделю. Нужны дрова — и снова перебираешь чаты в поисках нормального контакта.</p>
+        <p>ВИзбу — это команда, которая взяла на себя эти задачи. Мы лично знаем каждого мастера, с которым работаем. Мы проверяем качество после каждого заказа. И мы несём ответственность за результат — не мастер перед вами, а мы перед вами.</p>
+        <ul class="about-points">
+          <li>
+            <span class="chk">✓</span>
+            <div>
+              <strong>Проверенные местные подрядчики</strong>
+              <span>Никаких случайных людей — только те, кого мы знаем лично</span>
+            </div>
+          </li>
+          <li>
+            <span class="chk">✓</span>
+            <div>
+              <strong>Один звонок — всё решено</strong>
+              <span>Не ищите мастера сами. Позвонили нам — мы всё организуем</span>
+            </div>
+          </li>
+          <li>
+            <span class="chk">✓</span>
+            <div>
+              <strong>Знаем СНТ изнутри</strong>
+              <span>Грунт, дороги, колодцы, электросети — нам не надо объяснять специфику</span>
+            </div>
+          </li>
+          <li>
+            <span class="chk">✓</span>
+            <div>
+              <strong>Весь сезон и зимой</strong>
+              <span>От открытия дачи в мае до чистки снега и консервации в октябре</span>
+            </div>
+          </li>
+          <li>
+            <span class="chk">✓</span>
+            <div>
+              <strong>Берём ответственность</strong>
+              <span>Если что-то пошло не так — мы решаем, а не прячемся</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="about-right">
+        <div class="about-img">
+          <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=700&h=400&fit=crop&auto=format&q=80"
+               alt="Загородный участок"
+               onerror="this.src='https://images.unsplash.com/photo-1501854140801-50d01698950b?w=700&h=400&fit=crop'"/>
+        </div>
+        <div class="about-stats">
+          <div class="stat"><div class="stat-n">70+</div><div class="stat-l">услуг в каталоге</div></div>
+          <div class="stat"><div class="stat-n">12</div><div class="stat-l">категорий работ</div></div>
+          <div class="stat"><div class="stat-n">1 час</div><div class="stat-l">время ответа</div></div>
+          <div class="stat"><div class="stat-n">0 ₽</div><div class="stat-l">стоимость заявки</div></div>
+        </div>
+        <div class="about-quote">
+          «Дача — это место для отдыха, а не для бесконечного поиска мастеров. Мы взяли эту задачу на себя.»<br/><br/>
+          <strong>— Команда ВИзбу</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- КАТАЛОГ -->
+  <div class="catalog-header">
+    <h2>Каталог услуг</h2>
+    <div class="filter-row" id="filters">
+      <button class="fbtn active" data-cat="Все">Все</button>
+      <button class="fbtn" data-cat="Участок">🌿 Участок</button>
+      <button class="fbtn" data-cat="Дрова">🪵 Дрова</button>
+      <button class="fbtn" data-cat="Сантехника">💧 Сантехника</button>
+      <button class="fbtn" data-cat="Электрика">⚡ Электрика</button>
+      <button class="fbtn" data-cat="Строительство">🏗️ Стройка</button>
+      <button class="fbtn" data-cat="Вывоз">🚛 Вывоз</button>
+      <button class="fbtn" data-cat="Сад">🌱 Сад</button>
+      <button class="fbtn" data-cat="Уборка">🧹 Уборка</button>
+      <button class="fbtn" data-cat="Спецтехника">🚜 Техника</button>
+      <button class="fbtn" data-cat="Ремонт техники">🔩 Ремонт</button>
+      <button class="fbtn" data-cat="Зима">❄️ Зима</button>
+    </div>
+  </div>
+  <div class="grid-wrap">
+    <div class="count" id="count"></div>
+    <div class="sg" id="grid"></div>
+    <div class="no-res" id="no-res">
+      <div class="e">🔍</div>
+      <p>Ничего не нашлось. Попробуйте другой запрос<br/>или позвоните — найдём мастера на любую задачу.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     СТРАНИЦА: СТРАХОВАНИЕ
+════════════════════════════════════════════════ -->
+<div class="page" id="page-insurance">
+  <div class="ins-hero">
+    <div class="badge">🛡️ ВИзбу Страхование</div>
+    <h1>Защитите дачу от<br/><em>любых неожиданностей</em></h1>
+    <p>Страхование загородного дома, участка и имущества. Оформление онлайн за 10 минут. Надёжные страховые партнёры.</p>
+  </div>
+
+  <div class="ins-content">
+    <div class="ins-grid">
+      <div class="ins-card">
+        <div class="ins-icon">🔥</div>
+        <h3>Пожар и стихийные бедствия</h3>
+        <p>Защита от пожара, удара молнии, взрыва газа, урагана, наводнения, сильного снегопада и других форс-мажоров.</p>
+        <span class="ins-price">от 3 500 ₽/год</span>
+      </div>
+      <div class="ins-card">
+        <div class="ins-icon">🚪</div>
+        <h3>Кража и вандализм</h3>
+        <p>Страхование имущества от кражи со взломом, грабежа, умышленной порчи. Покрывает технику, инструменты, мебель.</p>
+        <span class="ins-price">от 2 500 ₽/год</span>
+      </div>
+      <div class="ins-card">
+        <div class="ins-icon">💧</div>
+        <h3>Затопление и прорыв труб</h3>
+        <p>Аварии водоснабжения, прорыв труб, затопление подвала или бани. Компенсация ущерба и ремонта.</p>
+        <span class="ins-price">от 2 000 ₽/год</span>
+      </div>
+      <div class="ins-card">
+        <div class="ins-icon">🏠</div>
+        <h3>Конструктив и фундамент</h3>
+        <p>Страхование самого строения: стен, кровли, фундамента, перекрытий — на случай серьёзных повреждений.</p>
+        <span class="ins-price">от 4 000 ₽/год</span>
+      </div>
+      <div class="ins-card">
+        <div class="ins-icon">⚡</div>
+        <h3>Перепады напряжения</h3>
+        <p>Компенсация ущерба от скачков и перепадов напряжения в электросети — техника, бытовые приборы.</p>
+        <span class="ins-price">от 1 500 ₽/год</span>
+      </div>
+      <div class="ins-card">
+        <div class="ins-icon">🤝</div>
+        <h3>Гражданская ответственность</h3>
+        <p>Если ущерб нанесён вашим имуществом соседям — дерево упало на забор, затопление. Мы покроем претензии.</p>
+        <span class="ins-price">от 1 800 ₽/год</span>
+      </div>
+    </div>
+
+    <div class="ins-how">
+      <h2>Как оформить страховку</h2>
+      <div class="ins-steps">
+        <div class="ins-step">
+          <div class="ins-step-n">1</div>
+          <h4>Оставьте заявку</h4>
+          <p>Укажите адрес и параметры дома</p>
+        </div>
+        <div class="ins-step">
+          <div class="ins-step-n">2</div>
+          <h4>Мы перезвоним</h4>
+          <p>Подберём оптимальный пакет под ваши задачи</p>
+        </div>
+        <div class="ins-step">
+          <div class="ins-step-n">3</div>
+          <h4>Подпишите онлайн</h4>
+          <p>Договор и оплата без визита в офис</p>
+        </div>
+        <div class="ins-step">
+          <div class="ins-step-n">4</div>
+          <h4>Дача защищена</h4>
+          <p>Полис вступает в силу сразу после оплаты</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ins-cta">
+      <h3>Узнать стоимость страховки</h3>
+      <p>Оставьте заявку — подберём пакет и рассчитаем цену для вашего дома</p>
+      <button class="btn-blue" onclick="openContactModal('Страхование дачи', 'Страхование')">Оставить заявку</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     СТРАНИЦА: УПРАВЛЕНИЕ
+════════════════════════════════════════════════ -->
+<div class="page" id="page-management">
+  <div class="mgmt-hero">
+    <div class="badge">🔑 ВИзбу Управление</div>
+    <h1>Дача зарабатывает,<br/><em>пока вы отдыхаете</em></h1>
+    <p>Мы берём ваш загородный дом в управление, находим арендаторов, организуем уборку и обслуживание. Вы просто получаете деньги.</p>
+    <div class="mgmt-hero-badges">
+      <span>🏡 Посуточная аренда</span>
+      <span>📅 Долгосрочная аренда</span>
+      <span>🧹 Уборка и обслуживание</span>
+      <span>💰 Пассивный доход</span>
+    </div>
+  </div>
+
+  <div class="mgmt-content">
+
+    <div class="mgmt-intro">
+      <div class="mgmt-intro-img">
+        <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=700&h=400&fit=crop&auto=format&q=80"
+             alt="Загородный дом"
+             onerror="this.style.background='#e8f5ee'"/>
+      </div>
+      <div class="mgmt-intro-text">
+        <h2>Ваш дом не должен <em>простаивать</em></h2>
+        <p>Большинство дач пустуют 9–10 месяцев в году. Это десятки тысяч рублей упущенного дохода — и при этом дом всё равно требует расходов на содержание.</p>
+        <p>ВИзбу Управление берёт ваш дом в работу. Мы размещаем объявления, общаемся с гостями, организуем уборку, встречаем и провожаем арендаторов. Вы не тратите ни минуты своего времени.</p>
+        <p>Всё прозрачно: ежемесячный отчёт с фото, статистикой заселений и переводом на вашу карту.</p>
+      </div>
+    </div>
+
+    <div class="mgmt-types">
+      <div class="mgmt-type">
+        <div class="mgmt-type-icon">🌙</div>
+        <h3>Посуточная аренда</h3>
+        <p>Идеально для домов рядом с природой, водоёмами или популярными маршрутами. Высокий доход в сезон.</p>
+        <ul>
+          <li>Размещение на Авито, Циан, Яндекс Путешествия</li>
+          <li>Общение с гостями 24/7</li>
+          <li>Профессиональная уборка после каждого гостя</li>
+          <li>Проверка гостей перед заселением</li>
+          <li>Контроль состояния дома</li>
+        </ul>
+        <div class="mgmt-earn">
+          <span>Ваш доход</span>
+          <strong>70% от арендной платы</strong>
+        </div>
+      </div>
+      <div class="mgmt-type">
+        <div class="mgmt-type-icon">📅</div>
+        <h3>Долгосрочная аренда</h3>
+        <p>Стабильный ежемесячный доход без лишней суеты. Один арендатор на весь сезон или на год.</p>
+        <ul>
+          <li>Поиск и проверка надёжных арендаторов</li>
+          <li>Составление договора аренды</li>
+          <li>Контроль оплаты и состояния дома</li>
+          <li>Ежеквартальная инспекция объекта</li>
+          <li>Решение любых вопросов с арендатором</li>
+        </ul>
+        <div class="mgmt-earn">
+          <span>Ваш доход</span>
+          <strong>85% от арендной платы</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgmt-how">
+      <h2>Как это работает</h2>
+      <div class="mgmt-steps">
+        <div class="mgmt-step">
+          <div class="mgmt-step-n">1</div>
+          <h4>Оставьте заявку</h4>
+          <p>Расскажите о доме и ваших ожиданиях</p>
+        </div>
+        <div class="mgmt-step">
+          <div class="mgmt-step-n">2</div>
+          <h4>Осмотр объекта</h4>
+          <p>Приедем, сфотографируем, оценим потенциал</p>
+        </div>
+        <div class="mgmt-step">
+          <div class="mgmt-step-n">3</div>
+          <h4>Подпишем договор</h4>
+          <p>Зафиксируем условия, ответственность и доли</p>
+        </div>
+        <div class="mgmt-step">
+          <div class="mgmt-step-n">4</div>
+          <h4>Дом в работе</h4>
+          <p>Мы занимаемся всем — вы получаете деньги</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgmt-cta">
+      <h3>Хотите сдавать свой дом?</h3>
+      <p>Оставьте заявку — приедем, осмотрим дом и рассчитаем потенциальный доход бесплатно</p>
+      <button class="btn-purple" onclick="openContactModal('Управление и аренда дома', 'Управление')">Оставить заявку</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <button class="modal-x" id="modal-x">✕</button>
+    <div class="m-cat" id="m-cat"></div>
+    <h2 id="m-name">Оставить заявку</h2>
+    <div id="m-form">
+      <form id="form">
+        <input type="hidden" id="f-svc"/>
+        <div class="fr"><label>Ваше имя *</label><input id="f-name" type="text" placeholder="Иван" required/></div>
+        <div class="fr"><label>Телефон *</label><input id="f-phone" type="tel" placeholder="+7 (___) ___-__-__" required/></div>
+        <div class="fr"><label>Адрес / СНТ / улица</label><input id="f-addr" type="text" placeholder="СНТ Синявино, ул. Лесная 5"/></div>
+        <div class="fr"><label>Комментарий</label><textarea id="f-comm" placeholder="Расскажите подробнее..."></textarea></div>
+        <button type="submit" class="btn-send">Отправить заявку →</button>
+        <p class="m-note">Перезвоним в течение часа, согласуем детали бесплатно</p>
+      </form>
+    </div>
+    <div class="m-success" id="m-ok">
+      <div class="si">✅</div>
+      <h3>Заявка принята!</h3>
+      <p>Мы перезвоним в течение часа и согласуем всё. Спасибо, что выбрали ВИзбу!</p>
+    </div>
+  </div>
+</div>
+
+<a href="tel:+7XXXXXXXXXX" class="ph-float">📞 Позвонить</a>
+
+<footer>
+  <p><strong>ВИзбу</strong> — живите в городе, дача в порядке</p>
+  <div class="footer-products">
+    <span>🏡 Услуги для дачи</span>
+    <span>🛡️ ВИзбу Страхование</span>
+    <span>🔑 ВИзбу Управление</span>
+  </div>
+  <p style="margin-top:10px;"><a href="tel:+7XXXXXXXXXX">+7 (XXX) XXX-XX-XX</a> · 2026</p>
+</footer>
+
+<script>
+const BOT_TOKEN = 'YOUR_BOT_TOKEN';
+const CHAT_ID   = 'YOUR_CHAT_ID';
+
+// ── 70+ УСЛУГ ────────────────────────────────────────────────────
+const SERVICES = [
+  // УЧАСТОК (15)
+  { name:'Покос травы', cat:'Участок', price:'от 2 000 ₽', e:'🌿',
+    desc:'Газонокосилкой или триммером. Любая площадь, вывоз скошенного.',
+    img:'https://images.unsplash.com/photo-1590650153855-d9e808231d41?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Мульчирование', cat:'Участок', price:'от 4 000 ₽', e:'🌿',
+    desc:'Измельчение травы и веток прямо на участке специальной техникой.',
+    img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Уборка листьев', cat:'Участок', price:'от 1 500 ₽', e:'🍂',
+    desc:'Осенняя и весенняя уборка, сбор и вывоз мешков с листьями.',
+    img:'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Спил деревьев', cat:'Участок', price:'от 3 000 ₽', e:'🪓',
+    desc:'Аккуратный спил, корчевание пней, уборка территории за собой.',
+    img:'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Вывоз веток и кустов', cat:'Участок', price:'от 2 500 ₽', e:'🌲',
+    desc:'Обрезка разросшихся кустов, уборка и вывоз с участка.',
+    img:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Стрижка живой изгороди', cat:'Участок', price:'от 2 000 ₽', e:'✂️',
+    desc:'Придание формы кустарникам и живой изгороди, выравнивание.',
+    img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Посев газона', cat:'Участок', price:'от 5 000 ₽', e:'🌱',
+    desc:'Подготовка почвы, посев газонной травы, раскатка рулонного газона.',
+    img:'https://images.unsplash.com/photo-1590650046871-92c887180603?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Аэрация и подкормка газона', cat:'Участок', price:'от 3 000 ₽', e:'🌿',
+    desc:'Прокалывание дёрна, внесение удобрений для здоровья газона.',
+    img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Обработка от сорняков', cat:'Участок', price:'от 2 500 ₽', e:'🌾',
+    desc:'Химическая или ручная обработка участка от нежелательной растительности.',
+    img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Укладка декоративной коры', cat:'Участок', price:'от 3 500 ₽', e:'🪵',
+    desc:'Мульчирование клумб и садовых зон декоративной корой или щепой.',
+    img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Обработка от клещей', cat:'Участок', price:'от 3 000 ₽', e:'🦟',
+    desc:'Профессиональная химическая обработка участка от клещей и насекомых.',
+    img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Планировка участка', cat:'Участок', price:'от 8 000 ₽', e:'📐',
+    desc:'Выравнивание рельефа, организация дренажа, разметка зон.',
+    img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Устройство дренажа', cat:'Участок', price:'от 15 000 ₽', e:'💧',
+    desc:'Отвод воды с участка, обустройство дренажных канав и труб.',
+    img:'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Установка водостоков', cat:'Участок', price:'от 5 000 ₽', e:'🌧️',
+    desc:'Монтаж водосточной системы для отвода воды с крыши.',
+    img:'https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Организация полива', cat:'Участок', price:'от 6 000 ₽', e:'💦',
+    desc:'Монтаж системы автоматического или капельного полива.',
+    img:'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=200&fit=crop&auto=format&q=80' },
+
+  // ДРОВА (5)
+  { name:'Дрова колотые с доставкой', cat:'Дрова', price:'от 3 500 ₽/куб', e:'🪵',
+    desc:'Сухие берёзовые и еловые дрова, привезём и выгрузим.',
+    img:'https://images.unsplash.com/photo-1542621334-a254cf47733d?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Топливо для котла', cat:'Дрова', price:'от 5 000 ₽', e:'🔥',
+    desc:'Пеллеты, брикеты, уголь — доставка прямо к вашему дому.',
+    img:'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Колка и укладка дров', cat:'Дрова', price:'от 2 000 ₽', e:'🪓',
+    desc:'Расколем на нужный размер, аккуратно уложим в поленницу.',
+    img:'https://images.unsplash.com/photo-1567954970774-58d6aa6c50dc?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Пеллеты и брикеты', cat:'Дрова', price:'от 4 500 ₽/мешок', e:'📦',
+    desc:'Евродрова — горят дольше обычных, удобная фасовка.',
+    img:'https://images.unsplash.com/photo-1542621334-a254cf47733d?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Строительство поленницы', cat:'Дрова', price:'от 3 000 ₽', e:'🏗️',
+    desc:'Сборка навеса или поленницы для хранения дров на участке.',
+    img:'https://images.unsplash.com/photo-1542621334-a254cf47733d?w=400&h=200&fit=crop&auto=format&q=80' },
+
+  // САНТЕХНИКА (8)
+  { name:'Сантехник', cat:'Сантехника', price:'от 1 500 ₽', e:'🔧',
+    desc:'Ремонт и замена труб, кранов, радиаторов, унитазов.',
+    img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Откачка септика', cat:'Сантехника', price:'от 3 000 ₽', e:'💧',
+    desc:'Ассенизаторская машина приедет в удобное для вас время.',
+    img:'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Бурение скважины', cat:'Сантехника', price:'от 30 000 ₽', e:'⛏️',
+    desc:'Бурение скважин под воду, насос и разводка под ключ.',
+    img:'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Летний водопровод', cat:'Сантехника', price:'от 5 000 ₽', e:'🚿',
+    desc:'Прокладка труб по участку, подключение к источнику воды.',
+    img:'https://images.unsplash.com/photo-1523575166983-fb6e8a0d57d4?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Ремонт колодца', cat:'Сантехника', price:'от 5 000 ₽', e:'🪣',
+    desc:'Чистка, углубление, замена насоса, ремонт оголовка колодца.',
+    img:'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Замена насоса', cat:'Сантехника', price:'от 3 000 ₽', e:'⚙️',
+    desc:'Замена насоса скважинного или поверхностного, с выездом в день.',
+    img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Установка септика', cat:'Сантехника', price:'от 50 000 ₽', e:'🛠️',
+    desc:'Монтаж автономной канализации под ключ, все типы септиков.',
+    img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Утепление труб', cat:'Сантехника', price:'от 3 000 ₽', e:'🧊',
+    desc:'Консервация водопровода на зиму, утепление уязвимых участков.',
+    img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=200&fit=crop&auto=format&q=80' },
+
+  // ЭЛЕКТРИКА (6)
+  { name:'Электрик', cat:'Электрика', price:'от 1 500 ₽', e:'⚡',
+    desc:'Замена проводки, розеток, щитков, выключателей. Устранение аварий.',
+    img:'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Подключение к электросети', cat:'Электрика', price:'от 8 000 ₽', e:'🔌',
+    desc:'Подключение дома, бани или хозпостройки к электросети.',
+    img:'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Освещение участка', cat:'Электрика', price:'от 5 000 ₽', e:'💡',
+    desc:'Уличные фонари, подсветка дорожек, охранное освещение.',
+    img:'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Монтаж видеонаблюдения', cat:'Электрика', price:'от 8 000 ₽', e:'📹',
+    desc:'Установка камер, видеорегистратора, удалённый доступ с телефона.',
+    img:'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Стабилизатор напряжения', cat:'Электрика', price:'от 3 000 ₽', e:'🔋',
+    desc:'Установка стабилизатора и защита техники от скачков напряжения.',
+    img:'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Монтаж розеток и выключателей', cat:'Электрика', price:'от 500 ₽/шт', e:'🔌',
+    desc:'Установка, перенос, замена розеток, выключателей и осветительных приборов.',
+    img:'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&h=200&fit=crop&auto=format&q=80' },
+
+  // СТРОИТЕЛЬСТВО (9)
+  { name:'Установка забора', cat:'Строительство', price:'от 500 ₽/м', e:'🏗️',
+    desc:'Профнастил, евроштакетник, сетка-рабица, деревянный забор под ключ.',
+    img:'https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Ворота и калитки', cat:'Строительство', price:'от 8 000 ₽', e:'🚪',
+    desc:'Откатные и распашные ворота, калитки, автоматика под ключ.',
+    img:'https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Ремонт кровли', cat:'Строительство', price:'от 5 000 ₽', e:'🏠',
+    desc:'Ремонт и замена кровельного покрытия, устранение протечек.',
+    img:'https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Тротуарная плитка', cat:'Строительство', price:'от 700 ₽/м²', e:'🧱',
+    desc:'Дорожки, площадки, отмостка. Подготовка основания включена.',
+    img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Строительство беседки', cat:'Строительство', price:'от 40 000 ₽', e:'⛺',
+    desc:'Деревянные беседки любой формы и размера, от проекта до финишной отделки.',
+    img:'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Строительство и ремонт бани', cat:'Строительство', price:'от 50 000 ₽', e:'🧖',
+    desc:'Постройка новой бани или ремонт существующей, отделка, печь.',
+    img:'https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Монтаж террасы', cat:'Строительство', price:'от 25 000 ₽', e:'🪵',
+    desc:'Деревянная или композитная терраса и веранда под ключ.',
+    img:'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Мелкий ремонт дома', cat:'Строительство', price:'от 1 500 ₽', e:'🔨',
+    desc:'Ремонт окон, дверей, пола, стен — любые мелкие задачи по дому.',
+    img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Покраска дома и забора', cat:'Строительство', price:'от 4 000 ₽', e:'🎨',
+    desc:'Покраска фасада, забора, деревянных конструкций. Материалы возможны наши.',
+    img:'https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&h=200&fit=crop&auto=format&q=80' },
+
+  // ВЫВОЗ (5)
+  { name:'Вывоз мусора', cat:'Вывоз', price:'от 3 000 ₽', e:'🚛',
+    desc:'Строительный и бытовой мусор, старая мебель — всё уберём.',
+    img:'https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Доставка щебня и песка', cat:'Вывоз', price:'от 2 500 ₽', e:'🚚',
+    desc:'Щебень, песок, чернозём, торф — привезём нужный объём.',
+    img:'https://images.unsplash.com/photo-1471195253598-8a6c84a7e0f4?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Доставка стройматериалов', cat:'Вывоз', price:'от 3 000 ₽', e:'🧱',
+    desc:'Кирпич, блоки, доска, брус — доставка с магазина до участка.',
+    img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Грузчики', cat:'Вывоз', price:'от 1 500 ₽/час', e:'💪',
+    desc:'Погрузка, разгрузка, переноска тяжёлых вещей на участке.',
+    img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Вывоз старой мебели и техники', cat:'Вывоз', price:'от 2 000 ₽', e:'🛋️',
+    desc:'Демонтаж и вывоз старой мебели, бытовой техники, металлолома.',
+    img:'https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?w=400&h=200&fit=crop&auto=format&q=80' },
+
+  // САД (7)
+  { name:'Посадка растений', cat:'Сад', price:'от 2 000 ₽', e:'🌱',
+    desc:'Посадка деревьев, кустарников, цветов, живой изгороди.',
+    img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Монтаж теплицы', cat:'Сад', price:'от 8 000 ₽', e:'🥦',
+    desc:'Установка теплиц из поликарбоната любого размера под ключ.',
+    img:'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Земля для огорода', cat:'Сад', price:'от 3 500 ₽/куб', e:'🌍',
+    desc:'Чернозём, торф, компост — привезём и распределим по грядкам.',
+    img:'https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Обрезка плодовых деревьев', cat:'Сад', price:'от 1 500 ₽/дер', e:'🍎',
+    desc:'Весенняя и осенняя обрезка яблонь, груш, слив, вишни.',
+    img:'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Обработка от вредителей', cat:'Сад', price:'от 3 000 ₽', e:'🐛',
+    desc:'Опрыскивание деревьев и кустарников от болезней и вредителей.',
+    img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Устройство клумб и грядок', cat:'Сад', price:'от 4 000 ₽', e:'🌸',
+    desc:'Планировка, подготовка почвы, высадка цветов и растений.',
+    img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Ландшафтный дизайн', cat:'Сад', price:'от 10 000 ₽', e:'🏡',
+    desc:'Разработка плана участка, подбор растений, реализация под ключ.',
+    img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop&auto=format&q=80' },
+
+  // УБОРКА (5)
+  { name:'Уборка дома после зимы', cat:'Уборка', price:'от 3 000 ₽', e:'🧹',
+    desc:'Генеральная уборка, мойка окон, удаление пыли и плесени.',
+    img:'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Помощница по дому', cat:'Уборка', price:'от 1 500 ₽', e:'🏡',
+    desc:'Регулярная уборка, помощь по хозяйству, стирка и глажка.',
+    img:'https://images.unsplash.com/photo-1527515637462-cff94ece374f?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Мойка окон', cat:'Уборка', price:'от 1 000 ₽', e:'🪟',
+    desc:'Профессиональная мойка окон, стеклянных поверхностей и теплиц.',
+    img:'https://images.unsplash.com/photo-1527515637462-cff94ece374f?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Чистка ковров и мебели', cat:'Уборка', price:'от 2 000 ₽', e:'🛋️',
+    desc:'Выездная химчистка мягкой мебели, матрасов, ковров на даче.',
+    img:'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Дезинфекция помещений', cat:'Уборка', price:'от 3 000 ₽', e:'🧴',
+    desc:'Профессиональная дезинфекция дома после долгого простоя.',
+    img:'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&h=200&fit=crop&auto=format&q=80' },
+
+  // СПЕЦТЕХНИКА (5)
+  { name:'Аренда мини-экскаватора', cat:'Спецтехника', price:'от 3 500 ₽/час', e:'🚜',
+    desc:'Копка траншей, котлованов, планировка участка, вывоз грунта.',
+    img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Вспашка мотоблоком', cat:'Спецтехника', price:'от 2 000 ₽', e:'🚜',
+    desc:'Вспашка огорода, культивация почвы, окучивание картофеля.',
+    img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Аренда трактора', cat:'Спецтехника', price:'от 5 000 ₽/час', e:'🚜',
+    desc:'Тяжёлые работы: вспашка больших площадей, выравнивание участка.',
+    img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Аренда прицепа', cat:'Спецтехника', price:'от 1 500 ₽/сут', e:'🚗',
+    desc:'Аренда прицепа для перевозки грузов, мебели, стройматериалов.',
+    img:'https://images.unsplash.com/photo-1471195253598-8a6c84a7e0f4?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Корчевание пней', cat:'Спецтехника', price:'от 2 000 ₽/пень', e:'🌳',
+    desc:'Удаление пней фрезой или экскаватором, засыпка ямы.',
+    img:'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&h=200&fit=crop&auto=format&q=80' },
+
+  // РЕМОНТ ТЕХНИКИ (6)
+  { name:'Ремонт стиральной машины', cat:'Ремонт техники', price:'от 2 000 ₽', e:'🔩',
+    desc:'Диагностика и ремонт стиральной машины с выездом на дачу.',
+    img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Ремонт котла отопления', cat:'Ремонт техники', price:'от 3 000 ₽', e:'🔥',
+    desc:'Диагностика и ремонт газовых и электрических котлов.',
+    img:'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Ремонт водонагревателя', cat:'Ремонт техники', price:'от 1 500 ₽', e:'♨️',
+    desc:'Ремонт и замена ТЭНов, терморегуляторов, водонагревателей.',
+    img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Обслуживание газового оборудования', cat:'Ремонт техники', price:'от 2 500 ₽', e:'⛽',
+    desc:'Техническое обслуживание, проверка и настройка газового оборудования.',
+    img:'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Ремонт посудомоечной машины', cat:'Ремонт техники', price:'от 2 000 ₽', e:'🔧',
+    desc:'Ремонт посудомоечных машин с выездом на дом или дачу.',
+    img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Ремонт вентиляции', cat:'Ремонт техники', price:'от 2 500 ₽', e:'💨',
+    desc:'Прочистка, ремонт и монтаж вентиляционных систем в доме и бане.',
+    img:'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&h=200&fit=crop&auto=format&q=80' },
+
+  // ЗИМА (5)
+  { name:'Чистка снега с дорожек', cat:'Зима', price:'от 2 000 ₽', e:'❄️',
+    desc:'Ручная или механизированная уборка снега с дорожек и площадок.',
+    img:'https://images.unsplash.com/photo-1547754980-3df97fed72a8?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Чистка кровли от снега', cat:'Зима', price:'от 3 000 ₽', e:'🏠',
+    desc:'Безопасное удаление снега и наледи с крыши дома.',
+    img:'https://images.unsplash.com/photo-1547754980-3df97fed72a8?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Консервация дачи на зиму', cat:'Зима', price:'от 5 000 ₽', e:'🔒',
+    desc:'Слив воды, отключение коммуникаций, подготовка дома к зиме.',
+    img:'https://images.unsplash.com/photo-1547754980-3df97fed72a8?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Монтаж снегозадержателей', cat:'Зима', price:'от 4 000 ₽', e:'🧲',
+    desc:'Установка снегозадержателей на кровлю для защиты от лавинного схода.',
+    img:'https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&h=200&fit=crop&auto=format&q=80' },
+  { name:'Утепление дома к зиме', cat:'Зима', price:'от 10 000 ₽', e:'🧱',
+    desc:'Утепление стен, чердака, подвала, теплоизоляция труб.',
+    img:'https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&h=200&fit=crop&auto=format&q=80' },
+];
+
+// ── НАВИГАЦИЯ ──────────────────────────────────────────────────────
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll(`[data-page="${tab.dataset.page}"]`)
+      .forEach(t => t.classList.add('active'));
+    document.getElementById(`page-${tab.dataset.page}`).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+// ── КАТАЛОГ ───────────────────────────────────────────────────────
+const grid     = document.getElementById('grid');
+const noRes    = document.getElementById('no-res');
+const countEl  = document.getElementById('count');
+const searchEl = document.getElementById('search');
+
+let activeCat = 'Все';
+let query     = '';
+
+function render() {
+  const q = query.toLowerCase();
+  const list = SERVICES.filter(s => {
+    const matchCat = activeCat === 'Все' || s.cat === activeCat;
+    const matchQ   = !q || s.name.toLowerCase().includes(q)
+                       || s.cat.toLowerCase().includes(q)
+                       || s.desc.toLowerCase().includes(q);
+    return matchCat && matchQ;
+  });
+
+  grid.innerHTML = '';
+  noRes.style.display = list.length ? 'none' : 'block';
+  countEl.textContent = list.length ? `Найдено: ${list.length} из ${SERVICES.length}` : '';
+
+  list.forEach(s => {
+    const c = document.createElement('div');
+    c.className = 'card';
+    c.innerHTML = `
+      <img class="card-photo" src="${s.img}" alt="${s.name}" loading="lazy"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div class="card-ph-fb">${s.e}</div>
+      <div class="card-body">
+        <div class="card-cat">${s.cat}</div>
+        <div class="card-name">${s.name}</div>
+        <div class="card-desc">${s.desc}</div>
+        <div class="card-ft">
+          <span class="card-price">${s.price}</span>
+          <button class="btn-req" data-svc="${s.name}" data-cat="${s.cat}">Оставить заявку</button>
+        </div>
+      </div>`;
+    grid.appendChild(c);
+  });
+
+  grid.querySelectorAll('.btn-req').forEach(b =>
+    b.addEventListener('click', () => openContactModal(b.dataset.svc, b.dataset.cat))
+  );
+}
+
+document.getElementById('filters').addEventListener('click', e => {
+  if (!e.target.classList.contains('fbtn')) return;
+  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+  activeCat = e.target.dataset.cat;
+  render();
+});
+
+searchEl.addEventListener('input', () => { query = searchEl.value; render(); });
+
+// ── МОДАЛКА ───────────────────────────────────────────────────────
+const overlay = document.getElementById('overlay');
+
+function openContactModal(name, cat) {
+  document.getElementById('f-svc').value   = name;
+  document.getElementById('m-cat').textContent  = cat;
+  document.getElementById('m-name').textContent = name;
+  document.getElementById('m-form').style.display = '';
+  document.getElementById('m-ok').style.display   = 'none';
+  document.getElementById('form').reset();
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('modal-x').addEventListener('click', closeModal);
+overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ── ФОРМА ─────────────────────────────────────────────────────────
+document.getElementById('form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const svc   = document.getElementById('f-svc').value;
+  const name  = document.getElementById('f-name').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  const addr  = document.getElementById('f-addr').value.trim();
+  const comm  = document.getElementById('f-comm').value.trim();
+
+  const text = [
+    '🆕 *Новая заявка — ВИзбу*',
+    `🔧 *Услуга:* ${svc}`,
+    `👤 *Имя:* ${name}`,
+    `📱 *Телефон:* ${phone}`,
+    addr ? `📍 *Адрес:* ${addr}` : '',
+    comm ? `💬 *Комментарий:* ${comm}` : '',
+    `🕐 ${new Date().toLocaleString('ru-RU')}`,
+  ].filter(Boolean).join('\n');
+
+  const btn = e.target.querySelector('.btn-send');
+  btn.textContent = 'Отправляем...'; btn.disabled = true;
+
+  try {
+    if (BOT_TOKEN !== 'YOUR_BOT_TOKEN') {
+      const r = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: 'Markdown' })
+      });
+      if (!r.ok) throw new Error();
+    }
+  } catch {}
+
+  console.log('📋 Заявка:', { svc, name, phone, addr, comm });
+  document.getElementById('m-form').style.display = 'none';
+  document.getElementById('m-ok').style.display   = 'block';
+  btn.textContent = 'Отправить заявку →'; btn.disabled = false;
+});
+
+render();
+</script>
+</body>
+</html>
