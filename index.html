@@ -120,6 +120,68 @@
     .search-box input::placeholder { color: #9ca3af; }
     .si { position: absolute; left: 18px; top: 50%;
           transform: translateY(-50%); font-size: 1.1rem; pointer-events: none; }
+    .hero-ctas {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .btn-hero-primary {
+      background: var(--accent); color: #fff; border: none; border-radius: 999px;
+      padding: 13px 26px; font-size: .95rem; font-weight: 800; cursor: pointer;
+      font-family: inherit; text-decoration: none;
+      box-shadow: 0 4px 16px rgba(244,162,58,.4); transition: transform .15s, box-shadow .15s;
+    }
+    .btn-hero-primary:hover { transform: scale(1.04); box-shadow: 0 6px 22px rgba(244,162,58,.55); }
+    .btn-hero-secondary {
+      background: rgba(255,255,255,.18); color: #fff; border: 1.5px solid rgba(255,255,255,.4);
+      border-radius: 999px; padding: 13px 24px; font-size: .95rem; font-weight: 700; cursor: pointer;
+      font-family: inherit; text-decoration: none; transition: background .15s;
+    }
+    .btn-hero-secondary:hover { background: rgba(255,255,255,.28); }
+
+    /* ───── CATALOG BANNER ───── */
+    .catalog-banner {
+      background: linear-gradient(135deg, var(--green3) 0%, var(--green) 100%);
+      color: #fff; padding: 38px 20px 32px;
+      position: relative; overflow: hidden;
+      margin-top: 24px;
+    }
+    .catalog-banner::before, .catalog-banner::after {
+      content: ''; position: absolute; width: 240px; height: 240px;
+      border-radius: 50%; opacity: .12; background: var(--accent);
+    }
+    .catalog-banner::before { top: -120px; left: -80px; }
+    .catalog-banner::after  { bottom: -120px; right: -80px; background: #fff; opacity: .07; }
+    .catalog-banner-inner {
+      max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    }
+    .catalog-banner-text .pretitle {
+      font-size: .75rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--accent); margin-bottom: 6px;
+    }
+    .catalog-banner-text h2 { font-size: clamp(1.5rem, 3.2vw, 2rem); font-weight: 900; line-height: 1.2; }
+    .catalog-banner-text p { opacity: .8; font-size: .9rem; margin-top: 6px; max-width: 540px; }
+    .catalog-banner-stats {
+      display: flex; gap: 20px; flex-wrap: wrap;
+    }
+    .catalog-banner-stat {
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.22);
+      border-radius: 12px; padding: 12px 16px; min-width: 92px; text-align: center;
+    }
+    .catalog-banner-stat strong { font-size: 1.4rem; font-weight: 900; display: block; line-height: 1.1; }
+    .catalog-banner-stat span { font-size: .72rem; opacity: .85; }
+
+    /* ───── ANCHOR LINK В hot-секции ───── */
+    .hot-jump {
+      text-align: center; margin-top: 22px;
+    }
+    .hot-jump a {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--green); font-weight: 800; font-size: .95rem;
+      text-decoration: none; padding: 8px 18px; border-radius: 999px;
+      border: 1.5px solid var(--green); transition: all .15s;
+    }
+    .hot-jump a:hover { background: var(--green); color: #fff; }
 
     /* ───── HOT (АПРЕЛЬ) ───── */
     .hot-section {
@@ -610,6 +672,10 @@
       <span class="si">🔍</span>
       <input id="search" type="text" placeholder="Что нужно? Покос, септик, клещи, забор..." autocomplete="off"/>
     </div>
+    <div class="hero-ctas">
+      <a href="#catalog-section" class="btn-hero-primary">📋 Все 80 услуг</a>
+      <a href="tel:+79119507358" class="btn-hero-secondary">📞 Срочный вызов</a>
+    </div>
   </div>
 
   <!-- ХИТЫ АПРЕЛЯ -->
@@ -620,6 +686,9 @@
         <p>Сезонные работы конца апреля. На отмеченные услуги действует акция −10% до 15 мая.</p>
       </div>
       <div class="hot-grid" id="hot-grid"></div>
+      <div class="hot-jump">
+        <a href="#catalog-section">↓ Все 80 услуг в каталоге</a>
+      </div>
     </div>
   </section>
 
@@ -711,8 +780,22 @@
   </section>
 
   <!-- КАТАЛОГ -->
-  <div class="catalog-header" id="catalog-section">
-    <h2>Полный каталог услуг</h2>
+  <div class="catalog-banner" id="catalog-section">
+    <div class="catalog-banner-inner">
+      <div class="catalog-banner-text">
+        <div class="pretitle">📋 Каталог услуг</div>
+        <h2>Все 80 услуг для дачи в одном месте</h2>
+        <p>Используйте фильтры по категориям или поиск по названию. Заявка занимает 1 минуту, перезвоним за час.</p>
+      </div>
+      <div class="catalog-banner-stats">
+        <div class="catalog-banner-stat"><strong>80</strong><span>услуг</span></div>
+        <div class="catalog-banner-stat"><strong>12</strong><span>категорий</span></div>
+        <div class="catalog-banner-stat"><strong>1 час</strong><span>отклик</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="catalog-header">
     <div class="filter-row" id="filters">
       <button class="fbtn active" data-cat="Все">Все</button>
       <button class="fbtn" data-cat="Сезон">🔥 Сезон</button>
@@ -1123,7 +1206,8 @@ const SERVICES = [
   { name:'Открытие дачи под ключ', cat:'Сезон', price:'от 4 500 ₽', e:'🌷',
     hot:true, promo:true, badge:'Хит апреля',
     desc:'Уберём, запустим воду и электричество, проверим дом после зимы. Всё за один день.',
-    img:'https://images.unsplash.com/photo-1588854337115-1c67d9247e4d?w=600&h=350&fit=crop&auto=format&q=80',
+    img:'images/01-otkrytie-dachi.jpg',
+    imgFallback:'https://images.unsplash.com/photo-1588854337115-1c67d9247e4d?w=600&h=350&fit=crop&auto=format&q=80',
     fields:[
       F.houseSz,
       { id:'extras', label:'Что включить', type:'multi',
@@ -1133,7 +1217,8 @@ const SERVICES = [
   { name:'Обработка от клещей', cat:'Сезон', price:'от 3 000 ₽', e:'🦟',
     hot:true, promo:true, badge:'Пик сезона',
     desc:'Профессиональная химическая обработка участка. Сертифицированные препараты, действие до 6 недель.',
-    img:'https://images.unsplash.com/photo-1599598425947-5117f9077dee?w=600&h=350&fit=crop&auto=format&q=80',
+    img:'images/02-kleshchi.jpg',
+    imgFallback:'https://images.unsplash.com/photo-1599598425947-5117f9077dee?w=600&h=350&fit=crop&auto=format&q=80',
     fields:[
       F.area,
       { id:'pets', label:'Дети и животные на участке', type:'pill', options:['Есть','Нет'] },
@@ -1142,7 +1227,8 @@ const SERVICES = [
   { name:'Расконсервация водопровода', cat:'Сезон', price:'от 2 500 ₽', e:'🚿',
     hot:true, promo:true, badge:'Сезон',
     desc:'Запуск летнего водопровода после зимы: продувка, проверка соединений, устранение протечек.',
-    img:'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&h=350&fit=crop&auto=format&q=80',
+    img:'images/03-rakonservaciya-vodoprovoda.jpg',
+    imgFallback:'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&h=350&fit=crop&auto=format&q=80',
     fields:[
       { id:'src', label:'Источник воды', type:'pill', options:['Скважина','Колодец','Центральный','Бочка'] },
       F.meters,
@@ -1151,7 +1237,8 @@ const SERVICES = [
   { name:'Проверка дома после зимы', cat:'Сезон', price:'от 2 000 ₽', e:'🏚',
     hot:true, badge:'Сезон',
     desc:'Осмотр кровли, фасада, фундамента, инженерных систем. Письменный отчёт с рекомендациями.',
-    img:'https://images.unsplash.com/photo-1599809275671-b5942cabc7a2?w=600&h=350&fit=crop&auto=format&q=80',
+    img:'images/04-proverka-doma-posle-zimy.jpg',
+    imgFallback:'https://images.unsplash.com/photo-1599809275671-b5942cabc7a2?w=600&h=350&fit=crop&auto=format&q=80',
     fields:[
       F.houseSz,
       { id:'concern', label:'Что больше всего беспокоит', type:'select',
@@ -1161,7 +1248,8 @@ const SERVICES = [
   { name:'Уборка участка после зимы', cat:'Сезон', price:'от 2 500 ₽', e:'🍂',
     hot:true, badge:'Сезон',
     desc:'Сбор веток, прошлогодних листьев и мусора, уборка с вывозом. Подготовка к посадкам.',
-    img:'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=600&h=350&fit=crop&auto=format&q=80',
+    img:'images/05-uborka-uchastka.jpg',
+    imgFallback:'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=600&h=350&fit=crop&auto=format&q=80',
     fields:[
       F.area,
       { id:'haul', label:'Вывоз нужен', type:'pill', options:['Да','Нет, оставим'] },
@@ -1171,7 +1259,8 @@ const SERVICES = [
   { name:'Покос травы', cat:'Участок', price:'от 2 000 ₽', e:'🌿',
     hot:true,
     desc:'Газонокосилкой или триммером. Любая площадь, вывоз скошенного по запросу.',
-    img:'https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=600&h=350&fit=crop&auto=format&q=80',
+    img:'images/06-pokos-travy.jpg',
+    imgFallback:'https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=600&h=350&fit=crop&auto=format&q=80',
     fields:[ F.area, F.urgent ] },
 
   { name:'Мульчирование', cat:'Участок', price:'от 4 000 ₽', e:'🪵',
@@ -1311,7 +1400,8 @@ const SERVICES = [
   { name:'Откачка септика', cat:'Сантехника', price:'от 3 000 ₽', e:'🚛',
     hot:true,
     desc:'Ассенизаторская машина приедет в удобное вам время. Все типы септиков.',
-    img:'https://images.unsplash.com/photo-1574359411659-15573a27fd0c?w=600&h=350&fit=crop&auto=format&q=80',
+    img:'images/07-otkachka-septika.jpg',
+    imgFallback:'https://images.unsplash.com/photo-1574359411659-15573a27fd0c?w=600&h=350&fit=crop&auto=format&q=80',
     fields:[
       { id:'volume', label:'Объём ёмкости', type:'pill', options:['до 2 м³','3–4 м³','5–6 м³','больше'] },
       { id:'type', label:'Что откачать', type:'pill', options:['Септик / выгребная яма','Жироуловитель','Дренажный колодец'] },
@@ -1364,7 +1454,8 @@ const SERVICES = [
   { name:'Электрик на дачу', cat:'Электрика', price:'от 1 500 ₽', e:'⚡',
     hot:true,
     desc:'Замена проводки, розеток, щитков, выключателей. Устранение аварий.',
-    img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=350&fit=crop&auto=format&q=80',
+    img:'images/08-elektrik.jpg',
+    imgFallback:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=350&fit=crop&auto=format&q=80',
     fields:[
       { id:'task', label:'Что сделать', type:'select',
         options:['Не работает свет / нет электричества','Замена проводки','Розетки и выключатели','Сборка щитка','Авария — срочно','Другое'] },
@@ -1525,7 +1616,8 @@ const SERVICES = [
   { name:'Посадка растений', cat:'Сад', price:'от 2 000 ₽', e:'🌱',
     hot:true,
     desc:'Посадка деревьев, кустарников, цветов, живой изгороди.',
-    img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&h=350&fit=crop&auto=format&q=80',
+    img:'images/09-posadka-rasteniy.jpg',
+    imgFallback:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&h=350&fit=crop&auto=format&q=80',
     fields:[
       { id:'kind', label:'Что сажаем', type:'pill', options:['Деревья','Кустарники','Цветы','Живая изгородь','Несколько'] },
       F.qty,
@@ -1534,7 +1626,8 @@ const SERVICES = [
   { name:'Монтаж теплицы', cat:'Сад', price:'от 8 000 ₽', e:'🥒',
     hot:true,
     desc:'Установка теплиц из поликарбоната любого размера под ключ.',
-    img:'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=600&h=350&fit=crop&auto=format&q=80',
+    img:'images/10-montazh-teplicy.jpg',
+    imgFallback:'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=600&h=350&fit=crop&auto=format&q=80',
     fields:[
       { id:'size', label:'Размер теплицы', type:'pill', options:['3×4','3×6','3×8','3×10','Своя'] },
       { id:'have', label:'Теплица есть?', type:'pill', options:['Куплена — ставим','Купите вы','Не знаю'] },
@@ -1543,7 +1636,8 @@ const SERVICES = [
   { name:'Земля для огорода', cat:'Сад', price:'от 3 500 ₽/куб', e:'🟫',
     hot:true,
     desc:'Чернозём, торф, компост — привезём и распределим по грядкам.',
-    img:'https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=600&h=350&fit=crop&auto=format&q=80',
+    img:'images/11-zemlya-dlya-ogoroda.jpg',
+    imgFallback:'https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=600&h=350&fit=crop&auto=format&q=80',
     fields:[
       { id:'mat', label:'Что нужно', type:'pill', options:['Чернозём','Торф','Компост','Перегной','Смесь'] },
       F.volumeM3,
@@ -1838,11 +1932,13 @@ function renderReviews() {
 function renderHot() {
   const hotGrid = document.getElementById('hot-grid');
   const hot = SERVICES.filter(s => s.hot).slice(0, 12);
-  hotGrid.innerHTML = hot.map(s => `
+  hotGrid.innerHTML = hot.map(s => {
+    const fbAttr = s.imgFallback ? ` data-fallback="${escapeAttr(s.imgFallback)}"` : '';
+    return `
     <div class="hot-card" data-svc="${escapeAttr(s.name)}">
       ${s.badge ? `<span class="hot-card-badge">${s.badge}</span>` : ''}
-      <img class="hot-card-img" src="${s.img}" alt="${escapeAttr(s.name)}" loading="lazy"
-           onerror="this.style.background='linear-gradient(135deg,#FDE9CB,#F4A23A)';this.removeAttribute('src');"/>
+      <img class="hot-card-img" src="${s.img}" alt="${escapeAttr(s.name)}" loading="lazy"${fbAttr}
+           onerror="if(this.dataset.fallback&&this.src!==this.dataset.fallback){this.src=this.dataset.fallback;}else{this.style.background='linear-gradient(135deg,#FDE9CB,#F4A23A)';this.removeAttribute('src');}"/>
       <div class="hot-card-body">
         <div class="hot-card-name">${s.e} ${s.name}</div>
         <div class="hot-card-desc">${s.desc}</div>
@@ -1851,8 +1947,8 @@ function renderHot() {
           <button class="hot-card-cta">Заявка →</button>
         </div>
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
   hotGrid.querySelectorAll('.hot-card').forEach(c => {
     c.addEventListener('click', () => openContactModal(c.dataset.svc, ''));
   });
@@ -1893,10 +1989,11 @@ function render() {
     else if (s.hot) badgeHtml = `<span class="card-badge b-hot">Хит апреля</span>`;
     else if (s.promo) badgeHtml = `<span class="card-badge b-promo">Акция −10%</span>`;
     else if (s.cat === 'Сезон') badgeHtml = `<span class="card-badge b-season">Сезон</span>`;
+    const fbAttr = s.imgFallback ? ` data-fallback="${escapeAttr(s.imgFallback)}"` : '';
     c.innerHTML = `
       <div class="card-photo-wrap">
-        <img class="card-photo" src="${s.img}" alt="${escapeAttr(s.name)}" loading="lazy"
-             onerror="this.style.display='none';this.parentElement.querySelector('.card-ph-fb').style.display='flex';"/>
+        <img class="card-photo" src="${s.img}" alt="${escapeAttr(s.name)}" loading="lazy"${fbAttr}
+             onerror="if(this.dataset.fallback&&this.src!==this.dataset.fallback){this.src=this.dataset.fallback;}else{this.style.display='none';this.parentElement.querySelector('.card-ph-fb').style.display='flex';}"/>
         <div class="card-ph-fb">${s.e}</div>
         ${badgeHtml}
       </div>
