@@ -111,15 +111,23 @@
       margin-bottom: 24px; font-size: .82rem; opacity: .85;
     }
     .hero-trust span { display: inline-flex; align-items: center; gap: 5px; }
-    .search-box { max-width: 560px; margin: 0 auto; position: relative; }
+    .search-box { max-width: 620px; margin: 0 auto; position: relative; }
     .search-box input {
-      width: 100%; padding: 16px 20px 16px 52px;
-      border-radius: 999px; border: none; font-size: 1rem;
-      box-shadow: 0 6px 28px rgba(0,0,0,.25); outline: none; color: var(--text);
+      width: 100%; padding: 18px 22px 18px 56px;
+      border-radius: 999px; border: 2px solid #fff;
+      font-size: 1.15rem; font-weight: 600;
+      color: #111 !important; background: #fff !important;
+      box-shadow: 0 6px 28px rgba(0,0,0,.28); outline: none;
+      -webkit-text-fill-color: #111;
+      caret-color: var(--accent);
     }
-    .search-box input::placeholder { color: #9ca3af; }
-    .si { position: absolute; left: 18px; top: 50%;
-          transform: translateY(-50%); font-size: 1.1rem; pointer-events: none; }
+    .search-box input::placeholder { color: #9ca3af; font-weight: 500; }
+    .search-box input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 8px 32px rgba(244,162,58,.35);
+    }
+    .si { position: absolute; left: 20px; top: 50%;
+          transform: translateY(-50%); font-size: 1.25rem; pointer-events: none; }
     .hero-ctas {
       display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
       margin-top: 20px;
@@ -182,6 +190,123 @@
       border: 1.5px solid var(--green); transition: all .15s;
     }
     .hot-jump a:hover { background: var(--green); color: #fff; }
+
+    /* ───── СТОРИС ───── */
+    .stories-bar {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0 16px;
+    }
+    .stories-scroll {
+      display: flex; gap: 16px; overflow-x: auto; overflow-y: hidden;
+      padding: 4px 20px 8px;
+      max-width: 1200px; margin: 0 auto;
+      scrollbar-width: none;
+    }
+    .stories-scroll::-webkit-scrollbar { display: none; }
+    .story {
+      flex-shrink: 0; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      width: 76px; user-select: none;
+    }
+    .story-avatar {
+      width: 70px; height: 70px; border-radius: 50%;
+      padding: 3px; background: linear-gradient(135deg, #F4A23A 0%, #DC2626 50%, #7C3AED 100%);
+      transition: transform .15s;
+    }
+    .story:hover .story-avatar { transform: scale(1.06); }
+    .story-avatar.viewed { background: #D1D5DB; }
+    .story-avatar-inner {
+      width: 100%; height: 100%; border-radius: 50%;
+      background: #fff; padding: 2px;
+    }
+    .story-avatar-inner > div {
+      width: 100%; height: 100%; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; color: #fff; font-weight: 900;
+      background-size: cover; background-position: center;
+    }
+    .story-title {
+      font-size: .72rem; font-weight: 700; text-align: center;
+      color: var(--text); line-height: 1.2;
+      max-width: 76px;
+      overflow: hidden; text-overflow: ellipsis;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    }
+    .story-overlay {
+      display: none; position: fixed; inset: 0; z-index: 600;
+      background: rgba(0,0,0,.92);
+      align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .story-overlay.open { display: flex; }
+    .story-modal {
+      width: 100%; max-width: 420px; aspect-ratio: 9/16;
+      max-height: 92vh; background: #1a1a1a;
+      border-radius: 16px; overflow: hidden;
+      position: relative;
+      display: flex; flex-direction: column;
+      animation: storyIn .25s ease;
+    }
+    @keyframes storyIn { from { transform: scale(.94); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .story-progress {
+      display: flex; gap: 4px; padding: 10px 12px 0;
+      position: absolute; top: 0; left: 0; right: 0; z-index: 3;
+    }
+    .story-progress-seg {
+      flex: 1; height: 3px; background: rgba(255,255,255,.3); border-radius: 99px; overflow: hidden;
+    }
+    .story-progress-seg div {
+      height: 100%; width: 0%; background: #fff;
+      transition: width .1s linear;
+    }
+    .story-progress-seg.done div { width: 100%; }
+    .story-x {
+      position: absolute; top: 18px; right: 14px; z-index: 5;
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(0,0,0,.45); border: none; color: #fff;
+      font-size: 1.3rem; cursor: pointer;
+    }
+    .story-bg { position: absolute; inset: 0; z-index: 1; }
+    .story-bg img { width: 100%; height: 100%; object-fit: cover; }
+    .story-content {
+      position: relative; z-index: 2;
+      flex: 1; display: flex; flex-direction: column;
+      padding: 56px 24px 24px;
+      color: #fff;
+      background: linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 60%, rgba(0,0,0,.85) 100%);
+    }
+    .story-tag {
+      display: inline-block; align-self: flex-start;
+      background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.3);
+      backdrop-filter: blur(6px);
+      border-radius: 999px; padding: 4px 12px;
+      font-size: .72rem; font-weight: 700; margin-bottom: 10px;
+    }
+    .story-title-big {
+      font-size: 1.45rem; font-weight: 900; line-height: 1.2;
+      margin-bottom: 8px; text-shadow: 0 2px 12px rgba(0,0,0,.5);
+    }
+    .story-text {
+      font-size: .95rem; line-height: 1.45; opacity: .95;
+      text-shadow: 0 1px 6px rgba(0,0,0,.5);
+    }
+    .story-bottom { margin-top: auto; }
+    .story-cta {
+      display: block; width: 100%;
+      padding: 14px 20px; border-radius: 12px;
+      background: var(--accent); color: #fff; border: none;
+      font-size: .98rem; font-weight: 800; cursor: pointer;
+      font-family: inherit; text-decoration: none; text-align: center;
+      box-shadow: 0 4px 16px rgba(244,162,58,.35);
+    }
+    .story-cta:hover { background: var(--accent2); }
+    .story-nav-zone {
+      position: absolute; top: 0; bottom: 0; width: 35%; z-index: 3;
+      cursor: pointer;
+    }
+    .story-nav-zone.left { left: 0; }
+    .story-nav-zone.right { right: 0; }
 
     /* ───── HOT (АПРЕЛЬ) ───── */
     .hot-section {
@@ -828,6 +953,30 @@
     </div>
   </div>
 
+  <!-- СТОРИС -->
+  <div class="stories-bar">
+    <div class="stories-scroll" id="stories-scroll"></div>
+  </div>
+
+  <!-- МОДАЛКА СТОРИС -->
+  <div class="story-overlay" id="story-overlay">
+    <div class="story-modal" id="story-modal">
+      <div class="story-progress" id="story-progress"></div>
+      <button class="story-x" id="story-x">✕</button>
+      <div class="story-bg" id="story-bg"></div>
+      <div class="story-nav-zone left" id="story-prev"></div>
+      <div class="story-nav-zone right" id="story-next"></div>
+      <div class="story-content">
+        <div class="story-tag" id="story-tag"></div>
+        <div class="story-title-big" id="story-title"></div>
+        <div class="story-text" id="story-text"></div>
+        <div class="story-bottom">
+          <button class="story-cta" id="story-cta"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ХИТЫ АПРЕЛЯ -->
   <section class="hot-section" id="hot-section">
     <div class="hot-inner">
@@ -838,6 +987,88 @@
       <div class="hot-grid" id="hot-grid"></div>
       <div class="hot-jump">
         <a href="#catalog-section">↓ Все 80 услуг в каталоге</a>
+      </div>
+    </div>
+  </section>
+
+  
+
+  
+
+  
+
+  <!-- КАТАЛОГ -->
+  <div class="catalog-banner" id="catalog-section">
+    <div class="catalog-banner-inner">
+      <div class="catalog-banner-text">
+        <div class="pretitle">📋 Каталог услуг</div>
+        <h2>Все 80 услуг для дачи в одном месте</h2>
+        <p>Используйте фильтры по категориям или поиск по названию. Заявка занимает 1 минуту, перезвоним за час.</p>
+      </div>
+      <div class="catalog-banner-stats">
+        <div class="catalog-banner-stat"><strong>80</strong><span>услуг</span></div>
+        <div class="catalog-banner-stat"><strong>12</strong><span>категорий</span></div>
+        <div class="catalog-banner-stat"><strong>1 час</strong><span>отклик</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="catalog-header">
+    <div class="filter-row" id="filters">
+      <button class="fbtn active" data-cat="Все">Все</button>
+      <button class="fbtn" data-cat="Сезон">🔥 Сезон</button>
+      <button class="fbtn" data-cat="Разнорабочие">👷 Разнорабочие</button>
+      <button class="fbtn" data-cat="Участок">🌿 Участок</button>
+      <button class="fbtn" data-cat="Дрова">🪵 Дрова</button>
+      <button class="fbtn" data-cat="Сантехника">💧 Сантехника</button>
+      <button class="fbtn" data-cat="Электрика">⚡ Электрика</button>
+      <button class="fbtn" data-cat="Строительство">🏗️ Стройка</button>
+      <button class="fbtn" data-cat="Вывоз">🚛 Вывоз</button>
+      <button class="fbtn" data-cat="Сад">🌱 Сад</button>
+      <button class="fbtn" data-cat="Уборка">🧹 Уборка</button>
+      <button class="fbtn" data-cat="Спецтехника">🚜 Техника</button>
+      <button class="fbtn" data-cat="Ремонт техники">🔩 Ремонт</button>
+      <button class="fbtn" data-cat="Зима">❄️ Зима</button>
+    </div>
+  </div>
+  <div class="grid-wrap">
+    <div class="count" id="count"></div>
+    <div class="sg" id="grid"></div>
+    <div class="no-res" id="no-res">
+      <div class="e">🔍</div>
+      <p>Ничего не нашлось. Попробуйте другой запрос<br/>или позвоните — найдём мастера на любую задачу.</p>
+    </div>
+  </div>
+
+  <!-- НАШИ РАБОТЫ -->
+  <section class="works" id="works-section">
+    <div class="works-inner">
+      <div class="works-head">
+        <div class="pretitle">📸 Наши работы</div>
+        <h2>Что мы делаем <em>каждую неделю</em></h2>
+        <p>Реальные кейсы из СНТ Ленобласти за последний месяц. Спросите нас про фотоотчёт по любой работе — пришлём.</p>
+      </div>
+      <div class="works-grid" id="works-grid"></div>
+    </div>
+  </section>
+
+  <!-- ОТЗЫВЫ -->
+  <section class="reviews" id="reviews-section">
+    <div class="reviews-inner">
+      <div class="reviews-head">
+        <div class="pretitle">⭐ Отзывы клиентов</div>
+        <h2>Что говорят <em>наши соседи по СНТ</em></h2>
+        <div class="reviews-summary">
+          <span class="item"><strong>4.9</strong> <span class="reviews-stars">★★★★★</span> <span class="lbl">средняя оценка</span></span>
+          <span class="item"><strong>412</strong> <span class="lbl">выполненных заказов</span></span>
+          <span class="item"><strong>98%</strong> <span class="lbl">рекомендуют ВИзбу</span></span>
+        </div>
+      </div>
+      <div class="reviews-grid" id="reviews-grid"></div>
+      <div class="reviews-cta">
+        Хотите оставить свой отзыв? Напишите нам в
+        <a href="https://wa.me/79119507358" target="_blank">WhatsApp</a> или
+        <a href="https://t.me/karina_vizbu" target="_blank">Telegram</a>.
       </div>
     </div>
   </section>
@@ -907,82 +1138,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ОТЗЫВЫ -->
-  <section class="reviews" id="reviews-section">
-    <div class="reviews-inner">
-      <div class="reviews-head">
-        <div class="pretitle">⭐ Отзывы клиентов</div>
-        <h2>Что говорят <em>наши соседи по СНТ</em></h2>
-        <div class="reviews-summary">
-          <span class="item"><strong>4.9</strong> <span class="reviews-stars">★★★★★</span> <span class="lbl">средняя оценка</span></span>
-          <span class="item"><strong>412</strong> <span class="lbl">выполненных заказов</span></span>
-          <span class="item"><strong>98%</strong> <span class="lbl">рекомендуют ВИзбу</span></span>
-        </div>
-      </div>
-      <div class="reviews-grid" id="reviews-grid"></div>
-      <div class="reviews-cta">
-        Хотите оставить свой отзыв? Напишите нам в
-        <a href="https://wa.me/79119507358" target="_blank">WhatsApp</a> или
-        <a href="https://t.me/karina_vizbu" target="_blank">Telegram</a>.
-      </div>
-    </div>
-  </section>
-
-  <!-- НАШИ РАБОТЫ -->
-  <section class="works" id="works-section">
-    <div class="works-inner">
-      <div class="works-head">
-        <div class="pretitle">📸 Наши работы</div>
-        <h2>Что мы делаем <em>каждую неделю</em></h2>
-        <p>Реальные кейсы из СНТ Ленобласти за последний месяц. Спросите нас про фотоотчёт по любой работе — пришлём.</p>
-      </div>
-      <div class="works-grid" id="works-grid"></div>
-    </div>
-  </section>
-
-  <!-- КАТАЛОГ -->
-  <div class="catalog-banner" id="catalog-section">
-    <div class="catalog-banner-inner">
-      <div class="catalog-banner-text">
-        <div class="pretitle">📋 Каталог услуг</div>
-        <h2>Все 80 услуг для дачи в одном месте</h2>
-        <p>Используйте фильтры по категориям или поиск по названию. Заявка занимает 1 минуту, перезвоним за час.</p>
-      </div>
-      <div class="catalog-banner-stats">
-        <div class="catalog-banner-stat"><strong>80</strong><span>услуг</span></div>
-        <div class="catalog-banner-stat"><strong>12</strong><span>категорий</span></div>
-        <div class="catalog-banner-stat"><strong>1 час</strong><span>отклик</span></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="catalog-header">
-    <div class="filter-row" id="filters">
-      <button class="fbtn active" data-cat="Все">Все</button>
-      <button class="fbtn" data-cat="Сезон">🔥 Сезон</button>
-      <button class="fbtn" data-cat="Разнорабочие">👷 Разнорабочие</button>
-      <button class="fbtn" data-cat="Участок">🌿 Участок</button>
-      <button class="fbtn" data-cat="Дрова">🪵 Дрова</button>
-      <button class="fbtn" data-cat="Сантехника">💧 Сантехника</button>
-      <button class="fbtn" data-cat="Электрика">⚡ Электрика</button>
-      <button class="fbtn" data-cat="Строительство">🏗️ Стройка</button>
-      <button class="fbtn" data-cat="Вывоз">🚛 Вывоз</button>
-      <button class="fbtn" data-cat="Сад">🌱 Сад</button>
-      <button class="fbtn" data-cat="Уборка">🧹 Уборка</button>
-      <button class="fbtn" data-cat="Спецтехника">🚜 Техника</button>
-      <button class="fbtn" data-cat="Ремонт техники">🔩 Ремонт</button>
-      <button class="fbtn" data-cat="Зима">❄️ Зима</button>
-    </div>
-  </div>
-  <div class="grid-wrap">
-    <div class="count" id="count"></div>
-    <div class="sg" id="grid"></div>
-    <div class="no-res" id="no-res">
-      <div class="e">🔍</div>
-      <p>Ничего не нашлось. Попробуйте другой запрос<br/>или позвоните — найдём мастера на любую задачу.</p>
-    </div>
-  </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════
@@ -2340,6 +2495,192 @@ function renderWorks() {
   `).join('');
 }
 
+// ── СТОРИС ─────────────────────────────────────────────────────────
+const STORIES = [
+  { id:'akciya-aprelya', title:'−10% апрель', emoji:'🌷',
+    bg:'https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=600&h=900&fit=crop&auto=format&q=80',
+    tag:'🎁 Акция апреля',
+    bigTitle:'−10% на открытие дачи',
+    text:'Заявка до 15 мая на открытие дачи и обработку от клещей — скидка 10%. Перезвоним через час.',
+    ctaText:'Открыть дачу за −10%',
+    ctaAction:'svc:Открытие дачи под ключ' },
+
+  { id:'kleshchi-pik', title:'Клещи 2026', emoji:'🦟',
+    bg:'https://images.unsplash.com/photo-1599598425947-5117f9077dee?w=600&h=900&fit=crop&auto=format&q=80',
+    tag:'⚠️ Пик сезона',
+    bigTitle:'Клещи проснулись',
+    text:'В Ленобласти зафиксированы первые присасывания. Обработка участка занимает 2 часа, защищает 6 недель. Дети и животные на участок — через 4 часа после.',
+    ctaText:'Обработать участок',
+    ctaAction:'svc:Обработка от клещей' },
+
+  { id:'banya-bochka', title:'Бани-бочки', emoji:'🛁',
+    bg:'https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=600&h=900&fit=crop&auto=format&q=80',
+    tag:'🔥 Хит сезона',
+    bigTitle:'Баня за 1 день',
+    text:'Готовая баня-бочка из кедра 4 м под ключ — от 240 000 ₽. Привезём, поставим, подключим. К майским — успеете попариться.',
+    ctaText:'Заказать баню-бочку',
+    ctaAction:'page:shop' },
+
+  { id:'kak-zakazat', title:'Как заказать', emoji:'📋',
+    bg:'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&h=900&fit=crop&auto=format&q=80',
+    tag:'💡 Инструкция',
+    bigTitle:'Как заказать за 1 минуту',
+    text:'1️⃣ Найдите услугу в каталоге или поиске\n2️⃣ Нажмите «Заявка»\n3️⃣ Укажите имя, телефон и пару деталей\n4️⃣ Перезвоним через час и согласуем\n\nЗаявка бесплатна, цена фиксируется до начала работ.',
+    ctaText:'Перейти к каталогу',
+    ctaAction:'anchor:#catalog-section' },
+
+  { id:'otzyvy-nedeli', title:'Отзывы', emoji:'⭐',
+    bg:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&h=900&fit=crop&auto=format&q=80',
+    tag:'⭐ 4.9 из 5',
+    bigTitle:'412 заказов в Ленобласти',
+    text:'«У нас собака и двое детей. Каждый год боимся клещей. Ребята из ВИзбу обработали 12 соток за 2 часа. Прошло 3 недели — ни одного клеща».\n\n— Сергей М., Васкелово',
+    ctaText:'Все отзывы',
+    ctaAction:'anchor:#reviews-section' },
+
+  { id:'drova-v-nalichii', title:'Дрова', emoji:'🪵',
+    bg:'https://images.unsplash.com/photo-1542621334-a254cf47733d?w=600&h=900&fit=crop&auto=format&q=80',
+    tag:'📦 В наличии',
+    bigTitle:'Дрова сухие',
+    text:'Берёзовые колотые — от 3 500 ₽/куб. Ольха и смешанные — от 2 800 ₽/куб. Привезём в день заказа, выгрузим где скажете.',
+    ctaText:'Заказать дрова',
+    ctaAction:'svc:Дрова берёзовые колотые' },
+
+  { id:'lifehack-septik', title:'Совет', emoji:'💡',
+    bg:'https://images.unsplash.com/photo-1574359411659-15573a27fd0c?w=600&h=900&fit=crop&auto=format&q=80',
+    tag:'🧠 Лайфхак',
+    bigTitle:'Когда чистить септик?',
+    text:'Если откачивали осенью — повторно нужно через 6-9 месяцев. Если зимой пользовались редко — после зимы перед сезоном. Признак: запах + долгий уход воды.',
+    ctaText:'Заказать откачку',
+    ctaAction:'svc:Откачка септика' },
+
+  { id:'top-aprelya', title:'Топ апреля', emoji:'🏆',
+    bg:'https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=600&h=900&fit=crop&auto=format&q=80',
+    tag:'🏆 Топ-5',
+    bigTitle:'Что заказывают сейчас',
+    text:'1. Открытие дачи под ключ\n2. Обработка от клещей\n3. Откачка септика\n4. Уборка участка после зимы\n5. Покос травы\n\nВсё со скидкой −10% по акции апреля.',
+    ctaText:'Все хиты апреля',
+    ctaAction:'anchor:#hot-section' },
+];
+
+let currentStory = -1;
+let storyTimer = null;
+let storyStart = 0;
+let storyDur = 7000;
+
+function renderStories() {
+  const sc = document.getElementById('stories-scroll');
+  if (!sc) return;
+  const viewed = JSON.parse(localStorage.getItem('vizbu_stories_viewed') || '[]');
+  sc.innerHTML = STORIES.map((s, i) => `
+    <div class="story" data-i="${i}">
+      <div class="story-avatar${viewed.includes(s.id) ? ' viewed' : ''}">
+        <div class="story-avatar-inner">
+          <div style="background-image:url('${s.bg}'); background-color:var(--green);">
+            ${!s.bg ? s.emoji : ''}
+          </div>
+        </div>
+      </div>
+      <div class="story-title">${s.title}</div>
+    </div>
+  `).join('');
+  sc.querySelectorAll('.story').forEach(el => {
+    el.addEventListener('click', () => openStory(parseInt(el.dataset.i, 10)));
+  });
+}
+
+function openStory(i) {
+  if (i < 0 || i >= STORIES.length) { closeStory(); return; }
+  currentStory = i;
+  const s = STORIES[i];
+
+  // Прогресс-бары
+  const prog = document.getElementById('story-progress');
+  prog.innerHTML = STORIES.map((_, idx) =>
+    `<div class="story-progress-seg${idx < i ? ' done' : ''}"><div ${idx < i ? 'style="width:100%"' : ''}></div></div>`
+  ).join('');
+
+  // BG
+  document.getElementById('story-bg').innerHTML = s.bg
+    ? `<img src="${s.bg}" alt="" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#2D6A4F,#F4A23A)';"/>`
+    : '';
+
+  document.getElementById('story-tag').textContent = s.tag || '';
+  document.getElementById('story-title').textContent = s.bigTitle || '';
+  document.getElementById('story-text').innerText = s.text || '';
+
+  const cta = document.getElementById('story-cta');
+  cta.textContent = s.ctaText || 'Перейти';
+  cta.onclick = () => {
+    const a = s.ctaAction || '';
+    closeStory();
+    if (a.startsWith('svc:')) {
+      const name = a.slice(4);
+      openContactModalByName(name);
+    } else if (a.startsWith('page:')) {
+      const p = a.slice(5);
+      switchPage(p);
+    } else if (a.startsWith('anchor:')) {
+      const sel = a.slice(7);
+      const el = document.querySelector(sel);
+      if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+    }
+  };
+
+  document.getElementById('story-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  // Запоминаем что просмотрено
+  const viewed = JSON.parse(localStorage.getItem('vizbu_stories_viewed') || '[]');
+  if (!viewed.includes(s.id)) {
+    viewed.push(s.id);
+    localStorage.setItem('vizbu_stories_viewed', JSON.stringify(viewed));
+  }
+
+  // Запуск таймера
+  if (storyTimer) clearInterval(storyTimer);
+  storyStart = Date.now();
+  storyTimer = setInterval(() => {
+    const elapsed = Date.now() - storyStart;
+    const pct = Math.min(100, (elapsed / storyDur) * 100);
+    const seg = prog.querySelectorAll('.story-progress-seg div');
+    if (seg[i]) seg[i].style.width = pct + '%';
+    if (pct >= 100) {
+      clearInterval(storyTimer);
+      openStory(i + 1);
+    }
+  }, 80);
+}
+
+function closeStory() {
+  document.getElementById('story-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+  if (storyTimer) { clearInterval(storyTimer); storyTimer = null; }
+  currentStory = -1;
+  renderStories(); // обновим viewed
+}
+
+function switchPage(p) {
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
+  document.querySelectorAll(`[data-page="${p}"]`).forEach(t => t.classList.add('active'));
+  const target = document.getElementById('page-' + p);
+  if (target) target.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.getElementById('story-x').addEventListener('click', closeStory);
+document.getElementById('story-overlay').addEventListener('click', e => {
+  if (e.target.id === 'story-overlay') closeStory();
+});
+document.getElementById('story-prev').addEventListener('click', () => openStory(currentStory - 1));
+document.getElementById('story-next').addEventListener('click', () => openStory(currentStory + 1));
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('story-overlay').classList.contains('open')) return;
+  if (e.key === 'Escape') closeStory();
+  if (e.key === 'ArrowLeft') openStory(currentStory - 1);
+  if (e.key === 'ArrowRight') openStory(currentStory + 1);
+});
+
 // ── ОТЗЫВЫ ─────────────────────────────────────────────────────────
 const REVIEWS = [
   { name:'Анна К.', place:'СНТ Синявино, Кировский р-н', date:'18 апреля 2026',
@@ -2683,6 +3024,7 @@ document.getElementById('form').addEventListener('submit', async e => {
   btn.textContent = 'Отправить заявку →'; btn.disabled = false;
 });
 
+renderStories();
 renderReviews();
 renderWorks();
 renderShop();
