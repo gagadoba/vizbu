@@ -3,13 +3,16 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ВИзбу — Бытовые услуги для дачи и СНТ</title>
+  <title>ВИзбу — Бытовые услуги для дачи и СНТ в Ленобласти</title>
+  <meta name="description" content="Открытие дачи, обработка от клещей, покос, дрова, сантехник, электрик. 70+ услуг от проверенных мастеров. Заявка за 1 минуту, перезвоним за час."/>
   <style>
     :root {
       --green:  #2D6A4F;
       --green2: #40916C;
       --green3: #1b4332;
       --accent: #F4A23A;
+      --accent2:#E08920;
+      --red:    #DC2626;
       --blue:   #2563EB;
       --blue2:  #1d4ed8;
       --purple: #7C3AED;
@@ -35,7 +38,7 @@
       display: flex; align-items: center; gap: 0; height: 60px;
     }
     .logo { font-size: 1.45rem; font-weight: 900; color: #fff;
-            letter-spacing: -.5px; margin-right: 32px; white-space: nowrap; flex-shrink: 0; }
+            letter-spacing: -.5px; margin-right: 32px; white-space: nowrap; flex-shrink: 0; cursor: pointer; }
     .logo em { color: var(--accent); font-style: normal; }
     nav { display: flex; gap: 2px; flex: 1; }
     .nav-tab {
@@ -68,16 +71,31 @@
     .page { display: none; }
     .page.active { display: block; }
 
+    /* ───── PROMO BAR ───── */
+    .promo-bar {
+      background: linear-gradient(90deg, #F4A23A 0%, #E08920 100%);
+      color: #fff; text-align: center; padding: 9px 16px;
+      font-size: .87rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      flex-wrap: wrap;
+    }
+    .promo-bar strong { font-weight: 900; }
+    .promo-bar .promo-pill {
+      background: #fff; color: #B45309; border-radius: 999px;
+      padding: 2px 10px; font-size: .78rem; font-weight: 800;
+    }
+
     /* ───── HERO ───── */
     .hero {
       background: linear-gradient(140deg, var(--green3) 0%, var(--green2) 100%);
-      color: #fff; text-align: center; padding: 60px 20px 52px;
+      color: #fff; text-align: center; padding: 56px 20px 48px;
+      position: relative; overflow: hidden;
     }
     .hero-tag {
       display: inline-block; background: rgba(255,255,255,.15);
       border: 1px solid rgba(255,255,255,.3); border-radius: 999px;
       padding: 5px 16px; font-size: .8rem; font-weight: 600;
-      margin-bottom: 16px; letter-spacing: .3px;
+      margin-bottom: 14px; letter-spacing: .3px;
     }
     .hero h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 900;
                line-height: 1.15; margin-bottom: 12px; }
@@ -86,8 +104,13 @@
       font-size: clamp(1rem, 2.5vw, 1.2rem); opacity: .9;
       margin-bottom: 8px; font-weight: 500;
     }
-    .hero p { opacity: .75; font-size: .95rem; max-width: 520px;
-              margin: 0 auto 34px; }
+    .hero p { opacity: .8; font-size: .95rem; max-width: 540px;
+              margin: 0 auto 24px; }
+    .hero-trust {
+      display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+      margin-bottom: 24px; font-size: .82rem; opacity: .85;
+    }
+    .hero-trust span { display: inline-flex; align-items: center; gap: 5px; }
     .search-box { max-width: 560px; margin: 0 auto; position: relative; }
     .search-box input {
       width: 100%; padding: 16px 20px 16px 52px;
@@ -98,13 +121,69 @@
     .si { position: absolute; left: 18px; top: 50%;
           transform: translateY(-50%); font-size: 1.1rem; pointer-events: none; }
 
+    /* ───── HOT (АПРЕЛЬ) ───── */
+    .hot-section {
+      background: linear-gradient(180deg, #FEF3E7 0%, #FFFBF5 100%);
+      padding: 36px 20px 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hot-inner { max-width: 1200px; margin: 0 auto; }
+    .hot-head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      flex-wrap: wrap; gap: 8px; margin-bottom: 16px;
+    }
+    .hot-head h2 {
+      font-size: clamp(1.2rem, 2.5vw, 1.55rem); font-weight: 900;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .hot-head .when {
+      background: var(--accent); color: #fff;
+      border-radius: 999px; padding: 3px 12px;
+      font-size: .73rem; font-weight: 800; letter-spacing: .3px;
+    }
+    .hot-head p { font-size: .88rem; color: var(--muted); flex-basis: 100%; }
+    .hot-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px;
+    }
+    .hot-card {
+      background: #fff; border: 1.5px solid var(--accent);
+      border-radius: 12px; overflow: hidden; cursor: pointer;
+      box-shadow: 0 2px 10px rgba(244,162,58,.18);
+      transition: transform .15s, box-shadow .2s;
+      display: flex; flex-direction: column; position: relative;
+    }
+    .hot-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(244,162,58,.28); }
+    .hot-card-img {
+      width: 100%; height: 110px; object-fit: cover; display: block; background: #FDE9CB;
+    }
+    .hot-card-body { padding: 12px 14px; flex: 1; display: flex; flex-direction: column; }
+    .hot-card-name { font-size: .94rem; font-weight: 800; margin-bottom: 4px; }
+    .hot-card-desc { font-size: .78rem; color: var(--muted); flex: 1; }
+    .hot-card-ft {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 6px; margin-top: 10px;
+    }
+    .hot-card-price { font-size: .85rem; font-weight: 800; color: var(--green); }
+    .hot-card-cta {
+      background: var(--accent); color: #fff; border: none; border-radius: 999px;
+      padding: 6px 12px; font-size: .76rem; font-weight: 800;
+      cursor: pointer; font-family: inherit;
+    }
+    .hot-card-badge {
+      position: absolute; top: 8px; left: 8px;
+      background: var(--red); color: #fff;
+      border-radius: 6px; padding: 3px 8px; font-size: .65rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: .4px;
+      box-shadow: 0 2px 6px rgba(220,38,38,.35);
+    }
+
     /* ───── ABOUT ───── */
     .about { background: #fff; }
     .about-inner {
-      max-width: 1200px; margin: 0 auto; padding: 72px 20px;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;
+      max-width: 1200px; margin: 0 auto; padding: 64px 20px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start;
     }
-    @media(max-width:720px){ .about-inner{ grid-template-columns:1fr; gap:36px; padding:48px 20px; } }
+    @media(max-width:720px){ .about-inner{ grid-template-columns:1fr; gap:32px; padding:44px 20px; } }
 
     .about-text .pretitle {
       font-size: .75rem; font-weight: 800; text-transform: uppercase;
@@ -172,15 +251,27 @@
       overflow: hidden; border: 1px solid var(--border);
       box-shadow: 0 1px 6px rgba(0,0,0,.05);
       transition: box-shadow .2s, transform .2s;
-      display: flex; flex-direction: column;
+      display: flex; flex-direction: column; position: relative;
     }
     .card:hover { box-shadow: 0 8px 30px rgba(0,0,0,.1); transform: translateY(-4px); }
+    .card-photo-wrap { position: relative; }
     .card-photo { width: 100%; height: 175px; object-fit: cover; display: block; background: #d4e6db; }
     .card-ph-fb {
       width: 100%; height: 175px; display: none;
       align-items: center; justify-content: center;
       font-size: 3rem; background: linear-gradient(135deg, #e8f5ee, #d4e6db);
     }
+    .card-badge {
+      position: absolute; top: 10px; left: 10px;
+      border-radius: 6px; padding: 4px 9px;
+      font-size: .68rem; font-weight: 800; letter-spacing: .4px;
+      text-transform: uppercase;
+      box-shadow: 0 2px 6px rgba(0,0,0,.18);
+    }
+    .card-badge.b-hot { background: var(--red); color: #fff; }
+    .card-badge.b-season { background: var(--accent); color: #fff; }
+    .card-badge.b-new { background: var(--blue); color: #fff; }
+    .card-badge.b-promo { background: #16A34A; color: #fff; }
     .card-body { padding: 15px; flex: 1; display: flex; flex-direction: column; }
     .card-cat { font-size: .68rem; font-weight: 800; text-transform: uppercase;
                 letter-spacing: .6px; color: var(--green); margin-bottom: 3px; }
@@ -194,7 +285,7 @@
       cursor: pointer; font-family: inherit; white-space: nowrap;
       transition: background .15s, transform .1s;
     }
-    .btn-req:hover { background: #e08f25; transform: scale(1.03); }
+    .btn-req:hover { background: var(--accent2); transform: scale(1.03); }
 
     /* ───── NO RESULTS ───── */
     .no-res { display:none; text-align:center; padding:60px 20px; color:var(--muted); }
@@ -332,7 +423,7 @@
     .overlay.open { display: flex; }
     .modal {
       background: #fff; border-radius: 20px;
-      width: 100%; max-width: 460px; padding: 32px 28px;
+      width: 100%; max-width: 480px; padding: 28px 26px;
       position: relative; max-height: 92vh; overflow-y: auto;
       animation: su .2s ease;
     }
@@ -341,16 +432,36 @@
                font-size:1.4rem; cursor:pointer; color:var(--muted); }
     .m-cat { font-size:.7rem; font-weight:800; text-transform:uppercase;
              letter-spacing:.5px; color:var(--green); margin-bottom:3px; }
-    .modal h2 { font-size:1.3rem; font-weight:900; margin-bottom:20px; }
-    .fr { margin-bottom:14px; }
+    .modal h2 { font-size:1.25rem; font-weight:900; margin-bottom:6px; line-height:1.25; }
+    .m-promo {
+      background: #FEF3E7; border-left: 3px solid var(--accent);
+      padding: 8px 12px; border-radius: 8px; margin-bottom: 16px;
+      font-size: .82rem; color: #B45309; font-weight: 600;
+    }
+    .m-promo strong { color: var(--accent2); }
+    .fr { margin-bottom:13px; }
     .fr label { display:block; font-size:.83rem; font-weight:700; margin-bottom:5px; }
-    .fr input, .fr textarea {
+    .fr label .req { color: var(--red); }
+    .fr input, .fr textarea, .fr select {
       width:100%; padding:11px 14px; border:1.5px solid var(--border);
       border-radius:10px; font-size:.95rem; font-family:inherit; color:var(--text);
-      transition:border-color .15s;
+      transition:border-color .15s; background: #fff;
     }
-    .fr input:focus, .fr textarea:focus { outline:none; border-color:var(--green2); }
-    .fr textarea { resize:vertical; min-height:76px; }
+    .fr select { appearance:none; -webkit-appearance:none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%236B7280' d='M1 1l5 5 5-5'/></svg>");
+      background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px;
+    }
+    .fr input:focus, .fr textarea:focus, .fr select:focus { outline:none; border-color:var(--green2); }
+    .fr textarea { resize:vertical; min-height:64px; }
+    .fr .pills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .fr .pill {
+      padding: 7px 12px; border-radius: 999px;
+      border: 1.5px solid var(--border); background: #fff;
+      font-size: .83rem; cursor: pointer; font-family: inherit; color: var(--text);
+      transition: all .15s; user-select: none;
+    }
+    .fr .pill.active { background: var(--green); border-color: var(--green); color: #fff; }
+    .fr-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .btn-send {
       width:100%; padding:14px; background:var(--green); color:#fff;
       border:none; border-radius:999px; font-size:1rem; font-weight:700;
@@ -381,13 +492,18 @@
                        margin-top:10px; font-size:.8rem; }
     .footer-products span { opacity:.6; }
 
-    @media(max-width:480px){ .modal{padding:24px 16px;} }
+    @media(max-width:480px){ .modal{padding:24px 18px;} .fr-row2{grid-template-columns:1fr;} }
   </style>
 </head>
 <body>
 
 <!-- HEADER -->
 <header>
+  <!-- ПРОМО-БАР АКЦИИ -->
+  <div class="promo-bar">
+    <span>🌷 <strong>Акция апреля:</strong> −10% на открытие дачи и обработку от клещей</span>
+    <span class="promo-pill">до 15 мая</span>
+  </div>
   <div class="hdr">
     <div class="logo"><img src="logo-white.svg" alt="ВИзбу" style="height:42px;width:auto;display:block;"></div>
     <nav>
@@ -415,15 +531,32 @@
 
   <!-- HERO -->
   <div class="hero">
-    <div class="hero-tag">Сервис для загородной жизни · с 2026 года</div>
+    <div class="hero-tag">Сервис для загородной жизни в Ленобласти · с 2026 года</div>
     <h1>Решаем всё,<br/><em>кроме погоды</em></h1>
     <div class="hero-slogan">70+ услуг для вашей дачи и участка</div>
-    <p>70+ услуг от проверенных местных мастеров. Покос, дрова, сантехник, электрик — и всё что между ними.</p>
+    <p>От открытия дачи и обработки от клещей до сантехника и дров. Один звонок — мы организуем всё.</p>
+    <div class="hero-trust">
+      <span>⭐ 4.9 / 5 по отзывам</span>
+      <span>⏱ Перезвоним за 1 час</span>
+      <span>🛠 Проверенные мастера</span>
+      <span>💸 Заявка бесплатно</span>
+    </div>
     <div class="search-box">
       <span class="si">🔍</span>
-      <input id="search" type="text" placeholder="Найти услугу — покос, сантехник, дрова..." autocomplete="off"/>
+      <input id="search" type="text" placeholder="Что нужно? Покос, септик, клещи, забор..." autocomplete="off"/>
     </div>
   </div>
+
+  <!-- ХИТЫ АПРЕЛЯ -->
+  <section class="hot-section" id="hot-section">
+    <div class="hot-inner">
+      <div class="hot-head">
+        <h2>🔥 Что заказывают сейчас в Ленобласти <span class="when">апрель–май</span></h2>
+        <p>Сезонные работы конца апреля. На отмеченные услуги действует акция −10% до 15 мая.</p>
+      </div>
+      <div class="hot-grid" id="hot-grid"></div>
+    </div>
+  </section>
 
   <!-- О НАС -->
   <section class="about" id="about-section">
@@ -432,7 +565,7 @@
         <div class="pretitle">Кто мы такие</div>
         <h2>Мы — ваши <em>надёжные соседи</em></h2>
         <p class="lead">ВИзбу родился из простой идеи: дача должна приносить радость, а не головную боль.</p>
-        <p>Мы сами живём в загородных посёлках и знаем, как это бывает: нужен сантехник — а найти некого. Нужен покос — мастер берёт трубку через неделю. Нужны дрова — и снова перебираешь чаты в поисках нормального контакта.</p>
+        <p>Мы сами живём в загородных посёлках Ленобласти и знаем, как это бывает: нужен сантехник — а найти некого. Нужен покос — мастер берёт трубку через неделю. Нужны дрова — и снова перебираешь чаты в поисках нормального контакта.</p>
         <p>ВИзбу — это команда, которая взяла на себя эти задачи. Мы лично знаем каждого мастера, с которым работаем. Мы проверяем качество после каждого заказа. И мы несём ответственность за результат — не мастер перед вами, а мы перед вами.</p>
         <ul class="about-points">
           <li>
@@ -474,9 +607,8 @@
       </div>
       <div class="about-right">
         <div class="about-img">
-          <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=700&h=400&fit=crop&auto=format&q=80"
-               alt="Загородный участок"
-               onerror="this.src='https://images.unsplash.com/photo-1501854140801-50d01698950b?w=700&h=400&fit=crop'"/>
+          <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=700&h=400&fit=crop&auto=format&q=80"
+               alt="Загородный дом весной"/>
         </div>
         <div class="about-stats">
           <div class="stat"><div class="stat-n">70+</div><div class="stat-l">услуг в каталоге</div></div>
@@ -494,9 +626,10 @@
 
   <!-- КАТАЛОГ -->
   <div class="catalog-header" id="catalog-section">
-    <h2>Каталог услуг</h2>
+    <h2>Полный каталог услуг</h2>
     <div class="filter-row" id="filters">
       <button class="fbtn active" data-cat="Все">Все</button>
+      <button class="fbtn" data-cat="Сезон">🔥 Сезон</button>
       <button class="fbtn" data-cat="Участок">🌿 Участок</button>
       <button class="fbtn" data-cat="Дрова">🪵 Дрова</button>
       <button class="fbtn" data-cat="Сантехника">💧 Сантехника</button>
@@ -625,8 +758,7 @@
     <div class="mgmt-intro">
       <div class="mgmt-intro-img">
         <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=700&h=400&fit=crop&auto=format&q=80"
-             alt="Загородный дом"
-             onerror="this.style.background='#e8f5ee'"/>
+             alt="Загородный дом"/>
       </div>
       <div class="mgmt-intro-text">
         <h2>Ваш дом не должен <em>простаивать</em></h2>
@@ -711,15 +843,21 @@
     <button class="modal-x" id="modal-x">✕</button>
     <div class="m-cat" id="m-cat"></div>
     <h2 id="m-name">Оставить заявку</h2>
+    <div class="m-promo" id="m-promo" style="display:none;">
+      🌷 <strong>Акция апреля:</strong> −10% от итоговой цены, если оставите заявку до 15 мая.
+    </div>
     <div id="m-form">
       <form id="form">
         <input type="hidden" id="f-svc"/>
-        <div class="fr"><label>Ваше имя *</label><input id="f-name" type="text" placeholder="Иван" required/></div>
-        <div class="fr"><label>Телефон *</label><input id="f-phone" type="tel" placeholder="+7 (___) ___-__-__" required/></div>
-        <div class="fr"><label>Адрес / СНТ / улица</label><input id="f-addr" type="text" placeholder="СНТ Синявино, ул. Лесная 5"/></div>
-        <div class="fr"><label>Комментарий</label><textarea id="f-comm" placeholder="Расскажите подробнее..."></textarea></div>
+        <div id="f-extra"></div>
+        <div class="fr-row2">
+          <div class="fr"><label>Ваше имя <span class="req">*</span></label><input id="f-name" type="text" placeholder="Иван" required/></div>
+          <div class="fr"><label>Телефон <span class="req">*</span></label><input id="f-phone" type="tel" placeholder="+7 (___) ___-__-__" required/></div>
+        </div>
+        <div class="fr"><label>Адрес / СНТ</label><input id="f-addr" type="text" placeholder="СНТ Синявино, ул. Лесная 5"/></div>
+        <div class="fr"><label>Комментарий (необязательно)</label><textarea id="f-comm" placeholder="Любые детали, которые помогут точнее посчитать..."></textarea></div>
         <button type="submit" class="btn-send">Отправить заявку →</button>
-        <p class="m-note">Перезвоним в течение часа, согласуем детали бесплатно</p>
+        <p class="m-note">Перезвоним в течение часа · согласуем детали бесплатно</p>
       </form>
     </div>
     <div class="m-success" id="m-ok">
@@ -765,7 +903,7 @@
   .order-date { font-size:.75rem; color:#6B7280; }
   .order-info { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
   .order-tag { font-size:.8rem; background:#F4F7F4; border-radius:6px; padding:3px 10px; color:#1A1A1A; }
-  .order-comm { font-size:.85rem; color:#6B7280; margin-bottom:12px; }
+  .order-comm { font-size:.85rem; color:#6B7280; margin-bottom:12px; white-space: pre-wrap; }
   .order-actions { display:flex; gap:8px; flex-wrap:wrap; }
   .btn-status { padding:6px 14px; border-radius:999px; border:1.5px solid #E2EBE6; background:#fff; cursor:pointer; font-size:.78rem; font-weight:700; font-family:inherit; transition:all .15s; }
   .btn-status:hover { border-color:#2D6A4F; color:#2D6A4F; }
@@ -835,6 +973,7 @@ function renderAdmin() {
         <span class="order-tag">👤 ${o.name}</span>
         <span class="order-tag">📱 ${o.phone}</span>
         ${o.addr ? `<span class="order-tag">📍 ${o.addr}</span>` : ''}
+        ${o.extras ? Object.entries(o.extras).map(([k,v]) => `<span class="order-tag">📋 ${k}: ${v}</span>`).join('') : ''}
       </div>
       ${o.comm ? `<div class="order-comm">💬 ${o.comm}</div>` : ''}
       <div class="order-actions">
@@ -873,265 +1012,657 @@ document.querySelector('.logo').addEventListener('click', () => {
 
 <script>
 // ── TELEGRAM ───────────────────────────────────────────────────────
-// Инструкция:
-// 1. Напишите @BotFather → /newbot → получите BOT_TOKEN
-// 2. Напишите своему боту /start с аккаунта @karina_vizbu
-// 3. Откройте: https://api.telegram.org/bot{ВАШ_ТОКЕН}/getUpdates
-// 4. Скопируйте число из поля "id" — это ваш CHAT_ID
 const BOT_TOKEN = 'YOUR_BOT_TOKEN';
 const CHAT_ID   = 'YOUR_CHAT_ID';
 
-// ── 70+ УСЛУГ ────────────────────────────────────────────────────
+// ── БИБЛИОТЕКА ПОЛЕЙ ───────────────────────────────────────────────
+// Удобные пресеты под минимальное заполнение условий
+const F = {
+  area:    { id:'area',    label:'Площадь участка',     type:'pill', options:['до 5 соток','5–10 соток','10–15 соток','15+'] },
+  areaM2:  { id:'areaM2',  label:'Площадь',             type:'pill', options:['до 50 м²','50–100 м²','100–200 м²','200+'] },
+  houseSz: { id:'houseSz', label:'Размер дома',         type:'pill', options:['до 60 м²','60–120 м²','120–200 м²','200+'] },
+  urgent:  { id:'urgent',  label:'Когда нужно',         type:'pill', options:['Сегодня-завтра','На этой неделе','В течение месяца'] },
+  volumeM3:{ id:'volume',  label:'Объём (м³)',          type:'pill', options:['1','2','3','4–6','6+'] },
+  qty:     { id:'qty',     label:'Количество',          type:'number', placeholder:'шт.' },
+  meters:  { id:'meters',  label:'Длина (м)',           type:'number', placeholder:'метров' },
+};
+
+// ── 75+ УСЛУГ ──────────────────────────────────────────────────────
+// Поля fields[] — это уточнения под каждую услугу (1-2 ключевых вопроса).
+// hot:true — попадает в блок "Хиты апреля".
+// promo:true — в карточку и модалку добавляется бейдж акции −10%.
 const SERVICES = [
-  // УЧАСТОК (15)
+
+  // ━━━━━━━━━━━━━━━━━━━━━━ СЕЗОННЫЕ (АПРЕЛЬ–МАЙ) ━━━━━━━━━━━━━━━━━━━━━━
+  { name:'Открытие дачи под ключ', cat:'Сезон', price:'от 4 500 ₽', e:'🌷',
+    hot:true, promo:true, badge:'Хит апреля',
+    desc:'Уберём, запустим воду и электричество, проверим дом после зимы. Всё за один день.',
+    img:'https://images.unsplash.com/photo-1588854337115-1c67d9247e4d?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.houseSz,
+      { id:'extras', label:'Что включить', type:'multi',
+        options:['Уборка дома','Запуск воды','Запуск септика','Электрика','Покос','Мойка окон'] },
+    ] },
+
+  { name:'Обработка от клещей', cat:'Сезон', price:'от 3 000 ₽', e:'🦟',
+    hot:true, promo:true, badge:'Пик сезона',
+    desc:'Профессиональная химическая обработка участка. Сертифицированные препараты, действие до 6 недель.',
+    img:'https://images.unsplash.com/photo-1599598425947-5117f9077dee?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.area,
+      { id:'pets', label:'Дети и животные на участке', type:'pill', options:['Есть','Нет'] },
+    ] },
+
+  { name:'Расконсервация водопровода', cat:'Сезон', price:'от 2 500 ₽', e:'🚿',
+    hot:true, promo:true, badge:'Сезон',
+    desc:'Запуск летнего водопровода после зимы: продувка, проверка соединений, устранение протечек.',
+    img:'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'src', label:'Источник воды', type:'pill', options:['Скважина','Колодец','Центральный','Бочка'] },
+      F.meters,
+    ] },
+
+  { name:'Проверка дома после зимы', cat:'Сезон', price:'от 2 000 ₽', e:'🏚',
+    hot:true, badge:'Сезон',
+    desc:'Осмотр кровли, фасада, фундамента, инженерных систем. Письменный отчёт с рекомендациями.',
+    img:'https://images.unsplash.com/photo-1599809275671-b5942cabc7a2?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.houseSz,
+      { id:'concern', label:'Что больше всего беспокоит', type:'select',
+        options:['Не знаю — нужен общий осмотр','Кровля / протечки','Фундамент / трещины','Электрика','Вода / трубы','Грызуны и плесень'] },
+    ] },
+
+  { name:'Уборка участка после зимы', cat:'Сезон', price:'от 2 500 ₽', e:'🍂',
+    hot:true, badge:'Сезон',
+    desc:'Сбор веток, прошлогодних листьев и мусора, уборка с вывозом. Подготовка к посадкам.',
+    img:'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.area,
+      { id:'haul', label:'Вывоз нужен', type:'pill', options:['Да','Нет, оставим'] },
+    ] },
+
+  // ━━━━━━━━━━━━━━━━━━━━━━ УЧАСТОК ━━━━━━━━━━━━━━━━━━━━━━
   { name:'Покос травы', cat:'Участок', price:'от 2 000 ₽', e:'🌿',
-    desc:'Газонокосилкой или триммером. Любая площадь, вывоз скошенного.',
-    img:'https://images.unsplash.com/photo-1590650153855-d9e808231d41?w=400&h=200&fit=crop&auto=format&q=80' },
-  { name:'Мульчирование', cat:'Участок', price:'от 4 000 ₽', e:'🌿',
+    hot:true,
+    desc:'Газонокосилкой или триммером. Любая площадь, вывоз скошенного по запросу.',
+    img:'https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[ F.area, F.urgent ] },
+
+  { name:'Мульчирование', cat:'Участок', price:'от 4 000 ₽', e:'🪵',
     desc:'Измельчение травы и веток прямо на участке специальной техникой.',
-    img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1597844808212-52fe2bcb3eee?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[ F.area ] },
+
   { name:'Уборка листьев', cat:'Участок', price:'от 1 500 ₽', e:'🍂',
     desc:'Осенняя и весенняя уборка, сбор и вывоз мешков с листьями.',
-    img:'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[ F.area, { id:'haul', label:'Вывоз', type:'pill', options:['Нужен','Не нужен'] } ] },
+
   { name:'Спил деревьев', cat:'Участок', price:'от 3 000 ₽', e:'🪓',
     desc:'Аккуратный спил, корчевание пней, уборка территории за собой.',
-    img:'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1610847499832-918a1c3c6811?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'qty', label:'Сколько деревьев', type:'number', placeholder:'шт.' },
+      { id:'diameter', label:'Диаметр ствола', type:'pill', options:['до 20 см','20–40 см','40–60 см','60+'] },
+    ] },
+
   { name:'Вывоз веток и кустов', cat:'Участок', price:'от 2 500 ₽', e:'🌲',
     desc:'Обрезка разросшихся кустов, уборка и вывоз с участка.',
-    img:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1444084316824-2bd90810f24f?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[ F.volumeM3 ] },
+
   { name:'Стрижка живой изгороди', cat:'Участок', price:'от 2 000 ₽', e:'✂️',
     desc:'Придание формы кустарникам и живой изгороди, выравнивание.',
-    img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1574263867128-b777b8b3c00b?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[ F.meters ] },
+
   { name:'Посев газона', cat:'Участок', price:'от 5 000 ₽', e:'🌱',
     desc:'Подготовка почвы, посев газонной травы, раскатка рулонного газона.',
-    img:'https://images.unsplash.com/photo-1590650046871-92c887180603?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1589923188900-85dae523342b?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.area,
+      { id:'type', label:'Тип газона', type:'pill', options:['Посевной','Рулонный','Не знаю — посоветуйте'] },
+    ] },
+
   { name:'Аэрация и подкормка газона', cat:'Участок', price:'от 3 000 ₽', e:'🌿',
     desc:'Прокалывание дёрна, внесение удобрений для здоровья газона.',
-    img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[ F.area ] },
+
   { name:'Обработка от сорняков', cat:'Участок', price:'от 2 500 ₽', e:'🌾',
     desc:'Химическая или ручная обработка участка от нежелательной растительности.',
-    img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1581094288338-2244c5cad94e?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.area,
+      { id:'how', label:'Способ', type:'pill', options:['Химия','Вручную','На усмотрение мастера'] },
+    ] },
+
   { name:'Укладка декоративной коры', cat:'Участок', price:'от 3 500 ₽', e:'🪵',
     desc:'Мульчирование клумб и садовых зон декоративной корой или щепой.',
-    img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop&auto=format&q=80' },
-  { name:'Обработка от клещей', cat:'Участок', price:'от 3 000 ₽', e:'🦟',
-    desc:'Профессиональная химическая обработка участка от клещей и насекомых.',
-    img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1597844808212-52fe2bcb3eee?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[ F.areaM2 ] },
+
   { name:'Планировка участка', cat:'Участок', price:'от 8 000 ₽', e:'📐',
     desc:'Выравнивание рельефа, организация дренажа, разметка зон.',
-    img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1503424886307-b090341d25d1?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.area,
+      { id:'slope', label:'Перепад высот', type:'pill', options:['Ровно','Небольшой','Сильный'] },
+    ] },
+
   { name:'Устройство дренажа', cat:'Участок', price:'от 15 000 ₽', e:'💧',
     desc:'Отвод воды с участка, обустройство дренажных канав и труб.',
-    img:'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.meters,
+      { id:'soil', label:'Грунт', type:'pill', options:['Глина','Песок','Не знаю'] },
+    ] },
+
   { name:'Установка водостоков', cat:'Участок', price:'от 5 000 ₽', e:'🌧️',
     desc:'Монтаж водосточной системы для отвода воды с крыши.',
-    img:'https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1605379399642-870262d3d051?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[ { id:'perim', label:'Периметр крыши (м)', type:'number', placeholder:'метров' } ] },
+
   { name:'Организация полива', cat:'Участок', price:'от 6 000 ₽', e:'💦',
     desc:'Монтаж системы автоматического или капельного полива.',
-    img:'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1542223533-5e8d6ce5180a?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.area,
+      { id:'src', label:'Источник воды', type:'pill', options:['Скважина','Колодец','Водопровод','Бочка'] },
+    ] },
 
-  // ДРОВА (5)
+  // ━━━━━━━━━━━━━━━━━━━━━━ ДРОВА ━━━━━━━━━━━━━━━━━━━━━━
   { name:'Дрова колотые с доставкой', cat:'Дрова', price:'от 3 500 ₽/куб', e:'🪵',
     desc:'Сухие берёзовые и еловые дрова, привезём и выгрузим.',
-    img:'https://images.unsplash.com/photo-1542621334-a254cf47733d?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1542621334-a254cf47733d?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.volumeM3,
+      { id:'wood', label:'Порода', type:'pill', options:['Берёза','Ольха','Смешанные','На ваше усмотрение'] },
+    ] },
+
   { name:'Топливо для котла', cat:'Дрова', price:'от 5 000 ₽', e:'🔥',
     desc:'Пеллеты, брикеты, уголь — доставка прямо к вашему дому.',
-    img:'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'type', label:'Тип топлива', type:'pill', options:['Пеллеты','Брикеты','Уголь','Подскажите лучшее'] },
+      { id:'qty', label:'Объём', type:'pill', options:['10 мешков','20 мешков','30+ мешков','Тонна'] },
+    ] },
+
   { name:'Колка и укладка дров', cat:'Дрова', price:'от 2 000 ₽', e:'🪓',
     desc:'Расколем на нужный размер, аккуратно уложим в поленницу.',
-    img:'https://images.unsplash.com/photo-1567954970774-58d6aa6c50dc?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1567954970774-58d6aa6c50dc?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.volumeM3,
+      { id:'stack', label:'Сложить в поленницу', type:'pill', options:['Да','Нет, оставим грудой'] },
+    ] },
+
   { name:'Пеллеты и брикеты', cat:'Дрова', price:'от 4 500 ₽/мешок', e:'📦',
     desc:'Евродрова — горят дольше обычных, удобная фасовка.',
-    img:'https://images.unsplash.com/photo-1542621334-a254cf47733d?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1604608672516-f1b9b1d1f3a4?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'type', label:'Что нужно', type:'pill', options:['Пеллеты','Брикеты','Оба варианта'] },
+      { id:'qty', label:'Кол-во мешков', type:'number', placeholder:'шт.' },
+    ] },
+
   { name:'Строительство поленницы', cat:'Дрова', price:'от 3 000 ₽', e:'🏗️',
     desc:'Сборка навеса или поленницы для хранения дров на участке.',
-    img:'https://images.unsplash.com/photo-1542621334-a254cf47733d?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1605528103428-11dc09f8a06a?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'size', label:'Размер', type:'pill', options:['2×2 м','3×2 м','4×2 м','Другой'] },
+      { id:'roof', label:'Навес', type:'pill', options:['Нужен','Не нужен'] },
+    ] },
 
-  // САНТЕХНИКА (8)
-  { name:'Сантехник', cat:'Сантехника', price:'от 1 500 ₽', e:'🔧',
-    desc:'Ремонт и замена труб, кранов, радиаторов, унитазов.',
-    img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=200&fit=crop&auto=format&q=80' },
-  { name:'Откачка септика', cat:'Сантехника', price:'от 3 000 ₽', e:'💧',
-    desc:'Ассенизаторская машина приедет в удобное для вас время.',
-    img:'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&h=200&fit=crop&auto=format&q=80' },
+  // ━━━━━━━━━━━━━━━━━━━━━━ САНТЕХНИКА ━━━━━━━━━━━━━━━━━━━━━━
+  { name:'Сантехник на дачу', cat:'Сантехника', price:'от 1 500 ₽', e:'🔧',
+    desc:'Ремонт и замена труб, кранов, радиаторов, унитазов. Выезд в течение дня.',
+    img:'https://images.unsplash.com/photo-1607400201515-c2c41c07d307?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'task', label:'Что сделать', type:'select',
+        options:['Подтекает кран / труба','Замена смесителя','Замена унитаза','Установка водонагревателя','Прорыв / авария','Другое — расскажу в комментариях'] },
+      F.urgent,
+    ] },
+
+  { name:'Откачка септика', cat:'Сантехника', price:'от 3 000 ₽', e:'🚛',
+    hot:true,
+    desc:'Ассенизаторская машина приедет в удобное вам время. Все типы септиков.',
+    img:'https://images.unsplash.com/photo-1574359411659-15573a27fd0c?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'volume', label:'Объём ёмкости', type:'pill', options:['до 2 м³','3–4 м³','5–6 м³','больше'] },
+      { id:'type', label:'Что откачать', type:'pill', options:['Септик / выгребная яма','Жироуловитель','Дренажный колодец'] },
+    ] },
+
   { name:'Бурение скважины', cat:'Сантехника', price:'от 30 000 ₽', e:'⛏️',
-    desc:'Бурение скважин под воду, насос и разводка под ключ.',
-    img:'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&h=200&fit=crop&auto=format&q=80' },
+    desc:'Бурение скважин под воду, установка насоса и разводка под ключ.',
+    img:'https://images.unsplash.com/photo-1574704001226-dba17e0a07ec?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'depth', label:'Желаемая глубина', type:'pill', options:['до 20 м','20–40 м','40–60 м','Не знаю — нужна разведка'] },
+      { id:'pump', label:'Насос и разводка', type:'pill', options:['Под ключ','Только бурение'] },
+    ] },
+
   { name:'Летний водопровод', cat:'Сантехника', price:'от 5 000 ₽', e:'🚿',
     desc:'Прокладка труб по участку, подключение к источнику воды.',
-    img:'https://images.unsplash.com/photo-1523575166983-fb6e8a0d57d4?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.meters,
+      { id:'src', label:'Источник', type:'pill', options:['Скважина','Колодец','Водопровод СНТ','Бочка'] },
+    ] },
+
   { name:'Ремонт колодца', cat:'Сантехника', price:'от 5 000 ₽', e:'🪣',
     desc:'Чистка, углубление, замена насоса, ремонт оголовка колодца.',
-    img:'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1587329310686-91414b8e3cb7?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'task', label:'Что нужно', type:'pill', options:['Чистка','Углубление','Замена насоса','Ремонт оголовка'] },
+    ] },
+
   { name:'Замена насоса', cat:'Сантехника', price:'от 3 000 ₽', e:'⚙️',
-    desc:'Замена насоса скважинного или поверхностного, с выездом в день.',
-    img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=200&fit=crop&auto=format&q=80' },
+    desc:'Замена насоса скважинного, колодезного или поверхностного. Выезд в день обращения.',
+    img:'https://images.unsplash.com/photo-1607400201889-565b1ee75f8e?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'pumpType', label:'Тип насоса', type:'pill', options:['Скважинный','Колодезный','Поверхностный','Не знаю'] },
+    ] },
+
   { name:'Установка септика', cat:'Сантехника', price:'от 50 000 ₽', e:'🛠️',
-    desc:'Монтаж автономной канализации под ключ, все типы септиков.',
-    img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=200&fit=crop&auto=format&q=80' },
+    desc:'Монтаж автономной канализации под ключ. Все типы септиков (Топас, Юнилос, бетонные кольца).',
+    img:'https://images.unsplash.com/photo-1581092334481-9cc36ed11d56?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'people', label:'Жильцов в доме', type:'pill', options:['1–2','3–4','5–6','7+'] },
+      { id:'type', label:'Тип септика', type:'pill', options:['Накопительный','С аэрацией (Топас)','Бетонные кольца','Не знаю — посоветуйте'] },
+    ] },
+
   { name:'Утепление труб', cat:'Сантехника', price:'от 3 000 ₽', e:'🧊',
     desc:'Консервация водопровода на зиму, утепление уязвимых участков.',
-    img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[ F.meters ] },
 
-  // ЭЛЕКТРИКА (6)
-  { name:'Электрик', cat:'Электрика', price:'от 1 500 ₽', e:'⚡',
+  // ━━━━━━━━━━━━━━━━━━━━━━ ЭЛЕКТРИКА ━━━━━━━━━━━━━━━━━━━━━━
+  { name:'Электрик на дачу', cat:'Электрика', price:'от 1 500 ₽', e:'⚡',
+    hot:true,
     desc:'Замена проводки, розеток, щитков, выключателей. Устранение аварий.',
-    img:'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'task', label:'Что сделать', type:'select',
+        options:['Не работает свет / нет электричества','Замена проводки','Розетки и выключатели','Сборка щитка','Авария — срочно','Другое'] },
+      F.urgent,
+    ] },
+
   { name:'Подключение к электросети', cat:'Электрика', price:'от 8 000 ₽', e:'🔌',
     desc:'Подключение дома, бани или хозпостройки к электросети.',
-    img:'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1581092335397-9583eb92d232?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'tu', label:'ТУ от электросети', type:'pill', options:['Уже получены','Нужно получить','Не знаю что это'] },
+    ] },
+
   { name:'Освещение участка', cat:'Электрика', price:'от 5 000 ₽', e:'💡',
     desc:'Уличные фонари, подсветка дорожек, охранное освещение.',
-    img:'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1542219550-37153d387c27?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.area,
+      { id:'pts', label:'Сколько точек освещения', type:'number', placeholder:'шт.' },
+    ] },
+
   { name:'Монтаж видеонаблюдения', cat:'Электрика', price:'от 8 000 ₽', e:'📹',
     desc:'Установка камер, видеорегистратора, удалённый доступ с телефона.',
-    img:'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&h=200&fit=crop&auto=format&q=80' },
-  { name:'Стабилизатор напряжения', cat:'Электрика', price:'от 3 000 ₽', e:'🔋',
-    desc:'Установка стабилизатора и защита техники от скачков напряжения.',
-    img:'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=200&fit=crop&auto=format&q=80' },
-  { name:'Монтаж розеток и выключателей', cat:'Электрика', price:'от 500 ₽/шт', e:'🔌',
-    desc:'Установка, перенос, замена розеток, выключателей и осветительных приборов.',
-    img:'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1558002038-1055907df827?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'cams', label:'Сколько камер', type:'pill', options:['2','4','6','8+'] },
+      { id:'remote', label:'Просмотр с телефона', type:'pill', options:['Нужен','Не обязательно'] },
+    ] },
 
-  // СТРОИТЕЛЬСТВО (9)
+  { name:'Стабилизатор напряжения', cat:'Электрика', price:'от 3 000 ₽', e:'🔋',
+    desc:'Установка стабилизатора, защита техники от скачков напряжения.',
+    img:'https://images.unsplash.com/photo-1581092446327-9b52bd1570c2?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'pwr', label:'Мощность дома', type:'pill', options:['до 5 кВт','5–10 кВт','10–15 кВт','15+'] },
+    ] },
+
+  { name:'Розетки и выключатели', cat:'Электрика', price:'от 500 ₽/шт', e:'🔌',
+    desc:'Установка, перенос, замена розеток, выключателей и осветительных приборов.',
+    img:'https://images.unsplash.com/photo-1558389186-438424b00a3a?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'qty', label:'Количество', type:'number', placeholder:'шт.' },
+    ] },
+
+  // ━━━━━━━━━━━━━━━━━━━━━━ СТРОИТЕЛЬСТВО ━━━━━━━━━━━━━━━━━━━━━━
   { name:'Установка забора', cat:'Строительство', price:'от 500 ₽/м', e:'🏗️',
     desc:'Профнастил, евроштакетник, сетка-рабица, деревянный забор под ключ.',
-    img:'https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.meters,
+      { id:'mat', label:'Материал', type:'pill', options:['Профнастил','Евроштакетник','Сетка-рабица','Дерево','Подскажите'] },
+    ] },
+
   { name:'Ворота и калитки', cat:'Строительство', price:'от 8 000 ₽', e:'🚪',
     desc:'Откатные и распашные ворота, калитки, автоматика под ключ.',
-    img:'https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1568667256549-094345857637?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'type', label:'Тип ворот', type:'pill', options:['Распашные','Откатные','Калитка отдельно'] },
+      { id:'auto', label:'Автоматика', type:'pill', options:['Нужна','Не нужна'] },
+    ] },
+
   { name:'Ремонт кровли', cat:'Строительство', price:'от 5 000 ₽', e:'🏠',
     desc:'Ремонт и замена кровельного покрытия, устранение протечек.',
-    img:'https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1632157595656-1d8945a6a8e8?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.areaM2,
+      { id:'task', label:'Что не так', type:'select',
+        options:['Протекает','Нужна замена покрытия','Доделать после строителей','Профилактика','Не знаю'] },
+    ] },
+
   { name:'Тротуарная плитка', cat:'Строительство', price:'от 700 ₽/м²', e:'🧱',
     desc:'Дорожки, площадки, отмостка. Подготовка основания включена.',
-    img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1601562574226-5d6e0b8c5d8b?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.areaM2,
+      { id:'shape', label:'Что укладываем', type:'pill', options:['Дорожки','Площадка','Отмостка','Парковка'] },
+    ] },
+
   { name:'Строительство беседки', cat:'Строительство', price:'от 40 000 ₽', e:'⛺',
-    desc:'Деревянные беседки любой формы и размера, от проекта до финишной отделки.',
-    img:'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=200&fit=crop&auto=format&q=80' },
+    desc:'Деревянные беседки любой формы, от проекта до финишной отделки.',
+    img:'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'size', label:'Размер', type:'pill', options:['3×3','4×4','5×5','5×7+','Своя'] },
+      { id:'mat', label:'Материал', type:'pill', options:['Брус','Бревно','Каркас','Не знаю'] },
+    ] },
+
   { name:'Строительство и ремонт бани', cat:'Строительство', price:'от 50 000 ₽', e:'🧖',
-    desc:'Постройка новой бани или ремонт существующей, отделка, печь.',
-    img:'https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&h=200&fit=crop&auto=format&q=80' },
+    desc:'Постройка новой бани или ремонт существующей: отделка, печь, полок.',
+    img:'https://images.unsplash.com/photo-1604335079247-ba1bf3f3e80b?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'job', label:'Тип работ', type:'pill', options:['Новая баня','Ремонт','Только печь','Только отделка'] },
+      { id:'size', label:'Размер бани', type:'pill', options:['3×4','4×4','4×6','5×6+','Не определились'] },
+    ] },
+
   { name:'Монтаж террасы', cat:'Строительство', price:'от 25 000 ₽', e:'🪵',
     desc:'Деревянная или композитная терраса и веранда под ключ.',
-    img:'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=200&fit=crop&auto=format&q=80' },
-  { name:'Мелкий ремонт дома', cat:'Строительство', price:'от 1 500 ₽', e:'🔨',
-    desc:'Ремонт окон, дверей, пола, стен — любые мелкие задачи по дому.',
-    img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=200&fit=crop&auto=format&q=80' },
-  { name:'Покраска дома и забора', cat:'Строительство', price:'от 4 000 ₽', e:'🎨',
-    desc:'Покраска фасада, забора, деревянных конструкций. Материалы возможны наши.',
-    img:'https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.areaM2,
+      { id:'mat', label:'Материал доски', type:'pill', options:['Дерево','Композит ДПК','Не знаю'] },
+    ] },
 
-  // ВЫВОЗ (5)
+  { name:'Мелкий ремонт по дому', cat:'Строительство', price:'от 1 500 ₽', e:'🔨',
+    desc:'Ремонт окон, дверей, пола, стен — любые задачи "на час".',
+    img:'https://images.unsplash.com/photo-1581092218081-39e4fd4b7baa?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'task', label:'Опишите задачу', type:'textarea', placeholder:'Например: повесить полку, починить дверь, заменить замок' },
+    ] },
+
+  { name:'Покраска дома и забора', cat:'Строительство', price:'от 4 000 ₽', e:'🎨',
+    desc:'Покраска фасада, забора, деревянных конструкций. Материалы можем привезти свои.',
+    img:'https://images.unsplash.com/photo-1562184552-997c461abbe6?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'obj', label:'Что красим', type:'pill', options:['Дом','Забор','Беседку','Баню','Несколько'] },
+      F.areaM2,
+    ] },
+
+  // ━━━━━━━━━━━━━━━━━━━━━━ ВЫВОЗ ━━━━━━━━━━━━━━━━━━━━━━
   { name:'Вывоз мусора', cat:'Вывоз', price:'от 3 000 ₽', e:'🚛',
     desc:'Строительный и бытовой мусор, старая мебель — всё уберём.',
-    img:'https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.volumeM3,
+      { id:'kind', label:'Тип мусора', type:'pill', options:['Бытовой','Строительный','Старая мебель','Смешанный'] },
+    ] },
+
   { name:'Доставка щебня и песка', cat:'Вывоз', price:'от 2 500 ₽', e:'🚚',
     desc:'Щебень, песок, чернозём, торф — привезём нужный объём.',
-    img:'https://images.unsplash.com/photo-1471195253598-8a6c84a7e0f4?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1597532654128-7d97b3f7d75a?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'mat', label:'Что нужно', type:'pill', options:['Щебень','Песок','Чернозём','Торф','ПГС'] },
+      F.volumeM3,
+    ] },
+
   { name:'Доставка стройматериалов', cat:'Вывоз', price:'от 3 000 ₽', e:'🧱',
-    desc:'Кирпич, блоки, доска, брус — доставка с магазина до участка.',
-    img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=200&fit=crop&auto=format&q=80' },
+    desc:'Кирпич, блоки, доска, брус — доставка из магазина до участка.',
+    img:'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'from', label:'Откуда забрать', type:'text', placeholder:'Магазин, адрес' },
+      { id:'mat', label:'Что везём', type:'text', placeholder:'Например: брус 100×100, 30 шт' },
+    ] },
+
   { name:'Грузчики', cat:'Вывоз', price:'от 1 500 ₽/час', e:'💪',
     desc:'Погрузка, разгрузка, переноска тяжёлых вещей на участке.',
-    img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1454944338482-a69bb95894af?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'qty', label:'Сколько грузчиков', type:'pill', options:['1','2','3','4+'] },
+      { id:'hours', label:'На сколько часов', type:'pill', options:['1–2','3–4','полдня','день'] },
+    ] },
+
   { name:'Вывоз старой мебели и техники', cat:'Вывоз', price:'от 2 000 ₽', e:'🛋️',
     desc:'Демонтаж и вывоз старой мебели, бытовой техники, металлолома.',
-    img:'https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'what', label:'Что вывозим', type:'textarea', placeholder:'Например: диван, шкаф, стиралка' },
+    ] },
 
-  // САД (7)
+  // ━━━━━━━━━━━━━━━━━━━━━━ САД ━━━━━━━━━━━━━━━━━━━━━━
   { name:'Посадка растений', cat:'Сад', price:'от 2 000 ₽', e:'🌱',
+    hot:true,
     desc:'Посадка деревьев, кустарников, цветов, живой изгороди.',
-    img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop&auto=format&q=80' },
-  { name:'Монтаж теплицы', cat:'Сад', price:'от 8 000 ₽', e:'🥦',
+    img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'kind', label:'Что сажаем', type:'pill', options:['Деревья','Кустарники','Цветы','Живая изгородь','Несколько'] },
+      F.qty,
+    ] },
+
+  { name:'Монтаж теплицы', cat:'Сад', price:'от 8 000 ₽', e:'🥒',
+    hot:true,
     desc:'Установка теплиц из поликарбоната любого размера под ключ.',
-    img:'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=200&fit=crop&auto=format&q=80' },
-  { name:'Земля для огорода', cat:'Сад', price:'от 3 500 ₽/куб', e:'🌍',
+    img:'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'size', label:'Размер теплицы', type:'pill', options:['3×4','3×6','3×8','3×10','Своя'] },
+      { id:'have', label:'Теплица есть?', type:'pill', options:['Куплена — ставим','Купите вы','Не знаю'] },
+    ] },
+
+  { name:'Земля для огорода', cat:'Сад', price:'от 3 500 ₽/куб', e:'🟫',
+    hot:true,
     desc:'Чернозём, торф, компост — привезём и распределим по грядкам.',
-    img:'https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'mat', label:'Что нужно', type:'pill', options:['Чернозём','Торф','Компост','Перегной','Смесь'] },
+      F.volumeM3,
+    ] },
+
   { name:'Обрезка плодовых деревьев', cat:'Сад', price:'от 1 500 ₽/дер', e:'🍎',
+    hot:true,
     desc:'Весенняя и осенняя обрезка яблонь, груш, слив, вишни.',
-    img:'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1578861256457-a9bf5d92ce97?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'qty', label:'Сколько деревьев', type:'number', placeholder:'шт.' },
+      { id:'kinds', label:'Какие', type:'text', placeholder:'Например: яблони, сливы' },
+    ] },
+
   { name:'Обработка от вредителей', cat:'Сад', price:'от 3 000 ₽', e:'🐛',
     desc:'Опрыскивание деревьев и кустарников от болезней и вредителей.',
-    img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1599598425947-5117f9077dee?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.area,
+      { id:'plants', label:'Что обрабатываем', type:'text', placeholder:'Яблоня, смородина, малина...' },
+    ] },
+
   { name:'Устройство клумб и грядок', cat:'Сад', price:'от 4 000 ₽', e:'🌸',
     desc:'Планировка, подготовка почвы, высадка цветов и растений.',
-    img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1467043153537-a4fba2cd39ef?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.areaM2,
+      { id:'kind', label:'Что нужно', type:'pill', options:['Клумбы','Грядки','И то и то'] },
+    ] },
+
   { name:'Ландшафтный дизайн', cat:'Сад', price:'от 10 000 ₽', e:'🏡',
     desc:'Разработка плана участка, подбор растений, реализация под ключ.',
-    img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1558293842-c0fd3db86157?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.area,
+      { id:'budget', label:'Ориентир бюджета', type:'pill', options:['до 100 тыс','100–300 тыс','300–500 тыс','500+'] },
+    ] },
 
-  // УБОРКА (5)
+  // ━━━━━━━━━━━━━━━━━━━━━━ УБОРКА ━━━━━━━━━━━━━━━━━━━━━━
   { name:'Уборка дома после зимы', cat:'Уборка', price:'от 3 000 ₽', e:'🧹',
+    hot:true,
     desc:'Генеральная уборка, мойка окон, удаление пыли и плесени.',
-    img:'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.houseSz,
+      { id:'extras', label:'Дополнительно', type:'multi',
+        options:['Мойка окон','Холодильник внутри','Микроволновка/духовка','Чистка ковров'] },
+    ] },
+
   { name:'Помощница по дому', cat:'Уборка', price:'от 1 500 ₽', e:'🏡',
     desc:'Регулярная уборка, помощь по хозяйству, стирка и глажка.',
-    img:'https://images.unsplash.com/photo-1527515637462-cff94ece374f?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1527515637462-cff94ece374f?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'freq', label:'Как часто', type:'pill', options:['Разово','1 раз в неделю','2 раза','Каждый день'] },
+      { id:'hours', label:'Часов в визит', type:'pill', options:['2','4','6','8'] },
+    ] },
+
   { name:'Мойка окон', cat:'Уборка', price:'от 1 000 ₽', e:'🪟',
     desc:'Профессиональная мойка окон, стеклянных поверхностей и теплиц.',
-    img:'https://images.unsplash.com/photo-1527515637462-cff94ece374f?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1581578017093-cd30fce4eeb7?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'qty', label:'Сколько окон', type:'number', placeholder:'шт.' },
+      { id:'side', label:'С какой стороны', type:'pill', options:['Снаружи','Изнутри','С обеих'] },
+    ] },
+
   { name:'Чистка ковров и мебели', cat:'Уборка', price:'от 2 000 ₽', e:'🛋️',
     desc:'Выездная химчистка мягкой мебели, матрасов, ковров на даче.',
-    img:'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1558317374-067fb5f30001?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'items', label:'Что чистим', type:'textarea', placeholder:'Например: диван 3-местный, ковёр 2×3' },
+    ] },
+
   { name:'Дезинфекция помещений', cat:'Уборка', price:'от 3 000 ₽', e:'🧴',
     desc:'Профессиональная дезинфекция дома после долгого простоя.',
-    img:'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.houseSz,
+      { id:'why', label:'Причина', type:'pill', options:['Стоял пустым','Плесень','Грызуны','Профилактика'] },
+    ] },
 
-  // СПЕЦТЕХНИКА (5)
+  // ━━━━━━━━━━━━━━━━━━━━━━ СПЕЦТЕХНИКА ━━━━━━━━━━━━━━━━━━━━━━
   { name:'Аренда мини-экскаватора', cat:'Спецтехника', price:'от 3 500 ₽/час', e:'🚜',
     desc:'Копка траншей, котлованов, планировка участка, вывоз грунта.',
-    img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'task', label:'Задача', type:'select',
+        options:['Траншея под коммуникации','Котлован под фундамент','Планировка участка','Корчевание','Другое'] },
+      { id:'hours', label:'Часов работы', type:'pill', options:['2–4','полдня','день','несколько дней'] },
+    ] },
+
   { name:'Вспашка мотоблоком', cat:'Спецтехника', price:'от 2 000 ₽', e:'🚜',
+    hot:true,
     desc:'Вспашка огорода, культивация почвы, окучивание картофеля.',
-    img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1592924357229-c4f1bd5b8e2c?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.area,
+      { id:'task', label:'Задача', type:'pill', options:['Вспашка','Культивация','Окучивание','Под газон'] },
+    ] },
+
   { name:'Аренда трактора', cat:'Спецтехника', price:'от 5 000 ₽/час', e:'🚜',
     desc:'Тяжёлые работы: вспашка больших площадей, выравнивание участка.',
-    img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1605002123304-d2c4ed4b8db5?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.area,
+      { id:'task', label:'Задача', type:'select',
+        options:['Вспашка','Выравнивание','Перевозка','Чистка снега','Другое'] },
+    ] },
+
   { name:'Аренда прицепа', cat:'Спецтехника', price:'от 1 500 ₽/сут', e:'🚗',
     desc:'Аренда прицепа для перевозки грузов, мебели, стройматериалов.',
-    img:'https://images.unsplash.com/photo-1471195253598-8a6c84a7e0f4?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1471195253598-8a6c84a7e0f4?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'days', label:'На сколько дней', type:'number', placeholder:'дней' },
+      { id:'load', label:'Что повезёте', type:'text', placeholder:'Например: брус, мебель' },
+    ] },
+
   { name:'Корчевание пней', cat:'Спецтехника', price:'от 2 000 ₽/пень', e:'🌳',
     desc:'Удаление пней фрезой или экскаватором, засыпка ямы.',
-    img:'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1518621736915-7c4c1c0d22b1?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'qty', label:'Сколько пней', type:'number', placeholder:'шт.' },
+      { id:'diam', label:'Диаметр', type:'pill', options:['до 20 см','20–40 см','40–60 см','60+'] },
+    ] },
 
-  // РЕМОНТ ТЕХНИКИ (6)
-  { name:'Ремонт стиральной машины', cat:'Ремонт техники', price:'от 2 000 ₽', e:'🔩',
+  // ━━━━━━━━━━━━━━━━━━━━━━ РЕМОНТ ТЕХНИКИ ━━━━━━━━━━━━━━━━━━━━━━
+  { name:'Ремонт стиральной машины', cat:'Ремонт техники', price:'от 2 000 ₽', e:'🧺',
     desc:'Диагностика и ремонт стиральной машины с выездом на дачу.',
-    img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'brand', label:'Марка', type:'text', placeholder:'Bosch, LG, Indesit...' },
+      { id:'sym', label:'Что не так', type:'select',
+        options:['Не включается','Не сливает','Не крутит барабан','Шумит','Течёт','Другое'] },
+    ] },
+
   { name:'Ремонт котла отопления', cat:'Ремонт техники', price:'от 3 000 ₽', e:'🔥',
     desc:'Диагностика и ремонт газовых и электрических котлов.',
-    img:'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'type', label:'Тип котла', type:'pill', options:['Газовый','Электрический','Твёрдотопливный'] },
+      { id:'brand', label:'Марка / ошибка', type:'text', placeholder:'Например: Baxi, ошибка E03' },
+    ] },
+
   { name:'Ремонт водонагревателя', cat:'Ремонт техники', price:'от 1 500 ₽', e:'♨️',
-    desc:'Ремонт и замена ТЭНов, терморегуляторов, водонагревателей.',
-    img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=200&fit=crop&auto=format&q=80' },
+    desc:'Замена ТЭНов, терморегуляторов, ремонт накопительных и проточных.',
+    img:'https://images.unsplash.com/photo-1631545806609-c98c83d6f5e2?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'type', label:'Тип', type:'pill', options:['Накопительный','Проточный','Газовая колонка'] },
+      { id:'sym', label:'Симптомы', type:'text', placeholder:'Например: не греет, бьёт током' },
+    ] },
+
   { name:'Обслуживание газового оборудования', cat:'Ремонт техники', price:'от 2 500 ₽', e:'⛽',
     desc:'Техническое обслуживание, проверка и настройка газового оборудования.',
-    img:'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&h=200&fit=crop&auto=format&q=80' },
-  { name:'Ремонт посудомоечной машины', cat:'Ремонт техники', price:'от 2 000 ₽', e:'🔧',
+    img:'https://images.unsplash.com/photo-1599058917765-a780eda07a3e?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'task', label:'Что нужно', type:'pill', options:['Плановое ТО','Не работает','Подключение','Перенос'] },
+    ] },
+
+  { name:'Ремонт посудомоечной машины', cat:'Ремонт техники', price:'от 2 000 ₽', e:'🍽️',
     desc:'Ремонт посудомоечных машин с выездом на дом или дачу.',
-    img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1581622558663-b2e33377dfb2?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'brand', label:'Марка', type:'text', placeholder:'Bosch, Siemens...' },
+      { id:'sym', label:'Что не так', type:'text', placeholder:'Например: не моет, течёт' },
+    ] },
+
   { name:'Ремонт вентиляции', cat:'Ремонт техники', price:'от 2 500 ₽', e:'💨',
     desc:'Прочистка, ремонт и монтаж вентиляционных систем в доме и бане.',
-    img:'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'task', label:'Задача', type:'pill', options:['Прочистка','Ремонт','Новый монтаж'] },
+    ] },
 
-  // ЗИМА (5)
+  // ━━━━━━━━━━━━━━━━━━━━━━ ЗИМА ━━━━━━━━━━━━━━━━━━━━━━
   { name:'Чистка снега с дорожек', cat:'Зима', price:'от 2 000 ₽', e:'❄️',
     desc:'Ручная или механизированная уборка снега с дорожек и площадок.',
-    img:'https://images.unsplash.com/photo-1547754980-3df97fed72a8?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1547754980-3df97fed72a8?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[ F.areaM2 ] },
+
   { name:'Чистка кровли от снега', cat:'Зима', price:'от 3 000 ₽', e:'🏠',
     desc:'Безопасное удаление снега и наледи с крыши дома.',
-    img:'https://images.unsplash.com/photo-1547754980-3df97fed72a8?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1547754980-3df97fed72a8?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[ F.areaM2 ] },
+
   { name:'Консервация дачи на зиму', cat:'Зима', price:'от 5 000 ₽', e:'🔒',
     desc:'Слив воды, отключение коммуникаций, подготовка дома к зиме.',
-    img:'https://images.unsplash.com/photo-1547754980-3df97fed72a8?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1542856391-010fb87dcfed?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      F.houseSz,
+      { id:'what', label:'Что включить', type:'multi',
+        options:['Слив воды','Электрика','Уборка','Утепление труб','Защита от мышей'] },
+    ] },
+
   { name:'Монтаж снегозадержателей', cat:'Зима', price:'от 4 000 ₽', e:'🧲',
     desc:'Установка снегозадержателей на кровлю для защиты от лавинного схода.',
-    img:'https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1605379399642-870262d3d051?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[ { id:'len', label:'Длина крыши (м)', type:'number', placeholder:'метров' } ] },
+
   { name:'Утепление дома к зиме', cat:'Зима', price:'от 10 000 ₽', e:'🧱',
     desc:'Утепление стен, чердака, подвала, теплоизоляция труб.',
-    img:'https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&h=200&fit=crop&auto=format&q=80' },
+    img:'https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=600&h=350&fit=crop&auto=format&q=80',
+    fields:[
+      { id:'where', label:'Где утеплять', type:'multi',
+        options:['Стены','Чердак','Пол / подвал','Трубы'] },
+      F.areaM2,
+    ] },
 ];
 
 // ── НАВИГАЦИЯ ──────────────────────────────────────────────────────
@@ -1146,6 +1677,30 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
   });
 });
 
+// ── ХИТЫ АПРЕЛЯ (HOT) ──────────────────────────────────────────────
+function renderHot() {
+  const hotGrid = document.getElementById('hot-grid');
+  const hot = SERVICES.filter(s => s.hot).slice(0, 12);
+  hotGrid.innerHTML = hot.map(s => `
+    <div class="hot-card" data-svc="${escapeAttr(s.name)}">
+      ${s.badge ? `<span class="hot-card-badge">${s.badge}</span>` : ''}
+      <img class="hot-card-img" src="${s.img}" alt="${escapeAttr(s.name)}" loading="lazy"
+           onerror="this.style.background='linear-gradient(135deg,#FDE9CB,#F4A23A)';this.removeAttribute('src');"/>
+      <div class="hot-card-body">
+        <div class="hot-card-name">${s.e} ${s.name}</div>
+        <div class="hot-card-desc">${s.desc}</div>
+        <div class="hot-card-ft">
+          <span class="hot-card-price">${s.price}</span>
+          <button class="hot-card-cta">Заявка →</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  hotGrid.querySelectorAll('.hot-card').forEach(c => {
+    c.addEventListener('click', () => openContactModal(c.dataset.svc, ''));
+  });
+}
+
 // ── КАТАЛОГ ───────────────────────────────────────────────────────
 const grid     = document.getElementById('grid');
 const noRes    = document.getElementById('no-res');
@@ -1155,6 +1710,10 @@ const searchEl = document.getElementById('search');
 let activeCat = 'Все';
 let query     = '';
 
+function escapeAttr(s) {
+  return String(s).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
 function render() {
   const q = query.toLowerCase();
   const list = SERVICES.filter(s => {
@@ -1163,7 +1722,7 @@ function render() {
                        || s.cat.toLowerCase().includes(q)
                        || s.desc.toLowerCase().includes(q);
     return matchCat && matchQ;
-  });
+  }).sort((a,b) => (b.hot?1:0) - (a.hot?1:0));
 
   grid.innerHTML = '';
   noRes.style.display = list.length ? 'none' : 'block';
@@ -1172,17 +1731,25 @@ function render() {
   list.forEach(s => {
     const c = document.createElement('div');
     c.className = 'card';
+    let badgeHtml = '';
+    if (s.hot && s.promo) badgeHtml = `<span class="card-badge b-hot">Хит · −10%</span>`;
+    else if (s.hot) badgeHtml = `<span class="card-badge b-hot">Хит апреля</span>`;
+    else if (s.promo) badgeHtml = `<span class="card-badge b-promo">Акция −10%</span>`;
+    else if (s.cat === 'Сезон') badgeHtml = `<span class="card-badge b-season">Сезон</span>`;
     c.innerHTML = `
-      <img class="card-photo" src="${s.img}" alt="${s.name}" loading="lazy"
-           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-      <div class="card-ph-fb">${s.e}</div>
+      <div class="card-photo-wrap">
+        <img class="card-photo" src="${s.img}" alt="${escapeAttr(s.name)}" loading="lazy"
+             onerror="this.style.display='none';this.parentElement.querySelector('.card-ph-fb').style.display='flex';"/>
+        <div class="card-ph-fb">${s.e}</div>
+        ${badgeHtml}
+      </div>
       <div class="card-body">
         <div class="card-cat">${s.cat}</div>
         <div class="card-name">${s.name}</div>
         <div class="card-desc">${s.desc}</div>
         <div class="card-ft">
           <span class="card-price">${s.price}</span>
-          <button class="btn-req" data-svc="${s.name}" data-cat="${s.cat}">Оставить заявку</button>
+          <button class="btn-req" data-svc="${escapeAttr(s.name)}" data-cat="${escapeAttr(s.cat)}">Оставить заявку</button>
         </div>
       </div>`;
     grid.appendChild(c);
@@ -1204,25 +1771,94 @@ document.getElementById('filters').addEventListener('click', e => {
 searchEl.addEventListener('input', () => {
   query = searchEl.value;
   render();
+  const hotSection = document.getElementById('hot-section');
   const aboutSection = document.getElementById('about-section');
   const catalogSection = document.getElementById('catalog-section');
   if (query.length > 0) {
+    hotSection.style.display = 'none';
     aboutSection.style.display = 'none';
     catalogSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
   } else {
+    hotSection.style.display = '';
     aboutSection.style.display = '';
   }
 });
 
 // ── МОДАЛКА ───────────────────────────────────────────────────────
 const overlay = document.getElementById('overlay');
+let currentSvc = null;
+let extraValues = {};
+
+function buildExtraField(f) {
+  const id = `xf-${f.id}`;
+  const lbl = `<label>${f.label}</label>`;
+  if (f.type === 'pill') {
+    const pills = f.options.map(o =>
+      `<span class="pill" data-key="${escapeAttr(f.id)}" data-val="${escapeAttr(o)}">${o}</span>`
+    ).join('');
+    return `<div class="fr">${lbl}<div class="pills">${pills}</div></div>`;
+  }
+  if (f.type === 'multi') {
+    const pills = f.options.map(o =>
+      `<span class="pill" data-key="${escapeAttr(f.id)}" data-val="${escapeAttr(o)}" data-multi="1">${o}</span>`
+    ).join('');
+    return `<div class="fr">${lbl}<div class="pills">${pills}</div></div>`;
+  }
+  if (f.type === 'select') {
+    const opts = f.options.map(o => `<option value="${escapeAttr(o)}">${o}</option>`).join('');
+    return `<div class="fr">${lbl}<select id="${id}" data-key="${escapeAttr(f.id)}"><option value="">— выберите —</option>${opts}</select></div>`;
+  }
+  if (f.type === 'number') {
+    return `<div class="fr">${lbl}<input id="${id}" type="number" data-key="${escapeAttr(f.id)}" placeholder="${escapeAttr(f.placeholder || '')}"/></div>`;
+  }
+  if (f.type === 'textarea') {
+    return `<div class="fr">${lbl}<textarea id="${id}" data-key="${escapeAttr(f.id)}" placeholder="${escapeAttr(f.placeholder || '')}"></textarea></div>`;
+  }
+  // text fallback
+  return `<div class="fr">${lbl}<input id="${id}" type="text" data-key="${escapeAttr(f.id)}" placeholder="${escapeAttr(f.placeholder || '')}"/></div>`;
+}
 
 function openContactModal(name, cat) {
-  document.getElementById('f-svc').value   = name;
-  document.getElementById('m-cat').textContent  = cat;
+  currentSvc = SERVICES.find(s => s.name === name);
+  extraValues = {};
+
+  document.getElementById('f-svc').value = name;
+  document.getElementById('m-cat').textContent = cat || (currentSvc ? currentSvc.cat : '');
   document.getElementById('m-name').textContent = name;
+
+  const promoEl = document.getElementById('m-promo');
+  promoEl.style.display = (currentSvc && currentSvc.promo) ? 'block' : 'none';
+
+  // Рендер дополнительных полей
+  const extra = document.getElementById('f-extra');
+  if (currentSvc && currentSvc.fields && currentSvc.fields.length) {
+    extra.innerHTML = currentSvc.fields.map(buildExtraField).join('');
+
+    // Pill-кнопки (single и multi)
+    extra.querySelectorAll('.pill').forEach(p => {
+      p.addEventListener('click', () => {
+        const key = p.dataset.key;
+        const val = p.dataset.val;
+        const isMulti = p.dataset.multi === '1';
+        if (isMulti) {
+          p.classList.toggle('active');
+          const arr = extraValues[key] || [];
+          const idx = arr.indexOf(val);
+          if (idx >= 0) arr.splice(idx, 1); else arr.push(val);
+          extraValues[key] = arr;
+        } else {
+          extra.querySelectorAll(`.pill[data-key="${key}"]`).forEach(x => x.classList.remove('active'));
+          p.classList.add('active');
+          extraValues[key] = val;
+        }
+      });
+    });
+  } else {
+    extra.innerHTML = '';
+  }
+
   document.getElementById('m-form').style.display = '';
-  document.getElementById('m-ok').style.display   = 'none';
+  document.getElementById('m-ok').style.display = 'none';
   document.getElementById('form').reset();
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -1244,12 +1880,36 @@ document.getElementById('form').addEventListener('submit', async e => {
   const addr  = document.getElementById('f-addr').value.trim();
   const comm  = document.getElementById('f-comm').value.trim();
 
+  // Сбор ответов из дополнительных полей (select / number / text / textarea)
+  const extra = document.getElementById('f-extra');
+  extra.querySelectorAll('select, input, textarea').forEach(el => {
+    const k = el.dataset.key;
+    if (!k) return;
+    const v = el.value.trim();
+    if (v) extraValues[k] = v;
+  });
+
+  // Лейблы для красивой подписи в Telegram / админке
+  const labelMap = {};
+  if (currentSvc && currentSvc.fields) {
+    currentSvc.fields.forEach(f => labelMap[f.id] = f.label);
+  }
+  const extras = {};
+  Object.keys(extraValues).forEach(k => {
+    const v = extraValues[k];
+    const val = Array.isArray(v) ? v.join(', ') : v;
+    if (val) extras[labelMap[k] || k] = val;
+  });
+
+  const extrasText = Object.keys(extras).map(k => `   • ${k}: ${extras[k]}`).join('\n');
+
   const text = [
     '🆕 *Новая заявка — ВИзбу*',
     `🔧 *Услуга:* ${svc}`,
     `👤 *Имя:* ${name}`,
     `📱 *Телефон:* ${phone}`,
     addr ? `📍 *Адрес:* ${addr}` : '',
+    extrasText ? `📋 *Условия:*\n${extrasText}` : '',
     comm ? `💬 *Комментарий:* ${comm}` : '',
     `🕐 ${new Date().toLocaleString('ru-RU')}`,
   ].filter(Boolean).join('\n');
@@ -1268,7 +1928,7 @@ document.getElementById('form').addEventListener('submit', async e => {
   } catch {}
 
   // Сохраняем в localStorage для админ-панели
-  const order = { id: Date.now(), svc, name, phone, addr, comm,
+  const order = { id: Date.now(), svc, name, phone, addr, comm, extras,
                   date: new Date().toLocaleString('ru-RU'), status: 'new' };
   const orders = JSON.parse(localStorage.getItem('vizbu_orders') || '[]');
   orders.unshift(order);
@@ -1280,6 +1940,7 @@ document.getElementById('form').addEventListener('submit', async e => {
   btn.textContent = 'Отправить заявку →'; btn.disabled = false;
 });
 
+renderHot();
 render();
 </script>
 </body>
