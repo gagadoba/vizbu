@@ -226,6 +226,71 @@
     }
     .about-quote strong { color: var(--accent); }
 
+    /* ───── REVIEWS ───── */
+    .reviews {
+      background: linear-gradient(180deg, #fff 0%, #F4F7F4 100%);
+      padding: 56px 20px 64px;
+      border-top: 1px solid var(--border);
+    }
+    .reviews-inner { max-width: 1200px; margin: 0 auto; }
+    .reviews-head {
+      text-align: center; margin-bottom: 28px;
+    }
+    .reviews-head .pretitle {
+      font-size: .75rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--green); margin-bottom: 8px;
+    }
+    .reviews-head h2 { font-size: clamp(1.5rem, 3.5vw, 2.1rem); font-weight: 900; margin-bottom: 12px; }
+    .reviews-head h2 em { color: var(--green); font-style: normal; }
+    .reviews-summary {
+      display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center;
+      gap: 14px 24px; padding: 12px 22px; border-radius: 999px;
+      background: #fff; border: 1px solid var(--border);
+      box-shadow: 0 2px 10px rgba(0,0,0,.04); margin-top: 8px;
+    }
+    .reviews-summary .item { display: inline-flex; align-items: center; gap: 8px; font-size: .9rem; }
+    .reviews-summary .item strong { font-size: 1.05rem; color: var(--text); font-weight: 900; }
+    .reviews-summary .item .lbl { color: var(--muted); font-weight: 600; }
+    .reviews-stars { color: #F59E0B; letter-spacing: 1px; font-size: 1rem; }
+
+    .reviews-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 16px;
+    }
+    .review {
+      background: #fff; border: 1px solid var(--border); border-radius: 14px;
+      padding: 22px 22px 20px; display: flex; flex-direction: column;
+      box-shadow: 0 1px 6px rgba(0,0,0,.04);
+      transition: box-shadow .2s, transform .2s;
+    }
+    .review:hover { box-shadow: 0 8px 26px rgba(0,0,0,.07); transform: translateY(-3px); }
+    .review-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .review-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--green); color: #fff; font-weight: 900; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .review-who { flex: 1; min-width: 0; }
+    .review-name { font-weight: 800; font-size: .95rem; }
+    .review-place { font-size: .77rem; color: var(--muted); }
+    .review-rate { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
+    .review-rate .stars { color: #F59E0B; font-size: .9rem; letter-spacing: 1px; }
+    .review-rate .date { font-size: .73rem; color: var(--muted); }
+    .review-svc {
+      display: inline-block; font-size: .7rem; font-weight: 800;
+      color: var(--green); background: #E8F5EE;
+      border-radius: 6px; padding: 3px 9px; margin-bottom: 10px;
+      letter-spacing: .3px; align-self: flex-start;
+    }
+    .review-text { font-size: .9rem; color: var(--text); line-height: 1.5; flex: 1; }
+
+    .reviews-cta {
+      text-align: center; margin-top: 28px;
+      font-size: .9rem; color: var(--muted);
+    }
+    .reviews-cta a { color: var(--green); font-weight: 700; text-decoration: none; }
+    .reviews-cta a:hover { text-decoration: underline; }
+
     /* ───── FILTERS ───── */
     .catalog-header {
       max-width: 1200px; margin: 0 auto; padding: 32px 20px 12px;
@@ -620,6 +685,27 @@
           «Дача — это место для отдыха, а не для бесконечного поиска мастеров. Мы взяли эту задачу на себя.»<br/><br/>
           <strong>— Команда ВИзбу</strong>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ОТЗЫВЫ -->
+  <section class="reviews" id="reviews-section">
+    <div class="reviews-inner">
+      <div class="reviews-head">
+        <div class="pretitle">⭐ Отзывы клиентов</div>
+        <h2>Что говорят <em>наши соседи по СНТ</em></h2>
+        <div class="reviews-summary">
+          <span class="item"><strong>4.9</strong> <span class="reviews-stars">★★★★★</span> <span class="lbl">средняя оценка</span></span>
+          <span class="item"><strong>412</strong> <span class="lbl">выполненных заказов</span></span>
+          <span class="item"><strong>98%</strong> <span class="lbl">рекомендуют ВИзбу</span></span>
+        </div>
+      </div>
+      <div class="reviews-grid" id="reviews-grid"></div>
+      <div class="reviews-cta">
+        Хотите оставить свой отзыв? Напишите нам в
+        <a href="https://wa.me/79119507358" target="_blank">WhatsApp</a> или
+        <a href="https://t.me/karina_vizbu" target="_blank">Telegram</a>.
       </div>
     </div>
   </section>
@@ -1677,6 +1763,77 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
   });
 });
 
+// ── ОТЗЫВЫ ─────────────────────────────────────────────────────────
+const REVIEWS = [
+  { name:'Анна К.', place:'СНТ Синявино, Кировский р-н', date:'18 апреля 2026',
+    svc:'Открытие дачи под ключ', rate:5,
+    text:'Приехали впервые после зимы — дом холодный, вода не запущена, на участке завалы веток. ' +
+         'Позвонила в ВИзбу утром — к вечеру всё работало. Запустили воду, прибрали участок, протопили дом. ' +
+         'Очень благодарна, спасли все наши майские!' },
+  { name:'Сергей М.', place:'Васкелово, Всеволожский р-н', date:'12 апреля 2026',
+    svc:'Обработка от клещей', rate:5,
+    text:'У нас собака и двое детей. Каждый год боимся сезона клещей. ' +
+         'Ребята из ВИзбу приехали, обработали участок 12 соток за два часа. ' +
+         'Прошло три недели — на собаке ни одного клеща. Записались на повторную обработку в июне.' },
+  { name:'Татьяна и Игорь', place:'Лемболово, Всеволожский р-н', date:'5 апреля 2026',
+    svc:'Откачка септика', rate:5,
+    text:'После зимы септик стоял полный. Заказывали через ВИзбу — машина приехала на следующий день, ' +
+         'не такая огромная как боялись (в наши узкие дороги пролезла). Цена та же что в объявлении, без накруток.' },
+  { name:'Михаил Д.', place:'Ладожское озеро, Приозерский р-н', date:'30 марта 2026',
+    svc:'Установка забора, 80 метров', rate:5,
+    text:'Заказывали забор из евроштакетника. Сначала приехал замерщик, через неделю поставили. ' +
+         'Сделали ровно, столбы вбиты глубоко, ничего не повело. Карина вела заказ — отвечала мгновенно ' +
+         'на все вопросы. По цене вышло как и обещали.' },
+  { name:'Елена П.', place:'Токсово, Всеволожский р-н', date:'9 апреля 2026',
+    svc:'Сантехник на дачу', rate:5,
+    text:'Прорвало трубу под раковиной в субботу вечером. Думала, до понедельника никого не найду. ' +
+         'Позвонила в ВИзбу — мастер Дмитрий приехал через 1.5 часа. Всё починил, поставил новые краны. ' +
+         'Удивительно, что вообще берут такие срочные вызовы по выходным.' },
+  { name:'Виктор Н.', place:'Невская Дубровка, Всеволожский р-н', date:'22 апреля 2026',
+    svc:'Бурение скважины 35 м', rate:5,
+    text:'Пробурили скважину под ключ: разведка, бурение, насос, разводка по дому. ' +
+         'Воду пробили на 35 метрах, чистая, без железа. Обещали неделю — управились за 4 дня. ' +
+         'Мусор после работ убрали, что вообще редкость.' },
+  { name:'Ирина С.', place:'СНТ Дунай, Выборгский р-н', date:'15 апреля 2026',
+    svc:'Дрова колотые, 5 м³', rate:5,
+    text:'Привезли 5 кубов берёзы, как и заказывали. Сухие, ровные, без гнили. ' +
+         'Водитель помог занести в дровник. Через неделю позвонила Карина: уточнила, всё ли в порядке. ' +
+         'Очень человечно, не как с обычными перекупами.' },
+  { name:'Алексей и Марина', place:'Гарболово, Всеволожский р-н', date:'2 апреля 2026',
+    svc:'Электрик + замена щитка', rate:5,
+    text:'После зимы выбило щиток. Электрик приехал в тот же день, нашёл проблему за 20 минут — ' +
+         'окислились автоматы. Поменяли весь щиток на новый, добавили УЗО. Объяснили, ' +
+         'что и зачем. Чек дали, всё официально.' },
+];
+
+function initialsOf(name) {
+  // 'Анна К.' → 'АК', 'Татьяна и Игорь' → 'ТИ'
+  const parts = name.replace('и', ' ').split(/\s+/).filter(Boolean);
+  return parts.slice(0, 2).map(p => p[0]).join('').toUpperCase();
+}
+
+function renderReviews() {
+  const grid = document.getElementById('reviews-grid');
+  if (!grid) return;
+  grid.innerHTML = REVIEWS.map(r => `
+    <div class="review">
+      <div class="review-top">
+        <div class="review-avatar">${initialsOf(r.name)}</div>
+        <div class="review-who">
+          <div class="review-name">${r.name}</div>
+          <div class="review-place">📍 ${r.place}</div>
+        </div>
+      </div>
+      <div class="review-rate">
+        <span class="stars">${'★'.repeat(r.rate)}${'☆'.repeat(5-r.rate)}</span>
+        <span class="date">${r.date}</span>
+      </div>
+      <span class="review-svc">${r.svc}</span>
+      <div class="review-text">${r.text}</div>
+    </div>
+  `).join('');
+}
+
 // ── ХИТЫ АПРЕЛЯ (HOT) ──────────────────────────────────────────────
 function renderHot() {
   const hotGrid = document.getElementById('hot-grid');
@@ -1773,14 +1930,17 @@ searchEl.addEventListener('input', () => {
   render();
   const hotSection = document.getElementById('hot-section');
   const aboutSection = document.getElementById('about-section');
+  const reviewsSection = document.getElementById('reviews-section');
   const catalogSection = document.getElementById('catalog-section');
   if (query.length > 0) {
     hotSection.style.display = 'none';
     aboutSection.style.display = 'none';
+    reviewsSection.style.display = 'none';
     catalogSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
   } else {
     hotSection.style.display = '';
     aboutSection.style.display = '';
+    reviewsSection.style.display = '';
   }
 });
 
@@ -1940,6 +2100,7 @@ document.getElementById('form').addEventListener('submit', async e => {
   btn.textContent = 'Отправить заявку →'; btn.disabled = false;
 });
 
+renderReviews();
 renderHot();
 render();
 </script>
