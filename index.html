@@ -88,29 +88,29 @@
     /* ───── HERO ───── */
     .hero {
       background: linear-gradient(140deg, var(--green3) 0%, var(--green2) 100%);
-      color: #fff; text-align: center; padding: 56px 20px 48px;
+      color: #fff; text-align: center; padding: 32px 20px 28px;
       position: relative; overflow: hidden;
     }
     .hero-tag {
       display: inline-block; background: rgba(255,255,255,.15);
       border: 1px solid rgba(255,255,255,.3); border-radius: 999px;
-      padding: 5px 16px; font-size: .8rem; font-weight: 600;
-      margin-bottom: 14px; letter-spacing: .3px;
+      padding: 4px 14px; font-size: .76rem; font-weight: 600;
+      margin-bottom: 10px; letter-spacing: .3px;
     }
-    .hero h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 900;
-               line-height: 1.15; margin-bottom: 12px; }
+    .hero h1 { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 900;
+               line-height: 1.15; margin-bottom: 10px; }
     .hero h1 em { color: var(--accent); font-style: normal; }
     .hero-slogan {
-      font-size: clamp(1rem, 2.5vw, 1.2rem); opacity: .9;
-      margin-bottom: 8px; font-weight: 500;
+      font-size: clamp(.95rem, 2.2vw, 1.05rem); opacity: .9;
+      margin-bottom: 14px; font-weight: 500;
     }
-    .hero p { opacity: .8; font-size: .95rem; max-width: 540px;
-              margin: 0 auto 24px; }
+    .hero p { opacity: .8; font-size: .88rem; max-width: 540px;
+              margin: 0 auto 16px; display: none; }
     .hero-trust {
-      display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
-      margin-bottom: 24px; font-size: .82rem; opacity: .85;
+      display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;
+      margin-bottom: 18px; font-size: .76rem; opacity: .85;
     }
-    .hero-trust span { display: inline-flex; align-items: center; gap: 5px; }
+    .hero-trust span { display: inline-flex; align-items: center; gap: 4px; }
     .search-box { max-width: 620px; margin: 0 auto; position: relative; }
     .search-box input {
       width: 100%; padding: 18px 22px 18px 56px;
@@ -129,8 +129,11 @@
     .si { position: absolute; left: 20px; top: 50%;
           transform: translateY(-50%); font-size: 1.25rem; pointer-events: none; }
     .hero-ctas {
-      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
-      margin-top: 20px;
+      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+      margin-top: 14px;
+    }
+    .hero-ctas .btn-hero-primary, .hero-ctas .btn-hero-secondary {
+      padding: 10px 20px; font-size: .85rem;
     }
     .btn-hero-primary {
       background: var(--accent); color: #fff; border: none; border-radius: 999px;
@@ -178,6 +181,25 @@
     }
     .catalog-banner-stat strong { font-size: 1.4rem; font-weight: 900; display: block; line-height: 1.1; }
     .catalog-banner-stat span { font-size: .72rem; opacity: .85; }
+
+    .catalog-search { max-width: 1200px; margin: 14px auto 0; padding: 0 20px; position: relative; }
+    .catalog-search input {
+      width: 100%; padding: 16px 20px 16px 54px;
+      border-radius: 999px; border: 2px solid rgba(255,255,255,.4);
+      font-size: 1.1rem; font-weight: 600;
+      color: #111 !important; background: #fff !important;
+      box-shadow: 0 4px 18px rgba(0,0,0,.18); outline: none;
+      -webkit-text-fill-color: #111;
+      caret-color: var(--accent);
+    }
+    .catalog-search input::placeholder { color: #9ca3af; font-weight: 500; }
+    .catalog-search input:focus {
+      border-color: var(--accent); box-shadow: 0 6px 22px rgba(244,162,58,.35);
+    }
+    .catalog-search .si2 {
+      position: absolute; left: 38px; top: 50%; transform: translateY(-50%);
+      font-size: 1.2rem; pointer-events: none;
+    }
 
     /* ───── ANCHOR LINK В hot-секции ───── */
     .hot-jump {
@@ -949,50 +971,7 @@
     </div>
   </div>
 
-  <!-- СТОРИС -->
-  <div class="stories-bar">
-    <div class="stories-scroll" id="stories-scroll"></div>
-  </div>
-
-  <!-- МОДАЛКА СТОРИС -->
-  <div class="story-overlay" id="story-overlay">
-    <div class="story-modal" id="story-modal">
-      <div class="story-progress" id="story-progress"></div>
-      <button class="story-x" id="story-x">✕</button>
-      <div class="story-bg" id="story-bg"></div>
-      <div class="story-nav-zone left" id="story-prev"></div>
-      <div class="story-nav-zone right" id="story-next"></div>
-      <div class="story-content">
-        <div class="story-tag" id="story-tag"></div>
-        <div class="story-title-big" id="story-title"></div>
-        <div class="story-text" id="story-text"></div>
-        <div class="story-bottom">
-          <button class="story-cta" id="story-cta"></button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ХИТЫ АПРЕЛЯ -->
-  <section class="hot-section" id="hot-section">
-    <div class="hot-inner">
-      <div class="hot-head">
-        <h2>🔥 Что заказывают сейчас в Ленобласти <span class="when">апрель–май</span></h2>
-        <p>Сезонные работы конца апреля. На отмеченные услуги действует акция −10% до 15 мая.</p>
-      </div>
-      <div class="hot-grid" id="hot-grid"></div>
-      <div class="hot-jump">
-        <a href="#catalog-section">↓ Все 80 услуг в каталоге</a>
-      </div>
-    </div>
-  </section>
-
   
-
-  
-
-  
-
   <!-- КАТАЛОГ -->
   <div class="catalog-banner" id="catalog-section">
     <div class="catalog-banner-inner">
@@ -1006,6 +985,10 @@
         <div class="catalog-banner-stat"><strong>12</strong><span>категорий</span></div>
         <div class="catalog-banner-stat"><strong>1 час</strong><span>отклик</span></div>
       </div>
+    </div>
+    <div class="catalog-search">
+      <span class="si2">🔍</span>
+      <input id="search2" type="text" placeholder="Найти услугу — покос, септик, клещи, забор..." autocomplete="off"/>
     </div>
   </div>
 
@@ -1046,6 +1029,56 @@
       <p>Ничего не нашлось. Попробуйте другой запрос<br/>или позвоните — найдём мастера на любую задачу.</p>
     </div>
   </div>
+
+  <!-- СТОРИС -->
+  <div class="stories-bar">
+    <div class="stories-scroll" id="stories-scroll"></div>
+  </div>
+
+  <!-- МОДАЛКА СТОРИС -->
+  <div class="story-overlay" id="story-overlay">
+    <div class="story-modal" id="story-modal">
+      <div class="story-progress" id="story-progress"></div>
+      <button class="story-x" id="story-x">✕</button>
+      <div class="story-bg" id="story-bg"></div>
+      <div class="story-nav-zone left" id="story-prev"></div>
+      <div class="story-nav-zone right" id="story-next"></div>
+      <div class="story-content">
+        <div class="story-tag" id="story-tag"></div>
+        <div class="story-title-big" id="story-title"></div>
+        <div class="story-text" id="story-text"></div>
+        <div class="story-bottom">
+          <button class="story-cta" id="story-cta"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  
+  <!-- ХИТЫ АПРЕЛЯ -->
+  <section class="hot-section" id="hot-section">
+    <div class="hot-inner">
+      <div class="hot-head">
+        <h2>🔥 Что заказывают сейчас в Ленобласти <span class="when">апрель–май</span></h2>
+        <p>Сезонные работы конца апреля. На отмеченные услуги действует акция −10% до 15 мая.</p>
+      </div>
+      <div class="hot-grid" id="hot-grid"></div>
+      <div class="hot-jump">
+        <a href="#catalog-section">↓ Все 80 услуг в каталоге</a>
+      </div>
+    </div>
+  </section>
+
+  
+
+  
+
+  
+
+  
+  
+  
 
   <!-- НАШИ РАБОТЫ -->
   <section class="works" id="works-section">
@@ -1229,7 +1262,8 @@
       <button class="btn-blue" onclick="openContactModal('Страхование дачи', 'Страхование')">Оставить заявку</button>
     </div>
   </div>
-</div>
+
+  </div>
 
 <!-- ═══════════════════════════════════════════════
      СТРАНИЦА: УПРАВЛЕНИЕ
@@ -2853,27 +2887,34 @@ document.getElementById('filters').addEventListener('click', e => {
   render();
 });
 
-searchEl.addEventListener('input', () => {
-  query = searchEl.value;
+function syncSearch(val) {
+  query = val;
+  if (searchEl.value !== val) searchEl.value = val;
+  const search2 = document.getElementById('search2');
+  if (search2 && search2.value !== val) search2.value = val;
   render();
   const hotSection = document.getElementById('hot-section');
   const aboutSection = document.getElementById('about-section');
   const reviewsSection = document.getElementById('reviews-section');
   const worksSection = document.getElementById('works-section');
-  const catalogSection = document.getElementById('catalog-section');
+  const storiesBar = document.querySelector('.stories-bar');
   if (query.length > 0) {
-    hotSection.style.display = 'none';
-    aboutSection.style.display = 'none';
-    reviewsSection.style.display = 'none';
-    worksSection.style.display = 'none';
-    catalogSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (hotSection) hotSection.style.display = 'none';
+    if (aboutSection) aboutSection.style.display = 'none';
+    if (reviewsSection) reviewsSection.style.display = 'none';
+    if (worksSection) worksSection.style.display = 'none';
+    if (storiesBar) storiesBar.style.display = 'none';
   } else {
-    hotSection.style.display = '';
-    aboutSection.style.display = '';
-    reviewsSection.style.display = '';
-    worksSection.style.display = '';
+    if (hotSection) hotSection.style.display = '';
+    if (aboutSection) aboutSection.style.display = '';
+    if (reviewsSection) reviewsSection.style.display = '';
+    if (worksSection) worksSection.style.display = '';
+    if (storiesBar) storiesBar.style.display = '';
   }
-});
+}
+searchEl.addEventListener('input', () => syncSearch(searchEl.value));
+const search2El = document.getElementById('search2');
+if (search2El) search2El.addEventListener('input', () => syncSearch(search2El.value));
 
 // ── МОДАЛКА ───────────────────────────────────────────────────────
 const overlay = document.getElementById('overlay');
