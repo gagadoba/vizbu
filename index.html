@@ -91,6 +91,22 @@
       color: #fff; text-align: center; padding: 32px 20px 28px;
       position: relative; overflow: hidden;
     }
+    .hero-grid {
+      display: grid; grid-template-columns: 110px 1fr 110px;
+      gap: 24px; max-width: 1100px; margin: 0 auto;
+      align-items: center;
+    }
+    .hero-center { min-width: 0; }
+    .hero-stories-col {
+      display: flex; flex-direction: column; gap: 14px; align-items: center;
+    }
+    .hero-stories-col .story { width: 84px; }
+    .hero-stories-col .story-avatar { width: 76px; height: 76px; }
+    .hero-stories-col .story-title { color: #fff; font-size: .72rem; }
+    @media (max-width: 760px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 0; }
+      .hero-stories-col { display: none; }
+    }
     .hero-tag {
       display: inline-block; background: rgba(255,255,255,.15);
       border: 1px solid rgba(255,255,255,.3); border-radius: 999px;
@@ -219,6 +235,7 @@
       border-bottom: 1px solid var(--border);
       padding: 18px 0 16px;
     }
+    @media (min-width: 761px) { .stories-bar { display: none; } }
     .stories-scroll {
       display: flex; gap: 16px; overflow-x: auto; overflow-y: hidden;
       padding: 4px 20px 8px;
@@ -955,19 +972,25 @@
 
   <!-- HERO -->
   <div class="hero">
-    <div class="hero-tag">Сервис для загородной жизни в Ленобласти · с 2026 года</div>
-    <h1>Решаем всё,<br/><em>кроме погоды</em></h1>
-    <div class="hero-slogan">70+ услуг для вашей дачи и участка</div>
-    <p>От открытия дачи и обработки от клещей до сантехника и дров. Один звонок — мы организуем всё.</p>
-    <div class="hero-trust">
-      <span>⭐ 4.9 / 5 по отзывам</span>
-      <span>⏱ Перезвоним за 1 час</span>
-      <span>🛠 Проверенные мастера</span>
-      <span>💸 Заявка бесплатно</span>
-    </div>
-    <div class="hero-ctas">
-      <a href="#catalog-section" class="btn-hero-primary">🔍 Найти услугу в каталоге</a>
-      <a href="tel:+79119507358" class="btn-hero-secondary">📞 Срочный вызов</a>
+    <div class="hero-grid">
+      <div class="hero-stories-col" id="stories-left"></div>
+      <div class="hero-center">
+        <div class="hero-tag">Сервис для загородной жизни в Ленобласти · с 2026 года</div>
+        <h1>Решаем всё,<br/><em>кроме погоды</em></h1>
+        <div class="hero-slogan">70+ услуг для вашей дачи и участка</div>
+        <p>От открытия дачи и обработки от клещей до сантехника и дров. Один звонок — мы организуем всё.</p>
+        <div class="hero-trust">
+          <span>⭐ 4.9 / 5 по отзывам</span>
+          <span>⏱ Перезвоним за 1 час</span>
+          <span>🛠 Проверенные мастера</span>
+          <span>💸 Заявка бесплатно</span>
+        </div>
+        <div class="hero-ctas">
+          <a href="#catalog-section" class="btn-hero-primary">🔍 Найти услугу в каталоге</a>
+          <a href="tel:+79119507358" class="btn-hero-secondary">📞 Срочный вызов</a>
+        </div>
+      </div>
+      <div class="hero-stories-col" id="stories-right"></div>
     </div>
   </div>
 
@@ -985,10 +1008,6 @@
         <div class="catalog-banner-stat"><strong>12</strong><span>категорий</span></div>
         <div class="catalog-banner-stat"><strong>1 час</strong><span>отклик</span></div>
       </div>
-    </div>
-    <div class="catalog-search">
-      <span class="si2">🔍</span>
-      <input id="search2" type="text" placeholder="Найти услугу — покос, септик, клещи, забор..." autocomplete="off"/>
     </div>
   </div>
 
@@ -2609,10 +2628,8 @@ let storyStart = 0;
 let storyDur = 7000;
 
 function renderStories() {
-  const sc = document.getElementById('stories-scroll');
-  if (!sc) return;
   const viewed = JSON.parse(localStorage.getItem('vizbu_stories_viewed') || '[]');
-  sc.innerHTML = STORIES.map((s, i) => `
+  const html = (s, i) => `
     <div class="story" data-i="${i}">
       <div class="story-avatar${viewed.includes(s.id) ? ' viewed' : ''}">
         <div class="story-avatar-inner">
@@ -2623,8 +2640,24 @@ function renderStories() {
       </div>
       <div class="story-title">${s.title}</div>
     </div>
-  `).join('');
-  sc.querySelectorAll('.story').forEach(el => {
+  `;
+
+  const half = Math.ceil(STORIES.length / 2);
+  const left = STORIES.slice(0, half);
+  const right = STORIES.slice(half);
+
+  // Левая колонка hero
+  const colL = document.getElementById('stories-left');
+  if (colL) colL.innerHTML = left.map((s, i) => html(s, i)).join('');
+  // Правая колонка hero
+  const colR = document.getElementById('stories-right');
+  if (colR) colR.innerHTML = right.map((s, i) => html(s, i + half)).join('');
+  // Полоска снизу — для мобильных
+  const sc = document.getElementById('stories-scroll');
+  if (sc) sc.innerHTML = STORIES.map((s, i) => html(s, i)).join('');
+
+  // Один обработчик на все 3 контейнера
+  document.querySelectorAll('.story').forEach(el => {
     el.addEventListener('click', () => openStory(parseInt(el.dataset.i, 10)));
   });
 }
@@ -2890,14 +2923,13 @@ document.getElementById('filters').addEventListener('click', e => {
 function syncSearch(val) {
   query = val;
   if (searchEl.value !== val) searchEl.value = val;
-  const search2 = document.getElementById('search2');
-  if (search2 && search2.value !== val) search2.value = val;
   render();
   const hotSection = document.getElementById('hot-section');
   const aboutSection = document.getElementById('about-section');
   const reviewsSection = document.getElementById('reviews-section');
   const worksSection = document.getElementById('works-section');
   const storiesBar = document.querySelector('.stories-bar');
+  const heroStories = document.querySelectorAll('.hero-stories-col');
   if (query.length > 0) {
     if (hotSection) hotSection.style.display = 'none';
     if (aboutSection) aboutSection.style.display = 'none';
@@ -2913,8 +2945,12 @@ function syncSearch(val) {
   }
 }
 searchEl.addEventListener('input', () => syncSearch(searchEl.value));
-const search2El = document.getElementById('search2');
-if (search2El) search2El.addEventListener('input', () => syncSearch(search2El.value));
+const clearBtn = document.getElementById('search-clear');
+if (clearBtn) clearBtn.addEventListener('click', () => {
+  searchEl.value = '';
+  syncSearch('');
+  searchEl.focus();
+});
 
 // ── МОДАЛКА ───────────────────────────────────────────────────────
 const overlay = document.getElementById('overlay');
