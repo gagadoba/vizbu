@@ -814,6 +814,305 @@
     }
     .shop-info strong { color: var(--accent2); }
 
+    /* ───── CONTRACTORS PAGE (B2B) ───── */
+    .nav-b2b { background: rgba(244,162,58,.18); color: #fff !important; }
+    .nav-b2b:hover { background: rgba(244,162,58,.32); }
+    .nav-b2b.active { background: var(--accent); color: #fff !important; }
+
+    .ctr-hero {
+      background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%);
+      color: #fff; padding: 64px 20px 56px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .ctr-hero::before {
+      content: ''; position: absolute; top: -100px; right: -100px;
+      width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(244,162,58,.18), transparent 70%);
+    }
+    .ctr-hero .badge {
+      background: rgba(244,162,58,.18); border: 1px solid rgba(244,162,58,.4);
+      border-radius: 999px; padding: 5px 16px; font-size: .8rem;
+      font-weight: 700; display: inline-block; margin-bottom: 16px;
+      color: var(--accent); position: relative; z-index: 1;
+    }
+    .ctr-hero h1 {
+      font-size: clamp(1.8rem, 4.5vw, 2.6rem); font-weight: 900;
+      margin-bottom: 14px; line-height: 1.2; position: relative; z-index: 1;
+    }
+    .ctr-hero h1 em { color: var(--accent); font-style: normal; }
+    .ctr-hero p {
+      opacity: .85; max-width: 600px; margin: 0 auto 24px;
+      font-size: 1.05rem; position: relative; z-index: 1;
+    }
+    .ctr-hero-ctas { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; position: relative; z-index: 1; }
+    .ctr-hero-ctas button, .ctr-hero-ctas a {
+      padding: 14px 28px; border-radius: 999px; font-size: .98rem;
+      font-weight: 800; cursor: pointer; font-family: inherit;
+      text-decoration: none; transition: transform .15s, box-shadow .15s;
+      border: none;
+    }
+    .btn-ctr-primary {
+      background: var(--accent); color: #fff;
+      box-shadow: 0 4px 18px rgba(244,162,58,.4);
+    }
+    .btn-ctr-primary:hover { transform: scale(1.04); box-shadow: 0 6px 22px rgba(244,162,58,.55); }
+    .btn-ctr-secondary {
+      background: rgba(255,255,255,.12); color: #fff;
+      border: 1.5px solid rgba(255,255,255,.35) !important;
+    }
+    .btn-ctr-secondary:hover { background: rgba(255,255,255,.22); }
+
+    .ctr-content { max-width: 1200px; margin: 0 auto; padding: 56px 20px; }
+
+    /* Преимущества */
+    .ctr-benefits {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px; margin-bottom: 56px;
+    }
+    .ctr-benefit {
+      background: #fff; border: 1px solid var(--border); border-radius: 14px;
+      padding: 24px; transition: transform .15s, box-shadow .2s;
+    }
+    .ctr-benefit:hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(0,0,0,.08); }
+    .ctr-benefit-ic { font-size: 2rem; margin-bottom: 10px; }
+    .ctr-benefit h3 { font-size: 1.05rem; font-weight: 900; margin-bottom: 6px; }
+    .ctr-benefit p { font-size: .88rem; color: var(--muted); line-height: 1.5; }
+
+    /* Как работает */
+    .ctr-how {
+      background: #fff; border-radius: 18px; padding: 44px 40px;
+      border: 1px solid var(--border); margin-bottom: 56px;
+    }
+    .ctr-how h2 { font-size: 1.6rem; font-weight: 900; text-align: center; margin-bottom: 28px; }
+    .ctr-how-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 24px; }
+    .ctr-how-step { text-align: center; position: relative; }
+    .ctr-how-step-n {
+      width: 50px; height: 50px; border-radius: 50%;
+      background: var(--accent); color: #fff; font-weight: 900; font-size: 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 14px;
+    }
+    .ctr-how-step h4 { font-size: 1rem; font-weight: 800; margin-bottom: 6px; }
+    .ctr-how-step p { font-size: .87rem; color: var(--muted); line-height: 1.5; }
+
+    /* Лента демо-заявок */
+    .ctr-feed-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      flex-wrap: wrap; gap: 8px; margin-bottom: 18px;
+    }
+    .ctr-feed-head h2 { font-size: 1.5rem; font-weight: 900; }
+    .ctr-feed-head .live {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #DCFCE7; color: #166534;
+      padding: 4px 12px; border-radius: 999px; font-size: .77rem; font-weight: 800;
+    }
+    .ctr-feed-head .live::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: #16A34A; animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .4; transform: scale(1.4); }
+    }
+    .ctr-feed-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 16px; margin-bottom: 56px;
+    }
+    .ctr-lead {
+      background: #fff; border: 1px solid var(--border); border-radius: 14px;
+      padding: 18px 18px 16px; display: flex; flex-direction: column;
+      transition: transform .15s, box-shadow .2s;
+      position: relative;
+    }
+    .ctr-lead:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(0,0,0,.08); }
+    .ctr-lead-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 10px; }
+    .ctr-lead-cat {
+      font-size: .67rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: .5px; background: #E8F5EE; color: var(--green);
+      padding: 4px 10px; border-radius: 6px;
+    }
+    .ctr-lead-time { font-size: .72rem; color: var(--muted); }
+    .ctr-lead-title { font-size: .98rem; font-weight: 800; margin-bottom: 8px; line-height: 1.3; }
+    .ctr-lead-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+    .ctr-lead-meta span {
+      font-size: .76rem; padding: 3px 9px; border-radius: 999px;
+      background: var(--bg); color: var(--text); font-weight: 600;
+    }
+    .ctr-lead-budget {
+      font-size: 1.05rem; font-weight: 900; color: var(--green);
+      margin-bottom: 10px;
+    }
+    .ctr-lead-budget small { font-size: .73rem; color: var(--muted); font-weight: 600; }
+    .ctr-lead-contact {
+      background: var(--bg); border: 1px dashed var(--border);
+      border-radius: 8px; padding: 9px 12px; margin-bottom: 12px;
+      font-size: .82rem; color: var(--muted);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .ctr-lead-contact .blur {
+      filter: blur(4px); user-select: none; flex: 1;
+    }
+    .ctr-lead-buy {
+      background: var(--accent); color: #fff; border: none; border-radius: 999px;
+      padding: 11px 18px; font-size: .87rem; font-weight: 800;
+      cursor: pointer; font-family: inherit; transition: background .15s, transform .1s;
+    }
+    .ctr-lead-buy:hover { background: var(--accent2); transform: scale(1.02); }
+    .ctr-lead-exclusive {
+      position: absolute; top: 12px; right: 12px;
+      background: var(--red); color: #fff;
+      font-size: .65rem; font-weight: 800; letter-spacing: .4px;
+      padding: 3px 8px; border-radius: 6px; text-transform: uppercase;
+    }
+
+    /* Тарифы */
+    .ctr-tariffs-wrap { margin-bottom: 56px; }
+    .ctr-tariffs-wrap > h2 { font-size: 1.6rem; font-weight: 900; text-align: center; margin-bottom: 8px; }
+    .ctr-tariffs-wrap > p { text-align: center; color: var(--muted); margin-bottom: 28px; max-width: 640px; margin-left: auto; margin-right: auto; }
+    .ctr-tariffs { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    @media (max-width: 720px) { .ctr-tariffs { grid-template-columns: 1fr; } }
+    .ctr-tariff {
+      background: #fff; border: 2px solid var(--border); border-radius: 18px;
+      padding: 32px 28px; position: relative;
+      display: flex; flex-direction: column;
+    }
+    .ctr-tariff.now { border-color: var(--green); }
+    .ctr-tariff.future { border-color: var(--accent); background: linear-gradient(180deg, #FFFBF5, #fff); }
+    .ctr-tariff-tag {
+      position: absolute; top: -12px; left: 24px;
+      background: var(--green); color: #fff;
+      font-size: .73rem; font-weight: 800; letter-spacing: .4px;
+      padding: 5px 12px; border-radius: 999px; text-transform: uppercase;
+    }
+    .ctr-tariff.future .ctr-tariff-tag { background: var(--accent); }
+    .ctr-tariff h3 { font-size: 1.35rem; font-weight: 900; margin-bottom: 6px; }
+    .ctr-tariff > p { color: var(--muted); font-size: .92rem; margin-bottom: 16px; }
+    .ctr-tariff-price {
+      font-size: 2rem; font-weight: 900; color: var(--green);
+      line-height: 1.1; margin-bottom: 4px;
+    }
+    .ctr-tariff.future .ctr-tariff-price { color: var(--accent); }
+    .ctr-tariff-price small { font-size: .9rem; font-weight: 600; color: var(--muted); }
+    .ctr-tariff ul { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-top: 16px; flex: 1; }
+    .ctr-tariff ul li { display: flex; gap: 8px; font-size: .92rem; align-items: flex-start; }
+    .ctr-tariff ul li::before { content: '✓'; color: var(--green); font-weight: 900; flex-shrink: 0; }
+    .ctr-tariff.future ul li::before { content: '⏳'; color: var(--accent); }
+
+    .ctr-pricing-table {
+      background: #fff; border: 1px solid var(--border); border-radius: 14px;
+      padding: 22px 26px; margin-top: 22px;
+    }
+    .ctr-pricing-table h4 { font-size: 1rem; font-weight: 900; margin-bottom: 14px; }
+    .ctr-pricing-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: .92rem; }
+    .ctr-pricing-row:last-child { border: none; }
+    .ctr-pricing-row strong { color: var(--accent); font-weight: 900; }
+
+    /* Калькулятор окупаемости */
+    .ctr-calc {
+      background: linear-gradient(135deg, var(--green3) 0%, var(--green) 100%);
+      color: #fff; border-radius: 18px;
+      padding: 32px 28px; margin-bottom: 56px;
+      text-align: center;
+    }
+    .ctr-calc h3 { font-size: 1.4rem; font-weight: 900; margin-bottom: 8px; }
+    .ctr-calc > p { opacity: .85; margin-bottom: 22px; }
+    .ctr-calc-row {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 14px; max-width: 700px; margin: 0 auto;
+    }
+    .ctr-calc-cell {
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.22);
+      border-radius: 12px; padding: 16px 14px;
+    }
+    .ctr-calc-cell strong {
+      font-size: 1.5rem; font-weight: 900; display: block; line-height: 1.1;
+      color: var(--accent);
+    }
+    .ctr-calc-cell span { font-size: .8rem; opacity: .85; }
+
+    /* Форма регистрации */
+    .ctr-reg {
+      background: #fff; border: 1px solid var(--border); border-radius: 18px;
+      padding: 36px 32px; max-width: 720px; margin: 0 auto 56px;
+    }
+    .ctr-reg h2 { font-size: 1.5rem; font-weight: 900; margin-bottom: 6px; }
+    .ctr-reg > p { color: var(--muted); font-size: .95rem; margin-bottom: 24px; }
+    .ctr-reg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 580px) { .ctr-reg-grid { grid-template-columns: 1fr; } }
+    .ctr-reg .fr.full { grid-column: 1 / -1; }
+    .ctr-reg-multi { display: flex; flex-wrap: wrap; gap: 7px; }
+    .ctr-reg-multi .pill {
+      padding: 8px 14px; border-radius: 999px;
+      border: 1.5px solid var(--border); background: #fff;
+      font-size: .85rem; cursor: pointer; font-family: inherit;
+      user-select: none; transition: all .15s;
+    }
+    .ctr-reg-multi .pill.active { background: var(--green); border-color: var(--green); color: #fff; }
+    .btn-ctr-submit {
+      width: 100%; padding: 16px; background: var(--accent); color: #fff;
+      border: none; border-radius: 999px; font-size: 1.02rem; font-weight: 800;
+      cursor: pointer; font-family: inherit; transition: background .15s;
+      margin-top: 10px;
+    }
+    .btn-ctr-submit:hover { background: var(--accent2); }
+    .ctr-reg-success {
+      display: none; text-align: center; padding: 30px 20px;
+    }
+    .ctr-reg-success .si { font-size: 3.5rem; margin-bottom: 10px; }
+    .ctr-reg-success h3 { font-weight: 900; font-size: 1.3rem; color: var(--green); margin-bottom: 8px; }
+    .ctr-reg-success p { color: var(--muted); }
+
+    /* Демо-кабинет (оверлей) */
+    .ctr-cabinet {
+      display: none; position: fixed; inset: 0; z-index: 700;
+      background: #F4F7F4; overflow-y: auto;
+    }
+    .ctr-cabinet.open { display: block; }
+    .ctr-cab-head {
+      background: var(--green3); color: #fff;
+      padding: 14px 20px; display: flex; align-items: center;
+      justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      position: sticky; top: 0; z-index: 5;
+    }
+    .ctr-cab-head .who { display: flex; align-items: center; gap: 12px; }
+    .ctr-cab-head .who-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 1rem;
+    }
+    .ctr-cab-head .who-name { font-weight: 800; }
+    .ctr-cab-head .who-rate { font-size: .78rem; opacity: .8; }
+    .ctr-cab-head .balance {
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.28);
+      border-radius: 10px; padding: 8px 14px;
+      font-size: .9rem;
+    }
+    .ctr-cab-head .balance strong { font-weight: 900; color: var(--accent); }
+    .ctr-cab-head button {
+      background: rgba(255,255,255,.15); border: none; color: #fff;
+      border-radius: 8px; padding: 8px 14px; cursor: pointer;
+      font-family: inherit; font-size: .85rem; font-weight: 700;
+    }
+    .ctr-cab-body { max-width: 1100px; margin: 0 auto; padding: 28px 20px; }
+    .ctr-cab-toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+    .ctr-cab-toolbar button {
+      padding: 7px 16px; border-radius: 999px;
+      border: 1.5px solid var(--border); background: #fff;
+      font-size: .82rem; cursor: pointer; font-family: inherit;
+    }
+    .ctr-cab-toolbar button.active {
+      background: var(--green); border-color: var(--green); color: #fff;
+    }
+    .ctr-cab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 16px; }
+
+    .ctr-demo-banner {
+      background: #FEF3E7; border-left: 4px solid var(--accent);
+      padding: 12px 16px; border-radius: 10px;
+      font-size: .88rem; color: #B45309; margin-bottom: 18px;
+    }
+    .ctr-demo-banner strong { color: var(--accent2); }
+
     /* ───── НАШИ РАБОТЫ ───── */
     .works {
       background: #fff; padding: 56px 20px 64px;
@@ -949,6 +1248,7 @@
       <button class="nav-tab" data-page="shop">🛍 Продаёт</button>
       <button class="nav-tab" data-page="insurance">🛡️ Страхование</button>
       <button class="nav-tab" data-page="management">🔑 Управление</button>
+      <button class="nav-tab nav-b2b" data-page="contractors">💼 Подрядчикам</button>
     </nav>
     <div class="hdr-contacts">
       <a href="tel:+79119507358" class="hdr-phone">📞 +7 911 950-73-58</a>
@@ -962,6 +1262,7 @@
     <button class="nav-tab" data-page="shop">🛍 Продаёт</button>
     <button class="nav-tab" data-page="insurance">🛡️ Страхование</button>
     <button class="nav-tab" data-page="management">🔑 Управление</button>
+    <button class="nav-tab nav-b2b" data-page="contractors">💼 Подрядчикам</button>
   </div>
 </header>
 
@@ -1509,6 +1810,263 @@
   </div>
 </div>
 
+<!-- ═══════════════════════════════════════════════
+     СТРАНИЦА: ПОДРЯДЧИКАМ (B2B)
+════════════════════════════════════════════════ -->
+<div class="page" id="page-contractors">
+  <div class="ctr-hero">
+    <div class="badge">💼 ВИзбу для подрядчиков</div>
+    <h1>Заявки на работы по даче,<br/><em>с проверенным адресом и бюджетом</em></h1>
+    <p>ВИзбу обзванивает клиентов, уточняет задачу и адрес — а потом передаёт вам уже горячий контакт. Эксклюзивно вам на 1 час: никаких 5 конкурентов с Avito.</p>
+    <div class="ctr-hero-ctas">
+      <a href="#ctr-reg" class="btn-ctr-primary">📝 Стать подрядчиком</a>
+      <button class="btn-ctr-secondary" onclick="openContractorCabinet()">👀 Демо-кабинет</button>
+    </div>
+  </div>
+
+  <div class="ctr-content">
+
+    <!-- Преимущества -->
+    <div class="ctr-benefits">
+      <div class="ctr-benefit">
+        <div class="ctr-benefit-ic">🎯</div>
+        <h3>Эксклюзивно вам на 1 час</h3>
+        <p>Контакт продаём только одному подрядчику. Если не отозвался за час — передаём следующему.</p>
+      </div>
+      <div class="ctr-benefit">
+        <div class="ctr-benefit-ic">✅</div>
+        <h3>Заявка проверена</h3>
+        <p>Мы созваниваемся с клиентом, уточняем адрес, объём, согласовываем бюджет. Вы едете на готовый заказ.</p>
+      </div>
+      <div class="ctr-benefit">
+        <div class="ctr-benefit-ic">📍</div>
+        <h3>Только Ленобласть</h3>
+        <p>Все клиенты — наши соседи по СНТ и посёлкам ЛО. Никаких Москвы и Питера, не нужно тратить день на дорогу.</p>
+      </div>
+      <div class="ctr-benefit">
+        <div class="ctr-benefit-ic">💸</div>
+        <h3>Возврат за пустой контакт</h3>
+        <p>Если не дозвонились или клиент уже передумал — деньги возвращаются на баланс. Никаких споров.</p>
+      </div>
+    </div>
+
+    <!-- Как работает -->
+    <div class="ctr-how">
+      <h2>Как это работает</h2>
+      <div class="ctr-how-steps">
+        <div class="ctr-how-step">
+          <div class="ctr-how-step-n">1</div>
+          <h4>Клиент оставляет заявку</h4>
+          <p>На сайте ВИзбу с описанием задачи, адресом и контактом</p>
+        </div>
+        <div class="ctr-how-step">
+          <div class="ctr-how-step-n">2</div>
+          <h4>ВИзбу проверяет</h4>
+          <p>Перезваниваем за 1 час: уточняем детали, согласовываем бюджет</p>
+        </div>
+        <div class="ctr-how-step">
+          <div class="ctr-how-step-n">3</div>
+          <h4>Заявка в ленте</h4>
+          <p>Заявка появляется у вас. Вы видите задачу, район, бюджет — но контакт скрыт</p>
+        </div>
+        <div class="ctr-how-step">
+          <div class="ctr-how-step-n">4</div>
+          <h4>Покупаете контакт</h4>
+          <p>Списываем фикс с баланса, открываем телефон и адрес. Звоните клиенту</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Лента демо-заявок -->
+    <div class="ctr-feed-head">
+      <h2>Лента заявок прямо сейчас</h2>
+      <span class="live">Обновлено только что</span>
+    </div>
+    <div class="ctr-feed-grid" id="ctr-feed-grid"></div>
+
+    <!-- Тарифы -->
+    <div class="ctr-tariffs-wrap">
+      <h2>Тарифы</h2>
+      <p>Сейчас работаем в ручном режиме: ВИзбу сама подбирает подрядчика и берёт процент. Когда наберём поток заявок — переходим на классическую цену за лид.</p>
+      <div class="ctr-tariffs">
+
+        <div class="ctr-tariff now">
+          <div class="ctr-tariff-tag">Сейчас</div>
+          <h3>Процент с заказа</h3>
+          <p>Подходит для тестовой фазы и сложных задач, где сложно посчитать заранее.</p>
+          <div class="ctr-tariff-price">10–15%<small> с выполненной работы</small></div>
+          <ul>
+            <li>Никакого баланса и предоплаты</li>
+            <li>Платите только если заказ выполнен</li>
+            <li>ВИзбу сама ищет лучшего подрядчика</li>
+            <li>Помогаем с возвратами и спорами</li>
+            <li>Размер процента зависит от категории</li>
+          </ul>
+        </div>
+
+        <div class="ctr-tariff future">
+          <div class="ctr-tariff-tag">Скоро</div>
+          <h3>Цена за лид</h3>
+          <p>Запускаем когда наберём больше заявок. Подрядчик платит фикс за доступ к контакту.</p>
+          <div class="ctr-tariff-price">от 150 ₽<small> за контакт</small></div>
+          <ul>
+            <li>Эксклюзивный контакт на 1 час</li>
+            <li>Возврат за пустой контакт</li>
+            <li>Цена зависит от категории и бюджета</li>
+            <li>Бонус: 1 бесплатный лид при пополнении 3000 ₽</li>
+            <li>Чем выше рейтинг — тем выше приоритет в очереди</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ctr-pricing-table">
+        <h4>Прайс по категориям (когда запустим pay-per-lead)</h4>
+        <div class="ctr-pricing-row"><span>🌿 Покос, уборка участка</span><strong>150 ₽</strong></div>
+        <div class="ctr-pricing-row"><span>🪵 Дрова, доставка</span><strong>200 ₽</strong></div>
+        <div class="ctr-pricing-row"><span>💧 Сантехник, септики</span><strong>250 ₽</strong></div>
+        <div class="ctr-pricing-row"><span>⚡ Электрик</span><strong>250 ₽</strong></div>
+        <div class="ctr-pricing-row"><span>🦟 Обработка от клещей</span><strong>300 ₽</strong></div>
+        <div class="ctr-pricing-row"><span>🏗️ Стройка крупная (баня, забор, кровля)</span><strong>500 ₽</strong></div>
+        <div class="ctr-pricing-row"><span>⛏️ Бурение скважины</span><strong>700 ₽</strong></div>
+      </div>
+    </div>
+
+    <!-- Калькулятор окупаемости -->
+    <div class="ctr-calc">
+      <h3>Окупаемость в среднем</h3>
+      <p>Расчёт на стандартного электрика по нашей статистике</p>
+      <div class="ctr-calc-row">
+        <div class="ctr-calc-cell">
+          <strong>10</strong>
+          <span>лидов в месяц</span>
+        </div>
+        <div class="ctr-calc-cell">
+          <strong>2 500 ₽</strong>
+          <span>стоимость лидов</span>
+        </div>
+        <div class="ctr-calc-cell">
+          <strong>4–6</strong>
+          <span>выполненных заказов</span>
+        </div>
+        <div class="ctr-calc-cell">
+          <strong>~25 000 ₽</strong>
+          <span>выручка</span>
+        </div>
+        <div class="ctr-calc-cell">
+          <strong>×10</strong>
+          <span>возврат на лид</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Регистрация -->
+    <div class="ctr-reg" id="ctr-reg">
+      <h2>Зарегистрироваться подрядчиком</h2>
+      <p>Заполните анкету. Перезвоним в течение дня, проведём короткий созвон и одобрим аккаунт. После одобрения — даём доступ к ленте заявок.</p>
+
+      <div id="ctr-reg-form">
+        <form id="ctr-form">
+          <div class="ctr-reg-grid">
+            <div class="fr"><label>ФИО <span class="req">*</span></label><input id="cf-name" type="text" placeholder="Иван Петров" required/></div>
+            <div class="fr"><label>Телефон <span class="req">*</span></label><input id="cf-phone" type="tel" placeholder="+7 (___) ___-__-__" required/></div>
+            <div class="fr"><label>Email</label><input id="cf-email" type="email" placeholder="ivan@mail.ru"/></div>
+            <div class="fr"><label>Опыт (лет)</label><input id="cf-exp" type="number" placeholder="5"/></div>
+            <div class="fr full"><label>Категории работ (выберите все, что подходит)</label>
+              <div class="ctr-reg-multi" id="cf-cats">
+                <span class="pill" data-v="Сантехника">💧 Сантехника</span>
+                <span class="pill" data-v="Электрика">⚡ Электрика</span>
+                <span class="pill" data-v="Стройка">🏗️ Стройка</span>
+                <span class="pill" data-v="Кровля">🏠 Кровля</span>
+                <span class="pill" data-v="Заборы">🧱 Заборы</span>
+                <span class="pill" data-v="Покос/уборка">🌿 Покос/уборка</span>
+                <span class="pill" data-v="Сад">🌱 Сад</span>
+                <span class="pill" data-v="Скважины">⛏️ Скважины</span>
+                <span class="pill" data-v="Септики">🚛 Септики</span>
+                <span class="pill" data-v="Бани">🧖 Бани</span>
+                <span class="pill" data-v="Спил деревьев">🪓 Спил</span>
+                <span class="pill" data-v="Спецтехника">🚜 Спецтехника</span>
+                <span class="pill" data-v="Разнорабочий">👷 Разнорабочий</span>
+              </div>
+            </div>
+            <div class="fr full"><label>Районы работы (Ленобласть)</label>
+              <div class="ctr-reg-multi" id="cf-areas">
+                <span class="pill" data-v="Всеволожский">Всеволожский</span>
+                <span class="pill" data-v="Кировский">Кировский</span>
+                <span class="pill" data-v="Приозерский">Приозерский</span>
+                <span class="pill" data-v="Выборгский">Выборгский</span>
+                <span class="pill" data-v="Тосненский">Тосненский</span>
+                <span class="pill" data-v="Ломоносовский">Ломоносовский</span>
+                <span class="pill" data-v="Гатчинский">Гатчинский</span>
+                <span class="pill" data-v="Любой">Любой по ЛО</span>
+              </div>
+            </div>
+            <div class="fr"><label>Статус <span class="req">*</span></label>
+              <select id="cf-status" required>
+                <option value="">— выберите —</option>
+                <option>Самозанятый</option>
+                <option>ИП</option>
+                <option>Физлицо</option>
+                <option>ООО</option>
+              </select>
+            </div>
+            <div class="fr"><label>Своя бригада?</label>
+              <select id="cf-team">
+                <option value="">— выберите —</option>
+                <option>Работаю один</option>
+                <option>Бригада 2-3 чел.</option>
+                <option>Бригада 4+ чел.</option>
+              </select>
+            </div>
+            <div class="fr full"><label>Портфолио / соцсети (необязательно)</label>
+              <input id="cf-portfolio" type="text" placeholder="Ссылка на Instagram, ВК, сайт или Avito"/>
+            </div>
+            <div class="fr full"><label>Расскажите о себе (необязательно)</label>
+              <textarea id="cf-about" placeholder="Опыт, специализация, что нравится делать"></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn-ctr-submit">Отправить заявку →</button>
+          <p class="m-note">Перезвоним в течение дня, проведём короткий созвон по работе</p>
+        </form>
+      </div>
+
+      <div class="ctr-reg-success" id="ctr-reg-ok">
+        <div class="si">✅</div>
+        <h3>Заявка принята!</h3>
+        <p>Мы перезвоним в течение дня, проведём короткий созвон, дальше дадим доступ в кабинет.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ДЕМО-КАБИНЕТ ПОДРЯДЧИКА -->
+<div class="ctr-cabinet" id="ctr-cabinet">
+  <div class="ctr-cab-head">
+    <div class="who">
+      <div class="who-avatar">ИП</div>
+      <div>
+        <div class="who-name">Иван Петров (демо)</div>
+        <div class="who-rate">⭐ 4.7 · 23 отзыва · Сантехник + Электрик</div>
+      </div>
+    </div>
+    <div class="balance">Баланс: <strong>5 000 ₽</strong></div>
+    <button onclick="closeContractorCabinet()">✕ Выйти из демо</button>
+  </div>
+  <div class="ctr-cab-body">
+    <div class="ctr-demo-banner">
+      🎬 <strong>Демо-режим:</strong> это превью кабинета подрядчика. Покупки контактов и пополнения здесь не работают — для теста.
+    </div>
+    <div class="ctr-cab-toolbar">
+      <button class="active" data-cab-cat="Все">Все</button>
+      <button data-cab-cat="Сантехника">💧 Сантехника</button>
+      <button data-cab-cat="Электрика">⚡ Электрика</button>
+      <button data-cab-cat="Покос/уборка">🌿 Покос/уборка</button>
+      <button data-cab-cat="Стройка">🏗️ Стройка</button>
+    </div>
+    <div class="ctr-cab-grid" id="ctr-cab-grid"></div>
+  </div>
+</div>
+
 <!-- MODAL -->
 <div class="overlay" id="overlay">
   <div class="modal">
@@ -1553,14 +2111,34 @@
       <button onclick="closeAdmin()" style="background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:8px;padding:8px 14px;cursor:pointer;font-size:.9rem;">✕ Закрыть</button>
     </div>
     <div style="padding:20px 24px;">
-      <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
-        <button onclick="filterAdmin('all')" id="af-all" style="padding:7px 16px;border-radius:999px;border:1.5px solid #2D6A4F;background:#2D6A4F;color:#fff;cursor:pointer;font-weight:600;font-size:.83rem;">Все</button>
-        <button onclick="filterAdmin('new')" id="af-new" style="padding:7px 16px;border-radius:999px;border:1.5px solid #E5EDE8;background:#fff;cursor:pointer;font-weight:600;font-size:.83rem;">🆕 Новые</button>
-        <button onclick="filterAdmin('work')" id="af-work" style="padding:7px 16px;border-radius:999px;border:1.5px solid #E5EDE8;background:#fff;cursor:pointer;font-weight:600;font-size:.83rem;">⏳ В работе</button>
-        <button onclick="filterAdmin('done')" id="af-done" style="padding:7px 16px;border-radius:999px;border:1.5px solid #E5EDE8;background:#fff;cursor:pointer;font-weight:600;font-size:.83rem;">✅ Выполнены</button>
-        <button onclick="clearDone()" style="padding:7px 16px;border-radius:999px;border:1.5px solid #fecaca;background:#fff;color:#dc2626;cursor:pointer;font-weight:600;font-size:.83rem;margin-left:auto;">🗑 Удалить выполненные</button>
+      <!-- Переключатель раздела -->
+      <div style="display:flex;gap:8px;margin-bottom:18px;border-bottom:1px solid #E5EDE8;padding-bottom:14px;">
+        <button onclick="adminTab('orders')" id="at-orders" style="padding:9px 18px;border-radius:10px;border:none;background:#1b4332;color:#fff;cursor:pointer;font-weight:800;font-size:.88rem;">📋 Заявки клиентов</button>
+        <button onclick="adminTab('contractors')" id="at-contractors" style="padding:9px 18px;border-radius:10px;border:none;background:#F4F7F4;color:#1A1A1A;cursor:pointer;font-weight:800;font-size:.88rem;">💼 Подрядчики <span id="ct-pending-cnt" style="background:#F4A23A;color:#fff;border-radius:10px;padding:1px 7px;font-size:.7rem;margin-left:4px;display:none;"></span></button>
       </div>
-      <div id="admin-orders"></div>
+
+      <!-- Таб: Заявки -->
+      <div id="admin-tab-orders">
+        <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+          <button onclick="filterAdmin('all')" id="af-all" style="padding:7px 16px;border-radius:999px;border:1.5px solid #2D6A4F;background:#2D6A4F;color:#fff;cursor:pointer;font-weight:600;font-size:.83rem;">Все</button>
+          <button onclick="filterAdmin('new')" id="af-new" style="padding:7px 16px;border-radius:999px;border:1.5px solid #E5EDE8;background:#fff;cursor:pointer;font-weight:600;font-size:.83rem;">🆕 Новые</button>
+          <button onclick="filterAdmin('work')" id="af-work" style="padding:7px 16px;border-radius:999px;border:1.5px solid #E5EDE8;background:#fff;cursor:pointer;font-weight:600;font-size:.83rem;">⏳ В работе</button>
+          <button onclick="filterAdmin('done')" id="af-done" style="padding:7px 16px;border-radius:999px;border:1.5px solid #E5EDE8;background:#fff;cursor:pointer;font-weight:600;font-size:.83rem;">✅ Выполнены</button>
+          <button onclick="clearDone()" style="padding:7px 16px;border-radius:999px;border:1.5px solid #fecaca;background:#fff;color:#dc2626;cursor:pointer;font-weight:600;font-size:.83rem;margin-left:auto;">🗑 Удалить выполненные</button>
+        </div>
+        <div id="admin-orders"></div>
+      </div>
+
+      <!-- Таб: Подрядчики -->
+      <div id="admin-tab-contractors" style="display:none;">
+        <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+          <button onclick="filterCtr('all')" id="cf-all" style="padding:7px 16px;border-radius:999px;border:1.5px solid #2D6A4F;background:#2D6A4F;color:#fff;cursor:pointer;font-weight:600;font-size:.83rem;">Все</button>
+          <button onclick="filterCtr('pending')" id="cf-pending" style="padding:7px 16px;border-radius:999px;border:1.5px solid #E5EDE8;background:#fff;cursor:pointer;font-weight:600;font-size:.83rem;">⏳ На модерации</button>
+          <button onclick="filterCtr('approved')" id="cf-approved" style="padding:7px 16px;border-radius:999px;border:1.5px solid #E5EDE8;background:#fff;cursor:pointer;font-weight:600;font-size:.83rem;">✅ Одобрены</button>
+          <button onclick="filterCtr('rejected')" id="cf-rejected" style="padding:7px 16px;border-radius:999px;border:1.5px solid #E5EDE8;background:#fff;cursor:pointer;font-weight:600;font-size:.83rem;">❌ Отклонены</button>
+        </div>
+        <div id="admin-contractors"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -1593,6 +2171,96 @@ function openAdmin() {
   document.getElementById('admin-overlay').style.display = 'block';
   document.body.style.overflow = 'hidden';
   renderAdmin();
+  renderContractors();
+  updatePendingBadge();
+}
+function adminTab(t) {
+  document.getElementById('admin-tab-orders').style.display = t === 'orders' ? '' : 'none';
+  document.getElementById('admin-tab-contractors').style.display = t === 'contractors' ? '' : 'none';
+  const o = document.getElementById('at-orders'), c = document.getElementById('at-contractors');
+  if (t === 'orders') {
+    o.style.background = '#1b4332'; o.style.color = '#fff';
+    c.style.background = '#F4F7F4'; c.style.color = '#1A1A1A';
+  } else {
+    c.style.background = '#1b4332'; c.style.color = '#fff';
+    o.style.background = '#F4F7F4'; o.style.color = '#1A1A1A';
+  }
+}
+function updatePendingBadge() {
+  const list = JSON.parse(localStorage.getItem('vizbu_contractors') || '[]');
+  const pending = list.filter(c => c.modStatus === 'pending').length;
+  const badge = document.getElementById('ct-pending-cnt');
+  if (badge) {
+    if (pending > 0) { badge.textContent = pending; badge.style.display = 'inline-block'; }
+    else badge.style.display = 'none';
+  }
+}
+
+let ctrFilter = 'all';
+function filterCtr(f) {
+  ctrFilter = f;
+  ['all','pending','approved','rejected'].forEach(x => {
+    const b = document.getElementById('cf-'+x);
+    if (!b) return;
+    b.style.background = x === f ? '#2D6A4F' : '#fff';
+    b.style.color = x === f ? '#fff' : '#1A1A1A';
+    b.style.borderColor = x === f ? '#2D6A4F' : '#E5EDE8';
+  });
+  renderContractors();
+}
+function setCtrStatus(id, status) {
+  const list = JSON.parse(localStorage.getItem('vizbu_contractors') || '[]');
+  const c = list.find(x => x.id === id);
+  if (c) { c.modStatus = status; localStorage.setItem('vizbu_contractors', JSON.stringify(list)); }
+  renderContractors();
+  updatePendingBadge();
+}
+function deleteCtr(id) {
+  if (!confirm('Удалить заявку подрядчика?')) return;
+  const list = JSON.parse(localStorage.getItem('vizbu_contractors') || '[]');
+  localStorage.setItem('vizbu_contractors', JSON.stringify(list.filter(c => c.id !== id)));
+  renderContractors();
+  updatePendingBadge();
+}
+function renderContractors() {
+  const list = JSON.parse(localStorage.getItem('vizbu_contractors') || '[]');
+  const filtered = ctrFilter === 'all' ? list : list.filter(c => c.modStatus === ctrFilter);
+  const lbl = { pending:'⏳ На модерации', approved:'✅ Одобрен', rejected:'❌ Отклонён' };
+  const c2 = document.getElementById('admin-contractors');
+  if (!c2) return;
+  if (!filtered.length) {
+    c2.innerHTML = '<div class="empty-state">Заявок подрядчиков нет</div>';
+    return;
+  }
+  c2.innerHTML = filtered.map(c => {
+    const colorMap = { pending:'#F4A23A', approved:'#2D6A4F', rejected:'#dc2626' };
+    return `
+    <div class="order-card" style="border-left:4px solid ${colorMap[c.modStatus]||'#888'};">
+      <div class="order-head">
+        <div>
+          <div class="order-svc">${c.name} <span style="font-weight:600;color:#6B7280;font-size:.85rem;">· ${c.status||'—'}${c.team ? ' · '+c.team : ''}</span></div>
+          <div class="order-date">${c.date} · ${lbl[c.modStatus] || c.modStatus}</div>
+        </div>
+      </div>
+      <div class="order-info">
+        <span class="order-tag">📱 ${c.phone}</span>
+        ${c.email ? `<span class="order-tag">📧 ${c.email}</span>` : ''}
+        ${c.exp ? `<span class="order-tag">🛠 Опыт ${c.exp} лет</span>` : ''}
+        ${c.cats && c.cats.length ? `<span class="order-tag">🔧 ${c.cats.join(', ')}</span>` : ''}
+        ${c.areas && c.areas.length ? `<span class="order-tag">📍 ${c.areas.join(', ')}</span>` : ''}
+        ${c.portfolio ? `<span class="order-tag">🔗 <a href="${c.portfolio.startsWith('http') ? c.portfolio : 'https://'+c.portfolio}" target="_blank" style="color:#2D6A4F;">портфолио</a></span>` : ''}
+      </div>
+      ${c.about ? `<div class="order-comm">💬 ${c.about}</div>` : ''}
+      <div class="order-actions">
+        <a href="tel:${c.phone.replace(/\D/g,'')}" class="btn-call">📞 Позвонить</a>
+        <a href="https://wa.me/${c.phone.replace(/\D/g,'').replace(/^8/,'7')}" target="_blank" class="btn-wa">WA</a>
+        ${c.modStatus !== 'approved' ? `<button class="btn-status" onclick="setCtrStatus(${c.id},'approved')" style="border-color:#2D6A4F;color:#2D6A4F;">✅ Одобрить</button>` : ''}
+        ${c.modStatus !== 'rejected' ? `<button class="btn-status" onclick="setCtrStatus(${c.id},'rejected')" style="border-color:#dc2626;color:#dc2626;">❌ Отклонить</button>` : ''}
+        ${c.modStatus !== 'pending' ? `<button class="btn-status" onclick="setCtrStatus(${c.id},'pending')">↩ В модерацию</button>` : ''}
+        <button class="btn-status" onclick="deleteCtr(${c.id})" style="margin-left:auto;border-color:#fecaca;color:#dc2626;">🗑</button>
+      </div>
+    </div>`;
+  }).join('');
 }
 function closeAdmin() {
   document.getElementById('admin-overlay').style.display = 'none';
@@ -2372,6 +3040,180 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
   });
 });
 
+// ── ДЕМО-ЛЕНТА ЗАЯВОК ДЛЯ ПОДРЯДЧИКОВ ──────────────────────────────
+const LEADS = [
+  { cat:'Сантехника', title:'Заменить смеситель и проверить трубы', area:'Всеволожский, Васкелово',
+    budget:'3 000–5 000 ₽', urgency:'Сегодня', when:'15 мин назад', price:250, exclusive:true,
+    contact:'+7 911 *** ** **' },
+  { cat:'Электрика', title:'Не работает свет в части дома, выбило автомат', area:'Кировский, СНТ Синявино',
+    budget:'1 500–3 500 ₽', urgency:'Сегодня', when:'25 мин назад', price:250, exclusive:true,
+    contact:'+7 921 *** ** **' },
+  { cat:'Покос/уборка', title:'Покос травы 8 соток + вывоз', area:'Всеволожский, Лемболово',
+    budget:'4 000 ₽', urgency:'В выходные', when:'40 мин назад', price:150, exclusive:true,
+    contact:'+7 953 *** ** **' },
+  { cat:'Сантехника', title:'Откачать септик 4 м³', area:'Приозерский, Ладожское',
+    budget:'4 500 ₽', urgency:'Завтра', when:'1 час назад', price:250, exclusive:true,
+    contact:'+7 911 *** ** **' },
+  { cat:'Стройка', title:'Установка забора евроштакетник, ~60 м', area:'Выборгский, СНТ Дунай',
+    budget:'45 000 ₽', urgency:'На этой неделе', when:'1.5 часа назад', price:500, exclusive:true,
+    contact:'+7 905 *** ** **' },
+  { cat:'Сезон', title:'Обработка 12 соток от клещей', area:'Всеволожский, Гарболово',
+    budget:'3 500 ₽', urgency:'В пятницу', when:'2 часа назад', price:300, exclusive:true,
+    contact:'+7 921 *** ** **' },
+  { cat:'Электрика', title:'Подключить новую баню к электросети', area:'Тосненский, СНТ Сосновка',
+    budget:'8 000–12 000 ₽', urgency:'На этой неделе', when:'3 часа назад', price:250, exclusive:true,
+    contact:'+7 911 *** ** **' },
+  { cat:'Стройка', title:'Замена кровли ~80 м², металлочерепица', area:'Гатчинский, Сиверский',
+    budget:'150 000–200 000 ₽', urgency:'В мае', when:'4 часа назад', price:500, exclusive:false,
+    contact:'+7 921 *** ** **' },
+  { cat:'Сад', title:'Обрезка 6 плодовых деревьев', area:'Всеволожский, Токсово',
+    budget:'2 500 ₽', urgency:'На неделе', when:'5 часов назад', price:150, exclusive:true,
+    contact:'+7 953 *** ** **' },
+];
+
+function escapeAttr2(s) {
+  return String(s).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+// Лента на лендинге (контакт скрыт)
+function renderLeadFeed() {
+  const grid = document.getElementById('ctr-feed-grid');
+  if (!grid) return;
+  grid.innerHTML = LEADS.slice(0, 6).map((l, i) => `
+    <div class="ctr-lead">
+      ${l.exclusive ? '<span class="ctr-lead-exclusive">Эксклюзив</span>' : ''}
+      <div class="ctr-lead-top">
+        <span class="ctr-lead-cat">${l.cat}</span>
+        <span class="ctr-lead-time">${l.when}</span>
+      </div>
+      <div class="ctr-lead-title">${l.title}</div>
+      <div class="ctr-lead-meta">
+        <span>📍 ${l.area}</span>
+        <span>⏱ ${l.urgency}</span>
+      </div>
+      <div class="ctr-lead-budget">${l.budget}<small> · бюджет клиента</small></div>
+      <div class="ctr-lead-contact">
+        🔒 <span class="blur">+7 911 234 56 78</span>
+      </div>
+      <button class="ctr-lead-buy" onclick="alert('Зарегистрируйтесь подрядчиком, чтобы покупать контакты — внизу страницы.')">Купить контакт за ${l.price} ₽</button>
+    </div>
+  `).join('');
+}
+
+// Демо-кабинет
+let cabFilter = 'Все';
+function openContractorCabinet() {
+  document.getElementById('ctr-cabinet').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  renderCabinet();
+}
+function closeContractorCabinet() {
+  document.getElementById('ctr-cabinet').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function renderCabinet() {
+  const grid = document.getElementById('ctr-cab-grid');
+  if (!grid) return;
+  const list = LEADS.filter(l => cabFilter === 'Все' || l.cat === cabFilter);
+  grid.innerHTML = list.map((l, i) => `
+    <div class="ctr-lead">
+      ${l.exclusive ? '<span class="ctr-lead-exclusive">Эксклюзив 1ч</span>' : ''}
+      <div class="ctr-lead-top">
+        <span class="ctr-lead-cat">${l.cat}</span>
+        <span class="ctr-lead-time">${l.when}</span>
+      </div>
+      <div class="ctr-lead-title">${l.title}</div>
+      <div class="ctr-lead-meta">
+        <span>📍 ${l.area}</span>
+        <span>⏱ ${l.urgency}</span>
+      </div>
+      <div class="ctr-lead-budget">${l.budget}</div>
+      <div class="ctr-lead-contact">
+        🔒 <span class="blur">${l.contact}</span>
+      </div>
+      <button class="ctr-lead-buy" data-i="${i}">Купить за ${l.price} ₽</button>
+    </div>
+  `).join('');
+  grid.querySelectorAll('.ctr-lead-buy').forEach(b => {
+    b.addEventListener('click', () => {
+      alert('🎬 Демо-режим\n\nВ боевом режиме здесь:\n• С баланса спишется ' + LEADS[parseInt(b.dataset.i)].price + ' ₽\n• Откроется телефон и адрес клиента\n• Вы получите уведомление в Telegram\n\nКонтакт будет эксклюзивно ваш на 1 час. Если не дозвонились — деньги вернутся.');
+    });
+  });
+}
+document.addEventListener('click', e => {
+  if (e.target.matches('.ctr-cab-toolbar button')) {
+    document.querySelectorAll('.ctr-cab-toolbar button').forEach(b => b.classList.remove('active'));
+    e.target.classList.add('active');
+    cabFilter = e.target.dataset.cabCat;
+    renderCabinet();
+  }
+});
+
+// Регистрация подрядчика
+function bindContractorRegistration() {
+  // Pill multi-select
+  document.querySelectorAll('#cf-cats .pill, #cf-areas .pill').forEach(p => {
+    p.addEventListener('click', () => p.classList.toggle('active'));
+  });
+
+  const form = document.getElementById('ctr-form');
+  if (!form) return;
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const name = document.getElementById('cf-name').value.trim();
+    const phone = document.getElementById('cf-phone').value.trim();
+    const email = document.getElementById('cf-email').value.trim();
+    const exp = document.getElementById('cf-exp').value.trim();
+    const status = document.getElementById('cf-status').value;
+    const team = document.getElementById('cf-team').value;
+    const portfolio = document.getElementById('cf-portfolio').value.trim();
+    const about = document.getElementById('cf-about').value.trim();
+    const cats = Array.from(document.querySelectorAll('#cf-cats .pill.active')).map(p => p.dataset.v);
+    const areas = Array.from(document.querySelectorAll('#cf-areas .pill.active')).map(p => p.dataset.v);
+
+    const text = [
+      '🆕 *Новая заявка ПОДРЯДЧИКА — ВИзбу*',
+      `👤 *ФИО:* ${name}`,
+      `📱 *Телефон:* ${phone}`,
+      email ? `📧 *Email:* ${email}` : '',
+      exp ? `🛠 *Опыт:* ${exp} лет` : '',
+      `💼 *Статус:* ${status}`,
+      team ? `👥 *Бригада:* ${team}` : '',
+      cats.length ? `🔧 *Категории:* ${cats.join(', ')}` : '',
+      areas.length ? `📍 *Районы:* ${areas.join(', ')}` : '',
+      portfolio ? `🔗 *Портфолио:* ${portfolio}` : '',
+      about ? `💬 *О себе:* ${about}` : '',
+      `🕐 ${new Date().toLocaleString('ru-RU')}`,
+    ].filter(Boolean).join('\n');
+
+    const btn = e.target.querySelector('.btn-ctr-submit');
+    btn.textContent = 'Отправляем...'; btn.disabled = true;
+    try {
+      if (BOT_TOKEN !== 'YOUR_BOT_TOKEN') {
+        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode:'Markdown' })
+        });
+      }
+    } catch {}
+
+    const contractor = {
+      id: Date.now(), name, phone, email, exp, status, team,
+      cats, areas, portfolio, about,
+      date: new Date().toLocaleString('ru-RU'),
+      modStatus: 'pending'
+    };
+    const list = JSON.parse(localStorage.getItem('vizbu_contractors') || '[]');
+    list.unshift(contractor);
+    localStorage.setItem('vizbu_contractors', JSON.stringify(list));
+
+    document.getElementById('ctr-reg-form').style.display = 'none';
+    document.getElementById('ctr-reg-ok').style.display = 'block';
+    btn.textContent = 'Отправить заявку →'; btn.disabled = false;
+    document.getElementById('ctr-reg').scrollIntoView({behavior:'smooth', block:'center'});
+  });
+}
+
 // ── ТОВАРЫ ВИзбу ПРОДАЁТ ──────────────────────────────────────────
 const SHOP = [
   // ━━━━━━━━━━ ТОПЛИВО ━━━━━━━━━━
@@ -3114,6 +3956,8 @@ renderWorks();
 renderShop();
 renderHot();
 render();
+renderLeadFeed();
+bindContractorRegistration();
 </script>
 </body>
 </html>
