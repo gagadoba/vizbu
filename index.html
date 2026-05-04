@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ВИзбу — Бытовые услуги для дачи и СНТ в Ленобласти</title>
+  <title>ВИсбу — Бытовые услуги для дачи и СНТ в Ленобласти</title>
   <meta name="description" content="Открытие дачи, обработка от клещей, покос, дрова, сантехник, электрик. 70+ услуг от проверенных мастеров. Заявка за 1 минуту, перезвоним за час."/>
   <style>
     :root {
@@ -37,9 +37,25 @@
       max-width: 1200px; margin: 0 auto; padding: 0 20px;
       display: flex; align-items: center; gap: 0; height: 60px;
     }
-    .logo { font-size: 1.45rem; font-weight: 900; color: #fff;
-            letter-spacing: -.5px; margin-right: 32px; white-space: nowrap; flex-shrink: 0; cursor: pointer; }
-    .logo em { color: var(--accent); font-style: normal; }
+    .logo {
+      margin-right: 32px;
+      white-space: nowrap; flex-shrink: 0; cursor: pointer;
+      display: flex; align-items: baseline; gap: 8px;
+      line-height: 1;
+    }
+    .logo-text {
+      font-weight: 900; font-size: 1.55rem;
+      color: #fff; letter-spacing: -.5px;
+    }
+    .logo-text::first-letter { color: var(--accent); }
+    .logo-sub {
+      font-weight: 700; font-size: .82rem;
+      color: rgba(255,255,255,.55); letter-spacing: .2px;
+    }
+    @media (max-width: 480px) {
+      .logo-sub { display: none; }
+      .logo-text { font-size: 1.4rem; }
+    }
     nav { display: flex; gap: 2px; flex: 1; }
     .nav-tab {
       padding: 8px 16px; border-radius: 8px; border: none;
@@ -436,6 +452,11 @@
     .about-right { display: flex; flex-direction: column; gap: 20px; }
     .about-img { border-radius: 18px; overflow: hidden; height: 280px; }
     .about-img img { width: 100%; height: 100%; object-fit: cover; }
+    .about-mascot {
+      background: linear-gradient(135deg, #E8F5EE 0%, #FEF3E7 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .about-mascot img { object-fit: contain; padding: 16px; }
     .about-stats {
       display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
     }
@@ -1227,6 +1248,11 @@
     .footer-products { display:flex; justify-content:center; gap:20px; flex-wrap:wrap;
                        margin-top:10px; font-size:.8rem; }
     .footer-products span { opacity:.6; }
+    .footer-logo {
+      max-width: 220px; height: auto; display: block;
+      margin: 0 auto 14px; border-radius: 12px;
+      background: #fff; padding: 8px 14px;
+    }
 
     @media(max-width:480px){ .modal{padding:24px 18px;} .fr-row2{grid-template-columns:1fr;} }
   </style>
@@ -1241,7 +1267,10 @@
     <span class="promo-pill">до 15 мая</span>
   </div>
   <div class="hdr">
-    <div class="logo"><img src="logo-white.svg" alt="ВИзбу" style="height:42px;width:auto;display:block;"></div>
+    <div class="logo">
+      <span class="logo-text">Visbu</span>
+      <span class="logo-sub">ВИсбу</span>
+    </div>
     <nav>
       <button class="nav-tab active" data-page="services">🏡 Услуги</button>
       <button class="nav-tab" data-page="brigade">👷 Бригада</button>
@@ -1421,7 +1450,7 @@
         <div class="reviews-summary">
           <span class="item"><strong>4.9</strong> <span class="reviews-stars">★★★★★</span> <span class="lbl">средняя оценка</span></span>
           <span class="item"><strong>412</strong> <span class="lbl">выполненных заказов</span></span>
-          <span class="item"><strong>98%</strong> <span class="lbl">рекомендуют ВИзбу</span></span>
+          <span class="item"><strong>98%</strong> <span class="lbl">рекомендуют ВИсбу</span></span>
         </div>
       </div>
       <div class="reviews-grid" id="reviews-grid"></div>
@@ -1439,9 +1468,9 @@
       <div class="about-text">
         <div class="pretitle">Кто мы такие</div>
         <h2>Мы — ваши <em>надёжные соседи</em></h2>
-        <p class="lead">ВИзбу родился из простой идеи: дача должна приносить радость, а не головную боль.</p>
+        <p class="lead">ВИсбу родился из простой идеи: дача должна приносить радость, а не головную боль.</p>
         <p>Мы сами живём в загородных посёлках Ленобласти и знаем, как это бывает: нужен сантехник — а найти некого. Нужен покос — мастер берёт трубку через неделю. Нужны дрова — и снова перебираешь чаты в поисках нормального контакта.</p>
-        <p>ВИзбу — это команда, которая взяла на себя эти задачи. Мы лично знаем каждого мастера, с которым работаем. Мы проверяем качество после каждого заказа. И мы несём ответственность за результат — не мастер перед вами, а мы перед вами.</p>
+        <p>ВИсбу — это команда, которая взяла на себя эти задачи. Мы лично знаем каждого мастера, с которым работаем. Мы проверяем качество после каждого заказа. И мы несём ответственность за результат — не мастер перед вами, а мы перед вами.</p>
         <ul class="about-points">
           <li>
             <span class="chk">✓</span>
@@ -1481,9 +1510,9 @@
         </ul>
       </div>
       <div class="about-right">
-        <div class="about-img">
-          <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=700&h=400&fit=crop&auto=format&q=80"
-               alt="Загородный дом весной"/>
+        <div class="about-img about-mascot">
+          <img src="images/logo-mascot.jpg" alt="ВИсбу — наш маскот"
+               onerror="this.src='https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=700&h=400&fit=crop&auto=format&q=80'"/>
         </div>
         <div class="about-stats">
           <div class="stat"><div class="stat-n">70+</div><div class="stat-l">услуг в каталоге</div></div>
@@ -1493,7 +1522,7 @@
         </div>
         <div class="about-quote">
           «Дача — это место для отдыха, а не для бесконечного поиска мастеров. Мы взяли эту задачу на себя.»<br/><br/>
-          <strong>— Команда ВИзбу</strong>
+          <strong>— Команда ВИсбу</strong>
         </div>
       </div>
     </div>
@@ -1505,7 +1534,7 @@
 ════════════════════════════════════════════════ -->
 <div class="page" id="page-insurance">
   <div class="ins-hero">
-    <div class="badge">🛡️ ВИзбу Страхование</div>
+    <div class="badge">🛡️ ВИсбу Страхование</div>
     <h1>Защитите дачу от<br/><em>любых неожиданностей</em></h1>
     <p>Страхование загородного дома, участка и имущества. Оформление онлайн за 10 минут. Надёжные страховые партнёры.</p>
   </div>
@@ -1590,7 +1619,7 @@
 ════════════════════════════════════════════════ -->
 <div class="page" id="page-management">
   <div class="mgmt-hero">
-    <div class="badge">🔑 ВИзбу Управление</div>
+    <div class="badge">🔑 ВИсбу Управление</div>
     <h1>Дача зарабатывает,<br/><em>пока вы отдыхаете</em></h1>
     <p>Мы берём ваш загородный дом в управление, находим арендаторов, организуем уборку и обслуживание. Вы просто получаете деньги.</p>
     <div class="mgmt-hero-badges">
@@ -1611,7 +1640,7 @@
       <div class="mgmt-intro-text">
         <h2>Ваш дом не должен <em>простаивать</em></h2>
         <p>Большинство дач пустуют 9–10 месяцев в году. Это десятки тысяч рублей упущенного дохода — и при этом дом всё равно требует расходов на содержание.</p>
-        <p>ВИзбу Управление берёт ваш дом в работу. Мы размещаем объявления, общаемся с гостями, организуем уборку, встречаем и провожаем арендаторов. Вы не тратите ни минуты своего времени.</p>
+        <p>ВИсбу Управление берёт ваш дом в работу. Мы размещаем объявления, общаемся с гостями, организуем уборку, встречаем и провожаем арендаторов. Вы не тратите ни минуты своего времени.</p>
         <p>Всё прозрачно: ежемесячный отчёт с фото, статистикой заселений и переводом на вашу карту.</p>
       </div>
     </div>
@@ -1686,11 +1715,11 @@
 </div>
 
 <!-- ═══════════════════════════════════════════════
-     СТРАНИЦА: ВИзбу БРИГАДА (РАЗНОРАБОЧИЕ)
+     СТРАНИЦА: ВИсбу БРИГАДА (РАЗНОРАБОЧИЕ)
 ════════════════════════════════════════════════ -->
 <div class="page" id="page-brigade">
   <div class="brg-hero">
-    <div class="badge">👷 ВИзбу Бригада</div>
+    <div class="badge">👷 ВИсбу Бригада</div>
     <h1>Разнорабочие на участок —<br/><em>надёжно и быстро</em></h1>
     <p>Проверенные люди в помощь по любому делу: копать, носить, разбирать, грузить, строить. Часами, днями или бригадой — выбирайте формат.</p>
   </div>
@@ -1774,11 +1803,11 @@
 </div>
 
 <!-- ═══════════════════════════════════════════════
-     СТРАНИЦА: ВИзбу ПРОДАЁТ (ТОВАРЫ)
+     СТРАНИЦА: ВИсбу ПРОДАЁТ (ТОВАРЫ)
 ════════════════════════════════════════════════ -->
 <div class="page" id="page-shop">
   <div class="shop-hero">
-    <div class="badge">🛍 ВИзбу Продаёт</div>
+    <div class="badge">🛍 ВИсбу Продаёт</div>
     <h1>Всё для дачи —<br/><em>под ключ и с доставкой</em></h1>
     <p>Дрова, теплицы, бани-бочки, бассейны, септики, материалы. Подберём поставщика, привезём и установим. Цена не выше рыночной.</p>
     <div class="shop-hero-pills">
@@ -1815,9 +1844,9 @@
 ════════════════════════════════════════════════ -->
 <div class="page" id="page-contractors">
   <div class="ctr-hero">
-    <div class="badge">💼 ВИзбу для подрядчиков</div>
+    <div class="badge">💼 ВИсбу для подрядчиков</div>
     <h1>Заявки на работы по даче,<br/><em>с проверенным адресом и бюджетом</em></h1>
-    <p>ВИзбу обзванивает клиентов, уточняет задачу и адрес — а потом передаёт вам уже горячий контакт. Эксклюзивно вам на 1 час: никаких 5 конкурентов с Avito.</p>
+    <p>ВИсбу обзванивает клиентов, уточняет задачу и адрес — а потом передаёт вам уже горячий контакт. Эксклюзивно вам на 1 час: никаких 5 конкурентов с Avito.</p>
     <div class="ctr-hero-ctas">
       <a href="#ctr-reg" class="btn-ctr-primary">📝 Стать подрядчиком</a>
       <button class="btn-ctr-secondary" onclick="openContractorCabinet()">👀 Демо-кабинет</button>
@@ -1857,11 +1886,11 @@
         <div class="ctr-how-step">
           <div class="ctr-how-step-n">1</div>
           <h4>Клиент оставляет заявку</h4>
-          <p>На сайте ВИзбу с описанием задачи, адресом и контактом</p>
+          <p>На сайте ВИсбу с описанием задачи, адресом и контактом</p>
         </div>
         <div class="ctr-how-step">
           <div class="ctr-how-step-n">2</div>
-          <h4>ВИзбу проверяет</h4>
+          <h4>ВИсбу проверяет</h4>
           <p>Перезваниваем за 1 час: уточняем детали, согласовываем бюджет</p>
         </div>
         <div class="ctr-how-step">
@@ -1887,7 +1916,7 @@
     <!-- Тарифы -->
     <div class="ctr-tariffs-wrap">
       <h2>Тарифы</h2>
-      <p>Сейчас работаем в ручном режиме: ВИзбу сама подбирает подрядчика и берёт процент. Когда наберём поток заявок — переходим на классическую цену за лид.</p>
+      <p>Сейчас работаем в ручном режиме: ВИсбу сама подбирает подрядчика и берёт процент. Когда наберём поток заявок — переходим на классическую цену за лид.</p>
       <div class="ctr-tariffs">
 
         <div class="ctr-tariff now">
@@ -1898,7 +1927,7 @@
           <ul>
             <li>Никакого баланса и предоплаты</li>
             <li>Платите только если заказ выполнен</li>
-            <li>ВИзбу сама ищет лучшего подрядчика</li>
+            <li>ВИсбу сама ищет лучшего подрядчика</li>
             <li>Помогаем с возвратами и спорами</li>
             <li>Размер процента зависит от категории</li>
           </ul>
@@ -2093,7 +2122,7 @@
     <div class="m-success" id="m-ok">
       <div class="si">✅</div>
       <h3>Заявка принята!</h3>
-      <p>Мы перезвоним в течение часа и согласуем всё. Спасибо, что выбрали ВИзбу!</p>
+      <p>Мы перезвоним в течение часа и согласуем всё. Спасибо, что выбрали ВИсбу!</p>
     </div>
   </div>
 </div>
@@ -2105,7 +2134,7 @@
   <div style="max-width:900px;margin:0 auto;background:#fff;border-radius:16px;overflow:hidden;">
     <div style="background:#1b4332;color:#fff;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;">
       <div>
-        <div style="font-size:1.2rem;font-weight:900;">🔐 ВИзбу — Панель заявок</div>
+        <div style="font-size:1.2rem;font-weight:900;">🔐 ВИсбу — Панель заявок</div>
         <div style="font-size:.8rem;opacity:.7;margin-top:2px;">Только для администратора</div>
       </div>
       <button onclick="closeAdmin()" style="background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:8px;padding:8px 14px;cursor:pointer;font-size:.9rem;">✕ Закрыть</button>
@@ -2336,11 +2365,12 @@ document.querySelector('.logo').addEventListener('click', () => {
 </script>
 
 <footer>
-  <p><strong>ВИзбу</strong> — решаем всё, кроме погоды</p>
+  <img src="images/logo-ru.jpg" alt="ВИсбу" class="footer-logo" onerror="this.style.display='none'"/>
+  <p><strong>ВИсбу</strong> — решаем всё, кроме погоды</p>
   <div class="footer-products">
     <span>🏡 Услуги для дачи</span>
-    <span>🛡️ ВИзбу Страхование</span>
-    <span>🔑 ВИзбу Управление</span>
+    <span>🛡️ ВИсбу Страхование</span>
+    <span>🔑 ВИсбу Управление</span>
   </div>
   <p style="margin-top:10px;">
     <a href="tel:+79119507358">+7 911 950-73-58</a> ·
@@ -3172,7 +3202,7 @@ function bindContractorRegistration() {
     const areas = Array.from(document.querySelectorAll('#cf-areas .pill.active')).map(p => p.dataset.v);
 
     const text = [
-      '🆕 *Новая заявка ПОДРЯДЧИКА — ВИзбу*',
+      '🆕 *Новая заявка ПОДРЯДЧИКА — ВИсбу*',
       `👤 *ФИО:* ${name}`,
       `📱 *Телефон:* ${phone}`,
       email ? `📧 *Email:* ${email}` : '',
@@ -3214,7 +3244,7 @@ function bindContractorRegistration() {
   });
 }
 
-// ── ТОВАРЫ ВИзбу ПРОДАЁТ ──────────────────────────────────────────
+// ── ТОВАРЫ ВИсбу ПРОДАЁТ ──────────────────────────────────────────
 const SHOP = [
   // ━━━━━━━━━━ ТОПЛИВО ━━━━━━━━━━
   { name:'Дрова берёзовые колотые', cat:'Топливо', price:'от 3 500 ₽/куб', e:'🪵',
@@ -3344,7 +3374,7 @@ function openContactModalByName(name) {
   if (inServices) { openContactModal(name, inServices.cat); return; }
   // Для товаров — лёгкая версия модалки без extra-полей
   document.getElementById('f-svc').value = name;
-  document.getElementById('m-cat').textContent = 'ВИзбу Продаёт';
+  document.getElementById('m-cat').textContent = 'ВИсбу Продаёт';
   document.getElementById('m-name').textContent = name;
   document.getElementById('m-promo').style.display = 'none';
   document.getElementById('f-extra').innerHTML = '';
@@ -3435,7 +3465,7 @@ const STORIES = [
     bg:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&h=900&fit=crop&auto=format&q=80',
     tag:'⭐ 4.9 из 5',
     bigTitle:'412 заказов в Ленобласти',
-    text:'«У нас собака и двое детей. Каждый год боимся клещей. Ребята из ВИзбу обработали 12 соток за 2 часа. Прошло 3 недели — ни одного клеща».\n\n— Сергей М., Васкелово',
+    text:'«У нас собака и двое детей. Каждый год боимся клещей. Ребята из ВИсбу обработали 12 соток за 2 часа. Прошло 3 недели — ни одного клеща».\n\n— Сергей М., Васкелово',
     ctaText:'Все отзывы',
     ctaAction:'anchor:#reviews-section' },
 
@@ -3602,16 +3632,16 @@ const REVIEWS = [
   { name:'Анна К.', place:'СНТ Синявино, Кировский р-н', date:'18 апреля 2026',
     svc:'Открытие дачи под ключ', rate:5,
     text:'Приехали впервые после зимы — дом холодный, вода не запущена, на участке завалы веток. ' +
-         'Позвонила в ВИзбу утром — к вечеру всё работало. Запустили воду, прибрали участок, протопили дом. ' +
+         'Позвонила в ВИсбу утром — к вечеру всё работало. Запустили воду, прибрали участок, протопили дом. ' +
          'Очень благодарна, спасли все наши майские!' },
   { name:'Сергей М.', place:'Васкелово, Всеволожский р-н', date:'12 апреля 2026',
     svc:'Обработка от клещей', rate:5,
     text:'У нас собака и двое детей. Каждый год боимся сезона клещей. ' +
-         'Ребята из ВИзбу приехали, обработали участок 12 соток за два часа. ' +
+         'Ребята из ВИсбу приехали, обработали участок 12 соток за два часа. ' +
          'Прошло три недели — на собаке ни одного клеща. Записались на повторную обработку в июне.' },
   { name:'Татьяна и Игорь', place:'Лемболово, Всеволожский р-н', date:'5 апреля 2026',
     svc:'Откачка септика', rate:5,
-    text:'После зимы септик стоял полный. Заказывали через ВИзбу — машина приехала на следующий день, ' +
+    text:'После зимы септик стоял полный. Заказывали через ВИсбу — машина приехала на следующий день, ' +
          'не такая огромная как боялись (в наши узкие дороги пролезла). Цена та же что в объявлении, без накруток.' },
   { name:'Михаил Д.', place:'Ладожское озеро, Приозерский р-н', date:'30 марта 2026',
     svc:'Установка забора, 80 метров', rate:5,
@@ -3621,7 +3651,7 @@ const REVIEWS = [
   { name:'Елена П.', place:'Токсово, Всеволожский р-н', date:'9 апреля 2026',
     svc:'Сантехник на дачу', rate:5,
     text:'Прорвало трубу под раковиной в субботу вечером. Думала, до понедельника никого не найду. ' +
-         'Позвонила в ВИзбу — мастер Дмитрий приехал через 1.5 часа. Всё починил, поставил новые краны. ' +
+         'Позвонила в ВИсбу — мастер Дмитрий приехал через 1.5 часа. Всё починил, поставил новые краны. ' +
          'Удивительно, что вообще берут такие срочные вызовы по выходным.' },
   { name:'Виктор Н.', place:'Невская Дубровка, Всеволожский р-н', date:'22 апреля 2026',
     svc:'Бурение скважины 35 м', rate:5,
@@ -3914,7 +3944,7 @@ document.getElementById('form').addEventListener('submit', async e => {
   const extrasText = Object.keys(extras).map(k => `   • ${k}: ${extras[k]}`).join('\n');
 
   const text = [
-    '🆕 *Новая заявка — ВИзбу*',
+    '🆕 *Новая заявка — ВИсбу*',
     `🔧 *Услуга:* ${svc}`,
     `👤 *Имя:* ${name}`,
     `📱 *Телефон:* ${phone}`,
