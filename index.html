@@ -969,6 +969,129 @@
     }
     .shop-info strong { color: var(--accent2); }
 
+    /* ───── ABOUT PAGE ───── */
+    .ab-hero {
+      background: linear-gradient(135deg, var(--green3) 0%, var(--green2) 100%);
+      color: #fff; padding: 64px 20px 48px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .ab-hero::before {
+      content: ''; position: absolute;
+      width: 380px; height: 380px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(244,162,58,.18), transparent 70%);
+      top: -150px; right: -100px;
+    }
+    .ab-hero > * { position: relative; z-index: 1; }
+    .ab-hero .badge {
+      background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3);
+      border-radius: 999px; padding: 5px 16px; font-size: .82rem;
+      font-weight: 700; display: inline-block; margin-bottom: 16px;
+    }
+    .ab-hero h1 {
+      font-size: clamp(1.8rem, 4.5vw, 2.6rem); font-weight: 900;
+      margin-bottom: 14px; line-height: 1.18;
+    }
+    .ab-hero h1 em { color: var(--accent); font-style: normal; }
+    .ab-hero p {
+      opacity: .92; max-width: 640px; margin: 0 auto;
+      font-size: 1.1rem; line-height: 1.5;
+    }
+
+    .ab-content { max-width: 880px; margin: 0 auto; padding: 56px 20px; }
+    .ab-section { margin-bottom: 50px; }
+    .ab-section .pretitle {
+      font-size: .78rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--green); margin-bottom: 8px;
+    }
+    .ab-section h2 {
+      font-size: clamp(1.4rem, 3vw, 1.85rem); font-weight: 900;
+      line-height: 1.25; margin-bottom: 16px;
+      color: var(--green3);
+    }
+    .ab-section h2 em { color: var(--accent); font-style: normal; }
+    .ab-section p {
+      font-size: 1.02rem; line-height: 1.65; color: var(--text);
+      margin-bottom: 14px;
+    }
+    .ab-section p strong { color: var(--green3); font-weight: 800; }
+
+    .ab-quote {
+      background: var(--warm); border-left: 4px solid var(--accent);
+      padding: 22px 28px; border-radius: 12px;
+      font-size: 1.08rem; line-height: 1.55; color: var(--text);
+      font-style: italic; margin: 24px 0;
+    }
+    .ab-quote-author {
+      display: block; font-style: normal;
+      font-weight: 800; color: var(--green3); font-size: .9rem;
+      margin-top: 10px;
+    }
+
+    .ab-values {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px; margin-top: 24px;
+    }
+    .ab-value {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 22px;
+    }
+    .ab-value-ic { font-size: 2rem; margin-bottom: 10px; }
+    .ab-value h3 { font-size: 1.05rem; font-weight: 900; margin-bottom: 6px; color: var(--green3); }
+    .ab-value p { font-size: .9rem; color: var(--muted); line-height: 1.5; margin: 0; }
+
+    .ab-team {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 18px; margin-top: 24px;
+    }
+    .ab-person {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 24px 18px; text-align: center;
+    }
+    .ab-person-avatar {
+      width: 76px; height: 76px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--green) 0%, var(--green2) 100%);
+      color: #fff; font-weight: 900; font-size: 1.6rem;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 12px;
+    }
+    .ab-person-name { font-size: 1.02rem; font-weight: 900; color: var(--green3); margin-bottom: 4px; }
+    .ab-person-role { font-size: .82rem; font-weight: 700; color: var(--accent); margin-bottom: 8px; text-transform: uppercase; letter-spacing: .4px; }
+    .ab-person-bio { font-size: .87rem; color: var(--muted); line-height: 1.45; }
+
+    .ab-stats {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px; margin-top: 22px;
+    }
+    .ab-stat {
+      background: linear-gradient(135deg, var(--green3) 0%, var(--green) 100%);
+      color: #fff; border-radius: 14px; padding: 22px 20px; text-align: center;
+    }
+    .ab-stat strong { font-size: 2rem; font-weight: 900; color: var(--accent); display: block; line-height: 1; margin-bottom: 6px; }
+    .ab-stat span { font-size: .85rem; opacity: .9; }
+
+    .ab-cta {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      color: #fff; border-radius: 16px; padding: 40px 30px;
+      text-align: center; margin-top: 40px;
+    }
+    .ab-cta h3 { font-size: 1.4rem; font-weight: 900; margin-bottom: 8px; }
+    .ab-cta p { opacity: .92; margin-bottom: 22px; font-size: 1rem; }
+    .ab-cta .ab-cta-btns {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+    }
+    .ab-cta a {
+      background: #fff; color: var(--accent2);
+      padding: 13px 28px; border-radius: 999px;
+      font-weight: 900; text-decoration: none;
+      box-shadow: 0 4px 14px rgba(0,0,0,.2);
+      transition: transform .15s;
+    }
+    .ab-cta a:hover { transform: scale(1.05); }
+    .ab-cta a.outline {
+      background: rgba(255,255,255,.18); color: #fff;
+      border: 1.5px solid rgba(255,255,255,.4);
+    }
+
     /* ───── CONTRACTORS PAGE (B2B) ───── */
     .nav-b2b { background: rgba(244,162,58,.18); color: #fff !important; }
     .nav-b2b:hover { background: rgba(244,162,58,.32); }
@@ -1900,6 +2023,116 @@
       <p>Оставьте заявку — приедем, осмотрим дом и рассчитаем потенциальный доход бесплатно</p>
       <button class="btn-purple" onclick="openContactModal('Управление и аренда дома', 'Управление')">Оставить заявку</button>
     </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     СТРАНИЦА: О НАС
+════════════════════════════════════════════════ -->
+<div class="page" id="page-about">
+  <div class="ab-hero">
+    <img src="images/logo-mascot.jpg" alt="" class="page-mascot" onerror="this.style.display='none'"/>
+    <div class="badge">🌿 О компании ВИсбу</div>
+    <h1>Мы те, кто<br/><em>знают вашу боль</em></h1>
+    <p>Сами живём в Ленобласти, сами строили дачи, сами искали мастеров по чатам СНТ. А потом устали и сделали то, чего не хватало нам самим.</p>
+  </div>
+
+  <div class="ab-content">
+
+    <div class="ab-section">
+      <div class="pretitle">Как всё началось</div>
+      <h2>В апреле 2025-го у нас <em>прорвало трубу</em></h2>
+      <p>Карина с мужем приехала на дачу в СНТ Лемболово открывать сезон. В подвале — потоп. Воскресенье, восемь утра. Звонит трём сантехникам из чата СНТ — никто не берёт трубку. Звонит на YouDo — приедет «через день за 12 тысяч плюс командировочные из Питера». Звонит соседу — у того тоже потоп, и тот же самый сантехник едет к нему вечером.</p>
+      <p>Через два дня воды в подвале по щиколотку, дача стоит, отпуск загублен. К пятнице нашли наконец местного дядю Лёшу из Васкелово — приехал, починил за 40 минут, взял <strong>2 500 рублей</strong>. И сказал: «Звони, когда что — у меня телефон не молчит, но через знакомых всегда приеду быстро».</p>
+      <p>Тогда мы поняли, что в Ленобласти есть десятки таких дядей Лёш — отличных мастеров, которые живут рядом с тобой и готовы приехать через час. Просто никто их не знает. Они не на YouDo, не на Профи.ру, не на Авито (или пишут там одну строчку без портфолио). Их находят только через сарафан.</p>
+      <div class="ab-quote">
+        «А что, если мы соберём всех этих местных мастеров под одну крышу? Чтобы дачник звонил в одно место и за час получал нужного человека — без рулетки, торга и недозвонов».
+        <span class="ab-quote-author">— из разговора Карины и Гасана, апрель 2025</span>
+      </div>
+      <p>Так появилась ВИсбу. Название от «изба» — потому что для нас дача это не просто загородный дом, а место силы. Куда хочется приезжать и отдыхать, а не чинить и страдать.</p>
+    </div>
+
+    <div class="ab-section">
+      <div class="pretitle">Как мы работаем сегодня</div>
+      <h2>Сначала — <em>проверяем мастера</em>. Только потом — отправляем к вам.</h2>
+      <p>За год мы лично познакомились с 200+ мастерами по всей Ленобласти — от Выборга до Тосно. Каждого проверяем: смотрим работы, говорим с прежними клиентами, выезжаем посмотреть на первый заказ. В базе остаются только те, за кого мы готовы поручиться.</p>
+      <p>Когда вы оставляете заявку — мы её разбираем сами. Звоним вам, уточняем детали, согласовываем срок и цену. И только потом передаём конкретному мастеру под ваш район и задачу. Вы общаетесь с одним человеком (нашим менеджером), а не с десятком неизвестных.</p>
+      <p>Если что-то пойдёт не так — мы решаем. Не вы с мастером выясняете отношения, а мы возвращаем деньги, организуем повторный выезд, разбираемся внутри. Для вас всегда один номер: <strong>+7 911 950-73-58</strong>.</p>
+    </div>
+
+    <div class="ab-section">
+      <div class="pretitle">Наши ценности</div>
+      <h2>Во что мы верим</h2>
+      <div class="ab-values">
+        <div class="ab-value">
+          <div class="ab-value-ic">🤝</div>
+          <h3>По-соседски</h3>
+          <p>Мы не безликая платформа. У нас есть имя, лицо и адрес. К нам можно приехать в офис, мы знаем своих мастеров и клиентов лично.</p>
+        </div>
+        <div class="ab-value">
+          <div class="ab-value-ic">📍</div>
+          <h3>Только Ленобласть</h3>
+          <p>Мы не пытаемся охватить всю Россию. Мы знаем каждое СНТ, каждый посёлок, каждый поворот в Лемболово. Это наш дом.</p>
+        </div>
+        <div class="ab-value">
+          <div class="ab-value-ic">⚖️</div>
+          <h3>Честная цена</h3>
+          <p>Никаких «ой, тут оказалось сложнее». Цена согласуется ДО начала работы и фиксируется. Если что-то меняется — обсуждаем заранее.</p>
+        </div>
+        <div class="ab-value">
+          <div class="ab-value-ic">🛡️</div>
+          <h3>Гарантия результата</h3>
+          <p>Если мастер плохо сделал — мы исправим за свой счёт. Не вы с мастером ругаетесь, а мы решаем. Это наша ответственность.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ab-section">
+      <div class="pretitle">Наша команда</div>
+      <h2>Кто стоит за <em>ВИсбу</em></h2>
+      <div class="ab-team">
+        <div class="ab-person">
+          <div class="ab-person-avatar">КГ</div>
+          <div class="ab-person-name">Карина</div>
+          <div class="ab-person-role">Основатель, оператор</div>
+          <div class="ab-person-bio">Та самая, у которой прорвало трубу. Лично отвечает на каждый звонок и заявку. Знает всех мастеров и половину клиентов в лицо.</div>
+        </div>
+        <div class="ab-person">
+          <div class="ab-person-avatar">ГГ</div>
+          <div class="ab-person-name">Гасан</div>
+          <div class="ab-person-role">Основатель, продукт</div>
+          <div class="ab-person-bio">Делает сайт, систему и всё, что не видно на витрине. Раньше работал в IT, теперь делает сервисы для людей.</div>
+        </div>
+        <div class="ab-person">
+          <div class="ab-person-avatar">ДЛ</div>
+          <div class="ab-person-name">Дмитрий</div>
+          <div class="ab-person-role">Координатор мастеров</div>
+          <div class="ab-person-bio">Знает всех мастеров области по именам. Сам долго работал электриком, понимает «изнанку» каждой профессии.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ab-section">
+      <div class="pretitle">В цифрах</div>
+      <h2>За первый год работы</h2>
+      <div class="ab-stats">
+        <div class="ab-stat"><strong>412</strong><span>выполненных заказов</span></div>
+        <div class="ab-stat"><strong>200+</strong><span>проверенных мастеров</span></div>
+        <div class="ab-stat"><strong>80+</strong><span>видов услуг</span></div>
+        <div class="ab-stat"><strong>4.9★</strong><span>средняя оценка</span></div>
+        <div class="ab-stat"><strong>98%</strong><span>рекомендуют ВИсбу</span></div>
+      </div>
+    </div>
+
+    <div class="ab-cta">
+      <h3>Готовы попробовать ВИсбу?</h3>
+      <p>Оставьте заявку онлайн — перезвоним за час, согласуем мастера и цену</p>
+      <div class="ab-cta-btns">
+        <a href="#catalog-section" onclick="document.querySelector('[data-page=services]').click(); return false;">📋 Оставить заявку</a>
+        <a href="tel:+79119507358" class="outline">📞 Позвонить</a>
+      </div>
+    </div>
+
   </div>
 </div>
 
