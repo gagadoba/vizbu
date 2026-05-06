@@ -97,11 +97,17 @@
 
     /* ───── PROMO BAR ───── */
     .promo-bar {
-      background: linear-gradient(90deg, #F4A23A 0%, #E08920 100%);
+      background: linear-gradient(90deg, #DC2626 0%, #F4A23A 50%, #16A34A 100%);
       color: #fff; text-align: center; padding: 9px 16px;
       font-size: .87rem; font-weight: 700;
       display: flex; align-items: center; justify-content: center; gap: 10px;
       flex-wrap: wrap;
+      animation: promo-shift 8s ease-in-out infinite;
+      background-size: 200% 100%;
+    }
+    @keyframes promo-shift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
     .promo-bar strong { font-weight: 900; }
     .promo-bar .promo-pill {
@@ -121,19 +127,19 @@
       align-items: center;
     }
     .hero-center { min-width: 0; display: flex; flex-direction: column; align-items: center; }
-    .hero-mascot {
-      width: 120px; height: 120px; object-fit: contain;
-      background: rgba(255,255,255,.95);
-      border-radius: 50%;
-      padding: 10px; margin-bottom: 14px;
-      box-shadow: 0 6px 20px rgba(0,0,0,.25);
+    .hero-bigLogo {
+      max-width: 360px; width: 100%; height: auto;
+      background: rgba(255,255,255,.96);
+      border-radius: 18px;
+      padding: 12px 18px; margin-bottom: 18px;
+      box-shadow: 0 8px 26px rgba(0,0,0,.28);
       animation: mascot-float 4s ease-in-out infinite;
     }
     @keyframes mascot-float {
-      0%, 100% { transform: translateY(0) rotate(-2deg); }
-      50% { transform: translateY(-6px) rotate(2deg); }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
     }
-    @media (max-width: 480px) { .hero-mascot { width: 90px; height: 90px; } }
+    @media (max-width: 480px) { .hero-bigLogo { max-width: 280px; padding: 8px 12px; } }
     .hero-stories-col {
       display: flex; flex-direction: column; gap: 14px; align-items: center;
     }
@@ -299,8 +305,7 @@
     .story-avatar-inner > div {
       width: 100%; height: 100%; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.6rem; color: #fff; font-weight: 900;
-      background-size: cover; background-position: center;
+      font-size: 1.7rem; color: #fff; font-weight: 900;
     }
     .story-title {
       font-size: .72rem; font-weight: 700; text-align: center;
@@ -345,6 +350,23 @@
     }
     .story-bg { position: absolute; inset: 0; z-index: 1; }
     .story-bg img { width: 100%; height: 100%; object-fit: cover; }
+    .story-bg-grad {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .story-bg-grad::before {
+      content: ''; position: absolute;
+      width: 200%; height: 200%; top: -50%; left: -50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.18), transparent 50%);
+    }
+    .story-bg-emoji {
+      font-size: 8rem;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,.4));
+      opacity: .85;
+      position: absolute; top: 22%; right: 18%;
+      transform: rotate(8deg);
+    }
     .story-content {
       position: relative; z-index: 2;
       flex: 1; display: flex; flex-direction: column;
@@ -613,12 +635,17 @@
     .card-ft { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
     .card-price { font-size: .92rem; font-weight: 800; color: var(--green); }
     .btn-req {
-      background: var(--accent); color: #fff; border: none; border-radius: 999px;
+      background: linear-gradient(135deg, #F4A23A 0%, #E08920 100%);
+      color: #fff; border: none; border-radius: 999px;
       padding: 8px 16px; font-size: .8rem; font-weight: 700;
       cursor: pointer; font-family: inherit; white-space: nowrap;
-      transition: background .15s, transform .1s;
+      transition: all .2s;
+      box-shadow: 0 2px 8px rgba(244,162,58,.35);
     }
-    .btn-req:hover { background: var(--accent2); transform: scale(1.03); }
+    .btn-req:hover {
+      background: linear-gradient(135deg, #FFB347 0%, #F4A23A 100%);
+      transform: scale(1.05); box-shadow: 0 4px 14px rgba(244,162,58,.55);
+    }
 
     /* ───── NO RESULTS ───── */
     .no-res { display:none; text-align:center; padding:60px 20px; color:var(--muted); }
@@ -1245,6 +1272,32 @@
     }
     .fr input:focus, .fr textarea:focus, .fr select:focus { outline:none; border-color:var(--green2); }
     .fr textarea { resize:vertical; min-height:64px; }
+    .fr-photo {
+      border: 2px dashed var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+      position: relative;
+    }
+    .fr-photo:hover { border-color: var(--accent); background: #FFFBF5; }
+    .fr-photo.has-files { border-color: var(--green); background: #E8F5EE; }
+    .fr-photo input[type=file] {
+      position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+    }
+    .fr-photo-icon { font-size: 1.4rem; margin-bottom: 4px; }
+    .fr-photo-text { font-size: .85rem; font-weight: 700; color: var(--text); }
+    .fr-photo-sub { font-size: .72rem; color: var(--muted); margin-top: 2px; }
+    .fr-photo-preview {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;
+      justify-content: center;
+    }
+    .fr-photo-thumb {
+      width: 56px; height: 56px; border-radius: 6px;
+      object-fit: cover; border: 2px solid #fff;
+      box-shadow: 0 1px 4px rgba(0,0,0,.15);
+    }
     .fr .pills { display: flex; flex-wrap: wrap; gap: 6px; }
     .fr .pill {
       padding: 7px 12px; border-radius: 999px;
@@ -1341,7 +1394,8 @@
     <div class="hero-grid">
       <div class="hero-stories-col" id="stories-left"></div>
       <div class="hero-center">
-        <img src="images/logo-mascot.jpg" alt="ВИсбу маскот" class="hero-mascot" onerror="this.style.display='none'"/>
+        <img src="images/logo-en.jpg" alt="Visbu — ВИсбу" class="hero-bigLogo"
+             onerror="this.src='images/logo-mascot.jpg'"/>
         <div class="hero-tag">Сервис для загородной жизни в Ленобласти · с 2026 года</div>
         <h1>Решаем всё,<br/><em>кроме погоды</em></h1>
         <div class="hero-slogan">70+ услуг для вашей дачи и участка</div>
@@ -2157,6 +2211,16 @@
         </div>
         <div class="fr"><label>Адрес / СНТ</label><input id="f-addr" type="text" placeholder="СНТ Синявино, ул. Лесная 5"/></div>
         <div class="fr"><label>Комментарий (необязательно)</label><textarea id="f-comm" placeholder="Любые детали, которые помогут точнее посчитать..."></textarea></div>
+        <div class="fr" id="f-photo-wrap" style="display:none;">
+          <label>Прикрепить фото <span style="color:var(--muted);font-weight:400;">(необязательно)</span></label>
+          <div class="fr-photo" id="f-photo-drop">
+            <div class="fr-photo-icon">📸</div>
+            <div class="fr-photo-text">Добавить фото</div>
+            <div class="fr-photo-sub">Поможет мастеру оценить работу заранее. До 5 фото, JPG/PNG/HEIC</div>
+            <input type="file" id="f-photo" accept="image/*" multiple/>
+            <div class="fr-photo-preview" id="f-photo-preview"></div>
+          </div>
+        </div>
         <button type="submit" class="btn-send">Отправить заявку →</button>
         <p class="m-note">Перезвоним в течение часа · согласуем детали бесплатно</p>
       </form>
@@ -2446,7 +2510,7 @@ const F = {
 const SERVICES = [
 
   // ━━━━━━━━━━━━━━━━━━━━━━ СЕЗОННЫЕ (АПРЕЛЬ–МАЙ) ━━━━━━━━━━━━━━━━━━━━━━
-  { name:'Открытие дачи под ключ', cat:'Сезон', price:'от 4 500 ₽', e:'🌷',
+  { name:'Открытие дачи под ключ', cat:'Сезон', price:'от 4 500 ₽', e:'🌷', wantsPhoto:true,
     hot:true, promo:true, badge:'Хит апреля',
     desc:'Уберём, запустим воду и электричество, проверим дом после зимы. Всё за один день.',
     img:'images/01-otkrytie-dachi.jpg',
@@ -2467,7 +2531,7 @@ const SERVICES = [
       { id:'pets', label:'Дети и животные на участке', type:'pill', options:['Есть','Нет'] },
     ] },
 
-  { name:'Расконсервация водопровода', cat:'Сезон', price:'от 2 500 ₽', e:'🚿',
+  { name:'Расконсервация водопровода', cat:'Сезон', price:'от 2 500 ₽', e:'🚿', wantsPhoto:true,
     hot:true, promo:true, badge:'Сезон',
     desc:'Запуск летнего водопровода после зимы: продувка, проверка соединений, устранение протечек.',
     img:'images/03-rakonservaciya-vodoprovoda.jpg',
@@ -2477,7 +2541,7 @@ const SERVICES = [
       F.meters,
     ] },
 
-  { name:'Проверка дома после зимы', cat:'Сезон', price:'от 2 000 ₽', e:'🏚',
+  { name:'Проверка дома после зимы', cat:'Сезон', price:'от 2 000 ₽', e:'🏚', wantsPhoto:true,
     hot:true, badge:'Сезон',
     desc:'Осмотр кровли, фасада, фундамента, инженерных систем. Письменный отчёт с рекомендациями.',
     img:'images/04-proverka-doma-posle-zimy.jpg',
@@ -2488,7 +2552,7 @@ const SERVICES = [
         options:['Не знаю — нужен общий осмотр','Кровля / протечки','Фундамент / трещины','Электрика','Вода / трубы','Грызуны и плесень'] },
     ] },
 
-  { name:'Уборка участка после зимы', cat:'Сезон', price:'от 2 500 ₽', e:'🍂',
+  { name:'Уборка участка после зимы', cat:'Сезон', price:'от 2 500 ₽', e:'🍂', wantsPhoto:true,
     hot:true, badge:'Сезон',
     desc:'Сбор веток, прошлогодних листьев и мусора, уборка с вывозом. Подготовка к посадкам.',
     img:'images/05-uborka-uchastka.jpg',
@@ -2568,7 +2632,7 @@ const SERVICES = [
     img:'images/uborka-listev.jpg',
     fields:[ F.area, { id:'haul', label:'Вывоз', type:'pill', options:['Нужен','Не нужен'] } ] },
 
-  { name:'Спил деревьев (стандартный)', cat:'Участок', price:'от 3 000 ₽', e:'🪓',
+  { name:'Спил деревьев (стандартный)', cat:'Участок', price:'от 3 000 ₽', e:'🪓', wantsPhoto:true,
     desc:'Аккуратный спил деревьев до 20 м, корчевание пней, уборка территории за собой.',
     img:'images/spil-derevev-standartnyy.jpg',
     fields:[
@@ -2576,7 +2640,7 @@ const SERVICES = [
       { id:'diameter', label:'Диаметр ствола', type:'pill', options:['до 20 см','20–40 см','40–60 см','60+'] },
     ] },
 
-  { name:'Спил аварийных и больших деревьев', cat:'Участок', price:'от 8 000 ₽', e:'🪓',
+  { name:'Спил аварийных и больших деревьев', cat:'Участок', price:'от 8 000 ₽', e:'🪓', wantsPhoto:true,
     desc:'Высотный спил деревьев 20+ метров: альпинисты с верёвками, автовышка, частями. Сложные случаи рядом с домом, ЛЭП.',
     img:'images/spil-avariynyh-i-bolshih-derevev.jpg',
     fields:[
@@ -2585,7 +2649,7 @@ const SERVICES = [
       { id:'access', label:'Сложность', type:'pill', options:['Свободный подъезд','Рядом с домом','Рядом с ЛЭП','Над постройками'] },
     ] },
 
-  { name:'Спил веток и обрезка кроны', cat:'Участок', price:'от 2 500 ₽', e:'✂️',
+  { name:'Спил веток и обрезка кроны', cat:'Участок', price:'от 2 500 ₽', e:'✂️', wantsPhoto:true,
     desc:'Удаление крупных веток, формовка кроны, расчистка над крышей и проводами.',
     img:'images/spil-vetok-i-obrezka-krony.jpeg',
     fields:[
@@ -2593,12 +2657,12 @@ const SERVICES = [
       { id:'task', label:'Что нужно', type:'pill', options:['Сухие ветки','Над крышей','Над проводами','Формовка кроны'] },
     ] },
 
-  { name:'Вывоз веток и кустов', cat:'Участок', price:'от 2 500 ₽', e:'🌲',
+  { name:'Вывоз веток и кустов', cat:'Участок', price:'от 2 500 ₽', e:'🌲', wantsPhoto:true,
     desc:'Обрезка разросшихся кустов, уборка и вывоз с участка.',
     img:'images/vyvoz-vetok-i-kustov.webp',
     fields:[ F.volumeM3 ] },
 
-  { name:'Стрижка живой изгороди', cat:'Участок', price:'от 2 000 ₽', e:'✂️',
+  { name:'Стрижка живой изгороди', cat:'Участок', price:'от 2 000 ₽', e:'✂️', wantsPhoto:true,
     desc:'Придание формы кустарникам и живой изгороди, выравнивание.',
     img:'images/strizhka-zhivoy-izgorodi.jpeg',
     fields:[ F.meters ] },
@@ -2637,7 +2701,7 @@ const SERVICES = [
       { id:'slope', label:'Перепад высот', type:'pill', options:['Ровно','Небольшой','Сильный'] },
     ] },
 
-  { name:'Устройство дренажа', cat:'Участок', price:'от 15 000 ₽', e:'💧',
+  { name:'Устройство дренажа', cat:'Участок', price:'от 15 000 ₽', e:'💧', wantsPhoto:true,
     desc:'Отвод воды с участка, обустройство дренажных канав и труб.',
     img:'images/ustroystvo-drenazha.jpg',
     fields:[
@@ -2676,7 +2740,7 @@ const SERVICES = [
     ] },
 
   // ━━━━━━━━━━━━━━━━━━━━━━ САНТЕХНИКА ━━━━━━━━━━━━━━━━━━━━━━
-  { name:'Сантехник на дачу', cat:'Сантехника', price:'от 1 500 ₽', e:'🔧',
+  { name:'Сантехник на дачу', cat:'Сантехника', price:'от 1 500 ₽', e:'🔧', wantsPhoto:true,
     desc:'Ремонт и замена труб, кранов, радиаторов, унитазов. Выезд в течение дня.',
     img:'images/santehnik-na-dachu.jpg',
     fields:[
@@ -2685,7 +2749,7 @@ const SERVICES = [
       F.urgent,
     ] },
 
-  { name:'Откачка септика', cat:'Сантехника', price:'от 3 000 ₽', e:'🚛',
+  { name:'Откачка септика', cat:'Сантехника', price:'от 3 000 ₽', e:'🚛', wantsPhoto:true,
     hot:true,
     desc:'Ассенизаторская машина приедет в удобное вам время. Все типы септиков.',
     img:'images/07-otkachka-septika.jpg',
@@ -2711,21 +2775,21 @@ const SERVICES = [
       { id:'src', label:'Источник', type:'pill', options:['Скважина','Колодец','Водопровод СНТ','Бочка'] },
     ] },
 
-  { name:'Ремонт колодца', cat:'Сантехника', price:'от 5 000 ₽', e:'🪣',
+  { name:'Ремонт колодца', cat:'Сантехника', price:'от 5 000 ₽', e:'🪣', wantsPhoto:true,
     desc:'Чистка, углубление, замена насоса, ремонт оголовка колодца.',
     img:'images/remont-kolodtsa.jpg',
     fields:[
       { id:'task', label:'Что нужно', type:'pill', options:['Чистка','Углубление','Замена насоса','Ремонт оголовка'] },
     ] },
 
-  { name:'Замена насоса', cat:'Сантехника', price:'от 3 000 ₽', e:'⚙️',
+  { name:'Замена насоса', cat:'Сантехника', price:'от 3 000 ₽', e:'⚙️', wantsPhoto:true,
     desc:'Замена насоса скважинного, колодезного или поверхностного. Выезд в день обращения.',
     img:'images/zamena-nasosa.jpeg',
     fields:[
       { id:'pumpType', label:'Тип насоса', type:'pill', options:['Скважинный','Колодезный','Поверхностный','Не знаю'] },
     ] },
 
-  { name:'Установка септика', cat:'Сантехника', price:'от 50 000 ₽', e:'🛠️',
+  { name:'Установка септика', cat:'Сантехника', price:'от 50 000 ₽', e:'🛠️', wantsPhoto:true,
     desc:'Монтаж автономной канализации под ключ. Все типы септиков (Топас, Юнилос, бетонные кольца).',
     img:'images/ustanovka-septika.jpg',
     fields:[
@@ -2733,13 +2797,13 @@ const SERVICES = [
       { id:'type', label:'Тип септика', type:'pill', options:['Накопительный','С аэрацией (Топас)','Бетонные кольца','Не знаю — посоветуйте'] },
     ] },
 
-  { name:'Утепление труб', cat:'Сантехника', price:'от 3 000 ₽', e:'🧊',
+  { name:'Утепление труб', cat:'Сантехника', price:'от 3 000 ₽', e:'🧊', wantsPhoto:true,
     desc:'Консервация водопровода на зиму, утепление уязвимых участков.',
     img:'images/uteplenie-trub.jpg',
     fields:[ F.meters ] },
 
   // ━━━━━━━━━━━━━━━━━━━━━━ ЭЛЕКТРИКА ━━━━━━━━━━━━━━━━━━━━━━
-  { name:'Электрик на дачу', cat:'Электрика', price:'от 1 500 ₽', e:'⚡',
+  { name:'Электрик на дачу', cat:'Электрика', price:'от 1 500 ₽', e:'⚡', wantsPhoto:true,
     hot:true,
     desc:'Замена проводки, розеток, щитков, выключателей. Устранение аварий.',
     img:'images/08-elektrik.jpg',
@@ -2750,14 +2814,14 @@ const SERVICES = [
       F.urgent,
     ] },
 
-  { name:'Подключение к электросети', cat:'Электрика', price:'от 8 000 ₽', e:'🔌',
+  { name:'Подключение к электросети', cat:'Электрика', price:'от 8 000 ₽', e:'🔌', wantsPhoto:true,
     desc:'Подключение дома, бани или хозпостройки к электросети.',
     img:'images/podklyuchenie-k-elektroseti.jpg',
     fields:[
       { id:'tu', label:'ТУ от электросети', type:'pill', options:['Уже получены','Нужно получить','Не знаю что это'] },
     ] },
 
-  { name:'Освещение участка', cat:'Электрика', price:'от 5 000 ₽', e:'💡',
+  { name:'Освещение участка', cat:'Электрика', price:'от 5 000 ₽', e:'💡', wantsPhoto:true,
     desc:'Уличные фонари, подсветка дорожек, охранное освещение.',
     img:'images/osveschenie-uchastka.jpg',
     fields:[
@@ -2773,7 +2837,7 @@ const SERVICES = [
       { id:'remote', label:'Просмотр с телефона', type:'pill', options:['Нужен','Не обязательно'] },
     ] },
 
-  { name:'Розетки и выключатели', cat:'Электрика', price:'от 500 ₽/шт', e:'🔌',
+  { name:'Розетки и выключатели', cat:'Электрика', price:'от 500 ₽/шт', e:'🔌', wantsPhoto:true,
     desc:'Установка, перенос, замена розеток, выключателей и осветительных приборов.',
     img:'images/rozetki-i-vyklyuchateli.jpg',
     fields:[
@@ -2781,7 +2845,7 @@ const SERVICES = [
     ] },
 
   // ━━━━━━━━━━━━━━━━━━━━━━ СТРОИТЕЛЬСТВО ━━━━━━━━━━━━━━━━━━━━━━
-  { name:'Установка забора', cat:'Строительство', price:'от 500 ₽/м', e:'🏗️',
+  { name:'Установка забора', cat:'Строительство', price:'от 500 ₽/м', e:'🏗️', wantsPhoto:true,
     desc:'Профнастил, евроштакетник, сетка-рабица, деревянный забор под ключ.',
     img:'images/ustanovka-zabora.jpg',
     fields:[
@@ -2789,7 +2853,7 @@ const SERVICES = [
       { id:'mat', label:'Материал', type:'pill', options:['Профнастил','Евроштакетник','Сетка-рабица','Дерево','Подскажите'] },
     ] },
 
-  { name:'Ворота и калитки', cat:'Строительство', price:'от 8 000 ₽', e:'🚪',
+  { name:'Ворота и калитки', cat:'Строительство', price:'от 8 000 ₽', e:'🚪', wantsPhoto:true,
     desc:'Откатные и распашные ворота, калитки, автоматика под ключ.',
     img:'images/vorota-i-kalitki.jpg',
     fields:[
@@ -2797,7 +2861,7 @@ const SERVICES = [
       { id:'auto', label:'Автоматика', type:'pill', options:['Нужна','Не нужна'] },
     ] },
 
-  { name:'Ремонт кровли', cat:'Строительство', price:'от 5 000 ₽', e:'🏠',
+  { name:'Ремонт кровли', cat:'Строительство', price:'от 5 000 ₽', e:'🏠', wantsPhoto:true,
     desc:'Ремонт и замена кровельного покрытия, устранение протечек.',
     img:'images/remont-krovli.jpg',
     fields:[
@@ -2806,7 +2870,7 @@ const SERVICES = [
         options:['Протекает','Нужна замена покрытия','Доделать после строителей','Профилактика','Не знаю'] },
     ] },
 
-  { name:'Тротуарная плитка', cat:'Строительство', price:'от 700 ₽/м²', e:'🧱',
+  { name:'Тротуарная плитка', cat:'Строительство', price:'от 700 ₽/м²', e:'🧱', wantsPhoto:true,
     desc:'Дорожки, площадки, отмостка. Подготовка основания включена.',
     img:'images/trotuarnaya-plitka.jpg',
     fields:[
@@ -2838,14 +2902,14 @@ const SERVICES = [
       { id:'mat', label:'Материал доски', type:'pill', options:['Дерево','Композит ДПК','Не знаю'] },
     ] },
 
-  { name:'Мелкий ремонт по дому', cat:'Строительство', price:'от 1 500 ₽', e:'🔨',
+  { name:'Мелкий ремонт по дому', cat:'Строительство', price:'от 1 500 ₽', e:'🔨', wantsPhoto:true,
     desc:'Ремонт окон, дверей, пола, стен — любые задачи "на час".',
     img:'images/melkiy-remont-po-domu.jpg',
     fields:[
       { id:'task', label:'Опишите задачу', type:'textarea', placeholder:'Например: повесить полку, починить дверь, заменить замок' },
     ] },
 
-  { name:'Покраска дома и забора', cat:'Строительство', price:'от 4 000 ₽', e:'🎨',
+  { name:'Покраска дома и забора', cat:'Строительство', price:'от 4 000 ₽', e:'🎨', wantsPhoto:true,
     desc:'Покраска фасада, забора, деревянных конструкций. Материалы можем привезти свои.',
     img:'images/pokraska-doma-i-zabora.jpeg',
     fields:[
@@ -2854,7 +2918,7 @@ const SERVICES = [
     ] },
 
   // ━━━━━━━━━━━━━━━━━━━━━━ ВЫВОЗ ━━━━━━━━━━━━━━━━━━━━━━
-  { name:'Вывоз мусора', cat:'Вывоз', price:'от 3 000 ₽', e:'🚛',
+  { name:'Вывоз мусора', cat:'Вывоз', price:'от 3 000 ₽', e:'🚛', wantsPhoto:true,
     desc:'Строительный и бытовой мусор, старая мебель — всё уберём.',
     img:'images/vyvoz-musora.jpg',
     fields:[
@@ -2878,7 +2942,7 @@ const SERVICES = [
       { id:'hours', label:'На сколько часов', type:'pill', options:['1–2','3–4','полдня','день'] },
     ] },
 
-  { name:'Вывоз старой мебели и техники', cat:'Вывоз', price:'от 2 000 ₽', e:'🛋️',
+  { name:'Вывоз старой мебели и техники', cat:'Вывоз', price:'от 2 000 ₽', e:'🛋️', wantsPhoto:true,
     desc:'Демонтаж и вывоз старой мебели, бытовой техники, металлолома.',
     img:'images/vyvoz-staroy-mebeli-i-tehniki.jpg',
     fields:[
@@ -2906,7 +2970,7 @@ const SERVICES = [
       { id:'have', label:'Теплица есть?', type:'pill', options:['Куплена — ставим','Купите вы','Не знаю'] },
     ] },
 
-  { name:'Обрезка плодовых деревьев', cat:'Сад', price:'от 1 500 ₽/дер', e:'🍎',
+  { name:'Обрезка плодовых деревьев', cat:'Сад', price:'от 1 500 ₽/дер', e:'🍎', wantsPhoto:true,
     hot:true,
     desc:'Весенняя и осенняя обрезка яблонь, груш, слив, вишни.',
     img:'images/obrezka-plodovyh-derevev.jpg',
@@ -2915,7 +2979,7 @@ const SERVICES = [
       { id:'kinds', label:'Какие', type:'text', placeholder:'Например: яблони, сливы' },
     ] },
 
-  { name:'Обработка от вредителей', cat:'Сад', price:'от 3 000 ₽', e:'🐛',
+  { name:'Обработка от вредителей', cat:'Сад', price:'от 3 000 ₽', e:'🐛', wantsPhoto:true,
     desc:'Опрыскивание деревьев и кустарников от болезней и вредителей.',
     img:'images/obrabotka-ot-vrediteley.jpg',
     fields:[
@@ -2940,7 +3004,7 @@ const SERVICES = [
     ] },
 
   // ━━━━━━━━━━━━━━━━━━━━━━ УБОРКА ━━━━━━━━━━━━━━━━━━━━━━
-  { name:'Уборка дома после зимы', cat:'Уборка', price:'от 3 000 ₽', e:'🧹',
+  { name:'Уборка дома после зимы', cat:'Уборка', price:'от 3 000 ₽', e:'🧹', wantsPhoto:true,
     hot:true,
     desc:'Генеральная уборка, мойка окон, удаление пыли и плесени.',
     img:'images/uborka-doma-posle-zimy.webp',
@@ -2958,7 +3022,7 @@ const SERVICES = [
       { id:'hours', label:'Часов в визит', type:'pill', options:['2','4','6','8'] },
     ] },
 
-  { name:'Мойка окон', cat:'Уборка', price:'от 1 000 ₽', e:'🪟',
+  { name:'Мойка окон', cat:'Уборка', price:'от 1 000 ₽', e:'🪟', wantsPhoto:true,
     desc:'Профессиональная мойка окон, стеклянных поверхностей и теплиц.',
     img:'images/moyka-okon.jpeg',
     fields:[
@@ -2966,7 +3030,7 @@ const SERVICES = [
       { id:'side', label:'С какой стороны', type:'pill', options:['Снаружи','Изнутри','С обеих'] },
     ] },
 
-  { name:'Чистка ковров и мебели', cat:'Уборка', price:'от 2 000 ₽', e:'🛋️',
+  { name:'Чистка ковров и мебели', cat:'Уборка', price:'от 2 000 ₽', e:'🛋️', wantsPhoto:true,
     desc:'Выездная химчистка мягкой мебели, матрасов, ковров на даче.',
     img:'images/chistka-kovrov-i-mebeli.jpg',
     fields:[
@@ -3009,7 +3073,7 @@ const SERVICES = [
       { id:'load', label:'Что повезёте', type:'text', placeholder:'Например: брус, мебель' },
     ] },
 
-  { name:'Корчевание пней', cat:'Спецтехника', price:'от 2 000 ₽/пень', e:'🌳',
+  { name:'Корчевание пней', cat:'Спецтехника', price:'от 2 000 ₽/пень', e:'🌳', wantsPhoto:true,
     desc:'Удаление пней фрезой или экскаватором, засыпка ямы.',
     img:'images/korchevanie-pney.webp',
     fields:[
@@ -3018,7 +3082,7 @@ const SERVICES = [
     ] },
 
   // ━━━━━━━━━━━━━━━━━━━━━━ РЕМОНТ ТЕХНИКИ ━━━━━━━━━━━━━━━━━━━━━━
-  { name:'Ремонт стиральной машины', cat:'Ремонт техники', price:'от 2 000 ₽', e:'🧺',
+  { name:'Ремонт стиральной машины', cat:'Ремонт техники', price:'от 2 000 ₽', e:'🧺', wantsPhoto:true,
     desc:'Диагностика и ремонт стиральной машины с выездом на дачу.',
     img:'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=600&h=350&fit=crop&auto=format&q=80',
     fields:[
@@ -3027,7 +3091,7 @@ const SERVICES = [
         options:['Не включается','Не сливает','Не крутит барабан','Шумит','Течёт','Другое'] },
     ] },
 
-  { name:'Ремонт котла отопления', cat:'Ремонт техники', price:'от 3 000 ₽', e:'🔥',
+  { name:'Ремонт котла отопления', cat:'Ремонт техники', price:'от 3 000 ₽', e:'🔥', wantsPhoto:true,
     desc:'Диагностика и ремонт газовых и электрических котлов.',
     img:'images/remont-kotla-otopleniya.jpg',
     fields:[
@@ -3035,7 +3099,7 @@ const SERVICES = [
       { id:'brand', label:'Марка / ошибка', type:'text', placeholder:'Например: Baxi, ошибка E03' },
     ] },
 
-  { name:'Ремонт водонагревателя', cat:'Ремонт техники', price:'от 1 500 ₽', e:'♨️',
+  { name:'Ремонт водонагревателя', cat:'Ремонт техники', price:'от 1 500 ₽', e:'♨️', wantsPhoto:true,
     desc:'Замена ТЭНов, терморегуляторов, ремонт накопительных и проточных.',
     img:'images/remont-vodonagrevatelya.jpg',
     fields:[
@@ -3043,14 +3107,14 @@ const SERVICES = [
       { id:'sym', label:'Симптомы', type:'text', placeholder:'Например: не греет, бьёт током' },
     ] },
 
-  { name:'Обслуживание газового оборудования', cat:'Ремонт техники', price:'от 2 500 ₽', e:'⛽',
+  { name:'Обслуживание газового оборудования', cat:'Ремонт техники', price:'от 2 500 ₽', e:'⛽', wantsPhoto:true,
     desc:'Техническое обслуживание, проверка и настройка газового оборудования.',
     img:'images/obsluzhivanie-gazovogo-oborudovaniya.jpeg',
     fields:[
       { id:'task', label:'Что нужно', type:'pill', options:['Плановое ТО','Не работает','Подключение','Перенос'] },
     ] },
 
-  { name:'Ремонт посудомоечной машины', cat:'Ремонт техники', price:'от 2 000 ₽', e:'🍽️',
+  { name:'Ремонт посудомоечной машины', cat:'Ремонт техники', price:'от 2 000 ₽', e:'🍽️', wantsPhoto:true,
     desc:'Ремонт посудомоечных машин с выездом на дом или дачу.',
     img:'https://images.unsplash.com/photo-1581622558663-b2e33377dfb2?w=600&h=350&fit=crop&auto=format&q=80',
     fields:[
@@ -3058,7 +3122,7 @@ const SERVICES = [
       { id:'sym', label:'Что не так', type:'text', placeholder:'Например: не моет, течёт' },
     ] },
 
-  { name:'Ремонт вентиляции', cat:'Ремонт техники', price:'от 2 500 ₽', e:'💨',
+  { name:'Ремонт вентиляции', cat:'Ремонт техники', price:'от 2 500 ₽', e:'💨', wantsPhoto:true,
     desc:'Прочистка, ремонт и монтаж вентиляционных систем в доме и бане.',
     img:'images/remont-ventilyatsii.jpg',
     fields:[
@@ -3471,8 +3535,8 @@ function renderWorks() {
 
 // ── СТОРИС ─────────────────────────────────────────────────────────
 const STORIES = [
-  { id:'akciya-aprelya', title:'−10% апрель', emoji:'🌷',
-    bg:'https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=600&h=900&fit=crop&auto=format&q=80',
+  { id:'akciya-aprelya', title:'Акция −10%', emoji:'🌷',
+    grad:'linear-gradient(135deg, #F4A23A 0%, #DC2626 100%)',
     tag:'🎁 Акция апреля',
     bigTitle:'−10% на открытие дачи',
     text:'Заявка до 15 мая на открытие дачи и обработку от клещей — скидка 10%. Перезвоним через час.',
@@ -3480,7 +3544,7 @@ const STORIES = [
     ctaAction:'svc:Открытие дачи под ключ' },
 
   { id:'kleshchi-pik', title:'Клещи 2026', emoji:'🦟',
-    bg:'https://images.unsplash.com/photo-1599598425947-5117f9077dee?w=600&h=900&fit=crop&auto=format&q=80',
+    grad:'linear-gradient(135deg, #DC2626 0%, #7C2D12 100%)',
     tag:'⚠️ Пик сезона',
     bigTitle:'Клещи проснулись',
     text:'В Ленобласти зафиксированы первые присасывания. Обработка участка занимает 2 часа, защищает 6 недель. Дети и животные на участок — через 4 часа после.',
@@ -3488,7 +3552,7 @@ const STORIES = [
     ctaAction:'svc:Обработка от клещей' },
 
   { id:'banya-bochka', title:'Бани-бочки', emoji:'🛁',
-    bg:'https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=600&h=900&fit=crop&auto=format&q=80',
+    grad:'linear-gradient(135deg, #2D6A4F 0%, #1B4332 100%)',
     tag:'🔥 Хит сезона',
     bigTitle:'Баня за 1 день',
     text:'Готовая баня-бочка из кедра 4 м под ключ — от 240 000 ₽. Привезём, поставим, подключим. К майским — успеете попариться.',
@@ -3496,15 +3560,15 @@ const STORIES = [
     ctaAction:'page:shop' },
 
   { id:'kak-zakazat', title:'Как заказать', emoji:'📋',
-    bg:'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&h=900&fit=crop&auto=format&q=80',
+    grad:'linear-gradient(135deg, #2563EB 0%, #1E3A8A 100%)',
     tag:'💡 Инструкция',
     bigTitle:'Как заказать за 1 минуту',
     text:'1️⃣ Найдите услугу в каталоге или поиске\n2️⃣ Нажмите «Заявка»\n3️⃣ Укажите имя, телефон и пару деталей\n4️⃣ Перезвоним через час и согласуем\n\nЗаявка бесплатна, цена фиксируется до начала работ.',
     ctaText:'Перейти к каталогу',
     ctaAction:'anchor:#catalog-section' },
 
-  { id:'otzyvy-nedeli', title:'Отзывы', emoji:'⭐',
-    bg:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&h=900&fit=crop&auto=format&q=80',
+  { id:'otzyvy-nedeli', title:'Отзывы 4.9★', emoji:'⭐',
+    grad:'linear-gradient(135deg, #F59E0B 0%, #B45309 100%)',
     tag:'⭐ 4.9 из 5',
     bigTitle:'412 заказов в Ленобласти',
     text:'«У нас собака и двое детей. Каждый год боимся клещей. Ребята из ВИсбу обработали 12 соток за 2 часа. Прошло 3 недели — ни одного клеща».\n\n— Сергей М., Васкелово',
@@ -3512,15 +3576,15 @@ const STORIES = [
     ctaAction:'anchor:#reviews-section' },
 
   { id:'drova-v-nalichii', title:'Дрова', emoji:'🪵',
-    bg:'https://images.unsplash.com/photo-1542621334-a254cf47733d?w=600&h=900&fit=crop&auto=format&q=80',
+    grad:'linear-gradient(135deg, #92400E 0%, #451A03 100%)',
     tag:'📦 В наличии',
     bigTitle:'Дрова сухие',
     text:'Берёзовые колотые — от 3 500 ₽/куб. Ольха и смешанные — от 2 800 ₽/куб. Привезём в день заказа, выгрузим где скажете.',
     ctaText:'Заказать дрова',
     ctaAction:'svc:Дрова берёзовые колотые' },
 
-  { id:'lifehack-septik', title:'Совет', emoji:'💡',
-    bg:'https://images.unsplash.com/photo-1574359411659-15573a27fd0c?w=600&h=900&fit=crop&auto=format&q=80',
+  { id:'lifehack-septik', title:'Лайфхак', emoji:'💡',
+    grad:'linear-gradient(135deg, #7C3AED 0%, #4C1D95 100%)',
     tag:'🧠 Лайфхак',
     bigTitle:'Когда чистить септик?',
     text:'Если откачивали осенью — повторно нужно через 6-9 месяцев. Если зимой пользовались редко — после зимы перед сезоном. Признак: запах + долгий уход воды.',
@@ -3528,7 +3592,7 @@ const STORIES = [
     ctaAction:'svc:Откачка септика' },
 
   { id:'top-aprelya', title:'Топ апреля', emoji:'🏆',
-    bg:'https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=600&h=900&fit=crop&auto=format&q=80',
+    grad:'linear-gradient(135deg, #16A34A 0%, #14532D 100%)',
     tag:'🏆 Топ-5',
     bigTitle:'Что заказывают сейчас',
     text:'1. Открытие дачи под ключ\n2. Обработка от клещей\n3. Откачка септика\n4. Уборка участка после зимы\n5. Покос травы\n\nВсё со скидкой −10% по акции апреля.',
@@ -3547,8 +3611,8 @@ function renderStories() {
     <div class="story" data-i="${i}">
       <div class="story-avatar${viewed.includes(s.id) ? ' viewed' : ''}">
         <div class="story-avatar-inner">
-          <div style="background-image:url('${s.bg}'); background-color:var(--green);">
-            ${!s.bg ? s.emoji : ''}
+          <div style="background:${s.grad || 'var(--green)'};">
+            ${s.emoji}
           </div>
         </div>
       </div>
@@ -3588,9 +3652,8 @@ function openStory(i) {
   ).join('');
 
   // BG
-  document.getElementById('story-bg').innerHTML = s.bg
-    ? `<img src="${s.bg}" alt="" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#2D6A4F,#F4A23A)';"/>`
-    : '';
+  const bgEl = document.getElementById('story-bg');
+  bgEl.innerHTML = `<div class="story-bg-grad" style="background:${s.grad || 'linear-gradient(135deg,#2D6A4F,#F4A23A)'};"><div class="story-bg-emoji">${s.emoji}</div></div>`;
 
   document.getElementById('story-tag').textContent = s.tag || '';
   document.getElementById('story-title').textContent = s.bigTitle || '';
@@ -3939,6 +4002,17 @@ function openContactModal(name, cat) {
     extra.innerHTML = '';
   }
 
+  // Показываем поле фото если для услуги это уместно
+  const photoWrap = document.getElementById('f-photo-wrap');
+  if (currentSvc && currentSvc.wantsPhoto) {
+    photoWrap.style.display = '';
+  } else {
+    photoWrap.style.display = 'none';
+  }
+  // Сбрасываем превью фото
+  document.getElementById('f-photo-preview').innerHTML = '';
+  document.getElementById('f-photo-drop').classList.remove('has-files');
+
   document.getElementById('m-form').style.display = '';
   document.getElementById('m-ok').style.display = 'none';
   document.getElementById('form').reset();
@@ -3954,6 +4028,45 @@ overlay.addEventListener('click', e => { if (e.target === overlay) closeModal();
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
 // ── ФОРМА ─────────────────────────────────────────────────────────
+// === ОБРАБОТЧИК ВЫБОРА ФОТО ===
+let selectedPhotos = [];
+const photoInput = document.getElementById('f-photo');
+const photoPreview = document.getElementById('f-photo-preview');
+const photoDrop = document.getElementById('f-photo-drop');
+
+if (photoInput) {
+  photoInput.addEventListener('change', e => {
+    const files = Array.from(e.target.files).slice(0, 5); // максимум 5
+    selectedPhotos = files;
+    photoPreview.innerHTML = '';
+    if (files.length > 0) {
+      photoDrop.classList.add('has-files');
+    } else {
+      photoDrop.classList.remove('has-files');
+    }
+    files.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = ev => {
+        const img = document.createElement('img');
+        img.src = ev.target.result;
+        img.className = 'fr-photo-thumb';
+        photoPreview.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    });
+    // Обновим текст
+    const txt = photoDrop.querySelector('.fr-photo-text');
+    const sub = photoDrop.querySelector('.fr-photo-sub');
+    if (files.length > 0) {
+      txt.textContent = `Выбрано ${files.length} ${files.length === 1 ? 'фото' : 'фото'}`;
+      sub.textContent = 'Клик чтобы выбрать другие';
+    } else {
+      txt.textContent = 'Добавить фото';
+      sub.textContent = 'Поможет мастеру оценить работу заранее. До 5 фото';
+    }
+  });
+}
+
 document.getElementById('form').addEventListener('submit', async e => {
   e.preventDefault();
   const svc   = document.getElementById('f-svc').value;
@@ -4001,16 +4114,46 @@ document.getElementById('form').addEventListener('submit', async e => {
 
   try {
     if (BOT_TOKEN !== 'YOUR_BOT_TOKEN') {
+      // Сначала отправим текстовую заявку
       const r = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
         method: 'POST', headers: {'Content-Type':'application/json'},
         body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: 'Markdown' })
       });
       if (!r.ok) throw new Error();
+
+      // Если есть фото — шлём отдельно
+      if (selectedPhotos.length > 0) {
+        if (selectedPhotos.length === 1) {
+          // одно фото = sendPhoto
+          const fd = new FormData();
+          fd.append('chat_id', CHAT_ID);
+          fd.append('photo', selectedPhotos[0]);
+          fd.append('caption', `📸 Фото к заявке: ${svc} · ${name}`);
+          await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+            method: 'POST', body: fd
+          });
+        } else {
+          // несколько = sendMediaGroup (макс 10)
+          const fd = new FormData();
+          fd.append('chat_id', CHAT_ID);
+          const media = selectedPhotos.map((f, i) => ({
+            type: 'photo',
+            media: `attach://photo${i}`,
+            caption: i === 0 ? `📸 Фото к заявке: ${svc} · ${name}` : undefined
+          }));
+          fd.append('media', JSON.stringify(media));
+          selectedPhotos.forEach((f, i) => fd.append(`photo${i}`, f));
+          await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMediaGroup`, {
+            method: 'POST', body: fd
+          });
+        }
+      }
     }
-  } catch {}
+  } catch (err) { console.error('Telegram error:', err); }
 
   // Сохраняем в localStorage для админ-панели
-  const order = { id: Date.now(), svc, name, phone, addr, comm, extras,
+  const photoCount = selectedPhotos.length;
+  const order = { id: Date.now(), svc, name, phone, addr, comm, extras, photoCount,
                   date: new Date().toLocaleString('ru-RU'), status: 'new' };
   const orders = JSON.parse(localStorage.getItem('vizbu_orders') || '[]');
   orders.unshift(order);
@@ -4020,6 +4163,7 @@ document.getElementById('form').addEventListener('submit', async e => {
   document.getElementById('m-form').style.display = 'none';
   document.getElementById('m-ok').style.display   = 'block';
   btn.textContent = 'Отправить заявку →'; btn.disabled = false;
+  selectedPhotos = [];
 });
 
 renderStories();
