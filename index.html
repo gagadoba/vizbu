@@ -187,30 +187,54 @@
     }
     .si { position: absolute; left: 20px; top: 50%;
           transform: translateY(-50%); font-size: 1.25rem; pointer-events: none; }
-    .hero-call {
-      display: flex; flex-direction: column; align-items: center;
-      gap: 2px; padding: 14px 28px;
+    /* Блок «Закажи за 1 минуту» */
+    .hero-order {
       background: #fff; color: #1A1A1A;
-      border-radius: 16px; text-decoration: none;
+      border-radius: 16px; padding: 18px 22px;
       box-shadow: 0 6px 20px rgba(0,0,0,.25);
-      margin: 12px auto 0; max-width: 380px;
-      transition: transform .15s, box-shadow .15s;
+      margin: 10px auto 0; max-width: 460px;
+      text-align: center;
     }
-    .hero-call:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,.32); }
-    .hero-call-label {
-      font-size: .78rem; font-weight: 800; letter-spacing: 2px;
-      color: var(--green); text-transform: uppercase;
+    .hero-order-title {
+      font-size: 1.05rem; font-weight: 900; color: var(--green3);
+      margin-bottom: 12px;
     }
-    .hero-call-phone {
-      font-size: 1.7rem; font-weight: 900;
-      color: var(--green3); letter-spacing: -.5px; line-height: 1.1;
+    .hero-order-title em { color: var(--accent); font-style: normal; }
+    .hero-order-steps {
+      display: flex; gap: 8px; margin-bottom: 14px;
     }
-    .hero-call-extra {
-      font-size: .76rem; color: var(--muted); font-weight: 600;
+    .hero-order-step {
+      flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px;
     }
+    .hero-order-step-n {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: .85rem;
+    }
+    .hero-order-step-text {
+      font-size: .75rem; font-weight: 600; color: var(--text); line-height: 1.2;
+    }
+    .hero-order-cta {
+      display: block; width: 100%; padding: 14px 20px;
+      background: linear-gradient(135deg, #F4A23A 0%, #E08920 100%);
+      color: #fff !important; border: none; border-radius: 999px;
+      font-size: 1rem; font-weight: 900; text-decoration: none;
+      cursor: pointer; transition: all .2s;
+      box-shadow: 0 4px 16px rgba(244,162,58,.35);
+    }
+    .hero-order-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(244,162,58,.5); }
+    .hero-order-or {
+      font-size: .8rem; color: var(--muted); margin-top: 12px;
+    }
+    .hero-order-or a {
+      color: var(--green); font-weight: 800; text-decoration: none;
+      border-bottom: 1px dashed var(--green);
+    }
+    .hero-order-or a:hover { color: var(--green2); }
     @media (max-width: 480px) {
-      .hero-call { padding: 12px 20px; }
-      .hero-call-phone { font-size: 1.4rem; }
+      .hero-order { padding: 14px 16px; }
+      .hero-order-step-text { font-size: .68rem; }
     }
     .hero-ctas {
       display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
@@ -1431,14 +1455,26 @@
           <span>🛠 Проверенные мастера</span>
           <span>💸 Заявка бесплатно</span>
         </div>
-        <a href="tel:+79119507358" class="hero-call">
-          <span class="hero-call-label">📞 Звоните прямо сейчас</span>
-          <span class="hero-call-phone">+7 911 950-73-58</span>
-          <span class="hero-call-extra">WhatsApp · Telegram · с 8:00 до 22:00</span>
-        </a>
-        <div class="hero-ctas">
-          <a href="#catalog-section" class="btn-hero-primary">🔍 Найти услугу в каталоге</a>
-          <a href="https://wa.me/79119507358" target="_blank" class="btn-hero-secondary">💬 Написать в WhatsApp</a>
+        <div class="hero-order">
+          <div class="hero-order-title">Заказ онлайн за <em>1 минуту</em> — перезвоним за час</div>
+          <div class="hero-order-steps">
+            <div class="hero-order-step">
+              <div class="hero-order-step-n">1</div>
+              <div class="hero-order-step-text">Найди услугу в каталоге</div>
+            </div>
+            <div class="hero-order-step">
+              <div class="hero-order-step-n">2</div>
+              <div class="hero-order-step-text">Заполни имя и телефон</div>
+            </div>
+            <div class="hero-order-step">
+              <div class="hero-order-step-n">3</div>
+              <div class="hero-order-step-text">Дождись звонка за час</div>
+            </div>
+          </div>
+          <a href="#catalog-section" class="hero-order-cta">📋 Оставить заявку онлайн</a>
+          <div class="hero-order-or">
+            Не любите формы? <a href="tel:+79119507358">Позвоните: +7 911 950-73-58</a>
+          </div>
         </div>
       </div>
       <div class="hero-stories-col" id="stories-right"></div>
@@ -2240,6 +2276,11 @@
           <div class="fr"><label>Телефон <span class="req">*</span></label><input id="f-phone" type="tel" placeholder="+7 (___) ___-__-__" required/></div>
         </div>
         <div class="fr"><label>Адрес / СНТ</label><input id="f-addr" type="text" placeholder="СНТ Синявино, ул. Лесная 5"/></div>
+        <div class="fr">
+          <label>Промокод <span style="color:var(--muted);font-weight:400;">(если есть)</span></label>
+          <input id="f-promo" type="text" placeholder="Например: VESNA или ДАЧА" autocomplete="off" style="text-transform:uppercase;"/>
+          <div id="f-promo-msg" style="margin-top:5px;font-size:.8rem;font-weight:700;display:none;"></div>
+        </div>
         <div class="fr"><label>Комментарий (необязательно)</label><textarea id="f-comm" placeholder="Любые детали, которые помогут точнее посчитать..."></textarea></div>
         <div class="fr" id="f-photo-wrap" style="display:none;">
           <label>Прикрепить фото <span style="color:var(--muted);font-weight:400;">(необязательно)</span></label>
@@ -2520,6 +2561,46 @@ document.querySelector('.logo').addEventListener('click', () => {
 // ── TELEGRAM ───────────────────────────────────────────────────────
 const BOT_TOKEN = '8279238790:AAGh2tpnm7bnsx88BkMG2Y0PQDX9kciRI1g';
 const CHAT_ID   = '268868539';
+
+// ── ПРОМОКОДЫ ──────────────────────────────────────────────────────
+const PROMO_CODES = {
+  'VESNA': {
+    type: 'fixed', amount: 1000,
+    firstOrderOnly: true,
+    label: 'скидка 1 000 ₽ на первую заявку',
+    short: '−1 000 ₽',
+  },
+  'ВЕСНА': {
+    type: 'fixed', amount: 1000,
+    firstOrderOnly: true,
+    label: 'скидка 1 000 ₽ на первую заявку',
+    short: '−1 000 ₽',
+  },
+  'DACHA': {
+    type: 'percent', amount: 10,
+    firstOrderOnly: true,
+    label: '−10% на первую заявку (с листовки)',
+    short: '−10%',
+  },
+  'ДАЧА': {
+    type: 'percent', amount: 10,
+    firstOrderOnly: true,
+    label: '−10% на первую заявку (с листовки)',
+    short: '−10%',
+  },
+};
+function validatePromo(raw) {
+  const code = (raw || '').trim().toUpperCase();
+  if (!code) return null;
+  const promo = PROMO_CODES[code];
+  if (!promo) return { code, valid: false, message: 'Промокод не найден' };
+  // Проверка first-order-only
+  const used = localStorage.getItem('vizbu_first_order_used') === '1';
+  if (promo.firstOrderOnly && used) {
+    return { code, valid: false, message: 'Промокод действует только на первую заявку — у вас уже была' };
+  }
+  return { code, valid: true, ...promo };
+}
 
 // ── БИБЛИОТЕКА ПОЛЕЙ ───────────────────────────────────────────────
 // Удобные пресеты под минимальное заполнение условий
@@ -4058,6 +4139,42 @@ overlay.addEventListener('click', e => { if (e.target === overlay) closeModal();
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
 // ── ФОРМА ─────────────────────────────────────────────────────────
+// === ОБРАБОТЧИК ПРОМОКОДА (live-валидация) ===
+const promoInput = document.getElementById('f-promo');
+const promoMsg = document.getElementById('f-promo-msg');
+if (promoInput) {
+  promoInput.addEventListener('input', () => {
+    const v = promoInput.value;
+    if (!v.trim()) {
+      promoMsg.style.display = 'none';
+      promoInput.style.borderColor = '';
+      return;
+    }
+    const r = validatePromo(v);
+    if (r && r.valid) {
+      promoMsg.style.display = 'block';
+      promoMsg.style.color = '#15803D';
+      promoMsg.innerHTML = `✅ Промокод применён · <strong>${r.short}</strong> · ${r.label}`;
+      promoInput.style.borderColor = '#15803D';
+    } else if (r) {
+      promoMsg.style.display = 'block';
+      promoMsg.style.color = '#DC2626';
+      promoMsg.textContent = '✕ ' + r.message;
+      promoInput.style.borderColor = '#DC2626';
+    }
+  });
+}
+
+// Авто-заполнение промокода из URL ?promo=DACHA
+(function autoFillPromo() {
+  const url = new URL(window.location.href);
+  const p = url.searchParams.get('promo');
+  if (p && promoInput) {
+    promoInput.value = p.toUpperCase();
+    promoInput.dispatchEvent(new Event('input'));
+  }
+})();
+
 // === ОБРАБОТЧИК ВЫБОРА ФОТО ===
 let selectedPhotos = [];
 const photoInput = document.getElementById('f-photo');
@@ -4104,6 +4221,9 @@ document.getElementById('form').addEventListener('submit', async e => {
   const phone = document.getElementById('f-phone').value.trim();
   const addr  = document.getElementById('f-addr').value.trim();
   const comm  = document.getElementById('f-comm').value.trim();
+  const promoRaw = document.getElementById('f-promo').value.trim();
+  const promoCheck = validatePromo(promoRaw);
+  const promo = (promoCheck && promoCheck.valid) ? promoCheck : null;
 
   // Сбор ответов из дополнительных полей (select / number / text / textarea)
   const extra = document.getElementById('f-extra');
@@ -4135,6 +4255,7 @@ document.getElementById('form').addEventListener('submit', async e => {
     `📱 *Телефон:* ${phone}`,
     addr ? `📍 *Адрес:* ${addr}` : '',
     extrasText ? `📋 *Условия:*\n${extrasText}` : '',
+    promo ? `🎁 *Промокод:* \`${promo.code}\` — ${promo.label}` : '',
     comm ? `💬 *Комментарий:* ${comm}` : '',
     `🕐 ${new Date().toLocaleString('ru-RU')}`,
   ].filter(Boolean).join('\n');
@@ -4184,7 +4305,11 @@ document.getElementById('form').addEventListener('submit', async e => {
   // Сохраняем в localStorage для админ-панели
   const photoCount = selectedPhotos.length;
   const order = { id: Date.now(), svc, name, phone, addr, comm, extras, photoCount,
+                  promo: promo ? promo.code : null,
+                  promoLabel: promo ? promo.label : null,
                   date: new Date().toLocaleString('ru-RU'), status: 'new' };
+  // Помечаем что первая заявка прошла (для firstOrderOnly промо в будущем)
+  if (promo) localStorage.setItem('vizbu_first_order_used', '1');
   const orders = JSON.parse(localStorage.getItem('vizbu_orders') || '[]');
   orders.unshift(order);
   localStorage.setItem('vizbu_orders', JSON.stringify(orders));
