@@ -16,11 +16,13 @@
       --blue:   #2563EB;
       --blue2:  #1d4ed8;
       --purple: #7C3AED;
-      --bg:     #F4F7F4;
-      --card:   #fff;
-      --border: #E2EBE6;
-      --text:   #1A1A1A;
-      --muted:  #6B7280;
+      --bg:     #FAF6EE;
+      --card:   #FFFCF6;
+      --border: #E8DFCC;
+      --text:   #2A2620;
+      --muted:  #7A6F60;
+      --warm:   #F5EBD8;
+      --warmAccent: #FCEDD5;
       --r:      14px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -127,19 +129,39 @@
       align-items: center;
     }
     .hero-center { min-width: 0; display: flex; flex-direction: column; align-items: center; }
-    .hero-bigLogo {
-      max-width: 360px; width: 100%; height: auto;
-      background: rgba(255,255,255,.96);
-      border-radius: 18px;
-      padding: 12px 18px; margin-bottom: 18px;
-      box-shadow: 0 8px 26px rgba(0,0,0,.28);
+    .hero-brandline {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 18px; flex-wrap: wrap; justify-content: center;
+    }
+    .hero-brand-mascot {
+      width: 88px; height: 88px;
+      mix-blend-mode: multiply;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,.3));
       animation: mascot-float 4s ease-in-out infinite;
     }
     @keyframes mascot-float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-5px) rotate(2deg); }
     }
-    @media (max-width: 480px) { .hero-bigLogo { max-width: 280px; padding: 8px 12px; } }
+    .hero-brand-text {
+      display: flex; flex-direction: column; align-items: flex-start;
+      line-height: 1;
+    }
+    .hero-brand-en {
+      font-size: 3.2rem; font-weight: 900; color: #fff;
+      letter-spacing: -1.5px; line-height: .95;
+    }
+    .hero-brand-en em { color: var(--accent); font-style: normal; }
+    .hero-brand-ru {
+      font-size: 1rem; font-weight: 700;
+      color: rgba(255,255,255,.7);
+      letter-spacing: 2px; margin-top: 6px;
+    }
+    @media (max-width: 480px) {
+      .hero-brand-mascot { width: 64px; height: 64px; }
+      .hero-brand-en { font-size: 2.4rem; }
+      .hero-brand-ru { font-size: .85rem; letter-spacing: 1.5px; }
+    }
     .hero-stories-col {
       display: flex; flex-direction: column; gap: 14px; align-items: center;
     }
@@ -153,23 +175,24 @@
     .hero-tag {
       display: inline-block; background: rgba(255,255,255,.15);
       border: 1px solid rgba(255,255,255,.3); border-radius: 999px;
-      padding: 4px 14px; font-size: .76rem; font-weight: 600;
-      margin-bottom: 10px; letter-spacing: .3px;
+      padding: 5px 16px; font-size: .88rem; font-weight: 600;
+      margin-bottom: 14px; letter-spacing: .3px;
     }
-    .hero h1 { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 900;
-               line-height: 1.15; margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(1.9rem, 4.8vw, 2.7rem); font-weight: 900;
+               line-height: 1.12; margin-bottom: 12px; }
     .hero h1 em { color: var(--accent); font-style: normal; }
     .hero-slogan {
-      font-size: clamp(.95rem, 2.2vw, 1.05rem); opacity: .9;
+      font-size: clamp(1.05rem, 2.4vw, 1.2rem); opacity: .92;
       margin-bottom: 14px; font-weight: 500;
+      max-width: 580px; margin-left: auto; margin-right: auto;
     }
-    .hero p { opacity: .8; font-size: .88rem; max-width: 540px;
+    .hero p { opacity: .82; font-size: .98rem; max-width: 540px;
               margin: 0 auto 16px; display: none; }
     .hero-trust {
       display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;
-      margin-bottom: 18px; font-size: .76rem; opacity: .85;
+      margin-bottom: 18px; font-size: .85rem; opacity: .9;
     }
-    .hero-trust span { display: inline-flex; align-items: center; gap: 4px; }
+    .hero-trust span { display: inline-flex; align-items: center; gap: 5px; }
     .search-box { max-width: 620px; margin: 0 auto; position: relative; }
     .search-box input {
       width: 100%; padding: 18px 22px 18px 56px;
@@ -1415,6 +1438,7 @@
       <button class="nav-tab" data-page="shop">🛍 Продаёт</button>
       <button class="nav-tab" data-page="insurance">🛡️ Страхование</button>
       <button class="nav-tab" data-page="management">🔑 Управление</button>
+      <button class="nav-tab" data-page="about">🌿 О нас</button>
       <button class="nav-tab nav-b2b" data-page="contractors">💼 Подрядчикам</button>
     </nav>
     <div class="hdr-contacts">
@@ -1443,11 +1467,16 @@
     <div class="hero-grid">
       <div class="hero-stories-col" id="stories-left"></div>
       <div class="hero-center">
-        <img src="images/logo-en.jpg" alt="Visbu — ВИсбу" class="hero-bigLogo"
-             onerror="this.src='images/logo-mascot.jpg'"/>
-        <div class="hero-tag">Сервис для загородной жизни в Ленобласти · с 2026 года</div>
+        <div class="hero-brandline">
+          <img src="images/logo-mascot.jpg" alt="" class="hero-brand-mascot"/>
+          <div class="hero-brand-text">
+            <span class="hero-brand-en"><em>V</em>isbu</span>
+            <span class="hero-brand-ru">ВИсбу</span>
+          </div>
+        </div>
+        <div class="hero-tag">Соседский сервис для дачи в Ленобласти</div>
         <h1>Решаем всё,<br/><em>кроме погоды</em></h1>
-        <div class="hero-slogan">70+ услуг для вашей дачи и участка</div>
+        <div class="hero-slogan">Один звонок или заявка — и проверенный мастер приедет к вам на дачу. От покоса травы до строительства бани, без поиска, торга и нервов.</div>
         <p>От открытия дачи и обработки от клещей до сантехника и дров. Один звонок — мы организуем всё.</p>
         <div class="hero-trust">
           <span>⭐ 4.9 / 5 по отзывам</span>
