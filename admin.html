@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ВИсбу — Админ-панель</title>
+<style>
+  :root {
+    --green:#2D6A4F; --green2:#40916C; --green3:#1B4332;
+    --accent:#F4A23A; --accent2:#E08920;
+    --red:#DC2626; --blue:#2563EB;
+    --bg:#FAF6EE; --card:#FFFCF6; --border:#E8DFCC;
+    --text:#2A2620; --muted:#7A6F60;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+       background:var(--bg);color:var(--text);line-height:1.5;}
+
+  header{background:var(--green3);color:#fff;padding:14px 20px;
+         display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+  header h1{font-size:1.25rem;font-weight:900;}
+  header h1 em{color:var(--accent);font-style:normal;}
+  header .who{font-size:.85rem;opacity:.75;}
+  .container{max-width:1200px;margin:0 auto;padding:24px 20px 80px;}
+
+  /* Login */
+  .login{max-width:380px;margin:80px auto;background:var(--card);
+         border:1px solid var(--border);border-radius:14px;padding:32px;
+         box-shadow:0 4px 18px rgba(0,0,0,.08);}
+  .login h2{font-size:1.4rem;font-weight:900;margin-bottom:6px;color:var(--green3);}
+  .login p{font-size:.9rem;color:var(--muted);margin-bottom:20px;}
+  .login input{width:100%;padding:12px 14px;border:1.5px solid var(--border);
+               border-radius:10px;font-size:1rem;font-family:inherit;}
+  .login button{width:100%;padding:13px;margin-top:14px;background:var(--green);
+                color:#fff;border:none;border-radius:999px;font-weight:800;
+                font-size:.95rem;cursor:pointer;}
+  .login .err{color:var(--red);font-size:.85rem;margin-top:10px;display:none;}
+
+  /* Tabs */
+  .tabs{display:flex;gap:8px;margin-bottom:20px;border-bottom:2px solid var(--border);}
+  .tabs button{padding:11px 20px;background:none;border:none;font-family:inherit;
+               font-size:.95rem;font-weight:700;color:var(--muted);cursor:pointer;
+               border-bottom:3px solid transparent;margin-bottom:-2px;}
+  .tabs button.active{color:var(--green);border-bottom-color:var(--accent);}
+  .tabs button .badge{background:var(--accent);color:#fff;font-size:.7rem;
+                       border-radius:99px;padding:1px 8px;margin-left:4px;font-weight:800;}
+
+  .filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+  .fbtn{padding:7px 14px;border-radius:99px;border:1.5px solid var(--border);
+        background:#fff;font-size:.83rem;cursor:pointer;font-family:inherit;
+        font-weight:600;color:var(--text);}
+  .fbtn.active{background:var(--green);border-color:var(--green);color:#fff;}
+
+  /* Orders */
+  .order{background:var(--card);border:1px solid var(--border);border-radius:14px;
+         padding:18px 20px;margin-bottom:14px;
+         box-shadow:0 1px 4px rgba(0,0,0,.04);}
+  .order-head{display:flex;justify-content:space-between;align-items:flex-start;
+              gap:12px;flex-wrap:wrap;margin-bottom:10px;}
+  .order-head .left h3{font-size:1.05rem;font-weight:900;margin-bottom:2px;}
+  .order-head .left .meta{font-size:.8rem;color:var(--muted);}
+  .order-head .left .meta .id{color:var(--accent);font-weight:800;}
+  .order-status{padding:5px 11px;border-radius:99px;font-size:.78rem;font-weight:800;}
+  .st-new{background:#FEF3E7;color:#B45309;}
+  .st-confirmed{background:#DBEAFE;color:#1E3A8A;}
+  .st-broadcasting{background:#E0E7FF;color:#3730A3;}
+  .st-taken{background:#DCFCE7;color:#15803D;}
+  .st-completed{background:#D1FAE5;color:#065F46;}
+  .st-cancelled{background:#FEE2E2;color:#991B1B;}
+  .st-rated{background:#F3E8FF;color:#6B21A8;}
+
+  .info{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;font-size:.85rem;}
+  .info span{background:var(--bg);padding:3px 10px;border-radius:6px;}
+  .extras-block{background:var(--bg);border-left:3px solid var(--accent);
+                padding:8px 12px;border-radius:6px;font-size:.85rem;margin-bottom:10px;
+                white-space:pre-wrap;}
+  .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+  .btn{padding:7px 14px;border-radius:99px;border:1.5px solid var(--border);
+       background:#fff;cursor:pointer;font-family:inherit;font-size:.82rem;
+       font-weight:700;text-decoration:none;color:var(--text);}
+  .btn:hover{border-color:var(--green);color:var(--green);}
+  .btn.primary{background:var(--green);border-color:var(--green);color:#fff;}
+  .btn.primary:hover{background:var(--green2);color:#fff;}
+  .btn.accent{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn.accent:hover{background:var(--accent2);color:#fff;}
+  .btn.danger{border-color:#fecaca;color:var(--red);}
+
+  /* Modal */
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);
+           z-index:100;align-items:center;justify-content:center;padding:16px;}
+  .overlay.open{display:flex;}
+  .modal{background:#fff;border-radius:16px;padding:28px;width:100%;max-width:520px;
+         max-height:92vh;overflow:auto;}
+  .modal h2{font-size:1.2rem;font-weight:900;margin-bottom:14px;}
+  .field{margin-bottom:12px;}
+  .field label{display:block;font-size:.83rem;font-weight:700;margin-bottom:5px;}
+  .field input,.field textarea,.field select{
+    width:100%;padding:11px 12px;border:1.5px solid var(--border);
+    border-radius:8px;font-size:.95rem;font-family:inherit;
+  }
+  .field textarea{min-height:74px;resize:vertical;}
+  .modal-actions{display:flex;gap:10px;margin-top:14px;}
+  .modal-actions button{flex:1;padding:12px;border-radius:99px;border:none;
+                        font-weight:800;cursor:pointer;font-family:inherit;}
+  .modal .save{background:var(--green);color:#fff;}
+  .modal .cancel{background:#eee;color:var(--text);}
+
+  /* Contractors */
+  .contractor{background:var(--card);border:1px solid var(--border);
+              border-radius:14px;padding:16px 18px;margin-bottom:12px;}
+  .contractor.pending{border-left:4px solid var(--accent);}
+  .contractor.approved{border-left:4px solid var(--green);}
+  .contractor.rejected{border-left:4px solid var(--red);opacity:.7;}
+  .contractor h4{font-size:1rem;font-weight:900;}
+  .contractor .meta{font-size:.82rem;color:var(--muted);margin-bottom:8px;}
+  .contractor .tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px;}
+  .contractor .tags span{background:var(--bg);padding:2px 9px;border-radius:5px;font-size:.78rem;}
+
+  .empty{text-align:center;padding:60px 20px;color:var(--muted);font-size:.95rem;}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login" class="login">
+  <h2>🔐 Админ-панель ВИсбу</h2>
+  <p>Введите пароль для доступа</p>
+  <input id="pwd" type="password" placeholder="Пароль" autofocus/>
+  <button id="login-btn">Войти</button>
+  <div class="err" id="err">Неверный пароль</div>
+</div>
+
+<!-- ADMIN UI -->
+<div id="adminUi" style="display:none;">
+  <header>
+    <h1><em>V</em>isbu · Админ-панель</h1>
+    <div class="who">Карина · оператор</div>
+  </header>
+
+  <div class="container">
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="orders">📋 Заказы <span class="badge" id="cnt-orders" style="display:none;"></span></button>
+      <button class="tab-btn" data-tab="contractors">👷 Подрядчики <span class="badge" id="cnt-contractors" style="display:none;"></span></button>
+    </div>
+
+    <!-- ORDERS TAB -->
+    <div id="tab-orders">
+      <div class="filter-row">
+        <button class="fbtn active" data-filter="all">Все</button>
+        <button class="fbtn" data-filter="new">🆕 Новые</button>
+        <button class="fbtn" data-filter="confirmed">✅ Согласованы</button>
+        <button class="fbtn" data-filter="broadcasting">📢 В эфире</button>
+        <button class="fbtn" data-filter="taken">👷 Взяты</button>
+        <button class="fbtn" data-filter="completed">🏁 Выполнены</button>
+        <button class="fbtn" data-filter="cancelled">❌ Сорвались</button>
+        <button class="fbtn" data-filter="rated">⭐ Закрыты</button>
+      </div>
+      <div id="orders-list"></div>
+    </div>
+
+    <!-- CONTRACTORS TAB -->
+    <div id="tab-contractors" style="display:none;">
+      <div class="filter-row">
+        <button class="fbtn active" data-cfilter="all">Все</button>
+        <button class="fbtn" data-cfilter="pending">⏳ Модерация</button>
+        <button class="fbtn" data-cfilter="approved">✅ Одобрены</button>
+        <button class="fbtn" data-cfilter="rejected">❌ Отклонены</button>
+      </div>
+      <div id="contractors-list"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL: Уточнить детали -->
+<div class="overlay" id="modal">
+  <div class="modal">
+    <h2 id="modal-title">Уточнить детали</h2>
+    <input type="hidden" id="m-id"/>
+    <div class="field"><label>Имя клиента</label><input id="m-name"/></div>
+    <div class="field"><label>Адрес / СНТ</label><input id="m-addr"/></div>
+    <div class="field"><label>Категория</label>
+      <select id="m-cat"></select>
+    </div>
+    <div class="field"><label>Бюджет (после согласования)</label><input id="m-budget" placeholder="Например: 4 000 ₽"/></div>
+    <div class="field"><label>Заметка менеджера (что сказал клиент)</label>
+      <textarea id="m-note" placeholder="Например: 8 соток газон, нужен вывоз. Время — выходные."></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="cancel" onclick="closeModal()">Отмена</button>
+      <button class="save" onclick="saveOrder()">Сохранить</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const API = '/api/api.php';
+let PASS = '';
+let activeTab = 'orders';
+let activeFilter = 'all';
+let activeCFilter = 'all';
+
+async function api(action, data = {}) {
+  const r = await fetch(API + '?action=' + action + (PASS ? '&pass=' + encodeURIComponent(PASS) : ''), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  return r.json();
+}
+
+document.getElementById('login-btn').addEventListener('click', login);
+document.getElementById('pwd').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+
+async function login() {
+  const pwd = document.getElementById('pwd').value;
+  PASS = pwd;
+  const r = await api('admin_orders');
+  if (r.ok) {
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('adminUi').style.display = 'block';
+    refreshAll();
+    setInterval(refreshAll, 30000); // авто-рефреш каждые 30с
+  } else {
+    document.getElementById('err').style.display = 'block';
+  }
+}
+
+document.querySelectorAll('.tab-btn').forEach(b => {
+  b.addEventListener('click', () => {
+    activeTab = b.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    document.getElementById('tab-orders').style.display = activeTab === 'orders' ? '' : 'none';
+    document.getElementById('tab-contractors').style.display = activeTab === 'contractors' ? '' : 'none';
+  });
+});
+
+document.querySelectorAll('[data-filter]').forEach(b => {
+  b.addEventListener('click', () => {
+    activeFilter = b.dataset.filter;
+    document.querySelectorAll('[data-filter]').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    renderOrders();
+  });
+});
+document.querySelectorAll('[data-cfilter]').forEach(b => {
+  b.addEventListener('click', () => {
+    activeCFilter = b.dataset.cfilter;
+    document.querySelectorAll('[data-cfilter]').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    renderContractors();
+  });
+});
+
+let allOrders = [];
+let allContractors = [];
+
+async function refreshAll() {
+  const r1 = await api('admin_orders');
+  if (r1.ok) { allOrders = r1.orders; renderOrders(); }
+  const r2 = await api('admin_contractors');
+  if (r2.ok) { allContractors = r2.contractors; renderContractors(); }
+  // Бейджи в табах
+  const newCnt = allOrders.filter(o => o.status === 'new').length;
+  const pendCnt = allContractors.filter(c => c.mod_status === 'pending').length;
+  const cnt1 = document.getElementById('cnt-orders');
+  cnt1.textContent = newCnt; cnt1.style.display = newCnt ? 'inline-block' : 'none';
+  const cnt2 = document.getElementById('cnt-contractors');
+  cnt2.textContent = pendCnt; cnt2.style.display = pendCnt ? 'inline-block' : 'none';
+}
+
+const STATUS_LABEL = {
+  new:'🆕 Новая', confirmed:'✅ Согласована', broadcasting:'📢 В эфире',
+  taken:'👷 Взята', completed:'🏁 Выполнена', cancelled:'❌ Сорвалась', rated:'⭐ Закрыта'
+};
+
+function renderOrders() {
+  const list = activeFilter === 'all' ? allOrders : allOrders.filter(o => o.status === activeFilter);
+  const el = document.getElementById('orders-list');
+  if (!list.length) { el.innerHTML = '<div class="empty">Заказов в этой категории нет</div>'; return; }
+
+  el.innerHTML = list.map(o => {
+    const date = new Date(o.created_at * 1000).toLocaleString('ru-RU');
+    const extras = o.extras ? JSON.parse(o.extras) : null;
+    let extrasHtml = '';
+    if (extras && Object.keys(extras).length) {
+      const parts = Object.entries(extras).map(([k,v]) => `${k}: ${Array.isArray(v) ? v.join(', ') : v}`);
+      extrasHtml = '<div class="extras-block">📋 ' + parts.join('\n') + '</div>';
+    }
+    const status = o.status;
+    const stCls = 'st-' + status;
+    const phoneClean = (o.client_phone || '').replace(/\D/g, '').replace(/^8/, '7');
+
+    let actions = '';
+    if (status === 'new') {
+      actions = `
+        <button class="btn primary" onclick="openModal(${o.id})">📋 Уточнить и согласовать</button>
+        <a class="btn" href="tel:${phoneClean}">📞 Позвонить</a>
+        <a class="btn" href="https://wa.me/${phoneClean}" target="_blank">WA</a>
+      `;
+    } else if (status === 'confirmed') {
+      actions = `
+        <button class="btn accent" onclick="broadcast(${o.id})">📢 В эфир (всем подрядчикам)</button>
+        <button class="btn" onclick="openModal(${o.id})">✏️ Изменить детали</button>
+        <a class="btn" href="tel:${phoneClean}">📞</a>
+      `;
+    } else if (status === 'broadcasting') {
+      actions = `
+        <span style="font-size:.85rem;color:var(--muted);">⏳ Ждём отклика подрядчика…</span>
+        <button class="btn" onclick="cancelBroadcast(${o.id})">↩ Вернуть в согласованные</button>
+      `;
+    } else if (status === 'taken') {
+      actions = `
+        <span style="font-size:.85rem;color:var(--green);">👷 Взял: <strong>${o.contractor_name || '?'}</strong> (${o.contractor_phone || ''})</span>
+      `;
+    } else if (status === 'completed') {
+      actions = `
+        <span style="font-size:.85rem;color:var(--muted);">🏁 Готово, ждём оценку клиента</span>
+        <button class="btn" onclick="askClientRate(${o.id}, '${phoneClean}')">📲 Напомнить клиенту оценить</button>
+      `;
+    } else if (status === 'cancelled') {
+      actions = `
+        <button class="btn accent" onclick="reBroadcast(${o.id})">↻ Перепустить в эфир</button>
+        <button class="btn" onclick="openModal(${o.id})">✏️ Изменить</button>
+      `;
+    } else if (status === 'rated') {
+      const stars = '★'.repeat(o.rating) + '☆'.repeat(5 - o.rating);
+      actions = `<span style="font-size:.95rem;color:var(--accent);">${stars} (${o.rating}) — закрыто</span>`;
+    }
+
+    return `
+      <div class="order">
+        <div class="order-head">
+          <div class="left">
+            <h3>${o.service}</h3>
+            <div class="meta"><span class="id">#${o.id}</span> · ${date}</div>
+          </div>
+          <span class="order-status ${stCls}">${STATUS_LABEL[status]}</span>
+        </div>
+        <div class="info">
+          <span>👤 ${o.client_name}</span>
+          <span>📱 ${o.client_phone}</span>
+          ${o.address ? `<span>📍 ${o.address}</span>` : ''}
+          ${o.category ? `<span>🔧 ${o.category}</span>` : ''}
+          ${o.budget ? `<span>💰 ${o.budget}</span>` : ''}
+          ${o.promo ? `<span>🎁 ${o.promo}</span>` : ''}
+        </div>
+        ${extrasHtml}
+        ${o.manager_note ? `<div class="extras-block" style="border-left-color:var(--green);">💬 <strong>Менеджер:</strong> ${o.manager_note}</div>` : ''}
+        ${o.comment ? `<div style="font-size:.85rem;color:var(--muted);margin-bottom:8px;">💭 ${o.comment}</div>` : ''}
+        <div class="actions">${actions}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function openModal(id) {
+  const o = allOrders.find(x => x.id == id);
+  if (!o) return;
+  document.getElementById('m-id').value = id;
+  document.getElementById('m-name').value = o.client_name || '';
+  document.getElementById('m-addr').value = o.address || '';
+  document.getElementById('m-budget').value = o.budget || '';
+  document.getElementById('m-note').value = o.manager_note || '';
+  const cats = ['Сезон','Разнорабочие','Участок','Дрова','Сантехника','Электрика',
+                'Строительство','Вывоз','Сад','Уборка','Спецтехника','Ремонт техники','Зима'];
+  const sel = document.getElementById('m-cat');
+  sel.innerHTML = cats.map(c => `<option value="${c}" ${c === o.category ? 'selected' : ''}>${c}</option>`).join('');
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+async function saveOrder() {
+  const id = document.getElementById('m-id').value;
+  const r = await api('order_update', {
+    id: parseInt(id),
+    client_name: document.getElementById('m-name').value,
+    address: document.getElementById('m-addr').value,
+    category: document.getElementById('m-cat').value,
+    budget: document.getElementById('m-budget').value,
+    manager_note: document.getElementById('m-note').value,
+    status: 'confirmed',
+  });
+  if (r.ok) { closeModal(); refreshAll(); }
+  else alert('Ошибка: ' + (r.error || ''));
+}
+
+async function broadcast(id) {
+  if (!confirm('Отправить заказ всем подрядчикам этой категории?')) return;
+  const r = await api('order_broadcast', { order_id: id });
+  if (r.ok) { alert(`Отправлено ${r.sent_to} подрядчикам из ${r.contractors}`); refreshAll(); }
+  else alert('Ошибка: ' + (r.error || ''));
+}
+
+async function reBroadcast(id) {
+  if (!confirm('Перепустить заказ в эфир?')) return;
+  await api('order_update', { id, status: 'confirmed' });
+  await broadcast(id);
+}
+
+async function cancelBroadcast(id) {
+  if (!confirm('Отменить рассылку и вернуть в согласованные?')) return;
+  await api('order_update', { id, status: 'confirmed' });
+  refreshAll();
+}
+
+function askClientRate(id, phone) {
+  const link = `https://visbu.ru/?my_orders=1&phone=${encodeURIComponent(phone)}`;
+  if (confirm(`Отправить клиенту WhatsApp с просьбой оценить?\n\nОткроется WA с готовым текстом.`)) {
+    const text = encodeURIComponent(`Здравствуйте! Спасибо что выбрали ВИсбу 🌿\nПожалуйста, оцените работу нашего мастера: ${link}`);
+    window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+  }
+}
+
+function renderContractors() {
+  const list = activeCFilter === 'all' ? allContractors : allContractors.filter(c => c.mod_status === activeCFilter);
+  const el = document.getElementById('contractors-list');
+  if (!list.length) { el.innerHTML = '<div class="empty">Подрядчиков нет</div>'; return; }
+
+  el.innerHTML = list.map(c => {
+    const date = new Date(c.created_at * 1000).toLocaleString('ru-RU');
+    const phoneClean = (c.phone || '').replace(/\D/g, '').replace(/^8/, '7');
+    const tg = c.tg_chat_id ? `<span style="color:var(--green);">✓ TG @${c.tg_username || ''}</span>` : '<span style="color:var(--accent);">⚠ TG не привязан</span>';
+    const rating = c.rating ? `${c.rating}★` : '—';
+    let actions = '';
+    if (c.mod_status === 'pending') {
+      actions = `<button class="btn primary" onclick="moderate(${c.id},'approved')">✅ Одобрить</button>
+                 <button class="btn danger" onclick="moderate(${c.id},'rejected')">❌ Отклонить</button>`;
+    } else if (c.mod_status === 'approved') {
+      actions = `<button class="btn" onclick="moderate(${c.id},'pending')">↩ В модерацию</button>
+                 <button class="btn danger" onclick="moderate(${c.id},'rejected')">❌ Заблокировать</button>`;
+    } else {
+      actions = `<button class="btn" onclick="moderate(${c.id},'pending')">↩ Восстановить</button>`;
+    }
+    return `
+      <div class="contractor ${c.mod_status}">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;">
+          <div>
+            <h4>${c.name}</h4>
+            <div class="meta">#${c.id} · ${c.phone} · ${tg} · ⭐ ${rating} · ${c.total_orders} заказов</div>
+          </div>
+          <span style="font-size:.78rem;color:var(--muted);">${date}</span>
+        </div>
+        <div class="tags">${(c.categories || []).map(x => `<span>🔧 ${x}</span>`).join('')}</div>
+        <div class="tags">${(c.areas || []).map(x => `<span>📍 ${x}</span>`).join('')}</div>
+        ${c.about ? `<div style="font-size:.85rem;color:var(--muted);margin-bottom:10px;">${c.about}</div>` : ''}
+        <div class="actions">
+          <a class="btn" href="tel:${phoneClean}">📞</a>
+          <a class="btn" href="https://wa.me/${phoneClean}" target="_blank">WA</a>
+          ${actions}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+async function moderate(id, status) {
+  await api('contractor_moderate', { id, status });
+  refreshAll();
+}
+</script>
+
+</body>
+</html>
