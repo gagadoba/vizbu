@@ -129,39 +129,19 @@
       align-items: center;
     }
     .hero-center { min-width: 0; display: flex; flex-direction: column; align-items: center; }
-    .hero-brandline {
-      display: flex; align-items: center; gap: 14px;
-      margin-bottom: 18px; flex-wrap: wrap; justify-content: center;
-    }
-    .hero-brand-mascot {
-      width: 88px; height: 88px;
-      mix-blend-mode: multiply;
-      filter: drop-shadow(0 4px 12px rgba(0,0,0,.3));
+    .hero-bigLogo {
+      max-width: 360px; width: 100%; height: auto;
+      background: #fff;
+      border-radius: 18px;
+      padding: 12px 18px; margin-bottom: 18px;
+      box-shadow: 0 8px 26px rgba(0,0,0,.28);
       animation: mascot-float 4s ease-in-out infinite;
     }
     @keyframes mascot-float {
-      0%, 100% { transform: translateY(0) rotate(-2deg); }
-      50% { transform: translateY(-5px) rotate(2deg); }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
     }
-    .hero-brand-text {
-      display: flex; flex-direction: column; align-items: flex-start;
-      line-height: 1;
-    }
-    .hero-brand-en {
-      font-size: 3.2rem; font-weight: 900; color: #fff;
-      letter-spacing: -1.5px; line-height: .95;
-    }
-    .hero-brand-en em { color: var(--accent); font-style: normal; }
-    .hero-brand-ru {
-      font-size: 1rem; font-weight: 700;
-      color: rgba(255,255,255,.7);
-      letter-spacing: 2px; margin-top: 6px;
-    }
-    @media (max-width: 480px) {
-      .hero-brand-mascot { width: 64px; height: 64px; }
-      .hero-brand-en { font-size: 2.4rem; }
-      .hero-brand-ru { font-size: .85rem; letter-spacing: 1.5px; }
-    }
+    @media (max-width: 480px) { .hero-bigLogo { max-width: 280px; padding: 8px 12px; } }
     .hero-stories-col {
       display: flex; flex-direction: column; gap: 14px; align-items: center;
     }
@@ -1591,13 +1571,8 @@
     <div class="hero-grid">
       <div class="hero-stories-col" id="stories-left"></div>
       <div class="hero-center">
-        <div class="hero-brandline">
-          <img src="images/logo-mascot.jpg" alt="" class="hero-brand-mascot"/>
-          <div class="hero-brand-text">
-            <span class="hero-brand-en"><em>V</em>isbu</span>
-            <span class="hero-brand-ru">ВИсбу</span>
-          </div>
-        </div>
+        <img src="images/logo-en.jpg" alt="Visbu — ВИсбу" class="hero-bigLogo"
+             onerror="this.src='images/logo-mascot.jpg'"/>
         <div class="hero-tag">Соседский сервис для дачи в Ленобласти</div>
         <h1>Решаем всё,<br/><em>кроме погоды</em></h1>
         <div class="hero-slogan">Один звонок или заявка — и проверенный мастер приедет к вам на дачу. От покоса травы до строительства бани, без поиска, торга и нервов.</div>
