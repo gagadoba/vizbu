@@ -84,6 +84,13 @@
     }
     .hdr-wa:hover { background:#25D366; border-color:#25D366; }
     .hdr-tg:hover { background:#2AABEE; border-color:#2AABEE; }
+    .hdr-my {
+      color:#fff; font-weight:800; font-size:.78rem;
+      background: rgba(244,162,58,.25);
+      border:1.5px solid var(--accent); border-radius:6px;
+      padding:5px 10px; cursor:pointer; font-family:inherit;
+    }
+    .hdr-my:hover { background: var(--accent); }
     @media(max-width:600px){ .hdr-wa,.hdr-tg{ display:none; } }
     @media(max-width:680px){
       nav { display: none; }
@@ -1494,6 +1501,94 @@
     .m-success h3 { font-weight:900; font-size:1.2rem; color:var(--green); margin-bottom:7px; }
     .m-success p { color:var(--muted); font-size:.9rem; }
 
+    /* ───── МОИ ЗАКАЗЫ (КАБИНЕТ КЛИЕНТА) ───── */
+    .my-overlay {
+      display:none; position:fixed; inset:0;
+      background: rgba(0,0,0,.6); z-index: 700;
+      align-items:flex-start; justify-content:center;
+      padding: 24px 16px; overflow-y:auto;
+    }
+    .my-overlay.open { display:flex; }
+    .my-modal {
+      background:#fff; border-radius:18px; padding:26px;
+      width:100%; max-width:620px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.3);
+      animation: su .2s ease;
+    }
+    .my-modal h2 {
+      font-size:1.35rem; font-weight:900; color:var(--green3);
+      margin-bottom:6px;
+    }
+    .my-modal h2 em { color:var(--accent); font-style:normal; }
+    .my-modal .sub { color:var(--muted); font-size:.92rem; margin-bottom:18px; }
+    .my-modal-x {
+      position:absolute; top:14px; right:18px; background:none; border:none;
+      font-size:1.4rem; cursor:pointer; color:var(--muted);
+    }
+    .my-modal-pos { position:relative; }
+    .my-input-row {
+      display:flex; gap:8px; margin-bottom:14px;
+    }
+    .my-input-row input {
+      flex:1; padding:12px 14px;
+      border:1.5px solid var(--border); border-radius:10px;
+      font-size:1rem; font-family:inherit;
+    }
+    .my-input-row button {
+      padding:12px 20px; background:var(--green); color:#fff;
+      border:none; border-radius:10px; font-weight:800;
+      cursor:pointer; font-family:inherit;
+    }
+    .my-orders { display:flex; flex-direction:column; gap:12px; }
+    .my-order {
+      background: var(--bg); border:1px solid var(--border);
+      border-radius:12px; padding:16px;
+    }
+    .my-order-top {
+      display:flex; justify-content:space-between; gap:8px;
+      flex-wrap:wrap; margin-bottom:8px;
+    }
+    .my-order-svc { font-size:1rem; font-weight:800; }
+    .my-order-status {
+      font-size:.74rem; font-weight:800;
+      padding:4px 10px; border-radius:99px;
+      letter-spacing:.3px;
+    }
+    .mst-new          { background:#FEF3E7; color:#B45309; }
+    .mst-confirmed    { background:#DBEAFE; color:#1E3A8A; }
+    .mst-broadcasting { background:#E0E7FF; color:#3730A3; }
+    .mst-taken        { background:#DCFCE7; color:#15803D; }
+    .mst-completed    { background:#D1FAE5; color:#065F46; }
+    .mst-cancelled    { background:#FEE2E2; color:#991B1B; }
+    .mst-rated        { background:#F3E8FF; color:#6B21A8; }
+    .my-order-meta { font-size:.82rem; color:var(--muted); margin-bottom:6px; }
+    .my-order-info { font-size:.85rem; line-height:1.5; }
+    .my-rate {
+      margin-top:10px; padding:10px;
+      background:#fff; border:1.5px dashed var(--accent);
+      border-radius:10px; text-align:center;
+    }
+    .my-rate-label {
+      font-size:.85rem; color:var(--accent2); font-weight:800;
+      margin-bottom:6px;
+    }
+    .my-stars {
+      display:inline-flex; gap:6px; cursor:pointer;
+    }
+    .my-star {
+      font-size:1.8rem; color:#D1D5DB;
+      transition: color .1s;
+    }
+    .my-star:hover, .my-star.hover, .my-star.active {
+      color:#F59E0B;
+    }
+    .my-rate-done {
+      color:var(--green); font-weight:800;
+      margin-top:6px;
+    }
+    .my-empty { text-align:center; padding:40px 20px; color:var(--muted); }
+    .my-empty .e { font-size:2.5rem; margin-bottom:8px; }
+
     /* ───── PHONE FLOAT ───── */
     .ph-float {
       position:fixed; bottom:20px; right:20px; background:var(--green); color:#fff;
@@ -1545,6 +1640,7 @@
       <button class="nav-tab nav-b2b" data-page="contractors">💼 Подрядчикам</button>
     </nav>
     <div class="hdr-contacts">
+      <button class="hdr-my" onclick="openMyOrders()">📋 Мои заказы</button>
       <a href="tel:+79119507358" class="hdr-phone">📞 +7 911 950-73-58</a>
       <a href="https://wa.me/79119507358" target="_blank" class="hdr-wa">WA</a>
       <a href="https://t.me/karina_vizbu" target="_blank" class="hdr-tg">TG</a>
@@ -2561,6 +2657,20 @@
 </div>
 
 <a href="tel:+79119507358" class="ph-float">📞 Позвонить</a>
+
+<!-- МОИ ЗАКАЗЫ — кабинет клиента -->
+<div class="my-overlay" id="my-overlay">
+  <div class="my-modal my-modal-pos">
+    <button class="my-modal-x" onclick="closeMyOrders()">✕</button>
+    <h2>📋 Мои <em>заказы</em></h2>
+    <p class="sub">Введите телефон, на который оставляли заявку — увидите все свои заказы и сможете оценить мастера.</p>
+    <div class="my-input-row">
+      <input id="my-phone" type="tel" placeholder="+7 (___) ___-__-__" autocomplete="off"/>
+      <button onclick="loadMyOrders()">Найти</button>
+    </div>
+    <div class="my-orders" id="my-orders"></div>
+  </div>
+</div>
 
 <!-- ── АДМИН-ПАНЕЛЬ ─────────────────────────────────── -->
 <div id="admin-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;overflow-y:auto;padding:20px;">
@@ -3691,27 +3801,54 @@ function bindContractorRegistration() {
 
     const btn = e.target.querySelector('.btn-ctr-submit');
     btn.textContent = 'Отправляем...'; btn.disabled = true;
-    try {
-      if (BOT_TOKEN !== 'YOUR_BOT_TOKEN') {
-        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-          method:'POST', headers:{'Content-Type':'application/json'},
-          body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode:'Markdown' })
-        });
-      }
-    } catch {}
 
-    const contractor = {
-      id: Date.now(), name, phone, email, exp, status, team,
-      cats, areas, portfolio, about,
-      date: new Date().toLocaleString('ru-RU'),
-      modStatus: 'pending'
-    };
-    const list = JSON.parse(localStorage.getItem('vizbu_contractors') || '[]');
-    list.unshift(contractor);
-    localStorage.setItem('vizbu_contractors', JSON.stringify(list));
+    let tgLink = null;
+    try {
+      const r = await fetch('/api/api.php?action=contractor_register', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({
+          name, phone, email, status, team,
+          experience: parseInt(exp) || 0,
+          categories: cats, areas, portfolio, about,
+          bot_username: 'visbu_orders_bot',
+        })
+      });
+      const data = await r.json();
+      if (data.ok) {
+        tgLink = data.tg_link;
+        localStorage.setItem('vizbu_contractor_id', data.contractor_id);
+        localStorage.setItem('vizbu_contractor_link', data.tg_link);
+      } else {
+        throw new Error(data.error || 'API');
+      }
+    } catch (err) {
+      console.error('Contractor reg error:', err);
+      // Fallback на старую схему через TG
+      try {
+        if (BOT_TOKEN !== 'YOUR_BOT_TOKEN') {
+          await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+            method:'POST', headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode:'Markdown' })
+          });
+        }
+      } catch {}
+    }
 
     document.getElementById('ctr-reg-form').style.display = 'none';
     document.getElementById('ctr-reg-ok').style.display = 'block';
+
+    // Если получили ссылку привязки — покажем её
+    if (tgLink) {
+      const ok = document.getElementById('ctr-reg-ok');
+      ok.innerHTML = `
+        <div class="si">✅</div>
+        <h3>Заявка принята!</h3>
+        <p>Перезвоним в течение дня. Сейчас — <strong>привяжите Telegram</strong>, чтобы получать заказы.</p>
+        <a href="${tgLink}" target="_blank" style="display:inline-block;margin-top:14px;padding:13px 28px;background:#2AABEE;color:#fff;border-radius:99px;text-decoration:none;font-weight:800;">📱 Привязать Telegram (1 клик)</a>
+        <p style="margin-top:12px;font-size:.82rem;color:var(--muted);">После привязки бот пришлёт подтверждение. Когда мы одобрим аккаунт — начнут приходить заявки.</p>
+      `;
+    }
+
     btn.textContent = 'Отправить заявку →'; btn.disabled = false;
     document.getElementById('ctr-reg').scrollIntoView({behavior:'smooth', block:'center'});
   });
@@ -4520,62 +4657,188 @@ document.getElementById('form').addEventListener('submit', async e => {
   btn.textContent = 'Отправляем...'; btn.disabled = true;
 
   try {
-    if (BOT_TOKEN !== 'YOUR_BOT_TOKEN') {
-      // Сначала отправим текстовую заявку
-      const r = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-        method: 'POST', headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: 'Markdown' })
-      });
-      if (!r.ok) throw new Error();
+    // Шлём заявку в наш бэкенд (он сам уведомит админа в Telegram и сохранит в БД)
+    const r = await fetch('/api/api.php?action=order_create', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        name, phone, service: svc,
+        category: currentSvc ? currentSvc.cat : '',
+        address: addr,
+        comment: comm,
+        extras,
+        promo: promo ? promo.code : '',
+      })
+    });
+    const data = await r.json();
+    if (!data.ok) throw new Error(data.error || 'API error');
+    const orderId = data.order_id;
 
-      // Если есть фото — шлём отдельно
-      if (selectedPhotos.length > 0) {
-        if (selectedPhotos.length === 1) {
-          // одно фото = sendPhoto
-          const fd = new FormData();
-          fd.append('chat_id', CHAT_ID);
-          fd.append('photo', selectedPhotos[0]);
-          fd.append('caption', `📸 Фото к заявке: ${svc} · ${name}`);
-          await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
-            method: 'POST', body: fd
-          });
-        } else {
-          // несколько = sendMediaGroup (макс 10)
-          const fd = new FormData();
-          fd.append('chat_id', CHAT_ID);
-          const media = selectedPhotos.map((f, i) => ({
-            type: 'photo',
-            media: `attach://photo${i}`,
-            caption: i === 0 ? `📸 Фото к заявке: ${svc} · ${name}` : undefined
-          }));
-          fd.append('media', JSON.stringify(media));
-          selectedPhotos.forEach((f, i) => fd.append(`photo${i}`, f));
-          await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMediaGroup`, {
-            method: 'POST', body: fd
-          });
-        }
+    // Если есть фото — отдельно загрузим в Telegram (по прежней схеме)
+    if (selectedPhotos.length > 0 && BOT_TOKEN !== 'YOUR_BOT_TOKEN') {
+      const cap = `📸 К заявке #${orderId}: ${svc} · ${name}`;
+      if (selectedPhotos.length === 1) {
+        const fd = new FormData();
+        fd.append('chat_id', CHAT_ID);
+        fd.append('photo', selectedPhotos[0]);
+        fd.append('caption', cap);
+        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, { method:'POST', body:fd });
+      } else {
+        const fd = new FormData();
+        fd.append('chat_id', CHAT_ID);
+        const media = selectedPhotos.map((f, i) => ({
+          type: 'photo', media: `attach://photo${i}`,
+          caption: i === 0 ? cap : undefined
+        }));
+        fd.append('media', JSON.stringify(media));
+        selectedPhotos.forEach((f, i) => fd.append(`photo${i}`, f));
+        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMediaGroup`, { method:'POST', body:fd });
       }
     }
-  } catch (err) { console.error('Telegram error:', err); }
+  } catch (err) {
+    console.error('Order send error:', err);
+    // Fallback на старую схему — прямо в Telegram если бэкенд лёг
+    try {
+      if (BOT_TOKEN !== 'YOUR_BOT_TOKEN') {
+        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode:'Markdown' })
+        });
+      }
+    } catch {}
+  }
 
-  // Сохраняем в localStorage для админ-панели
-  const photoCount = selectedPhotos.length;
-  const order = { id: Date.now(), svc, name, phone, addr, comm, extras, photoCount,
-                  promo: promo ? promo.code : null,
-                  promoLabel: promo ? promo.label : null,
-                  date: new Date().toLocaleString('ru-RU'), status: 'new' };
-  // Помечаем что первая заявка прошла (для firstOrderOnly промо в будущем)
+  // Помечаем первую заявку
   if (promo) localStorage.setItem('vizbu_first_order_used', '1');
+  // Запоминаем телефон клиента — пригодится для "Мои заказы"
+  localStorage.setItem('vizbu_my_phone', phone);
+
+  // Локальная копия для оффлайн-просмотра
+  const order = { id: Date.now(), svc, name, phone, addr, comm, extras,
+                  photoCount: selectedPhotos.length,
+                  promo: promo ? promo.code : null,
+                  date: new Date().toLocaleString('ru-RU'), status: 'new' };
   const orders = JSON.parse(localStorage.getItem('vizbu_orders') || '[]');
   orders.unshift(order);
   localStorage.setItem('vizbu_orders', JSON.stringify(orders));
 
-  console.log('📋 Заявка:', order);
+  console.log('📋 Заявка отправлена:', order);
   document.getElementById('m-form').style.display = 'none';
   document.getElementById('m-ok').style.display   = 'block';
   btn.textContent = 'Отправить заявку →'; btn.disabled = false;
   selectedPhotos = [];
 });
+
+// ── МОИ ЗАКАЗЫ ─────────────────────────────────────────────────────
+const STATUS_LABEL_RU = {
+  new:'🆕 Принята, скоро перезвоним',
+  confirmed:'✅ Согласована — ищем мастера',
+  broadcasting:'📢 Подбираем подрядчика',
+  taken:'👷 Мастер взял заказ',
+  completed:'🏁 Выполнено — оцените!',
+  cancelled:'❌ Сорвалось — мы свяжемся',
+  rated:'⭐ Закрыто',
+};
+function openMyOrders() {
+  const phone = localStorage.getItem('vizbu_my_phone') || '';
+  if (phone) document.getElementById('my-phone').value = phone;
+  document.getElementById('my-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if (phone) loadMyOrders();
+}
+function closeMyOrders() {
+  document.getElementById('my-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+async function loadMyOrders() {
+  const phone = document.getElementById('my-phone').value.trim();
+  if (!phone) return;
+  localStorage.setItem('vizbu_my_phone', phone);
+  const c = document.getElementById('my-orders');
+  c.innerHTML = '<div class="my-empty">Загружаем…</div>';
+  try {
+    const r = await fetch('/api/api.php?action=my_orders&phone=' + encodeURIComponent(phone));
+    const data = await r.json();
+    if (!data.ok) throw new Error(data.error);
+    if (!data.orders.length) {
+      c.innerHTML = '<div class="my-empty"><div class="e">📭</div>По этому номеру заказов пока нет.<br/>Оставьте заявку через каталог!</div>';
+      return;
+    }
+    c.innerHTML = data.orders.map(o => {
+      const date = new Date(o.created_at * 1000).toLocaleDateString('ru-RU', { day:'numeric', month:'long', hour:'2-digit', minute:'2-digit' });
+      const stCls = 'mst-' + o.status;
+      let extras = '';
+      if (o.contractor_name && (o.status === 'taken' || o.status === 'completed' || o.status === 'rated')) {
+        extras += `<div>👷 Мастер: <strong>${o.contractor_name}</strong>${o.contractor_phone ? ' · ' + o.contractor_phone : ''}</div>`;
+      }
+      if (o.address) extras += `<div>📍 ${o.address}</div>`;
+      if (o.budget) extras += `<div>💰 Бюджет: ${o.budget}</div>`;
+
+      let rateBlock = '';
+      if (o.status === 'completed' && !o.rating) {
+        rateBlock = `
+          <div class="my-rate">
+            <div class="my-rate-label">Как вам работа мастера?</div>
+            <div class="my-stars" data-oid="${o.id}">
+              ${[1,2,3,4,5].map(i => `<span class="my-star" data-r="${i}">★</span>`).join('')}
+            </div>
+          </div>`;
+      } else if (o.status === 'rated' && o.rating) {
+        rateBlock = `
+          <div class="my-rate">
+            <div class="my-rate-done">✓ Вы оценили: ${'★'.repeat(o.rating)}${'☆'.repeat(5 - o.rating)}</div>
+          </div>`;
+      }
+
+      return `
+        <div class="my-order">
+          <div class="my-order-top">
+            <div class="my-order-svc">${o.service}</div>
+            <span class="my-order-status ${stCls}">${STATUS_LABEL_RU[o.status] || o.status}</span>
+          </div>
+          <div class="my-order-meta">#${o.id} · ${date}</div>
+          <div class="my-order-info">${extras}</div>
+          ${rateBlock}
+        </div>
+      `;
+    }).join('');
+
+    // обработчики звёзд
+    c.querySelectorAll('.my-stars').forEach(stars => {
+      const oid = stars.dataset.oid;
+      const arr = stars.querySelectorAll('.my-star');
+      arr.forEach(s => {
+        s.addEventListener('mouseover', () => {
+          const r = parseInt(s.dataset.r);
+          arr.forEach((x,i) => x.classList.toggle('hover', i < r));
+        });
+        s.addEventListener('mouseout', () => arr.forEach(x => x.classList.remove('hover')));
+        s.addEventListener('click', async () => {
+          const rating = parseInt(s.dataset.r);
+          const phone = document.getElementById('my-phone').value.trim();
+          const r = await fetch('/api/api.php?action=rate', {
+            method:'POST', headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({ order_id: parseInt(oid), rating, phone })
+          });
+          const d = await r.json();
+          if (d.ok) loadMyOrders();
+          else alert('Ошибка: ' + (d.error || ''));
+        });
+      });
+    });
+  } catch (e) {
+    c.innerHTML = '<div class="my-empty">Ошибка загрузки. Проверьте интернет или попробуйте позже.</div>';
+  }
+}
+
+// Авто-открытие модалки если URL содержит ?my_orders=1
+(function autoOpenMyOrders() {
+  const url = new URL(location.href);
+  if (url.searchParams.get('my_orders') === '1') {
+    const ph = url.searchParams.get('phone');
+    if (ph) document.getElementById('my-phone').value = ph;
+    setTimeout(openMyOrders, 200);
+  }
+})();
 
 renderStories();
 renderReviews();
