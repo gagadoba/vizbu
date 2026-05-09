@@ -83,16 +83,76 @@ CREATE TABLE IF NOT EXISTS broadcast_log (
   FOREIGN KEY (contractor_id) REFERENCES contractors(id)
 );
 
+CREATE TABLE IF NOT EXISTS clients (
+  id              INTEGER PRIMARY KEY AUTOINCREMENT,
+  name            TEXT NOT NULL,
+  phone           TEXT NOT NULL UNIQUE,
+  password_hash   TEXT NOT NULL,
+  email           TEXT,
+  address         TEXT,           -- адрес/СНТ для авто-заполнения формы
+  comment         TEXT,           -- произвольная инфа от клиента
+  auth_token      TEXT UNIQUE,    -- токен для сессий
+  orders_count    INTEGER DEFAULT 0,
+  last_login_at   INTEGER,
+  created_at      INTEGER NOT NULL DEFAULT (strftime('%s', 'now'))
+);
+
 CREATE INDEX IF NOT EXISTS idx_orders_phone ON orders(client_phone);
 CREATE INDEX IF NOT EXISTS idx_orders_status ON orders(status);
 CREATE INDEX IF NOT EXISTS idx_contractors_tg ON contractors(tg_chat_id);
 CREATE INDEX IF NOT EXISTS idx_contractors_token ON contractors(link_token);
+CREATE INDEX IF NOT EXISTS idx_clients_phone ON clients(phone);
+CREATE INDEX IF NOT EXISTS idx_clients_token ON clients(auth_token);
 ");
+
+// Идемпотентно добавляем колонку client_id в orders (привязка заказа к клиенту)
+try {
+    $db->exec('ALTER TABLE orders ADD COLUMN client_id INTEGER');
+} catch (PDOException $e) {
+    // колонка уже есть — ок
+}
 
 function db_log($order_id, $from, $to, $by_who, $note = null) {
     global $db;
     $stmt = $db->prepare('INSERT INTO order_history (order_id, status_from, status_to, by_who, note) VALUES (?,?,?,?,?)');
     $stmt->execute([$order_id, $from, $to, $by_who, $note]);
+}
+
+// ── Helpers для авторизации клиентов ───────────────────────────────
+function client_by_token($token) {
+    global $db;
+    if (!$token) return null;
+    $stmt = $db->prepare('SELECT * FROM clients WHERE auth_token = ?');
+    $stmt->execute([$token]);
+    return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+}
+
+function client_by_phone($phone) {
+    global $db;
+    if (!$phone) return null;
+    $stmt = $db->prepare('SELECT * FROM clients WHERE phone = ?');
+    $stmt->execute([$phone]);
+    return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+}
+
+// Берём токен из заголовка X-Auth-Token, query или body
+function current_auth_token() {
+    $hdr = $_SERVER['HTTP_X_AUTH_TOKEN'] ?? '';
+    if ($hdr) return $hdr;
+    if (!empty($_GET['auth_token'])) return $_GET['auth_token'];
+    $raw = file_get_contents('php://input');
+    if ($raw) {
+        $j = json_decode($raw, true);
+        if (is_array($j) && !empty($j['auth_token'])) return $j['auth_token'];
+    }
+    return '';
+}
+
+// Возвращает публичную часть клиента (без password_hash)
+function client_public($c) {
+    if (!$c) return null;
+    unset($c['password_hash']);
+    return $c;
 }
 
 function tg_send($chat_id, $text, $reply_markup = null) {

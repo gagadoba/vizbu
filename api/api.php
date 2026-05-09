@@ -37,11 +37,19 @@ switch ($action) {
 
         if (!$name || !$phone || !$service) fail('Заполните имя, телефон и услугу');
 
-        $stmt = $db->prepare('INSERT INTO orders (client_name, client_phone, service, category, address, comment, extras, promo) VALUES (?,?,?,?,?,?,?,?)');
+        // Если клиент авторизован — линкуем заказ к нему. Анонимно — тоже ок.
+        $client = client_by_token(current_auth_token());
+        $client_id = $client ? (int)$client['id'] : null;
+
+        $stmt = $db->prepare('INSERT INTO orders (client_name, client_phone, service, category, address, comment, extras, promo, client_id) VALUES (?,?,?,?,?,?,?,?,?)');
         $stmt->execute([$name, $phone, $service, $category, $address, $comment,
-                        $extras ? json_encode($extras, JSON_UNESCAPED_UNICODE) : null, $promo]);
+                        $extras ? json_encode($extras, JSON_UNESCAPED_UNICODE) : null, $promo, $client_id]);
         $order_id = (int)$db->lastInsertId();
         db_log($order_id, null, 'new', 'client');
+
+        if ($client_id) {
+            $db->prepare('UPDATE clients SET orders_count = orders_count + 1 WHERE id = ?')->execute([$client_id]);
+        }
 
         // Уведомляем админа
         $extrasText = '';
@@ -69,13 +77,23 @@ switch ($action) {
     // КЛИЕНТ — мои заказы (по телефону)
     // ════════════════════════════════════════════
     case 'my_orders': {
-        $phone = trim($body['phone'] ?? $_GET['phone'] ?? '');
-        if (!$phone) fail('Укажите номер телефона');
-
-        $stmt = $db->prepare('SELECT o.*, c.name as contractor_name, c.phone as contractor_phone
-                              FROM orders o LEFT JOIN contractors c ON c.id = o.contractor_id
-                              WHERE o.client_phone = ? ORDER BY o.created_at DESC');
-        $stmt->execute([$phone]);
+        // Авторизованный пользователь — берём заказы по client_id и/или его телефону
+        $client = client_by_token(current_auth_token());
+        $phone  = trim($body['phone'] ?? $_GET['phone'] ?? '');
+        if ($client) {
+            // Объединяем: заказы с client_id == клиент ИЛИ заказы по тому же телефону
+            $stmt = $db->prepare('SELECT o.*, c.name as contractor_name, c.phone as contractor_phone
+                                  FROM orders o LEFT JOIN contractors c ON c.id = o.contractor_id
+                                  WHERE o.client_id = ? OR o.client_phone = ?
+                                  ORDER BY o.created_at DESC');
+            $stmt->execute([$client['id'], $client['phone']]);
+        } else {
+            if (!$phone) fail('Укажите номер телефона');
+            $stmt = $db->prepare('SELECT o.*, c.name as contractor_name, c.phone as contractor_phone
+                                  FROM orders o LEFT JOIN contractors c ON c.id = o.contractor_id
+                                  WHERE o.client_phone = ? ORDER BY o.created_at DESC');
+            $stmt->execute([$phone]);
+        }
         $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
         ok(['orders' => $orders]);
     }
@@ -106,6 +124,105 @@ switch ($action) {
         tg_send(ADMIN_CHAT, "⭐ Заказ #$order_id оценён: *{$rating}★* от {$o['client_name']}");
 
         ok(['rating' => $rating]);
+    }
+
+    // ════════════════════════════════════════════
+    // КЛИЕНТ — регистрация (имя + телефон + пароль обязательно;
+    //           email/адрес/комментарий — опционально)
+    // ════════════════════════════════════════════
+    case 'client_register': {
+        $name     = trim($body['name'] ?? '');
+        $phone    = trim($body['phone'] ?? '');
+        $password = (string)($body['password'] ?? '');
+        $email    = trim($body['email'] ?? '');
+        $address  = trim($body['address'] ?? '');
+        $comment  = trim($body['comment'] ?? '');
+
+        if (!$name || !$phone || !$password) fail('Заполните имя, телефон и пароль');
+        if (mb_strlen($password) < 4) fail('Пароль слишком короткий (минимум 4 символа)');
+
+        // Проверяем что телефона ещё нет
+        $exists = client_by_phone($phone);
+        if ($exists) fail('Этот номер уже зарегистрирован. Войдите по паролю.');
+
+        $hash  = password_hash($password, PASSWORD_DEFAULT);
+        $token = rand_token(32);
+        $stmt = $db->prepare('INSERT INTO clients (name, phone, password_hash, email, address, comment, auth_token, last_login_at) VALUES (?,?,?,?,?,?,?,strftime("%s","now"))');
+        $stmt->execute([$name, $phone, $hash, $email, $address, $comment, $token]);
+        $cid = (int)$db->lastInsertId();
+
+        // Уведомляем админа
+        $msg = "👤 *Новая регистрация клиента #$cid*\n"
+             . "Имя: $name\n📱 Телефон: $phone\n"
+             . ($email ? "📧 Email: $email\n" : '')
+             . ($address ? "📍 Адрес: $address\n" : '')
+             . ($comment ? "💬 Комментарий: $comment\n" : '');
+        tg_send(ADMIN_CHAT, $msg);
+
+        $client = client_by_token($token);
+        ok(['auth_token' => $token, 'client' => client_public($client)]);
+    }
+
+    // ════════════════════════════════════════════
+    // КЛИЕНТ — вход по телефону и паролю
+    // ════════════════════════════════════════════
+    case 'client_login': {
+        $phone    = trim($body['phone'] ?? '');
+        $password = (string)($body['password'] ?? '');
+        if (!$phone || !$password) fail('Введите телефон и пароль');
+
+        $c = client_by_phone($phone);
+        if (!$c || !password_verify($password, $c['password_hash'])) {
+            fail('Неверный телефон или пароль', 401);
+        }
+
+        // Ротация токена для свежей сессии (можно оставить старый — но так безопаснее)
+        $token = $c['auth_token'] ?: rand_token(32);
+        $stmt = $db->prepare('UPDATE clients SET auth_token = ?, last_login_at = strftime("%s","now") WHERE id = ?');
+        $stmt->execute([$token, $c['id']]);
+
+        $c = client_by_token($token);
+        ok(['auth_token' => $token, 'client' => client_public($c)]);
+    }
+
+    // ════════════════════════════════════════════
+    // КЛИЕНТ — кто я (по токену)
+    // ════════════════════════════════════════════
+    case 'client_me': {
+        $c = client_by_token(current_auth_token());
+        if (!$c) fail('Не авторизован', 401);
+        ok(['client' => client_public($c)]);
+    }
+
+    // ════════════════════════════════════════════
+    // КЛИЕНТ — обновить профиль (email/адрес/комментарий/имя)
+    // ════════════════════════════════════════════
+    case 'client_update': {
+        $c = client_by_token(current_auth_token());
+        if (!$c) fail('Не авторизован', 401);
+
+        $name    = isset($body['name'])    ? trim($body['name'])    : null;
+        $email   = isset($body['email'])   ? trim($body['email'])   : null;
+        $address = isset($body['address']) ? trim($body['address']) : null;
+        $comment = isset($body['comment']) ? trim($body['comment']) : null;
+
+        $stmt = $db->prepare('UPDATE clients SET
+            name    = COALESCE(?, name),
+            email   = COALESCE(?, email),
+            address = COALESCE(?, address),
+            comment = COALESCE(?, comment)
+            WHERE id = ?');
+        $stmt->execute([$name, $email, $address, $comment, $c['id']]);
+        ok(['client' => client_public(client_by_token($c['auth_token']))]);
+    }
+
+    // ════════════════════════════════════════════
+    // КЛИЕНТ — выход (сбрасываем токен)
+    // ════════════════════════════════════════════
+    case 'client_logout': {
+        $c = client_by_token(current_auth_token());
+        if ($c) $db->prepare('UPDATE clients SET auth_token = NULL WHERE id = ?')->execute([$c['id']]);
+        ok();
     }
 
     // ════════════════════════════════════════════
@@ -178,6 +295,71 @@ switch ($action) {
             $c['rating'] = $c['rating_cnt'] > 0 ? round($c['rating_sum'] / $c['rating_cnt'], 1) : null;
         }
         ok(['contractors' => $list]);
+    }
+
+    // ════════════════════════════════════════════
+    // АДМИН — список клиентов (зарегистрированных)
+    // ════════════════════════════════════════════
+    case 'admin_clients': {
+        admin_check();
+        $q = trim($_GET['q'] ?? $body['q'] ?? '');
+        if ($q !== '') {
+            $like = '%' . $q . '%';
+            $stmt = $db->prepare('SELECT id, name, phone, email, address, comment, orders_count, last_login_at, created_at
+                                  FROM clients
+                                  WHERE name LIKE ? OR phone LIKE ? OR email LIKE ?
+                                  ORDER BY created_at DESC');
+            $stmt->execute([$like, $like, $like]);
+        } else {
+            $stmt = $db->query('SELECT id, name, phone, email, address, comment, orders_count, last_login_at, created_at
+                                FROM clients ORDER BY created_at DESC');
+        }
+        ok(['clients' => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
+    }
+
+    // ════════════════════════════════════════════
+    // АДМИН — выгрузка клиентов в CSV
+    // ════════════════════════════════════════════
+    case 'admin_clients_csv': {
+        admin_check();
+        $stmt = $db->query('SELECT id, name, phone, email, address, comment, orders_count, last_login_at, created_at
+                            FROM clients ORDER BY created_at DESC');
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Возвращаем CSV прямо в HTTP
+        header('Content-Type: text/csv; charset=utf-8');
+        header('Content-Disposition: attachment; filename="visbu-clients-' . date('Y-m-d') . '.csv"');
+        $out = fopen('php://output', 'w');
+        // BOM для корректного открытия в Excel
+        fwrite($out, "\xEF\xBB\xBF");
+        fputcsv($out, ['id','имя','телефон','email','адрес','комментарий','заказов','последний вход','создан']);
+        foreach ($rows as $r) {
+            fputcsv($out, [
+                $r['id'],
+                $r['name'],
+                $r['phone'],
+                $r['email'],
+                $r['address'],
+                $r['comment'],
+                $r['orders_count'],
+                $r['last_login_at'] ? date('Y-m-d H:i', $r['last_login_at']) : '',
+                $r['created_at'] ? date('Y-m-d H:i', $r['created_at']) : '',
+            ]);
+        }
+        fclose($out);
+        exit;
+    }
+
+    // ════════════════════════════════════════════
+    // АДМИН — удалить клиента
+    // ════════════════════════════════════════════
+    case 'admin_client_delete': {
+        admin_check();
+        $id = (int)($body['id'] ?? 0);
+        if (!$id) fail('Не указан id');
+        $db->prepare('UPDATE orders SET client_id = NULL WHERE client_id = ?')->execute([$id]);
+        $db->prepare('DELETE FROM clients WHERE id = ?')->execute([$id]);
+        ok();
     }
 
     // ════════════════════════════════════════════

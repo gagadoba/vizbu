@@ -1644,6 +1644,124 @@
     .btn-wa { background:#25D366; color:#fff; border:none; border-radius:999px; padding:6px 16px; font-weight:700; font-size:.78rem; cursor:pointer; text-decoration:none; }
     .empty-state { text-align:center; padding:48px 20px; color:var(--muted); font-size:.95rem; }
 
+    /* ───── AUTH (вход/регистрация) ───── */
+    .hdr-auth {
+      color:#fff; font-weight:800; font-size:.78rem;
+      background: rgba(255,255,255,.12);
+      border:1.5px solid #fff; border-radius:6px;
+      padding:5px 10px; cursor:pointer; font-family:inherit;
+      margin-right:6px;
+    }
+    .hdr-auth:hover { background: rgba(255,255,255,.22); }
+    .hdr-user {
+      color:#fff; font-weight:800; font-size:.78rem;
+      background: rgba(45,106,79,.85);
+      border:1.5px solid var(--green); border-radius:6px;
+      padding:5px 10px; cursor:pointer; font-family:inherit;
+      margin-right:6px; position:relative;
+      display:inline-flex; align-items:center; gap:4px;
+    }
+    .hdr-user-menu {
+      position:absolute; top:calc(100% + 6px); right:0;
+      background:#fff; color:var(--text);
+      border:1px solid var(--border); border-radius:10px;
+      box-shadow:0 8px 24px rgba(0,0,0,.16);
+      min-width:180px; padding:6px 0;
+      display:none; z-index:600;
+    }
+    .hdr-user.open .hdr-user-menu { display:block; }
+    .hdr-user-menu button {
+      display:block; width:100%; text-align:left;
+      background:none; border:none; padding:9px 14px;
+      font:inherit; cursor:pointer; color:var(--text);
+      font-size:.85rem; font-weight:600;
+    }
+    .hdr-user-menu button:hover { background:var(--bg); }
+
+    .auth-overlay {
+      display:none; position:fixed; inset:0;
+      background: rgba(0,0,0,.6); z-index: 800;
+      align-items:flex-start; justify-content:center;
+      padding: 24px 16px; overflow-y:auto;
+    }
+    .auth-overlay.open { display:flex; }
+    .auth-modal {
+      background:#fff; border-radius:18px; padding:26px;
+      width:100%; max-width:480px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.3);
+      position:relative;
+    }
+    .auth-modal h2 {
+      font-size:1.35rem; font-weight:900; color:var(--green);
+      margin-bottom:6px;
+    }
+    .auth-modal .sub { color:var(--muted); font-size:.92rem; margin-bottom:16px; }
+    .auth-tabs { display:flex; gap:6px; margin-bottom:14px; }
+    .auth-tab {
+      flex:1; padding:10px 14px;
+      border:1.5px solid var(--border); background:#fff;
+      border-radius:10px; font-weight:700; cursor:pointer;
+      font-family:inherit; font-size:.92rem;
+      transition:all .12s;
+    }
+    .auth-tab.active { background:var(--green); color:#fff; border-color:var(--green); }
+    .auth-form { display:flex; flex-direction:column; gap:10px; }
+    .auth-form input,
+    .auth-form textarea {
+      padding:12px 14px; border:1.5px solid var(--border);
+      border-radius:10px; font:inherit; font-size:.95rem;
+      background:#fff; color:var(--text);
+    }
+    .auth-form input:focus, .auth-form textarea:focus {
+      outline:none; border-color:var(--green);
+    }
+    .auth-form .btn-primary {
+      background:var(--green); color:#fff; border:none;
+      padding:13px; border-radius:10px; font-weight:800;
+      font-family:inherit; font-size:1rem; cursor:pointer;
+      margin-top:4px; transition:filter .12s;
+    }
+    .auth-form .btn-primary:hover { filter:brightness(1.1); }
+    .auth-form .btn-primary:disabled { opacity:.6; cursor:wait; }
+    .auth-extra-toggle {
+      cursor:pointer; color:var(--muted); font-size:.85rem;
+      padding:6px 0; user-select:none;
+    }
+    .auth-extra-toggle:hover { color:var(--green); }
+    .auth-extra-fields { display:flex; flex-direction:column; gap:10px; }
+    .auth-msg {
+      padding:10px 12px; border-radius:8px;
+      font-size:.85rem; font-weight:600;
+      margin-bottom:10px;
+    }
+    .auth-msg.error   { background:#FEE2E2; color:#991B1B; }
+    .auth-msg.success { background:#DCFCE7; color:#15803D; }
+    .auth-skip {
+      text-align:center; margin-top:14px;
+      color:var(--muted); font-size:.85rem;
+      cursor:pointer; padding:8px;
+    }
+    .auth-skip:hover { color:var(--green); }
+
+    /* ───── Админ: таблица клиентов ───── */
+    .ad-clients-search {
+      width:100%; padding:10px 14px; border:1.5px solid var(--border);
+      border-radius:10px; font:inherit; margin-bottom:14px;
+    }
+    .ad-clients-table {
+      width:100%; border-collapse:collapse; font-size:.85rem;
+    }
+    .ad-clients-table th {
+      background:var(--bg); text-align:left;
+      padding:9px 10px; font-weight:800; color:var(--text);
+      border-bottom:2px solid var(--border);
+    }
+    .ad-clients-table td {
+      padding:9px 10px; border-bottom:1px solid var(--border);
+      vertical-align:top;
+    }
+    .ad-clients-table tr:hover td { background:var(--bg); }
+
     @media(max-width:480px){ .modal{padding:24px 18px;} .fr-row2{grid-template-columns:1fr;} }
   </style>
 </head>
@@ -1671,7 +1789,16 @@
       <button class="nav-tab" data-page="management">🔑 Управление</button>
     </nav>
     <div class="hdr-contacts">
-      <button class="hdr-my" onclick="openMyOrders()">📋 Мои заказы</button>
+      <button class="hdr-auth" id="hdr-auth-btn" onclick="openAuth('login')">👤 Войти</button>
+      <span class="hdr-user" id="hdr-user-info" style="display:none;" onclick="toggleUserMenu(event)">
+        <span id="hdr-user-name">👤</span><span style="font-size:.7rem;">▾</span>
+        <span class="hdr-user-menu">
+          <button onclick="openMyOrders()">📋 Мои заказы</button>
+          <button onclick="openAuth('profile')">⚙️ Профиль</button>
+          <button onclick="doLogout()">🚪 Выйти</button>
+        </span>
+      </span>
+      <button class="hdr-my" id="hdr-my-btn" onclick="openMyOrders()">📋 Мои заказы</button>
       <a href="tel:+79119507358" class="hdr-phone">📞 +7 911 950-73-58</a>
       <a href="https://wa.me/79119507358" target="_blank" rel="noopener" class="hdr-wa">WA</a>
       <a href="https://t.me/karina_vizbu" target="_blank" rel="noopener" class="hdr-tg">TG</a>
@@ -2565,6 +2692,72 @@
 </div>
 
 
+
+<!-- ── ВХОД / РЕГИСТРАЦИЯ КЛИЕНТА ─────────────────── -->
+<div class="auth-overlay" id="auth-overlay">
+  <div class="auth-modal">
+    <button class="my-modal-x" onclick="closeAuth()">✕</button>
+    <h2 id="auth-title">Войти в ВИсбу</h2>
+    <p class="sub" id="auth-sub">Введите телефон и пароль, чтобы видеть свои заказы и не вводить данные заново.</p>
+
+    <div class="auth-tabs" id="auth-tabs">
+      <button class="auth-tab active" onclick="authTab('login')" id="auth-tab-login" type="button">Войти</button>
+      <button class="auth-tab"        onclick="authTab('register')" id="auth-tab-register" type="button">Регистрация</button>
+    </div>
+
+    <div id="auth-msg-box"></div>
+
+    <!-- Вход -->
+    <form class="auth-form" id="auth-form-login" onsubmit="doLogin(event)">
+      <input id="li-phone"    type="tel"      placeholder="+7 (___) ___-__-__" autocomplete="tel" required/>
+      <input id="li-password" type="password" placeholder="Пароль" autocomplete="current-password" required/>
+      <button type="submit" class="btn-primary" id="li-btn">Войти</button>
+    </form>
+
+    <!-- Регистрация -->
+    <form class="auth-form" id="auth-form-register" style="display:none;" onsubmit="doRegister(event)">
+      <input id="ri-name"      type="text"     placeholder="Ваше имя *"          autocomplete="name" required/>
+      <input id="ri-phone"     type="tel"      placeholder="Телефон * +7…"      autocomplete="tel"  required/>
+      <input id="ri-password"  type="password" placeholder="Пароль *"           autocomplete="new-password" required/>
+      <input id="ri-password2" type="password" placeholder="Повторите пароль *" autocomplete="new-password" required/>
+      <div class="auth-extra-toggle" onclick="toggleAuthExtra()" id="auth-extra-toggle">
+        <span id="auth-extra-arrow">▸</span> Добавить адрес и доп. инфо
+        <span style="color:var(--muted);font-size:.78rem;">— чтобы не вводить их каждый раз</span>
+      </div>
+      <div class="auth-extra-fields" id="auth-extra-fields" style="display:none;">
+        <input id="ri-email"   type="email" placeholder="Email (для чеков и истории заказов)" autocomplete="email"/>
+        <input id="ri-address" type="text"  placeholder="Адрес / СНТ" autocomplete="street-address"/>
+        <textarea id="ri-comment" rows="2" placeholder="Доп. инфо: доступ к участку, особые пожелания…"></textarea>
+      </div>
+      <button type="submit" class="btn-primary" id="ri-btn">Зарегистрироваться</button>
+    </form>
+
+    <!-- Профиль (для залогиненного пользователя) -->
+    <form class="auth-form" id="auth-form-profile" style="display:none;" onsubmit="doProfileSave(event)">
+      <input id="pr-name"    type="text"  placeholder="Имя" autocomplete="name"/>
+      <input id="pr-email"   type="email" placeholder="Email" autocomplete="email"/>
+      <input id="pr-address" type="text"  placeholder="Адрес / СНТ" autocomplete="street-address"/>
+      <textarea id="pr-comment" rows="2" placeholder="Доп. инфо"></textarea>
+      <button type="submit" class="btn-primary" id="pr-btn">Сохранить</button>
+    </form>
+
+    <div class="auth-skip" id="auth-skip" onclick="closeAuth()">Пропустить — я и без регистрации справлюсь</div>
+  </div>
+</div>
+
+<!-- ── ОФФЕР РЕГИСТРАЦИИ ПОСЛЕ АНОНИМНОГО ЗАКАЗА ────── -->
+<div class="auth-overlay" id="reg-prompt">
+  <div class="auth-modal">
+    <button class="my-modal-x" onclick="closeRegPrompt()">✕</button>
+    <h2>✅ Заявка принята!</h2>
+    <p class="sub">Хотите зарегистрироваться, чтобы видеть статус заказа в кабинете и оформлять следующие заявки в один клик?</p>
+    <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;">
+      <button class="btn-primary" style="flex:1;background:var(--green);color:#fff;border:none;padding:13px;border-radius:10px;font-weight:800;cursor:pointer;font-family:inherit;font-size:1rem;" onclick="closeRegPrompt(); openAuth('register');">Зарегистрироваться</button>
+      <button onclick="closeRegPrompt()" style="padding:13px 20px;background:#fff;border:1.5px solid var(--border);border-radius:10px;font-weight:700;cursor:pointer;font-family:inherit;">Пропустить</button>
+    </div>
+  </div>
+</div>
+
 <!-- МОИ ЗАКАЗЫ — кабинет клиента -->
 <div class="my-overlay" id="my-overlay">
   <div class="my-modal my-modal-pos">
@@ -2593,6 +2786,7 @@
       <div style="display:flex;gap:8px;margin-bottom:18px;border-bottom:1px solid #E5EDE8;padding-bottom:14px;">
         <button onclick="adminTab('orders')" id="at-orders" style="padding:9px 18px;border-radius:10px;border:none;background:#1b4332;color:#fff;cursor:pointer;font-weight:800;font-size:.88rem;">📋 Заявки клиентов</button>
         <button onclick="adminTab('contractors')" id="at-contractors" style="padding:9px 18px;border-radius:10px;border:none;background:#F4F7F4;color:#1A1A1A;cursor:pointer;font-weight:800;font-size:.88rem;">💼 Подрядчики <span id="ct-pending-cnt" style="background:#F4A23A;color:#fff;border-radius:10px;padding:1px 7px;font-size:.7rem;margin-left:4px;display:none;"></span></button>
+        <button onclick="adminTab('clients')" id="at-clients" style="padding:9px 18px;border-radius:10px;border:none;background:#F4F7F4;color:#1A1A1A;cursor:pointer;font-weight:800;font-size:.88rem;">👥 Клиенты <span id="cl-cnt" style="background:#2D6A4F;color:#fff;border-radius:10px;padding:1px 7px;font-size:.7rem;margin-left:4px;display:none;"></span></button>
       </div>
       <div id="admin-tab-orders">
         <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
@@ -2612,6 +2806,13 @@
           <button onclick="filterCtr('rejected')" id="cf-rejected" style="padding:7px 16px;border-radius:999px;border:1.5px solid #E5EDE8;background:#fff;cursor:pointer;font-weight:600;font-size:.83rem;">❌ Отклонены</button>
         </div>
         <div id="admin-contractors"></div>
+      </div>
+      <div id="admin-tab-clients" style="display:none;">
+        <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;align-items:center;">
+          <input class="ad-clients-search" id="ad-clients-q" placeholder="🔎 Поиск по имени, телефону или email…" oninput="renderAdminClients()" style="flex:1;min-width:220px;"/>
+          <button onclick="exportClientsCsv()" style="padding:10px 16px;background:var(--green);color:#fff;border:none;border-radius:10px;font-weight:800;cursor:pointer;font-family:inherit;font-size:.88rem;">⬇ Экспорт CSV</button>
+        </div>
+        <div id="admin-clients"></div>
       </div>
     </div>
   </div>
@@ -2690,8 +2891,11 @@ async function submitLead(payload, photos = []) {
   let backendOk = false;
   let orderId = null;
   try {
+    const _hdr = {'Content-Type':'application/json'};
+    const _tok = localStorage.getItem('vizbu_auth_token') || '';
+    if (_tok) _hdr['X-Auth-Token'] = _tok;
     const r = await fetch(`${FORM_ENDPOINT}?action=${action}`, {
-      method: 'POST', headers: {'Content-Type':'application/json'},
+      method: 'POST', headers: _hdr,
       body: JSON.stringify({
         ...data,
         // нормализованные поля для бэкенда
@@ -4423,6 +4627,10 @@ document.getElementById('form').addEventListener('submit', async e => {
       <div class="si">✅</div>
       <h3>Заявка принята!</h3>
       <p>Мы перезвоним в течение часа и согласуем всё. Спасибо, что выбрали ВИсбу!</p>`;
+    // Если пользователь не залогинен — мягко предложим зарегистрироваться
+    if (!localStorage.getItem('vizbu_auth_token')) {
+      setTimeout(() => { try { showRegPrompt(); } catch {} }, 700);
+    }
   }
   document.getElementById('m-form').style.display = 'none';
   ok.style.display = 'block';
@@ -4453,6 +4661,7 @@ function openAdmin() {
   document.body.style.overflow = 'hidden';
   renderAdminOrders();
   renderAdminContractors();
+  renderAdminClients();
 }
 function closeAdmin() {
   document.getElementById('admin-overlay').style.display = 'none';
@@ -4461,10 +4670,18 @@ function closeAdmin() {
 function adminTab(t) {
   document.getElementById('admin-tab-orders').style.display       = t === 'orders'      ? '' : 'none';
   document.getElementById('admin-tab-contractors').style.display  = t === 'contractors' ? '' : 'none';
+  const cl = document.getElementById('admin-tab-clients');
+  if (cl) cl.style.display = t === 'clients' ? '' : 'none';
   document.getElementById('at-orders').style.background       = t === 'orders'      ? '#1b4332' : '#F4F7F4';
   document.getElementById('at-orders').style.color           = t === 'orders'      ? '#fff'    : '#1A1A1A';
   document.getElementById('at-contractors').style.background = t === 'contractors' ? '#1b4332' : '#F4F7F4';
   document.getElementById('at-contractors').style.color      = t === 'contractors' ? '#fff'    : '#1A1A1A';
+  const cb = document.getElementById('at-clients');
+  if (cb) {
+    cb.style.background = t === 'clients' ? '#1b4332' : '#F4F7F4';
+    cb.style.color      = t === 'clients' ? '#fff'    : '#1A1A1A';
+  }
+  if (t === 'clients') renderAdminClients();
 }
 function filterAdmin(f) {
   adminFilter = f;
@@ -4807,6 +5024,335 @@ async function loadMyOrders() {
     }
   });
 })();
+
+
+// ════════════════════════════════════════════════════════════════════
+// AUTH — клиентская регистрация и вход
+// ════════════════════════════════════════════════════════════════════
+const AUTH_KEY  = 'vizbu_auth_token';
+const CLIENT_KEY = 'vizbu_client';
+
+function getAuthToken()   { return localStorage.getItem(AUTH_KEY) || ''; }
+function getCurrentClient() {
+  try { return JSON.parse(localStorage.getItem(CLIENT_KEY) || 'null'); } catch { return null; }
+}
+function setAuth(token, client) {
+  if (token)  localStorage.setItem(AUTH_KEY, token);   else localStorage.removeItem(AUTH_KEY);
+  if (client) localStorage.setItem(CLIENT_KEY, JSON.stringify(client)); else localStorage.removeItem(CLIENT_KEY);
+  // Сразу же запомним телефон — чтобы "Мои заказы" работало даже если /api лёг
+  if (client && client.phone) localStorage.setItem('vizbu_my_phone', client.phone);
+  refreshHeaderAuth();
+  prefillFormFromAuth();
+}
+
+function refreshHeaderAuth() {
+  const c = getCurrentClient();
+  const btn = document.getElementById('hdr-auth-btn');
+  const info = document.getElementById('hdr-user-info');
+  const myBtn = document.getElementById('hdr-my-btn');
+  if (!btn || !info) return;
+  if (c) {
+    btn.style.display = 'none';
+    info.style.display = 'inline-flex';
+    document.getElementById('hdr-user-name').textContent = '👤 ' + (c.name || 'Профиль');
+    if (myBtn) myBtn.style.display = 'none';   // в дропдауне есть "Мои заказы"
+  } else {
+    btn.style.display = '';
+    info.style.display = 'none';
+    info.classList.remove('open');
+    if (myBtn) myBtn.style.display = '';
+  }
+}
+function toggleUserMenu(e) {
+  e.stopPropagation();
+  document.getElementById('hdr-user-info').classList.toggle('open');
+}
+document.addEventListener('click', () => {
+  const u = document.getElementById('hdr-user-info');
+  if (u) u.classList.remove('open');
+});
+
+// Открыть/закрыть модалку авторизации
+function openAuth(tab) {
+  authMsg('', '');
+  authTab(tab || 'login');
+  document.getElementById('auth-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // Если открыли в режиме профиля — заполним поля текущими значениями
+  if (tab === 'profile') {
+    const c = getCurrentClient();
+    if (c) {
+      document.getElementById('pr-name').value    = c.name || '';
+      document.getElementById('pr-email').value   = c.email || '';
+      document.getElementById('pr-address').value = c.address || '';
+      document.getElementById('pr-comment').value = c.comment || '';
+    }
+  }
+}
+function closeAuth() {
+  document.getElementById('auth-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function authTab(t) {
+  // Сброс полей-сообщений
+  authMsg('', '');
+  const lt = document.getElementById('auth-tab-login');
+  const rt = document.getElementById('auth-tab-register');
+  const tabs = document.getElementById('auth-tabs');
+  const fl = document.getElementById('auth-form-login');
+  const fr = document.getElementById('auth-form-register');
+  const fp = document.getElementById('auth-form-profile');
+  const skip = document.getElementById('auth-skip');
+  const title = document.getElementById('auth-title');
+  const sub   = document.getElementById('auth-sub');
+
+  if (t === 'profile') {
+    tabs.style.display = 'none';
+    fl.style.display = 'none';
+    fr.style.display = 'none';
+    fp.style.display = '';
+    if (skip)  skip.style.display = 'none';
+    title.textContent = '⚙️ Профиль';
+    sub.textContent = 'Эти данные будут автоматически подставляться в форму заявки.';
+    return;
+  }
+
+  tabs.style.display = '';
+  fp.style.display = 'none';
+  if (skip) skip.style.display = '';
+
+  if (t === 'register') {
+    lt.classList.remove('active');
+    rt.classList.add('active');
+    fl.style.display = 'none';
+    fr.style.display = '';
+    title.textContent = 'Регистрация в ВИсбу';
+    sub.textContent   = 'Имя и телефон — обязательно. Адрес и доп. инфо подставятся в форму заявки автоматически.';
+  } else {
+    lt.classList.add('active');
+    rt.classList.remove('active');
+    fl.style.display = '';
+    fr.style.display = 'none';
+    title.textContent = 'Войти в ВИсбу';
+    sub.textContent   = 'Введите телефон и пароль, чтобы видеть свои заказы и не вводить данные заново.';
+  }
+}
+function authMsg(text, kind) {
+  const box = document.getElementById('auth-msg-box');
+  if (!box) return;
+  if (!text) { box.innerHTML = ''; return; }
+  box.innerHTML = `<div class="auth-msg ${kind || ''}">${text}</div>`;
+}
+function toggleAuthExtra() {
+  const f = document.getElementById('auth-extra-fields');
+  const a = document.getElementById('auth-extra-arrow');
+  const open = f.style.display === 'none';
+  f.style.display = open ? '' : 'none';
+  a.textContent   = open ? '▾' : '▸';
+}
+
+async function doLogin(e) {
+  e.preventDefault();
+  const phone = document.getElementById('li-phone').value.trim();
+  const pwd   = document.getElementById('li-password').value;
+  if (!phone || !pwd) { authMsg('Заполните телефон и пароль', 'error'); return; }
+  const btn = document.getElementById('li-btn');
+  btn.disabled = true; btn.textContent = 'Входим…';
+  try {
+    const r = await fetch('/api/api.php?action=client_login', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ phone, password: pwd })
+    });
+    const d = await r.json();
+    if (!d.ok) throw new Error(d.error || 'Ошибка входа');
+    setAuth(d.auth_token, d.client);
+    authMsg('Добро пожаловать, ' + (d.client.name || '') + '!', 'success');
+    setTimeout(closeAuth, 700);
+  } catch (err) {
+    authMsg('❌ ' + (err.message || 'Не удалось войти'), 'error');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Войти';
+  }
+}
+
+async function doRegister(e) {
+  e.preventDefault();
+  const name  = document.getElementById('ri-name').value.trim();
+  const phone = document.getElementById('ri-phone').value.trim();
+  const pwd   = document.getElementById('ri-password').value;
+  const pwd2  = document.getElementById('ri-password2').value;
+  const email = document.getElementById('ri-email').value.trim();
+  const addr  = document.getElementById('ri-address').value.trim();
+  const comm  = document.getElementById('ri-comment').value.trim();
+  if (!name || !phone || !pwd) { authMsg('Заполните имя, телефон и пароль', 'error'); return; }
+  if (pwd.length < 4)          { authMsg('Пароль слишком короткий — минимум 4 символа', 'error'); return; }
+  if (pwd !== pwd2)            { authMsg('Пароли не совпадают', 'error'); return; }
+
+  const btn = document.getElementById('ri-btn');
+  btn.disabled = true; btn.textContent = 'Регистрируем…';
+  try {
+    const r = await fetch('/api/api.php?action=client_register', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ name, phone, password: pwd, email, address: addr, comment: comm })
+    });
+    const d = await r.json();
+    if (!d.ok) throw new Error(d.error || 'Не удалось зарегистрировать');
+    setAuth(d.auth_token, d.client);
+    authMsg('✅ Аккаунт создан! Добро пожаловать.', 'success');
+    setTimeout(closeAuth, 800);
+  } catch (err) {
+    authMsg('❌ ' + (err.message || 'Не удалось зарегистрироваться'), 'error');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Зарегистрироваться';
+  }
+}
+
+async function doLogout() {
+  try {
+    await fetch('/api/api.php?action=client_logout', {
+      method:'POST',
+      headers: { 'Content-Type':'application/json', 'X-Auth-Token': getAuthToken() }
+    });
+  } catch {}
+  setAuth('', null);
+  // Разлогин не должен мешать оставлять анонимные заявки
+}
+
+async function doProfileSave(e) {
+  e.preventDefault();
+  const name    = document.getElementById('pr-name').value.trim();
+  const email   = document.getElementById('pr-email').value.trim();
+  const address = document.getElementById('pr-address').value.trim();
+  const comment = document.getElementById('pr-comment').value.trim();
+  const btn = document.getElementById('pr-btn');
+  btn.disabled = true; btn.textContent = 'Сохраняем…';
+  try {
+    const r = await fetch('/api/api.php?action=client_update', {
+      method:'POST',
+      headers: { 'Content-Type':'application/json', 'X-Auth-Token': getAuthToken() },
+      body: JSON.stringify({ name, email, address, comment })
+    });
+    const d = await r.json();
+    if (!d.ok) throw new Error(d.error || 'Ошибка');
+    setAuth(getAuthToken(), d.client);
+    authMsg('✅ Профиль обновлён', 'success');
+    setTimeout(closeAuth, 700);
+  } catch (err) {
+    authMsg('❌ ' + (err.message || 'Не удалось сохранить'), 'error');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Сохранить';
+  }
+}
+
+// Авто-заполнение формы заявки данными из профиля
+function prefillFormFromAuth() {
+  const c = getCurrentClient();
+  if (!c) return;
+  const set = (id, v) => { const el = document.getElementById(id); if (el && !el.value) el.value = v || ''; };
+  set('f-name',  c.name);
+  set('f-phone', c.phone);
+  set('f-addr',  c.address);
+  // Можно подставить и комментарий в плейсхолдер при желании
+}
+
+// Mini-prompt после анонимного заказа
+function showRegPrompt() {
+  if (getCurrentClient()) return;  // уже залогинен — пропускаем
+  document.getElementById('reg-prompt').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeRegPrompt() {
+  document.getElementById('reg-prompt').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// При загрузке: подтянем актуальные данные клиента, если токен есть
+(async function initAuth() {
+  refreshHeaderAuth();
+  const tok = getAuthToken();
+  if (!tok) return;
+  try {
+    const r = await fetch('/api/api.php?action=client_me', { headers: { 'X-Auth-Token': tok } });
+    const d = await r.json();
+    if (d && d.ok && d.client) setAuth(tok, d.client);
+    else if (d && !d.ok) setAuth('', null);   // токен невалиден — выкидываем
+  } catch {}
+  prefillFormFromAuth();
+})();
+
+// ════════════════════════════════════════════════════════════════════
+// АДМИН — вкладка «Клиенты»
+// ════════════════════════════════════════════════════════════════════
+let adminClientsCache = [];
+
+async function renderAdminClients() {
+  const c = document.getElementById('admin-clients');
+  if (!c) return;
+  c.innerHTML = '<div class="empty-state">Загружаем…</div>';
+  const q = (document.getElementById('ad-clients-q')?.value || '').trim();
+  let list = [];
+  try {
+    const url = '/api/api.php?action=admin_clients&pass=' + encodeURIComponent('vizbu2026') + (q ? '&q=' + encodeURIComponent(q) : '');
+    const r = await fetch(url);
+    const d = await r.json();
+    if (d && d.ok) list = d.clients || [];
+  } catch {}
+  adminClientsCache = list;
+
+  const cnt = document.getElementById('cl-cnt');
+  if (cnt) {
+    if (list.length) { cnt.textContent = list.length; cnt.style.display = 'inline-block'; }
+    else { cnt.style.display = 'none'; }
+  }
+
+  if (!list.length) {
+    c.innerHTML = '<div class="empty-state">📭 Зарегистрированных клиентов пока нет.<br/>Они появятся здесь, когда кто-то заполнит форму регистрации на сайте.</div>';
+    return;
+  }
+  c.innerHTML = `
+    <table class="ad-clients-table">
+      <thead><tr>
+        <th>#</th><th>Имя</th><th>Телефон</th><th>Email</th><th>Адрес</th><th>Заказов</th><th>Создан</th><th></th>
+      </tr></thead>
+      <tbody>
+        ${list.map(cl => {
+          const created = cl.created_at ? new Date(cl.created_at * 1000).toLocaleString('ru-RU') : '';
+          return `<tr>
+            <td>${cl.id}</td>
+            <td><strong>${escapeHtml(cl.name || '')}</strong>${cl.comment ? '<br/><small style="color:var(--muted);">' + escapeHtml(cl.comment) + '</small>' : ''}</td>
+            <td><a href="tel:${escapeHtml(cl.phone || '')}">${escapeHtml(cl.phone || '')}</a></td>
+            <td>${escapeHtml(cl.email || '')}</td>
+            <td>${escapeHtml(cl.address || '')}</td>
+            <td>${cl.orders_count || 0}</td>
+            <td>${created}</td>
+            <td><button onclick="deleteClient(${cl.id})" style="background:none;border:none;color:#dc2626;cursor:pointer;font-size:1rem;" title="Удалить">🗑</button></td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+async function deleteClient(id) {
+  if (!confirm('Удалить клиента? Его заявки сохранятся, но "отвяжутся".')) return;
+  try {
+    await fetch('/api/api.php?action=admin_client_delete&pass=' + encodeURIComponent('vizbu2026'), {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ id })
+    });
+  } catch {}
+  renderAdminClients();
+}
+
+function exportClientsCsv() {
+  // Просто откроем url — браузер скачает файл
+  const url = '/api/api.php?action=admin_clients_csv&pass=' + encodeURIComponent('vizbu2026');
+  window.open(url, '_blank');
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[ch]);
+}
 </script>
 </body>
 </html>
