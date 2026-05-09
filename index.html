@@ -2908,7 +2908,10 @@ async function submitLead(payload, photos = []) {
         promo:    data.promo || '',
       })
     });
-    const j = await r.json().catch(() => ({}));
+    // Безопасный парсинг — на Vercel/без PHP сервер вернёт не-JSON, не паникуем
+    const tx = await r.text();
+    let j = {};
+    try { if (tx && (tx.trim()[0] === '{' || tx.trim()[0] === '[')) j = JSON.parse(tx); } catch {}
     if (j && j.ok) { backendOk = true; orderId = j.order_id || null; }
   } catch (err) {
     console.warn('Бэкенд недоступен, шлём напрямую в Telegram:', err);
@@ -5151,6 +5154,62 @@ function toggleAuthExtra() {
   a.textContent   = open ? '▾' : '▸';
 }
 
+// ── Безопасный API-вызов: парсит JSON только если ответ корректный
+async function safeApi(action, body, init) {
+  init = init || {};
+  const headers = Object.assign({'Content-Type':'application/json'}, init.headers || {});
+  const tok = getAuthToken(); if (tok && !headers['X-Auth-Token']) headers['X-Auth-Token'] = tok;
+  let resp;
+  try {
+    resp = await fetch('/api/api.php?action=' + encodeURIComponent(action), {
+      method: init.method || (body ? 'POST' : 'GET'),
+      headers,
+      body: body ? JSON.stringify(body) : undefined,
+    });
+  } catch (err) {
+    return { ok:false, offline:true, error:'Сеть недоступна — работаем в локальном режиме' };
+  }
+  const txt = await resp.text();
+  if (!txt) return { ok:false, offline:true, status:resp.status, error:'Сервер вернул пустой ответ (демо-режим без бэкенда)' };
+  // Если первый непробельный символ не "{" — это не JSON
+  const trim = txt.trim();
+  if (trim[0] !== '{' && trim[0] !== '[') {
+    return { ok:false, offline:true, status:resp.status, error:'Сервер вернул не-JSON (демо-режим без бэкенда)' };
+  }
+  try {
+    const j = JSON.parse(trim);
+    return j && typeof j === 'object' ? j : { ok:false, error:'Некорректный ответ' };
+  } catch {
+    return { ok:false, offline:true, error:'Не удалось распарсить ответ сервера' };
+  }
+}
+
+// ── Локальная "БД" клиентов (когда /api недоступен)
+const LOCAL_CLIENTS_KEY = 'vizbu_local_clients';
+function localClientsAll() { try { return JSON.parse(localStorage.getItem(LOCAL_CLIENTS_KEY) || '[]'); } catch { return []; } }
+function localClientsSave(list) { localStorage.setItem(LOCAL_CLIENTS_KEY, JSON.stringify(list)); }
+function localClientFind(phone) {
+  const norm = (phone||'').replace(/\D/g,'');
+  return localClientsAll().find(c => (c.phone||'').replace(/\D/g,'') === norm) || null;
+}
+// Простой обратимый хеш для локальных паролей (всё равно localStorage в браузере клиента)
+function lhash(s) { let h = 0; for (let i = 0; i < s.length; i++) { h = ((h<<5)-h) + s.charCodeAt(i); h |= 0; } return 'l' + h; }
+
+async function tgNotifyRegistration(c) {
+  // Дублируем в Telegram, как фронт делает для заявок
+  if (typeof tgSendText !== 'function') return;
+  const lines = [
+    '👤 *Новая регистрация клиента (демо/без бэкенда)*',
+    `Имя: ${c.name || ''}`,
+    `📱 Телефон: ${c.phone || ''}`,
+    c.email   ? `📧 Email: ${c.email}` : '',
+    c.address ? `📍 Адрес: ${c.address}` : '',
+    c.comment ? `💬 Комментарий: ${c.comment}` : '',
+    `🕐 ${new Date().toLocaleString('ru-RU')}`,
+  ].filter(Boolean).join('\n');
+  try { await tgSendText(lines); } catch {}
+}
+
 async function doLogin(e) {
   e.preventDefault();
   const phone = document.getElementById('li-phone').value.trim();
@@ -5158,21 +5217,33 @@ async function doLogin(e) {
   if (!phone || !pwd) { authMsg('Заполните телефон и пароль', 'error'); return; }
   const btn = document.getElementById('li-btn');
   btn.disabled = true; btn.textContent = 'Входим…';
-  try {
-    const r = await fetch('/api/api.php?action=client_login', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ phone, password: pwd })
-    });
-    const d = await r.json();
-    if (!d.ok) throw new Error(d.error || 'Ошибка входа');
+
+  // 1) Пробуем серверный вход
+  const d = await safeApi('client_login', { phone, password: pwd });
+  if (d.ok) {
     setAuth(d.auth_token, d.client);
     authMsg('Добро пожаловать, ' + (d.client.name || '') + '!', 'success');
-    setTimeout(closeAuth, 700);
-  } catch (err) {
-    authMsg('❌ ' + (err.message || 'Не удалось войти'), 'error');
-  } finally {
     btn.disabled = false; btn.textContent = 'Войти';
+    setTimeout(closeAuth, 700);
+    return;
   }
+
+  // 2) Если бэкенда нет — пробуем локальную БД
+  if (d.offline) {
+    const c = localClientFind(phone);
+    if (c && c.passHash === lhash(pwd)) {
+      const token = 'local-' + Date.now().toString(36);
+      setAuth(token, { id: c.id, name: c.name, phone: c.phone, email: c.email, address: c.address, comment: c.comment });
+      authMsg('Добро пожаловать, ' + c.name + '! (демо-режим, без сервера)', 'success');
+      btn.disabled = false; btn.textContent = 'Войти';
+      setTimeout(closeAuth, 700);
+      return;
+    }
+    authMsg('❌ Бэкенд недоступен, а локального аккаунта с таким телефоном нет. Зарегистрируйтесь — ваши данные сохранятся в браузере.', 'error');
+  } else {
+    authMsg('❌ ' + (d.error || 'Не удалось войти'), 'error');
+  }
+  btn.disabled = false; btn.textContent = 'Войти';
 }
 
 async function doRegister(e) {
@@ -5190,30 +5261,45 @@ async function doRegister(e) {
 
   const btn = document.getElementById('ri-btn');
   btn.disabled = true; btn.textContent = 'Регистрируем…';
-  try {
-    const r = await fetch('/api/api.php?action=client_register', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ name, phone, password: pwd, email, address: addr, comment: comm })
-    });
-    const d = await r.json();
-    if (!d.ok) throw new Error(d.error || 'Не удалось зарегистрировать');
+
+  // 1) Пробуем серверную регистрацию
+  const d = await safeApi('client_register', { name, phone, password: pwd, email, address: addr, comment: comm });
+  if (d.ok) {
     setAuth(d.auth_token, d.client);
     authMsg('✅ Аккаунт создан! Добро пожаловать.', 'success');
-    setTimeout(closeAuth, 800);
-  } catch (err) {
-    authMsg('❌ ' + (err.message || 'Не удалось зарегистрироваться'), 'error');
-  } finally {
     btn.disabled = false; btn.textContent = 'Зарегистрироваться';
+    setTimeout(closeAuth, 800);
+    return;
   }
+
+  // 2) Если бэкенда нет — сохраняем локально + шлём в Telegram, чтобы данные не потерялись
+  if (d.offline) {
+    if (localClientFind(phone)) {
+      authMsg('❌ Этот номер уже зарегистрирован в этом браузере. Войдите по паролю.', 'error');
+      btn.disabled = false; btn.textContent = 'Зарегистрироваться';
+      return;
+    }
+    const list = localClientsAll();
+    const id = Date.now();
+    const rec = { id, name, phone, passHash: lhash(pwd), email, address: addr, comment: comm, createdAt: new Date().toISOString() };
+    list.unshift(rec);
+    localClientsSave(list);
+    const token = 'local-' + id.toString(36);
+    setAuth(token, { id, name, phone, email, address: addr, comment: comm });
+    await tgNotifyRegistration(rec);
+    authMsg('✅ Аккаунт создан в демо-режиме. Данные сохранены в этом браузере и отправлены в Telegram админу.', 'success');
+    btn.disabled = false; btn.textContent = 'Зарегистрироваться';
+    setTimeout(closeAuth, 1100);
+    return;
+  }
+
+  // 3) Бэкенд ответил, но ошибка
+  authMsg('❌ ' + (d.error || 'Не удалось зарегистрироваться'), 'error');
+  btn.disabled = false; btn.textContent = 'Зарегистрироваться';
 }
 
 async function doLogout() {
-  try {
-    await fetch('/api/api.php?action=client_logout', {
-      method:'POST',
-      headers: { 'Content-Type':'application/json', 'X-Auth-Token': getAuthToken() }
-    });
-  } catch {}
+  try { await safeApi('client_logout', {}, { method:'POST' }); } catch {}
   setAuth('', null);
   // Разлогин не должен мешать оставлять анонимные заявки
 }
@@ -5226,22 +5312,36 @@ async function doProfileSave(e) {
   const comment = document.getElementById('pr-comment').value.trim();
   const btn = document.getElementById('pr-btn');
   btn.disabled = true; btn.textContent = 'Сохраняем…';
-  try {
-    const r = await fetch('/api/api.php?action=client_update', {
-      method:'POST',
-      headers: { 'Content-Type':'application/json', 'X-Auth-Token': getAuthToken() },
-      body: JSON.stringify({ name, email, address, comment })
-    });
-    const d = await r.json();
-    if (!d.ok) throw new Error(d.error || 'Ошибка');
+
+  // 1) Серверный апдейт
+  const d = await safeApi('client_update', { name, email, address, comment });
+  if (d.ok) {
     setAuth(getAuthToken(), d.client);
     authMsg('✅ Профиль обновлён', 'success');
-    setTimeout(closeAuth, 700);
-  } catch (err) {
-    authMsg('❌ ' + (err.message || 'Не удалось сохранить'), 'error');
-  } finally {
     btn.disabled = false; btn.textContent = 'Сохранить';
+    setTimeout(closeAuth, 700);
+    return;
   }
+
+  // 2) Локальный апдейт
+  if (d.offline) {
+    const cur = getCurrentClient();
+    if (cur) {
+      const list = localClientsAll();
+      const i = list.findIndex(c => (c.phone||'').replace(/\D/g,'') === (cur.phone||'').replace(/\D/g,''));
+      if (i >= 0) {
+        list[i] = Object.assign({}, list[i], { name, email, address, comment });
+        localClientsSave(list);
+      }
+      setAuth(getAuthToken(), Object.assign({}, cur, { name, email, address, comment }));
+      authMsg('✅ Профиль обновлён локально (демо-режим)', 'success');
+      btn.disabled = false; btn.textContent = 'Сохранить';
+      setTimeout(closeAuth, 700);
+      return;
+    }
+  }
+  authMsg('❌ ' + (d.error || 'Не удалось сохранить'), 'error');
+  btn.disabled = false; btn.textContent = 'Сохранить';
 }
 
 // Авто-заполнение формы заявки данными из профиля
@@ -5270,13 +5370,12 @@ function closeRegPrompt() {
 (async function initAuth() {
   refreshHeaderAuth();
   const tok = getAuthToken();
-  if (!tok) return;
-  try {
-    const r = await fetch('/api/api.php?action=client_me', { headers: { 'X-Auth-Token': tok } });
-    const d = await r.json();
-    if (d && d.ok && d.client) setAuth(tok, d.client);
-    else if (d && !d.ok) setAuth('', null);   // токен невалиден — выкидываем
-  } catch {}
+  if (!tok) { prefillFormFromAuth(); return; }
+  // Локальные токены начинаются на "local-" — не ходим на сервер
+  if (tok.startsWith('local-')) { prefillFormFromAuth(); return; }
+  const d = await safeApi('client_me');
+  if (d.ok && d.client) setAuth(tok, d.client);
+  else if (!d.offline && !d.ok) setAuth('', null);   // токен невалиден — выкидываем
   prefillFormFromAuth();
 })();
 
@@ -5291,12 +5390,35 @@ async function renderAdminClients() {
   c.innerHTML = '<div class="empty-state">Загружаем…</div>';
   const q = (document.getElementById('ad-clients-q')?.value || '').trim();
   let list = [];
+  let isLocal = false;
   try {
     const url = '/api/api.php?action=admin_clients&pass=' + encodeURIComponent('vizbu2026') + (q ? '&q=' + encodeURIComponent(q) : '');
     const r = await fetch(url);
-    const d = await r.json();
-    if (d && d.ok) list = d.clients || [];
-  } catch {}
+    const txt = await r.text();
+    const trim = txt.trim();
+    if (trim && (trim[0] === '{' || trim[0] === '[')) {
+      const d = JSON.parse(trim);
+      if (d && d.ok) list = d.clients || [];
+    } else {
+      isLocal = true;
+    }
+  } catch { isLocal = true; }
+  if (isLocal) {
+    // fallback на локально зарегистрированных в этом браузере
+    let locals = [];
+    try { locals = JSON.parse(localStorage.getItem('vizbu_local_clients') || '[]'); } catch {}
+    list = locals.map(x => ({
+      id: x.id, name: x.name, phone: x.phone, email: x.email,
+      address: x.address, comment: x.comment, orders_count: 0,
+      created_at: x.createdAt ? Math.floor(new Date(x.createdAt).getTime()/1000) : null,
+    }));
+    if (q) {
+      const ql = q.toLowerCase();
+      list = list.filter(x => (x.name||'').toLowerCase().includes(ql) ||
+                              (x.phone||'').includes(q) ||
+                              (x.email||'').toLowerCase().includes(ql));
+    }
+  }
   adminClientsCache = list;
 
   const cnt = document.getElementById('cl-cnt');
@@ -5306,10 +5428,13 @@ async function renderAdminClients() {
   }
 
   if (!list.length) {
-    c.innerHTML = '<div class="empty-state">📭 Зарегистрированных клиентов пока нет.<br/>Они появятся здесь, когда кто-то заполнит форму регистрации на сайте.</div>';
+    c.innerHTML = '<div class="empty-state">📭 Зарегистрированных клиентов пока нет.' +
+      (isLocal ? '<br/><small>(демо-режим без бэкенда — здесь видны только клиенты из этого браузера)</small>' : '<br/>Они появятся здесь, когда кто-то заполнит форму регистрации на сайте.') +
+      '</div>';
     return;
   }
-  c.innerHTML = `
+  const banner = isLocal ? '<div class="auth-msg" style="background:#FEF3E7;color:#B45309;margin-bottom:10px;">⚠️ Демо-режим: бэкенд /api/api.php не отвечает. Показаны клиенты только из этого браузера.</div>' : '';
+  c.innerHTML = banner + `
     <table class="ad-clients-table">
       <thead><tr>
         <th>#</th><th>Имя</th><th>Телефон</th><th>Email</th><th>Адрес</th><th>Заказов</th><th>Создан</th><th></th>
