@@ -342,6 +342,99 @@
       .btn-process-primary, .btn-process-light { width: 100%; }
     }
 
+    /* ───── ЧЕМ МЫ МОЖЕМ ПОМОЧЬ ───── */
+    .pillars {
+      background: #FAFCFA;
+      padding: 36px 20px 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    .pillars-inner { max-width: 1200px; margin: 0 auto; }
+    .pillars-head { text-align: center; margin-bottom: 22px; }
+    .pillars-kicker {
+      display: inline-block; background: #E8F5EE; color: var(--green);
+      font-size: .78rem; font-weight: 800; padding: 4px 12px;
+      border-radius: 99px; margin-bottom: 10px;
+      text-transform: uppercase; letter-spacing: .04em;
+    }
+    .pillars-head h2 {
+      font-size: clamp(1.4rem, 3vw, 1.85rem); font-weight: 900;
+      letter-spacing: -.01em; line-height: 1.15;
+      color: var(--text); margin-bottom: 6px;
+    }
+    .pillars-head h2 em { color: var(--green); font-style: normal; }
+    .pillars-head p {
+      color: var(--muted); font-size: .95rem; max-width: 620px; margin: 0 auto;
+    }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .pillar {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 14px; padding: 16px 18px;
+      transition: transform .15s, border-color .15s, box-shadow .15s;
+      cursor: pointer; text-align: left;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .pillar:hover {
+      border-color: var(--green);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(45,106,79,.12);
+    }
+    .pillar-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: #E8F5EE; color: var(--green);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; margin-bottom: 4px;
+    }
+    .pillar.product .pillar-icon { background: #FEF3E7; color: #B45309; }
+    .pillar h3 {
+      font-size: 1rem; font-weight: 800; color: var(--text);
+      letter-spacing: -.01em; line-height: 1.2;
+    }
+    .pillar p {
+      font-size: .82rem; color: var(--muted);
+      line-height: 1.4; margin: 0;
+    }
+    .pillar .pl-tag {
+      display: inline-block; background: #FEF3E7; color: #B45309;
+      font-size: .68rem; font-weight: 800; padding: 2px 8px;
+      border-radius: 99px; align-self: flex-start;
+      text-transform: uppercase; letter-spacing: .03em;
+    }
+
+    /* Краткое «кто мы» рядом */
+    .pillars-who {
+      max-width: 1200px; margin: 26px auto 0;
+      background: linear-gradient(135deg, #1B4332 0%, #2D6A4F 100%);
+      color: #fff; border-radius: 16px;
+      padding: 22px 26px;
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 20px; align-items: center;
+    }
+    .pillars-who-text h3 {
+      font-size: 1.1rem; font-weight: 900; margin-bottom: 6px;
+      letter-spacing: -.005em;
+    }
+    .pillars-who-text p {
+      font-size: .9rem; opacity: .92; line-height: 1.45;
+      margin: 0; max-width: 720px;
+    }
+    .pillars-who-text strong { color: #F4D49A; font-weight: 800; }
+    .btn-who-more {
+      background: #F4A23A; color: #1B4332; border: none;
+      border-radius: 999px; padding: 11px 22px;
+      font-weight: 800; font-size: .9rem; cursor: pointer;
+      font-family: inherit; white-space: nowrap;
+      transition: filter .12s;
+    }
+    .btn-who-more:hover { filter: brightness(1.1); }
+    @media(max-width:680px) {
+      .pillars-who { grid-template-columns: 1fr; text-align: center; }
+      .btn-who-more { justify-self: center; }
+    }
+
     /* ───── TASK ADVISOR ───── */
     .advisor {
       background: #fff;
@@ -1924,8 +2017,8 @@
              onerror="this.src='images/logo-flying-house.webp'"/>
         <div class="hero-tag">Сервис для загородной жизни в Ленобласти · с 2026 года</div>
         <h1>Решаем всё,<br/><em>кроме погоды</em></h1>
-        <div class="hero-slogan">81 услуга для дачи и участка в Ленобласти</div>
-        <p>Открытие дачи, покос, клещи, септик, сантехник, электрик, дрова и вывоз мусора. Опишите задачу — перезвоним за час и подберём исполнителя.</p>
+        <div class="hero-slogan">Соседский сервис для дачи и СНТ в Ленобласти</div>
+        <p>Сантехник, электрик, стройка и ремонт, разнорабочие, доставка земли, щебня, дров. Плюс <strong>управление дачей</strong>, когда вы в городе, и <strong>страхование</strong> — на случай пожара или протечки. Один контакт — мы сами найдём проверенного мастера и проконтролируем работу.</p>
         <div class="hero-trust">
           <span>⭐ 4.9 / 5 по внутренним заявкам</span>
           <span>⏱ Перезвоним за 1 час</span>
@@ -1958,6 +2051,80 @@
       <div class="process-cta-actions">
         <button type="button" class="btn-process-primary js-general-request">Подобрать мастера</button>
         <a class="btn-process-light" href="https://wa.me/79119507358" target="_blank" rel="noopener">Написать в WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── ЧЕМ МЫ МОЖЕМ ПОМОЧЬ ─────────────── -->
+  <section class="pillars" aria-label="Что мы делаем">
+    <div class="pillars-inner">
+      <div class="pillars-head">
+        <span class="pillars-kicker">Чем мы помогаем дачнику</span>
+        <h2>От починки крана до <em>управления дачей</em></h2>
+        <p>Один контакт на любой дачный вопрос — от мелкого ремонта до защиты дома, пока вы в городе.</p>
+      </div>
+
+      <div class="pillars-grid">
+
+        <!-- Услуги -->
+        <button type="button" class="pillar js-general-request" data-prefill-svc="Сантехник">
+          <div class="pillar-icon">💧</div>
+          <h3>Сантехник</h3>
+          <p>Протечки, скважина, септик, замена насоса, ремонт водопровода и колодца.</p>
+        </button>
+
+        <button type="button" class="pillar js-general-request" data-prefill-svc="Электрик">
+          <div class="pillar-icon">⚡</div>
+          <h3>Электрик</h3>
+          <p>Электромонтаж, освещение участка, видеонаблюдение, розетки и стабилизаторы.</p>
+        </button>
+
+        <button type="button" class="pillar js-general-request" data-prefill-svc="Стройка и ремонт">
+          <div class="pillar-icon">🏗️</div>
+          <h3>Стройка и&nbsp;ремонт</h3>
+          <p>Забор, ворота, кровля, беседка, баня, террасы, мелкий ремонт дома, покраска.</p>
+        </button>
+
+        <button type="button" class="pillar js-general-request" data-prefill-svc="Доставка стройматериалов">
+          <div class="pillar-icon">🚛</div>
+          <h3>Доставка</h3>
+          <p>Земля, щебень, песок, дрова, стройматериалы. Привезём к воротам и разгрузим.</p>
+        </button>
+
+        <button type="button" class="pillar js-general-request" data-prefill-svc="Разнорабочий">
+          <div class="pillar-icon">👷</div>
+          <h3>Разнорабочие</h3>
+          <p>На час, на полдня, на день. Бригада 2–3 человека, если объём большой.</p>
+        </button>
+
+        <!-- Продукты ВИсбу -->
+        <button type="button" class="pillar product" onclick="goToPage('management')">
+          <div class="pillar-icon">🔑</div>
+          <h3>Управление дачей <span class="pl-tag">Продукт</span></h3>
+          <p>Присматриваем за домом, пока вы в городе: открытие/закрытие сезона, охрана, аренда.</p>
+        </button>
+
+        <button type="button" class="pillar product" onclick="goToPage('insurance')">
+          <div class="pillar-icon">🛡️</div>
+          <h3>Страхование <span class="pl-tag">Продукт</span></h3>
+          <p>Защита от пожара, протечки, кражи, удара молнии — оформим прямо на сайте.</p>
+        </button>
+
+        <a href="#catalog-section" class="pillar" style="text-decoration:none;color:inherit;">
+          <div class="pillar-icon">📋</div>
+          <h3>+74 услуги в каталоге</h3>
+          <p>Открытие дачи, обработка от клещей, дрова, покос, уборка, корчевание пней, ремонт техники, зимняя консервация…</p>
+        </a>
+
+      </div>
+
+      <!-- Кто мы — компактный блок -->
+      <div class="pillars-who">
+        <div class="pillars-who-text">
+          <h3>Кто такие ВИсбу</h3>
+          <p>Мы — команда, которая <strong>сама живёт в СНТ Ленобласти</strong> и знает, как это бывает: нужен сантехник — а найти некого; нужен покос — мастер берёт трубку через неделю. ВИсбу — один контакт, который закрывает любой дачный вопрос. Каждого мастера в нашей базе мы знаем лично. Если что-то пошло не так — отвечаем мы, а не подрядчик.</p>
+        </div>
+        <button type="button" class="btn-who-more" onclick="document.getElementById('about-section').scrollIntoView({behavior:'smooth',block:'start'});">Подробнее о&nbsp;нас →</button>
       </div>
     </div>
   </section>
@@ -2883,7 +3050,7 @@
         </div>
         <div class="fr">
           <label for="f-promo">Промокод <span style="color:var(--muted);font-weight:400;">(если есть)</span></label>
-          <input id="f-promo" type="text" placeholder="Например: VESNA или ДАЧА" autocomplete="off" style="text-transform:uppercase;"/>
+          <input id="f-promo" type="text" placeholder="Например: DACHA2026" autocomplete="off" style="text-transform:uppercase;"/>
           <div id="f-promo-msg" style="margin-top:5px;font-size:.8rem;font-weight:700;display:none;"></div>
         </div>
         <button type="submit" class="btn-send">Отправить заявку →</button>
@@ -5718,28 +5885,48 @@ function closeRegPrompt() {
   prefillFormFromAuth();
 })();
 
-// Промокод: лёгкая валидация при вводе
+// Промокод: лёгкая валидация при вводе + поддержка ?promo= в URL (с листовки/QR)
 (function () {
   const promo = document.getElementById('f-promo');
   if (!promo) return;
   const msg = document.getElementById('f-promo-msg');
   const codes = {
-    VESNA:  { label: '−10% на сезонные работы' },
-    DACHA:  { label: '−5% на любую заявку' },
-    'ДАЧА': { label: '−5% на любую заявку' },
+    DACHA2026:   { label: '−1000 ₽ на первый заказ', firstOnly: true },
+    'ДАЧА2026':  { label: '−1000 ₽ на первый заказ', firstOnly: true },
+    VESNA:       { label: '−10% на сезонные работы' },
   };
-  promo.addEventListener('input', () => {
+
+  function validate() {
     const c = (promo.value || '').trim().toUpperCase();
     if (!c) { msg.style.display = 'none'; return; }
     msg.style.display = 'block';
-    if (codes[c]) {
-      msg.style.color = '#15803D';
-      msg.innerHTML = `✅ Промокод применён · <strong>${c}</strong> · ${codes[c].label}`;
+    const found = codes[c];
+    if (found) {
+      // Если "первая заявка" и пользователь уже оформлял — пометим
+      const usedFirst = localStorage.getItem('vizbu_first_order_used') === '1';
+      if (found.firstOnly && usedFirst) {
+        msg.style.color = '#B45309';
+        msg.innerHTML = `⚠️ Промокод <strong>${c}</strong> действует только на первую заявку — у вас уже была.`;
+      } else {
+        msg.style.color = '#15803D';
+        msg.innerHTML = `✅ Промокод применён · <strong>${c}</strong> · ${found.label}`;
+      }
     } else {
       msg.style.color = '#B45309';
       msg.innerHTML = `⏳ Проверим промокод <strong>${c}</strong> при оформлении`;
     }
-  });
+  }
+  promo.addEventListener('input', validate);
+
+  // Авто-подстановка промокода из URL ?promo=DACHA2026 (с листовки/QR-кода)
+  try {
+    const url = new URL(location.href);
+    const fromUrl = (url.searchParams.get('promo') || '').trim().toUpperCase();
+    if (fromUrl && !promo.value) {
+      promo.value = fromUrl;
+      validate();
+    }
+  } catch {}
 })();
 </script>
 </body>
