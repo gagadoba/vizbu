@@ -130,12 +130,12 @@
     .hdr-tg:hover { background:#2AABEE; border-color:#2AABEE; }
     @media(max-width:1220px){ .hdr-wa,.hdr-tg{ display:none; } }
     @media(max-width:940px){ .hdr-phone{ display:none; } }
-    @media(max-width:1040px){
+    @media(max-width:680px){
       nav { display: none; }
       .mobile-tabs { display: flex; overflow-x: auto; gap: 4px;
                      padding: 8px 16px; background: var(--green3); }
     }
-    @media(min-width:1041px){ .mobile-tabs { display: none; } }
+    @media(min-width:681px){ .mobile-tabs { display: none; } }
     .mobile-tabs .nav-tab { flex-shrink: 0; }
 
     /* ───── PAGE SECTIONS ───── */
@@ -266,12 +266,12 @@
     }
     .btn-hero-primary:hover { transform: scale(1.04); box-shadow: 0 6px 22px rgba(244,162,58,.55); }
     .btn-hero-secondary {
-      background: rgba(255,255,255,.08); color: #fff; border: 1.5px solid rgba(255,255,255,.24);
+      background: rgba(255,255,255,.18); color: #fff; border: 1.5px solid rgba(255,255,255,.4);
       border-radius: 999px; padding: 13px 24px; font-size: .95rem; font-weight: 700; cursor: pointer;
       font-family: inherit; text-decoration: none; transition: background .15s;
       display: inline-flex; align-items: center; justify-content: center;
     }
-    .btn-hero-secondary:hover { background: rgba(255,255,255,.18); }
+    .btn-hero-secondary:hover { background: rgba(255,255,255,.28); }
     @media (max-width: 760px) {
       .hero {
         min-height: auto; padding: 42px 18px 38px;
@@ -282,11 +282,7 @@
       .hero-center { align-items: center; text-align: center; margin: 0 auto; }
       .hero p { margin-left: auto; margin-right: auto; }
       .hero-trust, .hero-ctas { justify-content: center; }
-      .hero-ctas .btn-hero-primary { width: 100%; justify-content: center; text-align: center; }
-      .hero-ctas .btn-hero-secondary {
-        width: auto; border: none; padding: 6px 4px; background: transparent;
-        text-decoration: underline; text-underline-offset: 4px;
-      }
+      .hero-ctas .btn-hero-primary, .hero-ctas .btn-hero-secondary { width: 100%; justify-content: center; text-align: center; }
     }
 
     /* ───── HOW IT WORKS STRIP ───── */
@@ -314,33 +310,6 @@
     .process-item span { display:block; font-size:.76rem; color:var(--muted); margin-top:2px; }
     @media(max-width:780px){ .process-inner{ grid-template-columns:1fr 1fr; } }
     @media(max-width:520px){ .process-inner{ grid-template-columns:1fr; } }
-
-    .process-cta {
-      background: #fff;
-      border-bottom: 1px solid var(--border);
-      padding: 0 20px 22px;
-    }
-    .process-cta-inner {
-      max-width: 1200px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between; gap: 14px;
-      background: #E8F5EE; border: 1px solid #CFE5D7;
-      border-radius: 10px; padding: 16px 18px;
-    }
-    .process-cta strong { display: block; font-size: .98rem; margin-bottom: 2px; }
-    .process-cta span { color: var(--muted); font-size: .86rem; }
-    .process-cta-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
-    .btn-process-primary, .btn-process-light {
-      border-radius: 999px; padding: 11px 18px; font-size: .88rem;
-      font-weight: 800; text-decoration: none; cursor: pointer; font-family: inherit;
-      display: inline-flex; align-items: center; justify-content: center; white-space: nowrap;
-    }
-    .btn-process-primary { background: var(--green); color: #fff; border: none; }
-    .btn-process-light { background: #fff; color: var(--green); border: 1.5px solid var(--green); }
-    @media(max-width:680px) {
-      .process-cta-inner { align-items: stretch; flex-direction: column; }
-      .process-cta-actions { justify-content: stretch; }
-      .btn-process-primary, .btn-process-light { width: 100%; }
-    }
 
     /* ───── TASK ADVISOR ───── */
     .advisor {
@@ -423,13 +392,6 @@
       display: flex; align-items: center; gap: 12px;
     }
     .catalog-search { max-width: 760px; width: 100%; margin: 0; padding: 0; position: relative; }
-    .catalog-toolbar-cta {
-      margin-left: auto; flex-shrink: 0;
-      border: none; border-radius: 999px; padding: 12px 18px;
-      background: var(--green); color: #fff; cursor: pointer;
-      font-size: .86rem; font-weight: 800; white-space: nowrap;
-      box-shadow: 0 2px 10px rgba(45,106,79,.22);
-    }
     .catalog-search input {
       width: 100%; padding: 15px 54px 15px 52px;
       border-radius: 999px; border: 2px solid rgba(255,255,255,.4);
@@ -455,25 +417,19 @@
       cursor: pointer; font-weight: 900;
     }
     #search-clear:hover { background: var(--green); color: #fff; }
-    @media(max-width:760px){ .catalog-toolbar-cta{ display:none; } }
-    @media(max-width:1040px){ .catalog-toolbar{ top: 109px; } }
+    @media(max-width:680px){ .catalog-toolbar{ top: 109px; } }
 
     /* ───── ANCHOR LINK В hot-секции ───── */
     .hot-jump {
       text-align: center; margin-top: 22px;
-      display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap;
     }
-    .hot-jump a, .hot-jump button {
+    .hot-jump a {
       display: inline-flex; align-items: center; gap: 8px;
       color: var(--green); font-weight: 800; font-size: .95rem;
       text-decoration: none; padding: 8px 18px; border-radius: 999px;
       border: 1.5px solid var(--green); transition: all .15s;
-      background: #fff; cursor: pointer; font-family: inherit;
     }
-    .hot-jump .primary {
-      background: var(--green); color: #fff;
-    }
-    .hot-jump a:hover, .hot-jump button:hover { background: var(--green); color: #fff; }
+    .hot-jump a:hover { background: var(--green); color: #fff; }
 
     /* ───── СТОРИС ───── */
     .stories-bar {
@@ -650,12 +606,12 @@
     .hot-card-desc { font-size: .78rem; color: var(--muted); flex: 1; }
     .hot-card-ft {
       display: flex; align-items: center; justify-content: space-between;
-      gap: 8px; margin-top: 10px;
+      gap: 6px; margin-top: 10px;
     }
     .hot-card-price { font-size: .85rem; font-weight: 800; color: var(--green); }
     .hot-card-cta {
       background: var(--accent); color: #fff; border: none; border-radius: 999px;
-      padding: 7px 13px; font-size: .76rem; font-weight: 800;
+      padding: 6px 12px; font-size: .76rem; font-weight: 800;
       cursor: pointer; font-family: inherit;
     }
     .hot-card-badge {
@@ -795,15 +751,6 @@
       background: #fff; color: var(--green);
     }
     .reviews-actions .primary { background: var(--green); color: #fff; }
-    @media(max-width:560px) {
-      .reviews-actions {
-        max-width: 360px; margin-left: auto; margin-right: auto;
-      }
-      .reviews-actions .primary { width: 100%; min-height: 44px; }
-      .reviews-actions a {
-        flex: 1; padding: 9px 12px; font-size: .8rem;
-      }
-    }
 
     /* ───── FILTERS ───── */
     .catalog-header {
@@ -869,17 +816,6 @@
     .btn-req:hover {
       background: linear-gradient(135deg, #FFB347 0%, #F4A23A 100%);
       transform: scale(1.05); box-shadow: 0 4px 14px rgba(244,162,58,.55);
-    }
-    @media(max-width:560px) {
-      .hot-card-ft, .card-ft, .shop-card-ft {
-        align-items: stretch; flex-direction: column;
-      }
-      .hot-card-price, .card-price, .shop-card-price {
-        font-size: .95rem;
-      }
-      .hot-card-cta, .btn-req, .shop-card-cta {
-        width: 100%; min-height: 42px;
-      }
     }
 
     /* ───── NO RESULTS ───── */
@@ -1431,151 +1367,6 @@
     }
     .ctr-demo-banner strong { color: var(--accent2); }
 
-    /* ───── ДЕМО-КАБИНЕТЫ И АДМИНКА ───── */
-    .ops-page {
-      background: #F4F7F4;
-      min-height: calc(100vh - 60px);
-      padding: 34px 20px 70px;
-    }
-    .ops-wrap { max-width: 1180px; margin: 0 auto; }
-    .ops-hero {
-      display: grid; grid-template-columns: minmax(0, 1fr) auto;
-      gap: 22px; align-items: center; margin-bottom: 22px;
-      background: #fff; border: 1px solid var(--border);
-      border-radius: 18px; padding: 24px;
-      box-shadow: 0 8px 24px rgba(34,69,45,.08);
-    }
-    .ops-hero h1 {
-      font-size: clamp(1.55rem, 4vw, 2.4rem);
-      font-weight: 900; line-height: 1.08; margin-bottom: 8px;
-    }
-    .ops-hero p { color: var(--muted); max-width: 720px; }
-    .ops-hero img {
-      width: 112px; height: 112px; object-fit: contain;
-      filter: drop-shadow(0 10px 18px rgba(34,69,45,.18));
-    }
-    .ops-grid {
-      display: grid; grid-template-columns: 330px minmax(0, 1fr);
-      gap: 18px; align-items: start;
-    }
-    .ops-panel {
-      background: #fff; border: 1px solid var(--border);
-      border-radius: 14px; padding: 18px;
-      box-shadow: 0 3px 14px rgba(34,69,45,.06);
-    }
-    .ops-panel h2, .ops-panel h3 {
-      font-size: 1.08rem; font-weight: 900; margin-bottom: 8px;
-    }
-    .ops-panel .muted, .ops-muted { color: var(--muted); font-size: .9rem; }
-    .ops-stack { display: grid; gap: 12px; }
-    .ops-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-    .ops-btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-      min-height: 38px; padding: 9px 14px; border-radius: 999px;
-      border: 1.5px solid var(--border); background: #fff; color: var(--green);
-      font-size: .86rem; font-weight: 800; font-family: inherit;
-      cursor: pointer; text-decoration: none; transition: all .15s;
-    }
-    .ops-btn:hover { border-color: var(--green); background: #F3FAF5; }
-    .ops-btn.primary { background: var(--green); border-color: var(--green); color: #fff; }
-    .ops-btn.primary:hover { background: var(--green2); }
-    .ops-btn.warn { background: #FEF3E7; border-color: #FDBA74; color: #B45309; }
-    .ops-btn.danger { background: #FEF2F2; border-color: #FCA5A5; color: #B91C1C; }
-    .ops-btn:disabled { opacity: .55; cursor: not-allowed; }
-    .ops-card {
-      background: #fff; border: 1px solid var(--border);
-      border-radius: 14px; padding: 16px;
-      box-shadow: 0 3px 14px rgba(34,69,45,.06);
-    }
-    .ops-card-head {
-      display: flex; justify-content: space-between; gap: 12px;
-      align-items: flex-start; margin-bottom: 10px;
-    }
-    .ops-card-title { font-weight: 900; font-size: 1rem; line-height: 1.25; }
-    .ops-meta {
-      display: flex; flex-wrap: wrap; gap: 7px 12px;
-      color: var(--muted); font-size: .84rem; margin: 8px 0;
-    }
-    .status-chip {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 5px 10px; border-radius: 999px;
-      font-size: .76rem; font-weight: 900; white-space: nowrap;
-      background: #EAF3EC; color: var(--green);
-    }
-    .status-chip.new { background:#FEF3E7; color:#B45309; }
-    .status-chip.clarifying { background:#EFF6FF; color:#1D4ED8; }
-    .status-chip.ready { background:#ECFDF5; color:#047857; }
-    .status-chip.assigned { background:#F5F3FF; color:#6D28D9; }
-    .status-chip.accepted, .status-chip.in_progress { background:#EEF2FF; color:#4338CA; }
-    .status-chip.done, .status-chip.closed { background:#DCFCE7; color:#15803D; }
-    .status-chip.failed { background:#FEF2F2; color:#B91C1C; }
-    .ops-form-grid {
-      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-    }
-    .ops-form-grid .fr { margin-bottom: 0; }
-    .ops-form-grid .full { grid-column: 1 / -1; }
-    .ops-kpis {
-      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px; margin-bottom: 18px;
-    }
-    .ops-kpi {
-      background: #fff; border: 1px solid var(--border);
-      border-radius: 14px; padding: 14px;
-    }
-    .ops-kpi strong { display:block; font-size: 1.55rem; font-weight: 900; color: var(--green); }
-    .ops-kpi span { color: var(--muted); font-size: .82rem; }
-    .ops-tabs { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
-    .ops-tabs button {
-      border: 1.5px solid var(--border); border-radius:999px; background:#fff;
-      padding: 8px 12px; cursor:pointer; font-family:inherit; font-weight:800; font-size:.82rem;
-    }
-    .ops-tabs button.active { background: var(--green); color:#fff; border-color:var(--green); }
-    .timeline { display: grid; gap: 8px; margin-top: 12px; }
-    .timeline-item {
-      display: grid; grid-template-columns: 18px 1fr; gap: 8px;
-      color: var(--muted); font-size: .84rem;
-    }
-    .timeline-dot {
-      width: 10px; height: 10px; border-radius: 50%; background: var(--green);
-      margin-top: 5px; box-shadow: 0 0 0 4px #EAF3EC;
-    }
-    .rating-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
-    .rating-row button {
-      width: 38px; height: 38px; border-radius: 50%;
-      border: 1.5px solid var(--border); background: #fff;
-      cursor: pointer; font-size: 1rem;
-    }
-    .rating-row button:hover { border-color: var(--accent); background: #FEF3E7; }
-    .cab-login {
-      display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:14px;
-    }
-    .cab-login select {
-      min-width: 260px; padding: 9px 12px; border: 1.5px solid rgba(255,255,255,.35);
-      border-radius: 8px; background: rgba(255,255,255,.12); color: #fff; font-family: inherit;
-    }
-    .cab-login select option { color: var(--text); }
-    .empty-state {
-      text-align: center; padding: 30px 18px; color: var(--muted);
-      background: #fff; border: 1px dashed var(--border); border-radius: 14px;
-    }
-    .ops-inline-link {
-      display: inline-flex; margin-left: 8px; vertical-align: middle;
-    }
-    @media(max-width:900px) {
-      .ops-grid, .ops-hero { grid-template-columns: 1fr; }
-      .ops-hero img { width: 86px; height: 86px; }
-      .ops-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-    @media(max-width:560px) {
-      .ops-page { padding: 22px 12px 82px; }
-      .ops-hero, .ops-panel, .ops-card { border-radius: 12px; padding: 14px; }
-      .ops-form-grid, .ops-kpis { grid-template-columns: 1fr; }
-      .ops-card-head { display: grid; }
-      .ops-btn { width: 100%; }
-      .ops-inline-link { margin: 8px 0 0; }
-    }
-
     /* ───── НАШИ РАБОТЫ ───── */
     .works {
       background: #fff; padding: 56px 20px 64px;
@@ -1647,7 +1438,7 @@
       transition:border-color .15s; background: #fff;
     }
     .fr select { appearance:none; -webkit-appearance:none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236B7280' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%236B7280' d='M1 1l5 5 5-5'/></svg>");
       background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px;
     }
     .fr input:focus, .fr textarea:focus, .fr select:focus { outline:none; border-color:var(--green2); }
@@ -1730,7 +1521,7 @@
     }
     .mobile-actionbar .primary { background: var(--green); color: #fff; }
     @media(max-width:680px) {
-      body { padding-bottom: 86px; }
+      body { padding-bottom: 66px; }
       .ph-float { display: none; }
       .mobile-actionbar { display: flex; }
     }
@@ -1753,7 +1544,107 @@
       background: #fff; padding: 8px 14px;
     }
 
-    /* ───── AUTH (вход/регистрация с паролем) ───── */
+    /* ───── HDR-MY (Кабинет клиента) ───── */
+    .hdr-my {
+      color:#fff; font-weight:800; font-size:.78rem;
+      background: rgba(244,162,58,.25);
+      border:1.5px solid var(--accent); border-radius:6px;
+      padding:5px 10px; cursor:pointer; font-family:inherit;
+      margin-right:6px;
+    }
+    .hdr-my:hover { background: var(--accent); color:#fff; }
+
+    /* ───── МОИ ЗАКАЗЫ (КАБИНЕТ КЛИЕНТА) ───── */
+    .my-overlay {
+      display:none; position:fixed; inset:0;
+      background: rgba(0,0,0,.6); z-index: 700;
+      align-items:flex-start; justify-content:center;
+      padding: 24px 16px; overflow-y:auto;
+    }
+    .my-overlay.open { display:flex; }
+    .my-modal {
+      background:#fff; border-radius:18px; padding:26px;
+      width:100%; max-width:620px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.3);
+    }
+    .my-modal h2 {
+      font-size:1.35rem; font-weight:900; color:var(--green);
+      margin-bottom:6px;
+    }
+    .my-modal h2 em { color:var(--accent); font-style:normal; }
+    .my-modal .sub { color:var(--muted); font-size:.92rem; margin-bottom:18px; }
+    .my-modal-x {
+      position:absolute; top:14px; right:18px; background:none; border:none;
+      font-size:1.4rem; cursor:pointer; color:var(--muted);
+    }
+    .my-modal-pos { position:relative; }
+    .my-input-row { display:flex; gap:8px; margin-bottom:14px; }
+    .my-input-row input {
+      flex:1; padding:12px 14px;
+      border:1.5px solid var(--border); border-radius:10px;
+      font-size:1rem; font-family:inherit;
+    }
+    .my-input-row button {
+      padding:12px 20px; background:var(--green); color:#fff;
+      border:none; border-radius:10px; font-weight:800;
+      cursor:pointer; font-family:inherit;
+    }
+    .my-orders { display:flex; flex-direction:column; gap:12px; }
+    .my-order {
+      background: var(--bg); border:1px solid var(--border);
+      border-radius:12px; padding:16px;
+    }
+    .my-order-top {
+      display:flex; justify-content:space-between; gap:8px;
+      flex-wrap:wrap; margin-bottom:8px;
+    }
+    .my-order-svc { font-size:1rem; font-weight:800; }
+    .my-order-status {
+      font-size:.74rem; font-weight:800;
+      padding:4px 10px; border-radius:99px;
+      letter-spacing:.3px;
+    }
+    .mst-new          { background:#FEF3E7; color:#B45309; }
+    .mst-confirmed    { background:#DBEAFE; color:#1E3A8A; }
+    .mst-broadcasting { background:#E0E7FF; color:#3730A3; }
+    .mst-taken        { background:#DCFCE7; color:#15803D; }
+    .mst-completed    { background:#D1FAE5; color:#065F46; }
+    .mst-cancelled    { background:#FEE2E2; color:#991B1B; }
+    .mst-rated        { background:#F3E8FF; color:#6B21A8; }
+    .my-order-meta { font-size:.82rem; color:var(--muted); margin-bottom:6px; }
+    .my-order-info { font-size:.85rem; line-height:1.5; }
+    .my-rate {
+      margin-top:10px; padding:10px;
+      background:#fff; border:1.5px dashed var(--accent);
+      border-radius:10px; text-align:center;
+    }
+    .my-rate-label { font-size:.85rem; color:var(--accent); font-weight:800; margin-bottom:6px; }
+    .my-stars { display:inline-flex; gap:6px; cursor:pointer; }
+    .my-star { font-size:1.8rem; color:#D1D5DB; transition: color .1s; }
+    .my-star:hover, .my-star.hover, .my-star.active { color:#F59E0B; }
+    .my-rate-done { color:var(--green); font-weight:800; margin-top:6px; }
+    .my-empty { text-align:center; padding:40px 20px; color:var(--muted); }
+    .my-empty .e { font-size:2.5rem; margin-bottom:8px; }
+
+    /* ───── АДМИН-ПАНЕЛЬ ───── */
+    .order-card { border:1px solid var(--border); border-radius:12px; padding:16px; margin-bottom:12px; background:#fff; }
+    .order-card.status-new { border-left:4px solid #F4A23A; }
+    .order-card.status-work { border-left:4px solid #2563EB; }
+    .order-card.status-done { border-left:4px solid #2D6A4F; opacity:.6; }
+    .order-head { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+    .order-svc { font-weight:800; font-size:1rem; color:var(--text); }
+    .order-date { font-size:.75rem; color:var(--muted); }
+    .order-info { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+    .order-tag { font-size:.8rem; background:var(--bg); border-radius:6px; padding:3px 10px; color:var(--text); }
+    .order-comm { font-size:.85rem; color:var(--muted); margin-bottom:12px; white-space: pre-wrap; }
+    .order-actions { display:flex; gap:8px; flex-wrap:wrap; }
+    .btn-status { padding:6px 14px; border-radius:999px; border:1.5px solid var(--border); background:#fff; cursor:pointer; font-size:.78rem; font-weight:700; font-family:inherit; transition:all .15s; }
+    .btn-status:hover { border-color:var(--green); color:var(--green); }
+    .btn-call { background:var(--green); color:#fff; border:none; border-radius:999px; padding:6px 16px; font-weight:700; font-size:.78rem; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:5px; }
+    .btn-wa { background:#25D366; color:#fff; border:none; border-radius:999px; padding:6px 16px; font-weight:700; font-size:.78rem; cursor:pointer; text-decoration:none; }
+    .empty-state { text-align:center; padding:48px 20px; color:var(--muted); font-size:.95rem; }
+
+    /* ───── AUTH (вход/регистрация) ───── */
     .hdr-auth {
       color:#fff; font-weight:800; font-size:.78rem;
       background: rgba(255,255,255,.12);
@@ -1786,6 +1677,7 @@
       font-size:.85rem; font-weight:600;
     }
     .hdr-user-menu button:hover { background:var(--bg); }
+
     .auth-overlay {
       display:none; position:fixed; inset:0;
       background: rgba(0,0,0,.6); z-index: 800;
@@ -1804,10 +1696,6 @@
       margin-bottom:6px;
     }
     .auth-modal .sub { color:var(--muted); font-size:.92rem; margin-bottom:16px; }
-    .auth-modal-x {
-      position:absolute; top:14px; right:18px; background:none; border:none;
-      font-size:1.4rem; cursor:pointer; color:var(--muted);
-    }
     .auth-tabs { display:flex; gap:6px; margin-bottom:14px; }
     .auth-tab {
       flex:1; padding:10px 14px;
@@ -1855,6 +1743,25 @@
     }
     .auth-skip:hover { color:var(--green); }
 
+    /* ───── Админ: таблица клиентов ───── */
+    .ad-clients-search {
+      width:100%; padding:10px 14px; border:1.5px solid var(--border);
+      border-radius:10px; font:inherit; margin-bottom:14px;
+    }
+    .ad-clients-table {
+      width:100%; border-collapse:collapse; font-size:.85rem;
+    }
+    .ad-clients-table th {
+      background:var(--bg); text-align:left;
+      padding:9px 10px; font-weight:800; color:var(--text);
+      border-bottom:2px solid var(--border);
+    }
+    .ad-clients-table td {
+      padding:9px 10px; border-bottom:1px solid var(--border);
+      vertical-align:top;
+    }
+    .ad-clients-table tr:hover td { background:var(--bg); }
+
     @media(max-width:480px){ .modal{padding:24px 18px;} .fr-row2{grid-template-columns:1fr;} }
   </style>
 </head>
@@ -1870,7 +1777,7 @@
   </div>
   <div class="hdr">
     <div class="logo">
-      <div class="logo-badge"><img src="images/logo-flying-house.webp" alt="" onerror="this.style.display='none'"/></div>
+      <div class="logo-badge"><img src="images/logo-mascot.jpg" alt="" onerror="this.style.display='none'"/></div>
       <span class="logo-text">Visbu</span>
       <span class="logo-sub">ВИсбу</span>
     </div>
@@ -1880,19 +1787,18 @@
       <button class="nav-tab" data-page="shop">🛍 Продаёт</button>
       <button class="nav-tab" data-page="insurance">🛡️ Страхование</button>
       <button class="nav-tab" data-page="management">🔑 Управление</button>
-      <button class="nav-tab" data-page="client">📋 Мои заказы</button>
-      <button class="nav-tab" data-page="admin">⚙️ Админ</button>
     </nav>
     <div class="hdr-contacts">
-      <button class="hdr-auth" id="hdr-auth-btn" type="button" onclick="openAuth('login')">👤 Войти</button>
+      <button class="hdr-auth" id="hdr-auth-btn" onclick="openAuth('login')">👤 Войти</button>
       <span class="hdr-user" id="hdr-user-info" style="display:none;" onclick="toggleUserMenu(event)">
         <span id="hdr-user-name">👤</span><span style="font-size:.7rem;">▾</span>
         <span class="hdr-user-menu">
-          <button type="button" onclick="event.stopPropagation();goToPage('client');">📋 Мои заказы</button>
-          <button type="button" onclick="event.stopPropagation();openAuth('profile');">⚙️ Профиль</button>
-          <button type="button" onclick="event.stopPropagation();doLogout();">🚪 Выйти</button>
+          <button onclick="openMyOrders()">📋 Мои заказы</button>
+          <button onclick="openAuth('profile')">⚙️ Профиль</button>
+          <button onclick="doLogout()">🚪 Выйти</button>
         </span>
       </span>
+      <button class="hdr-my" id="hdr-my-btn" onclick="openMyOrders()">📋 Мои заказы</button>
       <a href="tel:+79119507358" class="hdr-phone">📞 +7 911 950-73-58</a>
       <a href="https://wa.me/79119507358" target="_blank" rel="noopener" class="hdr-wa">WA</a>
       <a href="https://t.me/karina_vizbu" target="_blank" rel="noopener" class="hdr-tg">TG</a>
@@ -1904,8 +1810,6 @@
     <button class="nav-tab" data-page="shop">🛍 Продаёт</button>
     <button class="nav-tab" data-page="insurance">🛡️ Страхование</button>
     <button class="nav-tab" data-page="management">🔑 Управление</button>
-    <button class="nav-tab" data-page="client">📋 Мои заказы</button>
-    <button class="nav-tab" data-page="admin">⚙️ Админ</button>
   </div>
 </header>
 
@@ -1921,9 +1825,9 @@
       <div class="hero-stories-col" id="stories-left"></div>
       <div class="hero-center">
         <img src="images/logo-ru.jpg" alt="ВИсбу" class="hero-bigLogo" width="380" height="180" decoding="async"
-             onerror="this.src='images/logo-flying-house.webp'"/>
+             onerror="this.src='images/logo-mascot.jpg'"/>
         <div class="hero-tag">Сервис для загородной жизни в Ленобласти · с 2026 года</div>
-        <h1>Решаем всё,<br/><em>кроме погоды</em></h1>
+        <h1>Дачные работы<br/><em>без поиска мастеров</em></h1>
         <div class="hero-slogan">81 услуга для дачи и участка в Ленобласти</div>
         <p>Открытие дачи, покос, клещи, септик, сантехник, электрик, дрова и вывоз мусора. Опишите задачу — перезвоним за час и подберём исполнителя.</p>
         <div class="hero-trust">
@@ -1949,18 +1853,6 @@
       <div class="process-item"><span class="ic">4</span><div><strong>Контролируем результат</strong><span>Работа и обратная связь</span></div></div>
     </div>
   </section>
-  <section class="process-cta" aria-label="Быстрая заявка">
-    <div class="process-cta-inner">
-      <div>
-        <strong>Готовы поручить задачу?</strong>
-        <span>Опишите её в двух словах — мы подберём подходящего мастера.</span>
-      </div>
-      <div class="process-cta-actions">
-        <button type="button" class="btn-process-primary js-general-request">Подобрать мастера</button>
-        <a class="btn-process-light" href="https://wa.me/79119507358" target="_blank" rel="noopener">Написать в WhatsApp</a>
-      </div>
-    </div>
-  </section>
 
   <!-- ХИТЫ МАЯ -->
   <section class="hot-section" id="hot-section">
@@ -1971,7 +1863,6 @@
       </div>
       <div class="hot-grid" id="hot-grid"></div>
       <div class="hot-jump">
-        <button type="button" class="primary js-general-request">Не вижу свою задачу</button>
         <a href="#catalog-section">↓ Все 81 услуга в каталоге</a>
       </div>
     </div>
@@ -2017,7 +1908,6 @@
         <input id="search" type="text" placeholder="Найти услугу: покос, септик, клещи, забор, электрик..." autocomplete="off"/>
         <button type="button" id="search-clear" aria-label="Очистить">✕</button>
       </div>
-      <button type="button" class="catalog-toolbar-cta js-general-request">Описать задачу</button>
     </div>
   </div>
 
@@ -2157,7 +2047,7 @@
       </div>
       <div class="about-right">
         <div class="about-img about-mascot">
-          <img src="images/logo-flying-house.webp" alt="ВИсбу — наш маскот"
+          <img src="images/logo-mascot.jpg" alt="ВИсбу — наш маскот"
                onerror="this.src='https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=700&h=400&fit=crop&auto=format&q=80'"/>
         </div>
         <div class="about-stats">
@@ -2181,7 +2071,7 @@
 ════════════════════════════════════════════════ -->
 <div class="page" id="page-insurance">
   <div class="ins-hero">
-    <img src="images/logo-flying-house.webp" alt="" class="page-mascot" onerror="this.style.display='none'"/>
+    <img src="images/logo-mascot.jpg" alt="" class="page-mascot" onerror="this.style.display='none'"/>
     <div class="badge">🛡️ ВИсбу Страхование</div>
     <h1>Защитите дачу от<br/><em>любых неожиданностей</em></h1>
     <p>Страхование загородного дома, участка и имущества. Оформление онлайн за 10 минут. Надёжные страховые партнёры.</p>
@@ -2267,7 +2157,7 @@
 ════════════════════════════════════════════════ -->
 <div class="page" id="page-management">
   <div class="mgmt-hero">
-    <img src="images/logo-flying-house.webp" alt="" class="page-mascot" onerror="this.style.display='none'"/>
+    <img src="images/logo-mascot.jpg" alt="" class="page-mascot" onerror="this.style.display='none'"/>
     <div class="badge">🔑 ВИсбу Управление</div>
     <h1>Дача зарабатывает,<br/><em>пока вы отдыхаете</em></h1>
     <p>Мы берём ваш загородный дом в управление, находим арендаторов, организуем уборку и обслуживание. Вы просто получаете деньги.</p>
@@ -2368,7 +2258,7 @@
 ════════════════════════════════════════════════ -->
 <div class="page" id="page-brigade">
   <div class="brg-hero">
-    <img src="images/logo-flying-house.webp" alt="" class="page-mascot" onerror="this.style.display='none'"/>
+    <img src="images/logo-mascot.jpg" alt="" class="page-mascot" onerror="this.style.display='none'"/>
     <div class="badge">👷 ВИсбу Бригада</div>
     <h1>Разнорабочие на участок —<br/><em>надёжно и быстро</em></h1>
     <p>Проверенные люди в помощь по любому делу: копать, носить, разбирать, грузить, строить. Часами, днями или бригадой — выбирайте формат.</p>
@@ -2457,7 +2347,7 @@
 ════════════════════════════════════════════════ -->
 <div class="page" id="page-shop">
   <div class="shop-hero">
-    <img src="images/logo-flying-house.webp" alt="" class="page-mascot" onerror="this.style.display='none'"/>
+    <img src="images/logo-mascot.jpg" alt="" class="page-mascot" onerror="this.style.display='none'"/>
     <div class="badge">🛍 ВИсбу Продаёт</div>
     <h1>Всё для дачи —<br/><em>под ключ и с доставкой</em></h1>
     <p>Дрова, теплицы, бани-бочки, бассейны, септики, материалы. Подберём поставщика, привезём и установим. Цена не выше рыночной.</p>
@@ -2495,10 +2385,10 @@
 ════════════════════════════════════════════════ -->
 <div class="page" id="page-contractors">
   <div class="ctr-hero">
-    <img src="images/logo-flying-house.webp" alt="" class="page-mascot" onerror="this.style.display='none'"/>
+    <img src="images/logo-mascot.jpg" alt="" class="page-mascot" onerror="this.style.display='none'"/>
     <div class="badge">💼 ВИсбу для подрядчиков</div>
     <h1>Заявки на работы по даче,<br/><em>с проверенным адресом и бюджетом</em></h1>
-    <p>ВИсбу обзванивает клиентов, уточняет задачу и адрес — а потом передаёт вам уже горячий заказ. На демо-запуске заявки бесплатные: приучаем подрядчиков и клиентов к сервису.</p>
+    <p>ВИсбу обзванивает клиентов, уточняет задачу и адрес — а потом передаёт вам уже горячий контакт. Эксклюзивно вам на 1 час: никаких 5 конкурентов с Avito.</p>
     <div class="ctr-hero-ctas">
       <a href="#ctr-reg" class="btn-ctr-primary">📝 Стать подрядчиком</a>
       <button class="btn-ctr-secondary" onclick="openContractorCabinet()">👀 Демо-кабинет</button>
@@ -2511,8 +2401,8 @@
     <div class="ctr-benefits">
       <div class="ctr-benefit">
         <div class="ctr-benefit-ic">🎯</div>
-        <h3>Заказ передаём адресно</h3>
-        <p>Админ выбирает подходящего подрядчика по категории и району. Если не отозвался — переназначаем следующему.</p>
+        <h3>Эксклюзивно вам на 1 час</h3>
+        <p>Контакт продаём только одному подрядчику. Если не отозвался за час — передаём следующему.</p>
       </div>
       <div class="ctr-benefit">
         <div class="ctr-benefit-ic">✅</div>
@@ -2526,8 +2416,8 @@
       </div>
       <div class="ctr-benefit">
         <div class="ctr-benefit-ic">💸</div>
-        <h3>Сейчас бесплатно</h3>
-        <p>На старте не берём оплату за заявки. Собираем поток, рейтинг подрядчиков и понятный процесс.</p>
+        <h3>Возврат за пустой контакт</h3>
+        <p>Если не дозвонились или клиент уже передумал — деньги возвращаются на баланс. Никаких споров.</p>
       </div>
     </div>
 
@@ -2547,13 +2437,13 @@
         </div>
         <div class="ctr-how-step">
           <div class="ctr-how-step-n">3</div>
-          <h4>Админ передаёт заказ</h4>
-          <p>Вы видите задачу, район, бюджет, контакты клиента и следующий шаг</p>
+          <h4>Заявка в ленте</h4>
+          <p>Заявка появляется у вас. Вы видите задачу, район, бюджет — но контакт скрыт</p>
         </div>
         <div class="ctr-how-step">
           <div class="ctr-how-step-n">4</div>
-          <h4>Нажимаете «Взять»</h4>
-          <p>Клиент видит новый статус, вы звоните, едете и отмечаете результат</p>
+          <h4>Покупаете контакт</h4>
+          <p>Списываем фикс с баланса, открываем телефон и адрес. Звоните клиенту</p>
         </div>
       </div>
     </div>
@@ -2568,27 +2458,27 @@
     <!-- Тарифы -->
     <div class="ctr-tariffs-wrap">
       <h2>Тарифы</h2>
-      <p>Сейчас работаем в ручном режиме и отдаём заявки бесплатно. Когда наберём стабильный поток и рейтинг — аккуратно включим коммерческую модель.</p>
+      <p>Сейчас работаем в ручном режиме: ВИсбу сама подбирает подрядчика и берёт процент. Когда наберём поток заявок — переходим на классическую цену за лид.</p>
       <div class="ctr-tariffs">
 
         <div class="ctr-tariff now">
           <div class="ctr-tariff-tag">Сейчас</div>
-          <h3>Бесплатные заявки</h3>
-          <p>Подходит для тестовой фазы: проверяем подрядчиков, скорость ответа и качество работ.</p>
-          <div class="ctr-tariff-price">0 ₽<small> за заказ на старте</small></div>
+          <h3>Процент с заказа</h3>
+          <p>Подходит для тестовой фазы и сложных задач, где сложно посчитать заранее.</p>
+          <div class="ctr-tariff-price">10–15%<small> с выполненной работы</small></div>
           <ul>
             <li>Никакого баланса и предоплаты</li>
-            <li>Админ передаёт заказ вручную</li>
-            <li>Подрядчик нажимает «Взять заказ»</li>
+            <li>Платите только если заказ выполнен</li>
+            <li>ВИсбу сама ищет лучшего подрядчика</li>
             <li>Помогаем с возвратами и спорами</li>
-            <li>Клиент после выполнения ставит оценку</li>
+            <li>Размер процента зависит от категории</li>
           </ul>
         </div>
 
         <div class="ctr-tariff future">
           <div class="ctr-tariff-tag">Скоро</div>
           <h3>Цена за лид</h3>
-          <p>Запускаем только когда наберём больше заявок и понятную экономику. Подрядчик платит фикс за доступ к контакту.</p>
+          <p>Запускаем когда наберём больше заявок. Подрядчик платит фикс за доступ к контакту.</p>
           <div class="ctr-tariff-price">от 150 ₽<small> за контакт</small></div>
           <ul>
             <li>Эксклюзивный контакт на 1 час</li>
@@ -2601,7 +2491,7 @@
       </div>
 
       <div class="ctr-pricing-table">
-        <h4>Будущий прайс по категориям (сейчас не списываем)</h4>
+        <h4>Прайс по категориям (когда запустим pay-per-lead)</h4>
         <div class="ctr-pricing-row"><span>🌿 Покос, уборка участка</span><strong>150 ₽</strong></div>
         <div class="ctr-pricing-row"><span>🪵 Дрова, доставка</span><strong>200 ₽</strong></div>
         <div class="ctr-pricing-row"><span>💧 Сантехник, септики</span><strong>250 ₽</strong></div>
@@ -2623,7 +2513,7 @@
         </div>
         <div class="ctr-calc-cell">
           <strong>2 500 ₽</strong>
-          <span>будущая стоимость лидов</span>
+          <span>стоимость лидов</span>
         </div>
         <div class="ctr-calc-cell">
           <strong>4–6</strong>
@@ -2720,126 +2610,22 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════
-     СТРАНИЦА: МОИ ЗАКАЗЫ
-════════════════════════════════════════════════ -->
-<div class="page" id="page-client">
-  <section class="ops-page">
-    <div class="ops-wrap">
-      <div class="ops-hero">
-        <div>
-          <div class="badge">📋 Кабинет клиента</div>
-          <h1>Мои заказы</h1>
-          <p>Статус заявки, следующий шаг, контакты менеджера и оценка подрядчика после выполнения.</p>
-        </div>
-        <img src="images/logo-flying-house.webp" alt="" onerror="this.style.display='none'"/>
-      </div>
-
-      <div class="ops-grid">
-        <aside class="ops-panel">
-          <h2>Войти по телефону</h2>
-          <p class="ops-muted">Для демо пароль не нужен. Введите телефон, который указали в заявке.</p>
-          <form id="client-login-form" class="ops-stack" style="margin-top:14px;">
-            <div class="fr">
-              <label for="client-name">Имя</label>
-              <input id="client-name" type="text" placeholder="Иван" autocomplete="name"/>
-            </div>
-            <div class="fr">
-              <label for="client-phone">Телефон <span class="req">*</span></label>
-              <input id="client-phone" type="tel" placeholder="+7 (___) ___-__-__" autocomplete="tel" required/>
-            </div>
-            <button class="ops-btn primary" type="submit">Показать мои заказы</button>
-          </form>
-          <div class="ops-actions">
-            <button type="button" class="ops-btn js-general-request">Новая заявка</button>
-            <a class="ops-btn" href="tel:+79119507358">Позвонить</a>
-          </div>
-        </aside>
-
-        <main class="ops-stack">
-          <div class="ops-panel">
-            <div class="ops-card-head">
-              <div>
-                <h2>Текущие заявки</h2>
-                <p class="ops-muted" id="client-cabinet-subtitle">Введите телефон, чтобы увидеть заказы.</p>
-              </div>
-              <button type="button" class="ops-btn" onclick="seedDemoData()">Заполнить демо</button>
-            </div>
-          </div>
-          <div class="ops-stack" id="client-orders"></div>
-        </main>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- ═══════════════════════════════════════════════
-     СТРАНИЦА: АДМИН-ПАНЕЛЬ
-════════════════════════════════════════════════ -->
-<div class="page" id="page-admin">
-  <section class="ops-page">
-    <div class="ops-wrap">
-      <div class="ops-hero">
-        <div>
-          <div class="badge">⚙️ ВИсбу диспетчерская</div>
-          <h1>Админ-панель заказов</h1>
-          <p>Новые заявки, уточнение деталей, модерация подрядчиков, передача заказа и контроль выполнения.</p>
-        </div>
-        <img src="images/logo-flying-house.webp" alt="" onerror="this.style.display='none'"/>
-      </div>
-
-      <div class="ops-kpis" id="admin-kpis"></div>
-
-      <div class="ops-grid">
-        <aside class="ops-panel">
-          <h2>Подрядчики</h2>
-          <p class="ops-muted">Анкеты попадают сюда после регистрации. Одобрите подрядчика, чтобы ему можно было передавать заказы.</p>
-          <div class="ops-actions">
-            <button type="button" class="ops-btn primary" onclick="seedDemoData()">Заполнить демо</button>
-            <button type="button" class="ops-btn" onclick="openContractorCabinet()">Кабинет подрядчика</button>
-          </div>
-          <div class="ops-stack" id="admin-contractors" style="margin-top:14px;"></div>
-        </aside>
-
-        <main class="ops-stack">
-          <div class="ops-panel">
-            <div class="ops-card-head">
-              <div>
-                <h2>Очередь заказов</h2>
-                <p class="ops-muted">Сначала уточните детали с клиентом, затем передайте заказ подходящему подрядчику.</p>
-              </div>
-              <button type="button" class="ops-btn danger" onclick="resetDemoData()">Очистить демо</button>
-            </div>
-            <div class="ops-tabs" id="admin-status-tabs"></div>
-          </div>
-          <div class="ops-stack" id="admin-orders"></div>
-        </main>
-      </div>
-    </div>
-  </section>
-</div>
-
 <!-- ДЕМО-КАБИНЕТ ПОДРЯДЧИКА -->
 <div class="ctr-cabinet" id="ctr-cabinet" role="dialog" aria-modal="true" aria-label="Демо-кабинет подрядчика">
   <div class="ctr-cab-head">
     <div class="who">
       <div class="who-avatar">ИП</div>
       <div>
-        <div class="who-name" id="cab-contractor-name">Подрядчик</div>
-        <div class="who-rate" id="cab-contractor-rate">Заявки выдаются бесплатно в демо-запуске</div>
+        <div class="who-name">Иван Петров (демо)</div>
+        <div class="who-rate">⭐ 4.7 · 23 отзыва · Сантехник + Электрик</div>
       </div>
     </div>
-    <div class="balance">Лиды: <strong>бесплатно</strong></div>
+    <div class="balance">Баланс: <strong>5 000 ₽</strong></div>
     <button onclick="closeContractorCabinet()">✕ Выйти из демо</button>
   </div>
   <div class="ctr-cab-body">
     <div class="ctr-demo-banner">
-      🎬 <strong>Демо-режим:</strong> сейчас заявки выдаём бесплатно. Админ передаёт заказ, подрядчик нажимает «Взять заказ», клиент сразу видит новый статус.
-    </div>
-    <div class="cab-login">
-      <label for="cab-contractor-select">Профиль подрядчика</label>
-      <select id="cab-contractor-select" onchange="setActiveContractor(this.value)"></select>
-      <button class="ops-btn" type="button" onclick="seedDemoData()">Заполнить демо</button>
+      🎬 <strong>Демо-режим:</strong> это превью кабинета подрядчика. Покупки контактов и пополнения здесь не работают — для теста.
     </div>
     <div class="ctr-cab-toolbar">
       <button class="active" data-cab-cat="Все">Все</button>
@@ -2902,15 +2688,15 @@
 <div class="mobile-actionbar" aria-label="Быстрые действия">
   <a href="tel:+79119507358">Позвонить</a>
   <a href="https://wa.me/79119507358" target="_blank" rel="noopener">WhatsApp</a>
-  <button type="button" onclick="switchPage('client')">Статус</button>
   <button type="button" class="primary js-general-request">Заявка</button>
 </div>
 
 
-<!-- ── ВХОД / РЕГИСТРАЦИЯ С ПАРОЛЕМ ─────────────────── -->
+
+<!-- ── ВХОД / РЕГИСТРАЦИЯ КЛИЕНТА ─────────────────── -->
 <div class="auth-overlay" id="auth-overlay">
   <div class="auth-modal">
-    <button class="auth-modal-x" onclick="closeAuth()" type="button">✕</button>
+    <button class="my-modal-x" onclick="closeAuth()">✕</button>
     <h2 id="auth-title">Войти в ВИсбу</h2>
     <p class="sub" id="auth-sub">Введите телефон и пароль, чтобы видеть свои заказы и не вводить данные заново.</p>
 
@@ -2921,12 +2707,14 @@
 
     <div id="auth-msg-box"></div>
 
+    <!-- Вход -->
     <form class="auth-form" id="auth-form-login" onsubmit="doLogin(event)">
       <input id="li-phone"    type="tel"      placeholder="+7 (___) ___-__-__" autocomplete="tel" required/>
       <input id="li-password" type="password" placeholder="Пароль" autocomplete="current-password" required/>
       <button type="submit" class="btn-primary" id="li-btn">Войти</button>
     </form>
 
+    <!-- Регистрация -->
     <form class="auth-form" id="auth-form-register" style="display:none;" onsubmit="doRegister(event)">
       <input id="ri-name"      type="text"     placeholder="Ваше имя *"          autocomplete="name" required/>
       <input id="ri-phone"     type="tel"      placeholder="Телефон * +7…"      autocomplete="tel"  required/>
@@ -2944,6 +2732,7 @@
       <button type="submit" class="btn-primary" id="ri-btn">Зарегистрироваться</button>
     </form>
 
+    <!-- Профиль (для залогиненного пользователя) -->
     <form class="auth-form" id="auth-form-profile" style="display:none;" onsubmit="doProfileSave(event)">
       <input id="pr-name"    type="text"  placeholder="Имя" autocomplete="name"/>
       <input id="pr-email"   type="email" placeholder="Email" autocomplete="email"/>
@@ -2959,12 +2748,72 @@
 <!-- ── ОФФЕР РЕГИСТРАЦИИ ПОСЛЕ АНОНИМНОГО ЗАКАЗА ────── -->
 <div class="auth-overlay" id="reg-prompt">
   <div class="auth-modal">
-    <button class="auth-modal-x" onclick="closeRegPrompt()" type="button">✕</button>
+    <button class="my-modal-x" onclick="closeRegPrompt()">✕</button>
     <h2>✅ Заявка принята!</h2>
     <p class="sub">Хотите зарегистрироваться, чтобы видеть статус заказа в кабинете и оформлять следующие заявки в один клик?</p>
     <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;">
-      <button class="btn-primary" type="button" style="flex:1;background:var(--green);color:#fff;border:none;padding:13px;border-radius:10px;font-weight:800;cursor:pointer;font-family:inherit;font-size:1rem;" onclick="closeRegPrompt(); openAuth('register');">Зарегистрироваться</button>
-      <button type="button" onclick="closeRegPrompt()" style="padding:13px 20px;background:#fff;border:1.5px solid var(--border);border-radius:10px;font-weight:700;cursor:pointer;font-family:inherit;">Пропустить</button>
+      <button class="btn-primary" style="flex:1;background:var(--green);color:#fff;border:none;padding:13px;border-radius:10px;font-weight:800;cursor:pointer;font-family:inherit;font-size:1rem;" onclick="closeRegPrompt(); openAuth('register');">Зарегистрироваться</button>
+      <button onclick="closeRegPrompt()" style="padding:13px 20px;background:#fff;border:1.5px solid var(--border);border-radius:10px;font-weight:700;cursor:pointer;font-family:inherit;">Пропустить</button>
+    </div>
+  </div>
+</div>
+
+<!-- МОИ ЗАКАЗЫ — кабинет клиента -->
+<div class="my-overlay" id="my-overlay">
+  <div class="my-modal my-modal-pos">
+    <button class="my-modal-x" onclick="closeMyOrders()">✕</button>
+    <h2>📋 Мои <em>заказы</em></h2>
+    <p class="sub">Введите телефон, на который оставляли заявку — увидите все свои заказы и сможете оценить мастера.</p>
+    <div class="my-input-row">
+      <input id="my-phone" type="tel" placeholder="+7 (___) ___-__-__" autocomplete="off"/>
+      <button onclick="loadMyOrders()">Найти</button>
+    </div>
+    <div class="my-orders" id="my-orders"></div>
+  </div>
+</div>
+
+<!-- ── АДМИН-ПАНЕЛЬ ─────────────────────────────────── -->
+<div id="admin-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;overflow-y:auto;padding:20px;">
+  <div style="max-width:900px;margin:0 auto;background:#fff;border-radius:16px;overflow:hidden;">
+    <div style="background:#1b4332;color:#fff;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="font-size:1.2rem;font-weight:900;">🔐 ВИсбу — Панель заявок</div>
+        <div style="font-size:.8rem;opacity:.7;margin-top:2px;">Только для администратора</div>
+      </div>
+      <button onclick="closeAdmin()" style="background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:8px;padding:8px 14px;cursor:pointer;font-size:.9rem;">✕ Закрыть</button>
+    </div>
+    <div style="padding:20px 24px;">
+      <div style="display:flex;gap:8px;margin-bottom:18px;border-bottom:1px solid #E5EDE8;padding-bottom:14px;">
+        <button onclick="adminTab('orders')" id="at-orders" style="padding:9px 18px;border-radius:10px;border:none;background:#1b4332;color:#fff;cursor:pointer;font-weight:800;font-size:.88rem;">📋 Заявки клиентов</button>
+        <button onclick="adminTab('contractors')" id="at-contractors" style="padding:9px 18px;border-radius:10px;border:none;background:#F4F7F4;color:#1A1A1A;cursor:pointer;font-weight:800;font-size:.88rem;">💼 Подрядчики <span id="ct-pending-cnt" style="background:#F4A23A;color:#fff;border-radius:10px;padding:1px 7px;font-size:.7rem;margin-left:4px;display:none;"></span></button>
+        <button onclick="adminTab('clients')" id="at-clients" style="padding:9px 18px;border-radius:10px;border:none;background:#F4F7F4;color:#1A1A1A;cursor:pointer;font-weight:800;font-size:.88rem;">👥 Клиенты <span id="cl-cnt" style="background:#2D6A4F;color:#fff;border-radius:10px;padding:1px 7px;font-size:.7rem;margin-left:4px;display:none;"></span></button>
+      </div>
+      <div id="admin-tab-orders">
+        <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+          <button onclick="filterAdmin('all')" id="af-all" style="padding:7px 16px;border-radius:999px;border:1.5px solid #2D6A4F;background:#2D6A4F;color:#fff;cursor:pointer;font-weight:600;font-size:.83rem;">Все</button>
+          <button onclick="filterAdmin('new')" id="af-new" style="padding:7px 16px;border-radius:999px;border:1.5px solid #E5EDE8;background:#fff;cursor:pointer;font-weight:600;font-size:.83rem;">🆕 Новые</button>
+          <button onclick="filterAdmin('work')" id="af-work" style="padding:7px 16px;border-radius:999px;border:1.5px solid #E5EDE8;background:#fff;cursor:pointer;font-weight:600;font-size:.83rem;">⏳ В работе</button>
+          <button onclick="filterAdmin('done')" id="af-done" style="padding:7px 16px;border-radius:999px;border:1.5px solid #E5EDE8;background:#fff;cursor:pointer;font-weight:600;font-size:.83rem;">✅ Выполнены</button>
+          <button onclick="clearDone()" style="padding:7px 16px;border-radius:999px;border:1.5px solid #fecaca;background:#fff;color:#dc2626;cursor:pointer;font-weight:600;font-size:.83rem;margin-left:auto;">🗑 Удалить выполненные</button>
+        </div>
+        <div id="admin-orders"></div>
+      </div>
+      <div id="admin-tab-contractors" style="display:none;">
+        <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+          <button onclick="filterCtr('all')" id="cf-all" style="padding:7px 16px;border-radius:999px;border:1.5px solid #2D6A4F;background:#2D6A4F;color:#fff;cursor:pointer;font-weight:600;font-size:.83rem;">Все</button>
+          <button onclick="filterCtr('pending')" id="cf-pending" style="padding:7px 16px;border-radius:999px;border:1.5px solid #E5EDE8;background:#fff;cursor:pointer;font-weight:600;font-size:.83rem;">⏳ На модерации</button>
+          <button onclick="filterCtr('approved')" id="cf-approved" style="padding:7px 16px;border-radius:999px;border:1.5px solid #E5EDE8;background:#fff;cursor:pointer;font-weight:600;font-size:.83rem;">✅ Одобрены</button>
+          <button onclick="filterCtr('rejected')" id="cf-rejected" style="padding:7px 16px;border-radius:999px;border:1.5px solid #E5EDE8;background:#fff;cursor:pointer;font-weight:600;font-size:.83rem;">❌ Отклонены</button>
+        </div>
+        <div id="admin-contractors"></div>
+      </div>
+      <div id="admin-tab-clients" style="display:none;">
+        <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;align-items:center;">
+          <input class="ad-clients-search" id="ad-clients-q" placeholder="🔎 Поиск по имени, телефону или email…" oninput="renderAdminClients()" style="flex:1;min-width:220px;"/>
+          <button onclick="exportClientsCsv()" style="padding:10px 16px;background:var(--green);color:#fff;border:none;border-radius:10px;font-weight:800;cursor:pointer;font-family:inherit;font-size:.88rem;">⬇ Экспорт CSV</button>
+        </div>
+        <div id="admin-clients"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -2981,10 +2830,9 @@
     <a href="tel:+79119507358">+7 911 950-73-58</a> ·
     <a href="https://wa.me/79119507358" target="_blank" rel="noopener">WhatsApp</a> ·
     <a href="https://t.me/karina_vizbu" target="_blank" rel="noopener">Telegram</a> ·
-    <button type="button" class="footer-page-link" data-page="client">Мои заказы</button> ·
-    <button type="button" class="footer-page-link" data-page="contractors">Подрядчикам</button> ·
-    <button type="button" class="footer-page-link" data-page="admin">Админ</button> · 2026
+    <button type="button" class="footer-page-link" data-page="contractors">Подрядчикам</button> · 2026
   </p>
+  <p style="margin-top:8px;font-size:.72rem;opacity:.4;cursor:pointer;" onclick="openAdmin()">Вход для администратора</p>
 </footer>
 
 <script>
@@ -3039,26 +2887,28 @@ async function submitLead(payload, photos = []) {
   const action  = isOrder ? 'order_create' : 'contractor_register';
   const data    = isOrder ? payload.order : payload.contractor;
 
-  // 1) Бэкенд (если живой) — он сам уведомит админа и сохранит в БД
+  // 1) Сначала бэкенд (он сам уведомит админа и сохранит в БД)
   let backendOk = false;
   let orderId = null;
   try {
     const _hdr = {'Content-Type':'application/json'};
-    const _tok = (typeof getAuthToken === 'function' ? getAuthToken() : (localStorage.getItem('vizbu_auth_token') || ''));
-    if (_tok && !_tok.startsWith('local-')) _hdr['X-Auth-Token'] = _tok;
+    const _tok = localStorage.getItem('vizbu_auth_token') || '';
+    if (_tok) _hdr['X-Auth-Token'] = _tok;
     const r = await fetch(`${FORM_ENDPOINT}?action=${action}`, {
       method: 'POST', headers: _hdr,
       body: JSON.stringify({
         ...data,
-        name:    data.name,
-        phone:   data.phone,
-        service: data.svc || data.service || '',
-        address: data.addr || data.address || '',
-        comment: data.comm || data.comment || '',
-        extras:  data.extras || {},
-        promo:   data.promo || '',
+        // нормализованные поля для бэкенда
+        name:     data.name,
+        phone:    data.phone,
+        service:  data.svc || data.service || '',
+        address:  data.addr || data.address || '',
+        comment:  data.comm || data.comment || '',
+        extras:   data.extras || {},
+        promo:    data.promo || '',
       })
     });
+    // Безопасный парсинг — на Vercel/без PHP сервер вернёт не-JSON, не паникуем
     const tx = await r.text();
     let j = {};
     try { if (tx && (tx.trim()[0] === '{' || tx.trim()[0] === '[')) j = JSON.parse(tx); } catch {}
@@ -3067,13 +2917,24 @@ async function submitLead(payload, photos = []) {
     console.warn('Бэкенд недоступен, шлём напрямую в Telegram:', err);
   }
 
-  // 2) Дублируем в Telegram — главный канал, если бэк лёг
+  // 2) Дублируем в Telegram (или используем как основной канал, если бэк лёг)
   const tgOk = await tgSendText(payload.text);
 
-  // 3) Фото отдельно
+  // 3) Фото — отдельной пачкой
   if (isOrder && photos && photos.length) {
     const cap = `📸 К заявке${orderId ? ' #' + orderId : ''}: ${data.svc || ''} · ${data.name || ''}`;
     await tgSendPhotos(photos, cap);
+  }
+
+  // 4) Локальная копия для оффлайн-просмотра
+  if (isOrder) {
+    try {
+      const orders = JSON.parse(localStorage.getItem('vizbu_orders') || '[]');
+      orders.unshift({ ...data, id: orderId || data.id, status: 'new' });
+      localStorage.setItem('vizbu_orders', JSON.stringify(orders));
+      if (data.phone) localStorage.setItem('vizbu_my_phone', data.phone);
+      if (data.promo) localStorage.setItem('vizbu_first_order_used', '1');
+    } catch {}
   }
 
   return { ok: backendOk || tgOk, status: (backendOk || tgOk) ? 200 : 500, orderId };
@@ -3775,568 +3636,6 @@ document.addEventListener('click', e => {
   }
 });
 
-// ── ДЕМО-ОПЕРАЦИОНКА: ЗАКАЗЫ, КЛИЕНТЫ, ПОДРЯДЧИКИ ────────────────
-const STORE = {
-  orders: 'vizbu_orders_v2',
-  clients: 'vizbu_clients_v2',
-  contractors: 'vizbu_contractors_v2',
-  currentClient: 'vizbu_current_client_phone',
-  currentContractor: 'vizbu_current_contractor_id',
-};
-
-const STATUS = {
-  new: { label: 'Новая заявка', hint: 'Менеджер ВИсбу скоро свяжется с клиентом.' },
-  clarifying: { label: 'Уточняем детали', hint: 'Менеджер согласовывает объём, дату, бюджет и фото.' },
-  ready: { label: 'Готово к передаче', hint: 'Детали согласованы, подбираем подрядчика.' },
-  assigned: { label: 'Передано подрядчику', hint: 'Подрядчик получил уведомление и должен взять заказ.' },
-  accepted: { label: 'Подрядчик взял заказ', hint: 'Подрядчик связывается с клиентом и договаривается о выезде.' },
-  in_progress: { label: 'В работе', hint: 'Подрядчик едет или уже выполняет заказ.' },
-  done: { label: 'Выполнено', hint: 'Просим клиента оценить подрядчика.' },
-  failed: { label: 'Сорвалось', hint: 'Заказ вернулся в админку для переназначения или отмены.' },
-  closed: { label: 'Закрыто', hint: 'Клиент оставил оценку, заказ завершён.' },
-};
-
-let adminFilter = 'all';
-
-function esc(value) {
-  return String(value ?? '').replace(/[&<>"']/g, ch => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
-  }[ch]));
-}
-
-function readStore(key, fallback = []) {
-  try {
-    const raw = localStorage.getItem(key);
-    return raw ? JSON.parse(raw) : fallback;
-  } catch (err) {
-    console.warn('Bad localStorage data', key, err);
-    return fallback;
-  }
-}
-
-function writeStore(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
-}
-
-function normalizePhone(phone) {
-  const digits = String(phone || '').replace(/\D/g, '');
-  if (digits.length === 11 && digits[0] === '8') return '7' + digits.slice(1);
-  return digits;
-}
-
-function phoneHref(phone) {
-  const normalized = normalizePhone(phone);
-  return normalized ? `tel:+${normalized}` : '#';
-}
-
-function waHref(phone, text) {
-  const normalized = normalizePhone(phone);
-  return normalized ? `https://wa.me/${normalized}?text=${encodeURIComponent(text)}` : '#';
-}
-
-function nowRu() {
-  return new Date().toLocaleString('ru-RU');
-}
-
-function statusChip(status) {
-  const item = STATUS[status] || STATUS.new;
-  return `<span class="status-chip ${esc(status)}">${esc(item.label)}</span>`;
-}
-
-function getSvcCategory(name) {
-  const found = SERVICES.find(s => s.name === name);
-  return found?.cat || 'Дачные работы';
-}
-
-function orderNumber(order) {
-  return String(order.id || '').replace(/\D/g, '').slice(-5) || '00000';
-}
-
-function orders() { return readStore(STORE.orders); }
-function contractors() { return readStore(STORE.contractors); }
-function clients() { return readStore(STORE.clients); }
-
-function saveOrders(next) { writeStore(STORE.orders, next); }
-function saveContractors(next) { writeStore(STORE.contractors, next); }
-function saveClients(next) { writeStore(STORE.clients, next); }
-
-function pushHistory(order, text) {
-  order.history = Array.isArray(order.history) ? order.history : [];
-  order.history.unshift({ at: nowRu(), text });
-}
-
-function setOrderStatus(order, status, text) {
-  order.status = status;
-  order.updatedAt = nowRu();
-  pushHistory(order, text || (STATUS[status]?.label || status));
-}
-
-function upsertClient({ name, phone, addr }) {
-  const phoneKey = normalizePhone(phone);
-  if (!phoneKey) return null;
-  const list = clients();
-  const idx = list.findIndex(c => c.phoneKey === phoneKey);
-  const item = {
-    id: idx >= 0 ? list[idx].id : `cl-${Date.now()}`,
-    name: name || list[idx]?.name || 'Клиент',
-    phone,
-    phoneKey,
-    addr: addr || list[idx]?.addr || '',
-    updatedAt: nowRu(),
-  };
-  if (idx >= 0) list[idx] = { ...list[idx], ...item };
-  else list.unshift(item);
-  saveClients(list);
-  localStorage.setItem(STORE.currentClient, phoneKey);
-  return item;
-}
-
-function createStoredOrder(base) {
-  const client = upsertClient(base);
-  const order = {
-    id: `ord-${Date.now()}`,
-    clientId: client?.id || '',
-    clientName: base.name,
-    phone: base.phone,
-    phoneKey: normalizePhone(base.phone),
-    address: base.addr || '',
-    service: base.svc || 'Подобрать мастера',
-    category: getSvcCategory(base.svc || ''),
-    comment: base.comm || '',
-    extras: base.extras || {},
-    photoCount: base.photoCount || 0,
-    status: 'new',
-    manager: { task: '', budget: '', date: '', notes: '', materials: '', priority: 'Обычный' },
-    assignedContractorId: '',
-    assignedAt: '',
-    acceptedAt: '',
-    resultNote: '',
-    rating: '',
-    review: '',
-    createdAt: nowRu(),
-    updatedAt: nowRu(),
-    history: [],
-  };
-  pushHistory(order, 'Клиент отправил заявку на сайте');
-  const list = orders();
-  list.unshift(order);
-  saveOrders(list);
-  renderClientCabinet();
-  renderAdminDashboard();
-  return order;
-}
-
-function saveContractorApplication(contractor) {
-  const list = contractors();
-  const phoneKey = normalizePhone(contractor.phone);
-  const idx = list.findIndex(c => c.phoneKey === phoneKey && phoneKey);
-  const item = {
-    ...contractor,
-    id: idx >= 0 ? list[idx].id : `ctr-${Date.now()}`,
-    phoneKey,
-    moderation: idx >= 0 ? list[idx].moderation : 'pending',
-    freeLeads: true,
-    rating: idx >= 0 ? list[idx].rating : 0,
-    completed: idx >= 0 ? list[idx].completed : 0,
-    createdAt: idx >= 0 ? list[idx].createdAt : nowRu(),
-    updatedAt: nowRu(),
-  };
-  if (idx >= 0) list[idx] = { ...list[idx], ...item };
-  else list.unshift(item);
-  saveContractors(list);
-  localStorage.setItem(STORE.currentContractor, item.id);
-  renderAdminDashboard();
-  renderCabinet();
-  return item;
-}
-
-function seedDemoData() {
-  const currentOrders = orders();
-  const currentContractors = contractors();
-  if (!currentContractors.length) {
-    saveContractors([
-      {
-        id: 'ctr-demo-1', name: 'Иван Петров', phone: '+7 911 111-22-33', phoneKey: '79111112233',
-        email: 'ivan@example.ru', exp: '7', status: 'ИП', team: 'Бригада 2-3 чел.',
-        cats: ['Сантехника', 'Электрика', 'Сезон'], areas: ['Всеволожский', 'Кировский'],
-        portfolio: '', about: 'Срочные выезды, вода, электрика, запуск дачи.', moderation: 'approved',
-        freeLeads: true, rating: 4.8, completed: 23, createdAt: nowRu(), updatedAt: nowRu(),
-      },
-      {
-        id: 'ctr-demo-2', name: 'Бригада Север', phone: '+7 921 444-55-66', phoneKey: '79214445566',
-        email: '', exp: '5', status: 'Самозанятый', team: 'Бригада 4+ чел.',
-        cats: ['Стройка', 'Заборы', 'Покос/уборка'], areas: ['Приозерский', 'Выборгский', 'Любой'],
-        portfolio: '', about: 'Заборы, покос, мелкая стройка.', moderation: 'approved',
-        freeLeads: true, rating: 4.6, completed: 18, createdAt: nowRu(), updatedAt: nowRu(),
-      },
-    ]);
-    localStorage.setItem(STORE.currentContractor, 'ctr-demo-1');
-  }
-  if (!currentOrders.length) {
-    const demo = [
-      {
-        id: 'ord-demo-1', clientId: 'cl-demo-1', clientName: 'Анна', phone: '+7 911 950-73-58',
-        phoneKey: '79119507358', address: 'СНТ Синявино, ул. Лесная 5',
-        service: 'Открытие дачи под ключ', category: 'Сезон',
-        comment: 'Нужно запустить воду и проверить электрику после зимы.',
-        extras: { 'Когда нужно': 'На этой неделе', 'Размер дома': '60–120 м²' },
-        photoCount: 2, status: 'new',
-        manager: { task: '', budget: '', date: '', notes: '', materials: '', priority: 'Обычный' },
-        assignedContractorId: '', assignedAt: '', acceptedAt: '', resultNote: '', rating: '', review: '',
-        createdAt: nowRu(), updatedAt: nowRu(),
-        history: [{ at: nowRu(), text: 'Клиент отправил заявку на сайте' }],
-      },
-      {
-        id: 'ord-demo-2', clientId: 'cl-demo-2', clientName: 'Сергей', phone: '+7 921 777-88-99',
-        phoneKey: '79217778899', address: 'Всеволожский район, Лемболово',
-        service: 'Покос травы', category: 'Покос/уборка',
-        comment: '8 соток, трава высокая, нужен вывоз.',
-        extras: { 'Площадь участка': '5–10 соток', 'Когда нужно': 'В выходные' },
-        photoCount: 0, status: 'ready',
-        manager: { task: 'Покос 8 соток и вывоз мешков', budget: '4 000–5 000 ₽', date: 'Ближайшие выходные', notes: 'Клиент ждёт звонок за день', materials: 'Инструмент подрядчика', priority: 'Обычный' },
-        assignedContractorId: '', assignedAt: '', acceptedAt: '', resultNote: '', rating: '', review: '',
-        createdAt: nowRu(), updatedAt: nowRu(),
-        history: [{ at: nowRu(), text: 'Менеджер согласовал детали с клиентом' }],
-      },
-    ];
-    saveOrders(demo);
-    saveClients([
-      { id: 'cl-demo-1', name: 'Анна', phone: '+7 911 950-73-58', phoneKey: '79119507358', addr: 'СНТ Синявино', updatedAt: nowRu() },
-      { id: 'cl-demo-2', name: 'Сергей', phone: '+7 921 777-88-99', phoneKey: '79217778899', addr: 'Лемболово', updatedAt: nowRu() },
-    ]);
-    localStorage.setItem(STORE.currentClient, '79119507358');
-  }
-  renderAdminDashboard();
-  renderClientCabinet();
-  renderCabinet();
-}
-
-function resetDemoData() {
-  if (!confirm('Очистить демо-заказы, клиентов и подрядчиков в этом браузере?')) return;
-  Object.values(STORE).forEach(key => localStorage.removeItem(key));
-  renderAdminDashboard();
-  renderClientCabinet();
-  renderCabinet();
-}
-
-function matchingContractors(order) {
-  return contractors().filter(c => {
-    if (c.moderation !== 'approved') return false;
-    const cats = c.cats || [];
-    return !order?.category || cats.includes(order.category) || cats.includes('Любой');
-  });
-}
-
-function contractorById(id) {
-  return contractors().find(c => c.id === id);
-}
-
-function renderTimeline(order) {
-  const history = order.history || [];
-  if (!history.length) return '';
-  return `<div class="timeline">${history.slice(0, 5).map(h => `
-    <div class="timeline-item"><span class="timeline-dot"></span><span><strong>${esc(h.at)}</strong><br>${esc(h.text)}</span></div>
-  `).join('')}</div>`;
-}
-
-function renderOrderMeta(order) {
-  const ctr = contractorById(order.assignedContractorId);
-  return `
-    <div class="ops-meta">
-      <span>№ ${esc(orderNumber(order))}</span>
-      <span>${esc(order.category)}</span>
-      <span>${esc(order.createdAt || '')}</span>
-      ${order.address ? `<span>${esc(order.address)}</span>` : ''}
-      ${ctr ? `<span>Подрядчик: ${esc(ctr.name)}</span>` : ''}
-    </div>`;
-}
-
-function renderClientCabinet() {
-  const holder = document.getElementById('client-orders');
-  if (!holder) return;
-  const phoneInput = document.getElementById('client-phone');
-  const nameInput = document.getElementById('client-name');
-  const current = localStorage.getItem(STORE.currentClient) || '';
-  if (phoneInput && current && !phoneInput.value) phoneInput.value = '+' + current;
-  const list = current ? orders().filter(o => o.phoneKey === current) : [];
-  const subtitle = document.getElementById('client-cabinet-subtitle');
-  if (subtitle) subtitle.textContent = current ? `Найдено заказов: ${list.length}` : 'Введите телефон, чтобы увидеть заказы.';
-  if (!current) {
-    holder.innerHTML = `<div class="empty-state">Введите телефон из заявки. Если заказов ещё нет, нажмите «Новая заявка».</div>`;
-    return;
-  }
-  if (!list.length) {
-    holder.innerHTML = `<div class="empty-state">По этому телефону заказов нет. Создайте новую заявку, и она появится здесь сразу после отправки.</div>`;
-    return;
-  }
-  const client = clients().find(c => c.phoneKey === current);
-  if (nameInput && client && !nameInput.value) nameInput.value = client.name || '';
-  holder.innerHTML = list.map(order => {
-    const ctr = contractorById(order.assignedContractorId);
-    const canRate = order.status === 'done';
-    return `
-      <article class="ops-card">
-        <div class="ops-card-head">
-          <div>
-            <div class="ops-card-title">${esc(order.service)}</div>
-            ${renderOrderMeta(order)}
-          </div>
-          ${statusChip(order.status)}
-        </div>
-        <p class="ops-muted">${esc(STATUS[order.status]?.hint || '')}</p>
-        ${order.manager?.task ? `<p style="margin-top:10px;"><strong>Согласованная задача:</strong> ${esc(order.manager.task)}</p>` : ''}
-        ${order.manager?.budget ? `<p><strong>Ориентир бюджета:</strong> ${esc(order.manager.budget)}</p>` : ''}
-        ${order.manager?.date ? `<p><strong>Когда:</strong> ${esc(order.manager.date)}</p>` : ''}
-        ${ctr ? `<p style="margin-top:10px;"><strong>Назначен подрядчик:</strong> ${esc(ctr.name)} · ${esc(ctr.phone)}</p>` : ''}
-        <div class="ops-actions">
-          <a class="ops-btn" href="tel:+79119507358">Менеджер</a>
-          ${ctr && ['accepted','in_progress','done'].includes(order.status) ? `<a class="ops-btn primary" href="${phoneHref(ctr.phone)}">Позвонить подрядчику</a>` : ''}
-          <button class="ops-btn js-general-request" type="button">Новая заявка</button>
-        </div>
-        ${canRate ? `
-          <div style="margin-top:14px;">
-            <strong>Оцените подрядчика</strong>
-            <div class="rating-row">${[1,2,3,4,5].map(n => `<button type="button" onclick="rateOrder('${esc(order.id)}',${n})">${n}</button>`).join('')}</div>
-          </div>` : ''}
-        ${order.rating ? `<p style="margin-top:12px;"><strong>Ваша оценка:</strong> ${esc(order.rating)} из 5</p>` : ''}
-        ${renderTimeline(order)}
-      </article>`;
-  }).join('');
-}
-
-function bindClientCabinet() {
-  const form = document.getElementById('client-login-form');
-  if (!form) return;
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const phone = document.getElementById('client-phone').value.trim();
-    const name = document.getElementById('client-name').value.trim();
-    const phoneKey = normalizePhone(phone);
-    if (!phoneKey) return;
-    upsertClient({ name, phone, addr: '' });
-    localStorage.setItem(STORE.currentClient, phoneKey);
-    renderClientCabinet();
-  });
-}
-
-function rateOrder(orderId, rating) {
-  const list = orders();
-  const order = list.find(o => o.id === orderId);
-  if (!order) return;
-  order.rating = rating;
-  setOrderStatus(order, 'closed', `Клиент поставил оценку ${rating} из 5`);
-  saveOrders(list);
-  renderClientCabinet();
-  renderAdminDashboard();
-}
-
-function renderAdminDashboard() {
-  renderAdminKpis();
-  renderAdminTabs();
-  renderAdminContractors();
-  renderAdminOrders();
-}
-
-function renderAdminKpis() {
-  const holder = document.getElementById('admin-kpis');
-  if (!holder) return;
-  const list = orders();
-  const ctrs = contractors();
-  holder.innerHTML = [
-    ['Новые', list.filter(o => o.status === 'new').length],
-    ['Готовы к передаче', list.filter(o => o.status === 'ready').length],
-    ['В работе', list.filter(o => ['assigned','accepted','in_progress'].includes(o.status)).length],
-    ['Подрядчики', ctrs.filter(c => c.moderation === 'approved').length],
-  ].map(([label, value]) => `<div class="ops-kpi"><strong>${value}</strong><span>${label}</span></div>`).join('');
-}
-
-function renderAdminTabs() {
-  const holder = document.getElementById('admin-status-tabs');
-  if (!holder) return;
-  const tabs = [
-    ['all', 'Все'],
-    ['new', 'Новые'],
-    ['clarifying', 'Уточнение'],
-    ['ready', 'К передаче'],
-    ['assigned', 'Переданы'],
-    ['accepted', 'Взяты'],
-    ['in_progress', 'В работе'],
-    ['done', 'Оценка'],
-    ['failed', 'Сорвались'],
-  ];
-  holder.innerHTML = tabs.map(([key, label]) => `<button type="button" class="${adminFilter === key ? 'active' : ''}" onclick="setAdminFilter('${key}')">${label}</button>`).join('');
-}
-
-function setAdminFilter(filter) {
-  adminFilter = filter;
-  renderAdminDashboard();
-}
-
-function renderAdminContractors() {
-  const holder = document.getElementById('admin-contractors');
-  if (!holder) return;
-  const list = contractors();
-  if (!list.length) {
-    holder.innerHTML = `<div class="empty-state">Подрядчиков пока нет. Зарегистрируйте анкету или заполните демо.</div>`;
-    return;
-  }
-  holder.innerHTML = list.map(c => `
-    <article class="ops-card">
-      <div class="ops-card-head">
-        <div>
-          <div class="ops-card-title">${esc(c.name)}</div>
-          <div class="ops-meta"><span>${esc(c.phone)}</span><span>${esc(c.status || '')}</span></div>
-        </div>
-        <span class="status-chip ${c.moderation === 'approved' ? 'ready' : 'new'}">${c.moderation === 'approved' ? 'Одобрен' : 'На модерации'}</span>
-      </div>
-      <p class="ops-muted">${esc((c.cats || []).join(', ') || 'Категории не выбраны')}</p>
-      <div class="ops-actions">
-        <button class="ops-btn primary" type="button" onclick="setContractorModeration('${esc(c.id)}','approved')">Одобрить</button>
-        <button class="ops-btn" type="button" onclick="setContractorModeration('${esc(c.id)}','pending')">На модерацию</button>
-        <a class="ops-btn" href="${waHref(c.phone, 'Здравствуйте! Это ВИсбу. Хотим уточнить вашу анкету подрядчика.')}" target="_blank" rel="noopener">WhatsApp</a>
-      </div>
-    </article>
-  `).join('');
-}
-
-function setContractorModeration(id, moderation) {
-  const list = contractors();
-  const item = list.find(c => c.id === id);
-  if (!item) return;
-  item.moderation = moderation;
-  item.updatedAt = nowRu();
-  saveContractors(list);
-  renderAdminDashboard();
-  renderCabinet();
-}
-
-function renderAdminOrders() {
-  const holder = document.getElementById('admin-orders');
-  if (!holder) return;
-  let list = orders();
-  if (adminFilter !== 'all') list = list.filter(o => o.status === adminFilter);
-  if (!list.length) {
-    holder.innerHTML = `<div class="empty-state">В этой очереди пока нет заказов.</div>`;
-    return;
-  }
-  holder.innerHTML = list.map(order => {
-    const ctrs = matchingContractors(order);
-    return `
-      <article class="ops-card">
-        <div class="ops-card-head">
-          <div>
-            <div class="ops-card-title">${esc(order.service)}</div>
-            ${renderOrderMeta(order)}
-          </div>
-          ${statusChip(order.status)}
-        </div>
-        <div class="ops-meta">
-          <span>Клиент: ${esc(order.clientName)}</span>
-          <span>${esc(order.phone)}</span>
-          ${order.photoCount ? `<span>Фото: ${esc(order.photoCount)}</span>` : ''}
-        </div>
-        ${order.comment ? `<p class="ops-muted">${esc(order.comment)}</p>` : ''}
-        <div class="ops-form-grid" style="margin-top:12px;">
-          <div class="fr full"><label for="adm-task-${esc(order.id)}">Согласованная задача</label><textarea id="adm-task-${esc(order.id)}">${esc(order.manager?.task || '')}</textarea></div>
-          <div class="fr"><label for="adm-budget-${esc(order.id)}">Бюджет</label><input id="adm-budget-${esc(order.id)}" value="${esc(order.manager?.budget || '')}" placeholder="например 4 000–5 000 ₽"/></div>
-          <div class="fr"><label for="adm-date-${esc(order.id)}">Когда ехать</label><input id="adm-date-${esc(order.id)}" value="${esc(order.manager?.date || '')}" placeholder="сегодня / суббота / дата"/></div>
-          <div class="fr"><label for="adm-materials-${esc(order.id)}">Материалы</label><input id="adm-materials-${esc(order.id)}" value="${esc(order.manager?.materials || '')}" placeholder="кто покупает, что взять"/></div>
-          <div class="fr"><label for="adm-priority-${esc(order.id)}">Приоритет</label><select id="adm-priority-${esc(order.id)}"><option ${order.manager?.priority === 'Обычный' ? 'selected' : ''}>Обычный</option><option ${order.manager?.priority === 'Срочно' ? 'selected' : ''}>Срочно</option><option ${order.manager?.priority === 'Ждёт фото' ? 'selected' : ''}>Ждёт фото</option></select></div>
-          <div class="fr full"><label for="adm-notes-${esc(order.id)}">Заметки менеджера</label><textarea id="adm-notes-${esc(order.id)}">${esc(order.manager?.notes || '')}</textarea></div>
-          <div class="fr full"><label for="adm-contractor-${esc(order.id)}">Передать подрядчику</label><select id="adm-contractor-${esc(order.id)}">
-            <option value="">— выберите подрядчика —</option>
-            ${ctrs.map(c => `<option value="${esc(c.id)}" ${order.assignedContractorId === c.id ? 'selected' : ''}>${esc(c.name)} · ${esc((c.cats || []).join(', '))}</option>`).join('')}
-          </select></div>
-        </div>
-        <div class="ops-actions">
-          <button class="ops-btn" type="button" onclick="adminSaveOrder('${esc(order.id)}','clarifying')">Сохранить уточнение</button>
-          <button class="ops-btn primary" type="button" onclick="adminSaveOrder('${esc(order.id)}','ready')">Детали согласованы</button>
-          <button class="ops-btn warn" type="button" onclick="adminAssignOrder('${esc(order.id)}')">Передать и уведомить</button>
-          <a class="ops-btn" href="${waHref(order.phone, 'Здравствуйте! Это ВИсбу. Уточняем детали по вашей заявке №' + orderNumber(order))}" target="_blank" rel="noopener">WhatsApp клиенту</a>
-        </div>
-        ${renderTimeline(order)}
-      </article>`;
-  }).join('');
-}
-
-function adminSaveOrder(orderId, nextStatus, shouldRender = true) {
-  const list = orders();
-  const order = list.find(o => o.id === orderId);
-  if (!order) return;
-  order.manager = {
-    task: document.getElementById(`adm-task-${orderId}`)?.value.trim() || '',
-    budget: document.getElementById(`adm-budget-${orderId}`)?.value.trim() || '',
-    date: document.getElementById(`adm-date-${orderId}`)?.value.trim() || '',
-    materials: document.getElementById(`adm-materials-${orderId}`)?.value.trim() || '',
-    priority: document.getElementById(`adm-priority-${orderId}`)?.value || 'Обычный',
-    notes: document.getElementById(`adm-notes-${orderId}`)?.value.trim() || '',
-  };
-  setOrderStatus(order, nextStatus, nextStatus === 'ready' ? 'Менеджер согласовал детали с клиентом' : 'Менеджер сохранил уточнения');
-  saveOrders(list);
-  if (shouldRender) {
-    renderAdminDashboard();
-    renderClientCabinet();
-  }
-}
-
-function adminAssignOrder(orderId) {
-  const select = document.getElementById(`adm-contractor-${orderId}`);
-  const contractorId = select?.value;
-  adminSaveOrder(orderId, 'ready', false);
-  const list = orders();
-  const order = list.find(o => o.id === orderId);
-  if (!order) return;
-  const ctr = contractorById(contractorId);
-  if (!ctr) {
-    alert('Выберите одобренного подрядчика для передачи заказа.');
-    renderAdminDashboard();
-    renderClientCabinet();
-    return;
-  }
-  order.assignedContractorId = contractorId;
-  order.assignedAt = nowRu();
-  setOrderStatus(order, 'assigned', `Заказ передан подрядчику ${ctr.name}`);
-  saveOrders(list);
-  renderAdminDashboard();
-  renderClientCabinet();
-  renderCabinet();
-  window.open(waHref(ctr.phone, `ВИсбу: у вас новый бесплатный заказ №${orderNumber(order)} — ${order.service}. Откройте кабинет и нажмите «Взять заказ».`), '_blank', 'noopener');
-}
-
-function setActiveContractor(id) {
-  localStorage.setItem(STORE.currentContractor, id);
-  renderCabinet();
-}
-
-function updateOrderFromContractor(orderId, status) {
-  const list = orders();
-  const order = list.find(o => o.id === orderId);
-  if (!order) return;
-  const ctr = contractorById(order.assignedContractorId);
-  if (status === 'accepted') order.acceptedAt = nowRu();
-  if (status === 'failed') order.resultNote = 'Подрядчик сообщил, что заказ сорвался';
-  const text = {
-    accepted: `Подрядчик ${ctr?.name || ''} взял заказ`,
-    in_progress: `Подрядчик ${ctr?.name || ''} выехал или начал работу`,
-    done: `Подрядчик ${ctr?.name || ''} отметил заказ выполненным`,
-    failed: `Подрядчик ${ctr?.name || ''} вернул заказ в админку`,
-  }[status] || STATUS[status]?.label;
-  setOrderStatus(order, status, text);
-  if (status === 'done' && ctr) {
-    const ctrs = contractors();
-    const item = ctrs.find(c => c.id === ctr.id);
-    if (item) {
-      item.completed = Number(item.completed || 0) + 1;
-      item.updatedAt = nowRu();
-      saveContractors(ctrs);
-    }
-  }
-  saveOrders(list);
-  renderCabinet();
-  renderClientCabinet();
-  renderAdminDashboard();
-}
-
 // ── ДЕМО-ЛЕНТА ЗАЯВОК ДЛЯ ПОДРЯДЧИКОВ ──────────────────────────────
 const LEADS = [
   { cat:'Сантехника', title:'Заменить смеситель и проверить трубы', area:'Всеволожский, Васкелово',
@@ -4388,7 +3687,7 @@ function renderLeadFeed() {
       <div class="ctr-lead-contact">
         🔒 <span class="blur">+7 911 234 56 78</span>
       </div>
-      <button class="ctr-lead-buy" onclick="document.getElementById('ctr-reg').scrollIntoView({behavior:'smooth'})">Встать в лист подрядчиков</button>
+      <button class="ctr-lead-buy" onclick="alert('Зарегистрируйтесь подрядчиком, чтобы покупать контакты — внизу страницы.')">Купить контакт за ${l.price} ₽</button>
     </div>
   `).join('');
 }
@@ -4407,62 +3706,31 @@ function closeContractorCabinet() {
 function renderCabinet() {
   const grid = document.getElementById('ctr-cab-grid');
   if (!grid) return;
-  const select = document.getElementById('cab-contractor-select');
-  const approved = contractors().filter(c => c.moderation === 'approved');
-  if (select) {
-    const current = localStorage.getItem(STORE.currentContractor) || approved[0]?.id || '';
-    select.innerHTML = approved.length
-      ? approved.map(c => `<option value="${esc(c.id)}" ${c.id === current ? 'selected' : ''}>${esc(c.name)} · ${esc((c.cats || []).join(', '))}</option>`).join('')
-      : '<option value="">Нет одобренных подрядчиков</option>';
-    if (current) localStorage.setItem(STORE.currentContractor, current);
-  }
-  const activeId = localStorage.getItem(STORE.currentContractor) || approved[0]?.id || '';
-  const ctr = contractorById(activeId);
-  const name = document.getElementById('cab-contractor-name');
-  const rate = document.getElementById('cab-contractor-rate');
-  if (name) name.textContent = ctr ? ctr.name : 'Подрядчик не выбран';
-  if (rate) rate.textContent = ctr ? `⭐ ${ctr.rating || 'новый'} · выполнено ${ctr.completed || 0} · ${((ctr.cats || []).join(', ') || 'категории не выбраны')}` : 'Одобрите подрядчика в админке';
-
-  if (!ctr) {
-    grid.innerHTML = `<div class="empty-state">Пока нет одобренных подрядчиков. Зарегистрируйте анкету и одобрите её в админ-панели.</div>`;
-    return;
-  }
-  let list = orders().filter(o => o.assignedContractorId === ctr.id);
-  if (cabFilter !== 'Все') list = list.filter(o => o.category === cabFilter);
-  if (!list.length) {
-    grid.innerHTML = `<div class="empty-state">Назначенных заказов пока нет. В админке выберите заказ, назначьте подрядчика и нажмите «Передать и уведомить».</div>`;
-    return;
-  }
-  grid.innerHTML = list.map(order => {
-    const canAccept = order.status === 'assigned';
-    const canWork = order.status === 'accepted';
-    const canFinish = ['accepted', 'in_progress'].includes(order.status);
-    return `
-      <article class="ctr-lead">
-        <div class="ctr-lead-top">
-          <span class="ctr-lead-cat">${esc(order.category)}</span>
-          ${statusChip(order.status)}
-        </div>
-        <div class="ctr-lead-title">${esc(order.service)}</div>
-        <div class="ctr-lead-meta">
-          <span>📍 ${esc(order.address || 'адрес уточняется')}</span>
-          <span>🕐 ${esc(order.manager?.date || 'по договорённости')}</span>
-        </div>
-        <div class="ctr-lead-budget">${esc(order.manager?.budget || 'Бюджет уточняется')}</div>
-        <p class="ops-muted">${esc(order.manager?.task || order.comment || 'Детали заказа появятся после уточнения менеджером.')}</p>
-        <div class="ctr-lead-contact">
-          📱 <strong>${esc(order.clientName)}</strong> · ${esc(order.phone)}
-        </div>
-        <div class="ops-actions">
-          ${canAccept ? `<button class="ops-btn primary" type="button" onclick="updateOrderFromContractor('${esc(order.id)}','accepted')">Взять заказ</button>` : ''}
-          ${canWork ? `<button class="ops-btn" type="button" onclick="updateOrderFromContractor('${esc(order.id)}','in_progress')">Выехал / в работе</button>` : ''}
-          ${canFinish ? `<button class="ops-btn primary" type="button" onclick="updateOrderFromContractor('${esc(order.id)}','done')">Выполнено</button>` : ''}
-          ${canFinish ? `<button class="ops-btn danger" type="button" onclick="updateOrderFromContractor('${esc(order.id)}','failed')">Сорвалось</button>` : ''}
-          <a class="ops-btn" href="${phoneHref(order.phone)}">Позвонить</a>
-          <a class="ops-btn" href="${waHref(order.phone, 'Здравствуйте! Это подрядчик ВИсбу по заказу №' + orderNumber(order))}" target="_blank" rel="noopener">WhatsApp</a>
-        </div>
-      </article>`;
-  }).join('');
+  const list = LEADS.filter(l => cabFilter === 'Все' || l.cat === cabFilter);
+  grid.innerHTML = list.map((l, i) => `
+    <div class="ctr-lead">
+      ${l.exclusive ? '<span class="ctr-lead-exclusive">Эксклюзив 1ч</span>' : ''}
+      <div class="ctr-lead-top">
+        <span class="ctr-lead-cat">${l.cat}</span>
+        <span class="ctr-lead-time">${l.when}</span>
+      </div>
+      <div class="ctr-lead-title">${l.title}</div>
+      <div class="ctr-lead-meta">
+        <span>📍 ${l.area}</span>
+        <span>⏱ ${l.urgency}</span>
+      </div>
+      <div class="ctr-lead-budget">${l.budget}</div>
+      <div class="ctr-lead-contact">
+        🔒 <span class="blur">${l.contact}</span>
+      </div>
+      <button class="ctr-lead-buy" data-i="${i}">Купить за ${l.price} ₽</button>
+    </div>
+  `).join('');
+  grid.querySelectorAll('.ctr-lead-buy').forEach(b => {
+    b.addEventListener('click', () => {
+      alert('🎬 Демо-режим\n\nВ боевом режиме здесь:\n• С баланса спишется ' + LEADS[parseInt(b.dataset.i)].price + ' ₽\n• Откроется телефон и адрес клиента\n• Вы получите уведомление в Telegram\n\nКонтакт будет эксклюзивно ваш на 1 час. Если не дозвонились — деньги вернутся.');
+    });
+  });
 }
 document.addEventListener('click', e => {
   if (e.target.matches('.ctr-cab-toolbar button')) {
@@ -4514,28 +3782,30 @@ function bindContractorRegistration() {
     ].filter(Boolean).join('\n');
 
     const contractor = {
-      name, phone, email, exp, status, team,
+      id: Date.now(), name, phone, email, exp, status, team,
       cats, areas, portfolio, about,
       date: new Date().toLocaleString('ru-RU')
     };
 
     const btn = e.target.querySelector('.btn-ctr-submit');
     btn.textContent = 'Отправляем...'; btn.disabled = true;
-    const storedContractor = saveContractorApplication(contractor);
     let result = { ok: false };
     try {
-      result = await submitLead({ type: 'contractor', text, contractor: storedContractor });
+      result = await submitLead({ type: 'contractor', text, contractor });
     } catch (err) {
       console.error('Lead endpoint error:', err);
     }
-    const ok = document.getElementById('ctr-reg-ok');
-    ok.innerHTML = `
-      <div class="si">✅</div>
-      <h3>Анкета в админ-панели</h3>
-      <p>Подрядчик сохранён в демо-системе. Теперь в админке его можно одобрить и передавать ему заказы.</p>
-      ${!result.ok ? `<p style="margin-top:14px;"><a class="btn-send" style="display:inline-flex;justify-content:center;text-decoration:none;" href="${whatsappUrl(text)}" target="_blank" rel="noopener">Отправить анкету в WhatsApp</a></p>` : ''}`;
+    if (!result.ok) {
+      const pending = JSON.parse(localStorage.getItem('vizbu_pending_contractors') || '[]');
+      pending.unshift(contractor);
+      localStorage.setItem('vizbu_pending_contractors', JSON.stringify(pending));
+      btn.textContent = 'Отправить заявку →'; btn.disabled = false;
+      window.open(whatsappUrl(text), '_blank', 'noopener');
+      alert('Онлайн-отправка через сайт пока не настроена. Мы открыли WhatsApp с текстом анкеты — отправьте сообщение там, чтобы заявка точно дошла.');
+      return;
+    }
     document.getElementById('ctr-reg-form').style.display = 'none';
-    ok.style.display = 'block';
+    document.getElementById('ctr-reg-ok').style.display = 'block';
     btn.textContent = 'Отправить заявку →'; btn.disabled = false;
     document.getElementById('ctr-reg').scrollIntoView({behavior:'smooth', block:'center'});
   });
@@ -5332,7 +4602,9 @@ document.getElementById('form').addEventListener('submit', async e => {
   btn.textContent = 'Отправляем...'; btn.disabled = true;
 
   const photoCount = selectedPhotos.length;
-  const order = createStoredOrder({ svc, name, phone, addr, comm, extras, photoCount });
+  const order = { id: Date.now(), svc, name, phone, addr, comm, extras, photoCount,
+                  promo: promoCode,
+                  date: new Date().toLocaleString('ru-RU') };
 
   let result = { ok: false };
   try {
@@ -5347,19 +4619,18 @@ document.getElementById('form').addEventListener('submit', async e => {
     pending.unshift(order);
     localStorage.setItem('vizbu_pending_orders', JSON.stringify(pending));
     ok.innerHTML = `
-      <div class="si">✅</div>
-      <h3>Заявка создана в демо-кабинете</h3>
-      <p>Она уже появилась в «Моих заказах» и админ-панели. Для реального сообщения менеджеру можно отправить её в WhatsApp.</p>
+      <div class="si">💬</div>
+      <h3>Отправьте заявку в WhatsApp</h3>
+      <p>Онлайн-отправка через сайт пока не настроена. Мы сохранили черновик в браузере, а WhatsApp точно доставит заявку.</p>
       <p style="margin-top:14px;">
         <a class="btn-send" style="display:inline-flex;justify-content:center;text-decoration:none;" href="${whatsappUrl(text)}" target="_blank" rel="noopener">Открыть WhatsApp</a>
-        <button class="ops-btn ops-inline-link" type="button" onclick="switchPage('client');closeModal();">Мои заказы</button>
       </p>`;
   } else {
     ok.innerHTML = `
       <div class="si">✅</div>
       <h3>Заявка принята!</h3>
-      <p>Мы перезвоним в течение часа. Статус уже доступен в разделе «Мои заказы».</p>`;
-    // Если не залогинен через наш auth — мягко предложим регистрацию с паролем
+      <p>Мы перезвоним в течение часа и согласуем всё. Спасибо, что выбрали ВИсбу!</p>`;
+    // Если пользователь не залогинен — мягко предложим зарегистрироваться
     if (!localStorage.getItem('vizbu_auth_token')) {
       setTimeout(() => { try { showRegPrompt(); } catch {} }, 700);
     }
@@ -5378,18 +4649,391 @@ renderHot();
 render();
 renderLeadFeed();
 bindContractorRegistration();
-bindClientCabinet();
-renderClientCabinet();
-renderAdminDashboard();
 
 
 // ════════════════════════════════════════════════════════════════════
-// AUTH — клиентская регистрация/вход с паролем
-// (отдельный поток от brother's page-client который работает по телефону без пароля)
+// АДМИН-ПАНЕЛЬ (заявки клиентов и подрядчиков)
 // ════════════════════════════════════════════════════════════════════
-const AUTH_KEY   = 'vizbu_auth_token';
-const CLIENT_KEY = 'vizbu_auth_client';
-const LOCAL_CLIENTS_KEY = 'vizbu_local_clients';
+let adminFilter = 'all';
+let ctrFilter   = 'all';
+
+function openAdmin() {
+  const pwd = prompt('🔐 Введите пароль администратора:');
+  if (pwd !== 'visbu2026' && pwd !== 'vizbu2026') { if (pwd !== null) alert('Неверный пароль'); return; }
+  document.getElementById('admin-overlay').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  renderAdminOrders();
+  renderAdminContractors();
+  renderAdminClients();
+}
+function closeAdmin() {
+  document.getElementById('admin-overlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+function adminTab(t) {
+  document.getElementById('admin-tab-orders').style.display       = t === 'orders'      ? '' : 'none';
+  document.getElementById('admin-tab-contractors').style.display  = t === 'contractors' ? '' : 'none';
+  const cl = document.getElementById('admin-tab-clients');
+  if (cl) cl.style.display = t === 'clients' ? '' : 'none';
+  document.getElementById('at-orders').style.background       = t === 'orders'      ? '#1b4332' : '#F4F7F4';
+  document.getElementById('at-orders').style.color           = t === 'orders'      ? '#fff'    : '#1A1A1A';
+  document.getElementById('at-contractors').style.background = t === 'contractors' ? '#1b4332' : '#F4F7F4';
+  document.getElementById('at-contractors').style.color      = t === 'contractors' ? '#fff'    : '#1A1A1A';
+  const cb = document.getElementById('at-clients');
+  if (cb) {
+    cb.style.background = t === 'clients' ? '#1b4332' : '#F4F7F4';
+    cb.style.color      = t === 'clients' ? '#fff'    : '#1A1A1A';
+  }
+  if (t === 'clients') renderAdminClients();
+}
+function filterAdmin(f) {
+  adminFilter = f;
+  ['all','new','work','done'].forEach(s => {
+    const b = document.getElementById('af-' + s);
+    if (!b) return;
+    if (s === f) { b.style.background = '#2D6A4F'; b.style.color = '#fff'; b.style.borderColor = '#2D6A4F'; }
+    else         { b.style.background = '#fff';    b.style.color = '#1A1A1A'; b.style.borderColor = '#E5EDE8'; }
+  });
+  renderAdminOrders();
+}
+function filterCtr(f) {
+  ctrFilter = f;
+  ['all','pending','approved','rejected'].forEach(s => {
+    const b = document.getElementById('cf-' + s);
+    if (!b) return;
+    if (s === f) { b.style.background = '#2D6A4F'; b.style.color = '#fff'; b.style.borderColor = '#2D6A4F'; }
+    else         { b.style.background = '#fff';    b.style.color = '#1A1A1A'; b.style.borderColor = '#E5EDE8'; }
+  });
+  renderAdminContractors();
+}
+async function renderAdminOrders() {
+  const c = document.getElementById('admin-orders');
+  if (!c) return;
+  c.innerHTML = '<div class="empty-state">Загружаем…</div>';
+
+  let orders = [];
+  try {
+    const r = await fetch('/api/api.php?action=admin_orders');
+    const d = await r.json();
+    if (d && d.ok) orders = d.orders || [];
+  } catch {}
+  if (!orders.length) {
+    // fallback to localStorage
+    try { orders = JSON.parse(localStorage.getItem('vizbu_orders') || '[]'); } catch {}
+  }
+
+  const filtered = adminFilter === 'all' ? orders : orders.filter(o =>
+    adminFilter === 'new'  ? (o.status === 'new') :
+    adminFilter === 'work' ? (o.status === 'work' || o.status === 'taken' || o.status === 'broadcasting' || o.status === 'confirmed') :
+                             (o.status === 'done' || o.status === 'completed' || o.status === 'rated')
+  );
+  if (!filtered.length) { c.innerHTML = '<div class="empty-state">📭 Заявок нет</div>'; return; }
+
+  c.innerHTML = filtered.map(o => {
+    const id = o.id || '';
+    const st = o.status || 'new';
+    const stClass = (st === 'new') ? 'status-new'
+                   : (st === 'done' || st === 'completed' || st === 'rated') ? 'status-done'
+                   : 'status-work';
+    const date = o.date || (o.created_at ? new Date(o.created_at * 1000).toLocaleString('ru-RU') : '');
+    const svc  = o.svc || o.service || '';
+    const name = o.name || '';
+    const phone = o.phone || '';
+    const addr = o.addr || o.address || '';
+    const comm = o.comm || o.comment || '';
+    const promo = o.promo || '';
+    const extras = o.extras || {};
+    const extrasHtml = Object.keys(extras).map(k => `<span class="order-tag">${k}: ${Array.isArray(extras[k]) ? extras[k].join(', ') : extras[k]}</span>`).join('');
+    return `
+      <div class="order-card ${stClass}">
+        <div class="order-head">
+          <div>
+            <div class="order-svc">${svc || '(без услуги)'} ${promo ? '· 🎁 ' + promo : ''}</div>
+            <div class="order-date">#${id} · ${date}</div>
+          </div>
+          <div class="order-actions">
+            <a class="btn-call" href="tel:${phone}">📞 ${phone}</a>
+            <a class="btn-wa" href="https://wa.me/${phone.replace(/\D/g,'')}" target="_blank" rel="noopener">WA</a>
+          </div>
+        </div>
+        <div class="order-info">
+          <span class="order-tag">👤 ${name}</span>
+          ${addr ? `<span class="order-tag">📍 ${addr}</span>` : ''}
+          ${extrasHtml}
+        </div>
+        ${comm ? `<div class="order-comm">💬 ${comm}</div>` : ''}
+        <div class="order-actions">
+          <button class="btn-status" onclick="setOrderStatus('${id}','new')">🆕 Новая</button>
+          <button class="btn-status" onclick="setOrderStatus('${id}','work')">⏳ В работе</button>
+          <button class="btn-status" onclick="setOrderStatus('${id}','done')">✅ Выполнено</button>
+          <button class="btn-status" onclick="deleteOrder('${id}')" style="margin-left:auto;color:#dc2626;border-color:#fecaca;">🗑</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+async function setOrderStatus(id, status) {
+  try {
+    await fetch('/api/api.php?action=order_status', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ order_id: id, status })
+    });
+  } catch {}
+  // local sync
+  try {
+    const orders = JSON.parse(localStorage.getItem('vizbu_orders') || '[]');
+    const i = orders.findIndex(o => String(o.id) === String(id));
+    if (i >= 0) { orders[i].status = status; localStorage.setItem('vizbu_orders', JSON.stringify(orders)); }
+  } catch {}
+  renderAdminOrders();
+}
+async function deleteOrder(id) {
+  if (!confirm('Удалить заявку?')) return;
+  try {
+    await fetch('/api/api.php?action=order_delete', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ order_id: id })
+    });
+  } catch {}
+  try {
+    const orders = JSON.parse(localStorage.getItem('vizbu_orders') || '[]').filter(o => String(o.id) !== String(id));
+    localStorage.setItem('vizbu_orders', JSON.stringify(orders));
+  } catch {}
+  renderAdminOrders();
+}
+async function clearDone() {
+  if (!confirm('Удалить все выполненные заявки?')) return;
+  try {
+    await fetch('/api/api.php?action=order_clear_done', { method:'POST' });
+  } catch {}
+  try {
+    const orders = JSON.parse(localStorage.getItem('vizbu_orders') || '[]')
+      .filter(o => !['done','completed','rated'].includes(o.status));
+    localStorage.setItem('vizbu_orders', JSON.stringify(orders));
+  } catch {}
+  renderAdminOrders();
+}
+async function renderAdminContractors() {
+  const c = document.getElementById('admin-contractors');
+  if (!c) return;
+  c.innerHTML = '<div class="empty-state">Загружаем…</div>';
+
+  let list = [];
+  try {
+    const r = await fetch('/api/api.php?action=admin_contractors');
+    const d = await r.json();
+    if (d && d.ok) list = d.contractors || [];
+  } catch {}
+  if (!list.length) {
+    try { list = JSON.parse(localStorage.getItem('vizbu_pending_contractors') || '[]'); } catch {}
+  }
+  const pendingCnt = list.filter(x => (x.moderation_status || x.status_mod || 'pending') === 'pending').length;
+  const badge = document.getElementById('ct-pending-cnt');
+  if (badge) {
+    if (pendingCnt) { badge.textContent = pendingCnt; badge.style.display = 'inline-block'; }
+    else { badge.style.display = 'none'; }
+  }
+  const filtered = ctrFilter === 'all' ? list : list.filter(x => (x.moderation_status || x.status_mod || 'pending') === ctrFilter);
+  if (!filtered.length) { c.innerHTML = '<div class="empty-state">📭 Подрядчиков нет</div>'; return; }
+
+  c.innerHTML = filtered.map(x => {
+    const ms = x.moderation_status || x.status_mod || 'pending';
+    return `
+      <div class="order-card">
+        <div class="order-head">
+          <div>
+            <div class="order-svc">${x.name || ''} ${x.team ? '· 👥 ' + x.team : ''}</div>
+            <div class="order-date">${x.date || ''} · ${ms}</div>
+          </div>
+          <div class="order-actions">
+            <a class="btn-call" href="tel:${x.phone}">📞 ${x.phone || ''}</a>
+            ${x.phone ? `<a class="btn-wa" href="https://wa.me/${String(x.phone).replace(/\D/g,'')}" target="_blank" rel="noopener">WA</a>` : ''}
+          </div>
+        </div>
+        <div class="order-info">
+          ${x.email ? `<span class="order-tag">📧 ${x.email}</span>` : ''}
+          ${x.exp ? `<span class="order-tag">🛠 ${x.exp} лет</span>` : ''}
+          ${x.status ? `<span class="order-tag">💼 ${x.status}</span>` : ''}
+          ${(x.cats || []).length ? `<span class="order-tag">🔧 ${(x.cats || []).join(', ')}</span>` : ''}
+          ${(x.areas || []).length ? `<span class="order-tag">📍 ${(x.areas || []).join(', ')}</span>` : ''}
+        </div>
+        ${x.about ? `<div class="order-comm">💬 ${x.about}</div>` : ''}
+        <div class="order-actions">
+          <button class="btn-status" onclick="setCtrStatus('${x.id || ''}','approved')">✅ Одобрить</button>
+          <button class="btn-status" onclick="setCtrStatus('${x.id || ''}','rejected')">❌ Отклонить</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+async function setCtrStatus(id, status) {
+  try {
+    await fetch('/api/api.php?action=contractor_status', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ contractor_id: id, status })
+    });
+  } catch {}
+  renderAdminContractors();
+}
+
+// ════════════════════════════════════════════════════════════════════
+// МОИ ЗАКАЗЫ — кабинет клиента
+// ════════════════════════════════════════════════════════════════════
+const STATUS_LABEL_RU = {
+  new:'🆕 Принята, скоро перезвоним',
+  confirmed:'✅ Согласована — ищем мастера',
+  broadcasting:'📢 Подбираем подрядчика',
+  taken:'👷 Мастер взял заказ',
+  work:'⏳ В работе',
+  completed:'🏁 Выполнено — оцените!',
+  done:'🏁 Выполнено',
+  cancelled:'❌ Сорвалось — мы свяжемся',
+  rated:'⭐ Закрыто',
+};
+function openMyOrders() {
+  const phone = localStorage.getItem('vizbu_my_phone') || '';
+  if (phone) document.getElementById('my-phone').value = phone;
+  document.getElementById('my-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if (phone) loadMyOrders();
+}
+function closeMyOrders() {
+  document.getElementById('my-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+async function loadMyOrders() {
+  const phone = document.getElementById('my-phone').value.trim();
+  if (!phone) return;
+  localStorage.setItem('vizbu_my_phone', phone);
+  const c = document.getElementById('my-orders');
+  c.innerHTML = '<div class="my-empty">Загружаем…</div>';
+
+  let orders = [];
+  let backendOk = false;
+  try {
+    const r = await fetch('/api/api.php?action=my_orders&phone=' + encodeURIComponent(phone));
+    const d = await r.json();
+    if (d && d.ok) { backendOk = true; orders = d.orders || []; }
+  } catch {}
+  if (!backendOk) {
+    try {
+      const all = JSON.parse(localStorage.getItem('vizbu_orders') || '[]');
+      orders = all.filter(o => (o.phone || '').replace(/\D/g,'') === phone.replace(/\D/g,''));
+    } catch {}
+  }
+  if (!orders.length) {
+    c.innerHTML = '<div class="my-empty"><div class="e">📭</div>По этому номеру заказов пока нет.<br/>Оставьте заявку через каталог!</div>';
+    return;
+  }
+  c.innerHTML = orders.map(o => {
+    const date = o.created_at
+      ? new Date(o.created_at * 1000).toLocaleDateString('ru-RU', { day:'numeric', month:'long', hour:'2-digit', minute:'2-digit' })
+      : (o.date || '');
+    const st = o.status || 'new';
+    const stCls = 'mst-' + st;
+    let extras = '';
+    if (o.contractor_name && (st === 'taken' || st === 'completed' || st === 'rated')) {
+      extras += `<div>👷 Мастер: <strong>${o.contractor_name}</strong>${o.contractor_phone ? ' · ' + o.contractor_phone : ''}</div>`;
+    }
+    if (o.address || o.addr) extras += `<div>📍 ${o.address || o.addr}</div>`;
+    if (o.budget) extras += `<div>💰 Бюджет: ${o.budget}</div>`;
+    let rateBlock = '';
+    if (st === 'completed' && !o.rating) {
+      rateBlock = `<div class="my-rate">
+        <div class="my-rate-label">Как вам работа мастера?</div>
+        <div class="my-stars" data-oid="${o.id}">
+          ${[1,2,3,4,5].map(i => `<span class="my-star" data-r="${i}">★</span>`).join('')}
+        </div></div>`;
+    } else if (st === 'rated' && o.rating) {
+      rateBlock = `<div class="my-rate"><div class="my-rate-done">✓ Вы оценили: ${'★'.repeat(o.rating)}${'☆'.repeat(5 - o.rating)}</div></div>`;
+    }
+    return `<div class="my-order">
+      <div class="my-order-top">
+        <div class="my-order-svc">${o.service || o.svc || ''}</div>
+        <span class="my-order-status ${stCls}">${STATUS_LABEL_RU[st] || st}</span>
+      </div>
+      <div class="my-order-meta">#${o.id} · ${date}</div>
+      <div class="my-order-info">${extras}</div>
+      ${rateBlock}
+    </div>`;
+  }).join('');
+  // обработчики звёзд
+  c.querySelectorAll('.my-stars').forEach(stars => {
+    const oid = stars.dataset.oid;
+    const arr = stars.querySelectorAll('.my-star');
+    arr.forEach(s => {
+      s.addEventListener('mouseover', () => {
+        const r = parseInt(s.dataset.r);
+        arr.forEach((x,i) => x.classList.toggle('hover', i < r));
+      });
+      s.addEventListener('mouseout', () => arr.forEach(x => x.classList.remove('hover')));
+      s.addEventListener('click', async () => {
+        const rating = parseInt(s.dataset.r);
+        const ph = document.getElementById('my-phone').value.trim();
+        try {
+          const r = await fetch('/api/api.php?action=rate', {
+            method:'POST', headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({ order_id: parseInt(oid), rating, phone: ph })
+          });
+          const d = await r.json();
+          if (d.ok) loadMyOrders(); else alert('Ошибка: ' + (d.error || ''));
+        } catch (e) { alert('Сеть недоступна, попробуйте позже'); }
+      });
+    });
+  });
+}
+
+// Авто-открытие модалки "Мои заказы" по URL ?my_orders=1
+(function autoOpenMyOrders() {
+  const url = new URL(location.href);
+  if (url.searchParams.get('my_orders') === '1') {
+    const ph = url.searchParams.get('phone');
+    if (ph) document.getElementById('my-phone').value = ph;
+    setTimeout(openMyOrders, 200);
+  }
+})();
+
+// 3 клика по логотипу → админка
+(function () {
+  let logoClicks = 0, logoTimer;
+  const logo = document.querySelector('.logo');
+  if (!logo) return;
+  logo.addEventListener('click', () => {
+    logoClicks++;
+    clearTimeout(logoTimer);
+    logoTimer = setTimeout(() => logoClicks = 0, 2000);
+    if (logoClicks >= 3) { logoClicks = 0; openAdmin(); }
+  });
+})();
+
+// Промокод: лёгкая валидация при вводе
+(function () {
+  const promo = document.getElementById('f-promo');
+  if (!promo) return;
+  const msg = document.getElementById('f-promo-msg');
+  const codes = {
+    VESNA:  { label: '−10% на сезонные работы' },
+    DACHA:  { label: '−5% на любую заявку' },
+    'ДАЧА': { label: '−5% на любую заявку' },
+  };
+  promo.addEventListener('input', () => {
+    const c = (promo.value || '').trim().toUpperCase();
+    if (!c) { msg.style.display = 'none'; return; }
+    msg.style.display = 'block';
+    if (codes[c]) {
+      msg.style.color = '#15803D';
+      msg.innerHTML = `✅ Промокод применён · <strong>${c}</strong> · ${codes[c].label}`;
+    } else {
+      msg.style.color = '#B45309';
+      msg.innerHTML = `⏳ Проверим промокод <strong>${c}</strong> при оформлении`;
+    }
+  });
+})();
+
+
+// ════════════════════════════════════════════════════════════════════
+// AUTH — клиентская регистрация и вход
+// ════════════════════════════════════════════════════════════════════
+const AUTH_KEY  = 'vizbu_auth_token';
+const CLIENT_KEY = 'vizbu_client';
 
 function getAuthToken()   { return localStorage.getItem(AUTH_KEY) || ''; }
 function getCurrentClient() {
@@ -5398,16 +5042,8 @@ function getCurrentClient() {
 function setAuth(token, client) {
   if (token)  localStorage.setItem(AUTH_KEY, token);   else localStorage.removeItem(AUTH_KEY);
   if (client) localStorage.setItem(CLIENT_KEY, JSON.stringify(client)); else localStorage.removeItem(CLIENT_KEY);
-  // Также синхронизируем телефон с братовым store, чтобы page-client тоже подхватывал
-  if (client && client.phone) {
-    try { localStorage.setItem('vizbu_current_client_phone', (client.phone || '').replace(/\D/g,'')); } catch {}
-    try {
-      // Регистрируем как клиент в системе брата (если функция есть)
-      if (typeof upsertClient === 'function') {
-        upsertClient({ name: client.name, phone: client.phone, addr: client.address || '' });
-      }
-    } catch {}
-  }
+  // Сразу же запомним телефон — чтобы "Мои заказы" работало даже если /api лёг
+  if (client && client.phone) localStorage.setItem('vizbu_my_phone', client.phone);
   refreshHeaderAuth();
   prefillFormFromAuth();
 }
@@ -5416,15 +5052,18 @@ function refreshHeaderAuth() {
   const c = getCurrentClient();
   const btn = document.getElementById('hdr-auth-btn');
   const info = document.getElementById('hdr-user-info');
+  const myBtn = document.getElementById('hdr-my-btn');
   if (!btn || !info) return;
   if (c) {
     btn.style.display = 'none';
     info.style.display = 'inline-flex';
     document.getElementById('hdr-user-name').textContent = '👤 ' + (c.name || 'Профиль');
+    if (myBtn) myBtn.style.display = 'none';   // в дропдауне есть "Мои заказы"
   } else {
     btn.style.display = '';
     info.style.display = 'none';
     info.classList.remove('open');
+    if (myBtn) myBtn.style.display = '';
   }
 }
 function toggleUserMenu(e) {
@@ -5436,19 +5075,13 @@ document.addEventListener('click', () => {
   if (u) u.classList.remove('open');
 });
 
-// Хелпер для перехода на страницу (использует братову систему страниц)
-function goToPage(p) {
-  try {
-    const tab = document.querySelector(`.nav-tab[data-page="${p}"]`);
-    if (tab) tab.click();
-  } catch {}
-}
-
+// Открыть/закрыть модалку авторизации
 function openAuth(tab) {
   authMsg('', '');
   authTab(tab || 'login');
   document.getElementById('auth-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
+  // Если открыли в режиме профиля — заполним поля текущими значениями
   if (tab === 'profile') {
     const c = getCurrentClient();
     if (c) {
@@ -5464,6 +5097,7 @@ function closeAuth() {
   document.body.style.overflow = '';
 }
 function authTab(t) {
+  // Сброс полей-сообщений
   authMsg('', '');
   const lt = document.getElementById('auth-tab-login');
   const rt = document.getElementById('auth-tab-register');
@@ -5477,22 +5111,31 @@ function authTab(t) {
 
   if (t === 'profile') {
     tabs.style.display = 'none';
-    fl.style.display = 'none'; fr.style.display = 'none'; fp.style.display = '';
+    fl.style.display = 'none';
+    fr.style.display = 'none';
+    fp.style.display = '';
     if (skip)  skip.style.display = 'none';
     title.textContent = '⚙️ Профиль';
     sub.textContent = 'Эти данные будут автоматически подставляться в форму заявки.';
     return;
   }
-  tabs.style.display = ''; fp.style.display = 'none';
+
+  tabs.style.display = '';
+  fp.style.display = 'none';
   if (skip) skip.style.display = '';
+
   if (t === 'register') {
-    lt.classList.remove('active'); rt.classList.add('active');
-    fl.style.display = 'none'; fr.style.display = '';
+    lt.classList.remove('active');
+    rt.classList.add('active');
+    fl.style.display = 'none';
+    fr.style.display = '';
     title.textContent = 'Регистрация в ВИсбу';
     sub.textContent   = 'Имя и телефон — обязательно. Адрес и доп. инфо подставятся в форму заявки автоматически.';
   } else {
-    lt.classList.add('active'); rt.classList.remove('active');
-    fl.style.display = ''; fr.style.display = 'none';
+    lt.classList.add('active');
+    rt.classList.remove('active');
+    fl.style.display = '';
+    fr.style.display = 'none';
     title.textContent = 'Войти в ВИсбу';
     sub.textContent   = 'Введите телефон и пароль, чтобы видеть свои заказы и не вводить данные заново.';
   }
@@ -5511,12 +5154,11 @@ function toggleAuthExtra() {
   a.textContent   = open ? '▾' : '▸';
 }
 
-// Безопасный API-вызов: парсит JSON только если ответ корректный
+// ── Безопасный API-вызов: парсит JSON только если ответ корректный
 async function safeApi(action, body, init) {
   init = init || {};
   const headers = Object.assign({'Content-Type':'application/json'}, init.headers || {});
-  const tok = getAuthToken();
-  if (tok && !tok.startsWith('local-') && !headers['X-Auth-Token']) headers['X-Auth-Token'] = tok;
+  const tok = getAuthToken(); if (tok && !headers['X-Auth-Token']) headers['X-Auth-Token'] = tok;
   let resp;
   try {
     resp = await fetch('/api/api.php?action=' + encodeURIComponent(action), {
@@ -5529,6 +5171,7 @@ async function safeApi(action, body, init) {
   }
   const txt = await resp.text();
   if (!txt) return { ok:false, offline:true, status:resp.status, error:'Сервер вернул пустой ответ (демо-режим без бэкенда)' };
+  // Если первый непробельный символ не "{" — это не JSON
   const trim = txt.trim();
   if (trim[0] !== '{' && trim[0] !== '[') {
     return { ok:false, offline:true, status:resp.status, error:'Сервер вернул не-JSON (демо-режим без бэкенда)' };
@@ -5541,16 +5184,19 @@ async function safeApi(action, body, init) {
   }
 }
 
-// Локальная "БД" клиентов для fallback
+// ── Локальная "БД" клиентов (когда /api недоступен)
+const LOCAL_CLIENTS_KEY = 'vizbu_local_clients';
 function localClientsAll() { try { return JSON.parse(localStorage.getItem(LOCAL_CLIENTS_KEY) || '[]'); } catch { return []; } }
 function localClientsSave(list) { localStorage.setItem(LOCAL_CLIENTS_KEY, JSON.stringify(list)); }
 function localClientFind(phone) {
   const norm = (phone||'').replace(/\D/g,'');
   return localClientsAll().find(c => (c.phone||'').replace(/\D/g,'') === norm) || null;
 }
+// Простой обратимый хеш для локальных паролей (всё равно localStorage в браузере клиента)
 function lhash(s) { let h = 0; for (let i = 0; i < s.length; i++) { h = ((h<<5)-h) + s.charCodeAt(i); h |= 0; } return 'l' + h; }
 
 async function tgNotifyRegistration(c) {
+  // Дублируем в Telegram, как фронт делает для заявок
   if (typeof tgSendText !== 'function') return;
   const lines = [
     '👤 *Новая регистрация клиента (демо/без бэкенда)*',
@@ -5572,6 +5218,7 @@ async function doLogin(e) {
   const btn = document.getElementById('li-btn');
   btn.disabled = true; btn.textContent = 'Входим…';
 
+  // 1) Пробуем серверный вход
   const d = await safeApi('client_login', { phone, password: pwd });
   if (d.ok) {
     setAuth(d.auth_token, d.client);
@@ -5580,6 +5227,8 @@ async function doLogin(e) {
     setTimeout(closeAuth, 700);
     return;
   }
+
+  // 2) Если бэкенда нет — пробуем локальную БД
   if (d.offline) {
     const c = localClientFind(phone);
     if (c && c.passHash === lhash(pwd)) {
@@ -5590,7 +5239,7 @@ async function doLogin(e) {
       setTimeout(closeAuth, 700);
       return;
     }
-    authMsg('❌ Бэкенд недоступен, а локального аккаунта с таким телефоном нет. Зарегистрируйтесь — данные сохранятся в браузере.', 'error');
+    authMsg('❌ Бэкенд недоступен, а локального аккаунта с таким телефоном нет. Зарегистрируйтесь — ваши данные сохранятся в браузере.', 'error');
   } else {
     authMsg('❌ ' + (d.error || 'Не удалось войти'), 'error');
   }
@@ -5613,6 +5262,7 @@ async function doRegister(e) {
   const btn = document.getElementById('ri-btn');
   btn.disabled = true; btn.textContent = 'Регистрируем…';
 
+  // 1) Пробуем серверную регистрацию
   const d = await safeApi('client_register', { name, phone, password: pwd, email, address: addr, comment: comm });
   if (d.ok) {
     setAuth(d.auth_token, d.client);
@@ -5621,6 +5271,8 @@ async function doRegister(e) {
     setTimeout(closeAuth, 800);
     return;
   }
+
+  // 2) Если бэкенда нет — сохраняем локально + шлём в Telegram, чтобы данные не потерялись
   if (d.offline) {
     if (localClientFind(phone)) {
       authMsg('❌ Этот номер уже зарегистрирован в этом браузере. Войдите по паролю.', 'error');
@@ -5640,6 +5292,8 @@ async function doRegister(e) {
     setTimeout(closeAuth, 1100);
     return;
   }
+
+  // 3) Бэкенд ответил, но ошибка
   authMsg('❌ ' + (d.error || 'Не удалось зарегистрироваться'), 'error');
   btn.disabled = false; btn.textContent = 'Зарегистрироваться';
 }
@@ -5647,6 +5301,7 @@ async function doRegister(e) {
 async function doLogout() {
   try { await safeApi('client_logout', {}, { method:'POST' }); } catch {}
   setAuth('', null);
+  // Разлогин не должен мешать оставлять анонимные заявки
 }
 
 async function doProfileSave(e) {
@@ -5658,6 +5313,7 @@ async function doProfileSave(e) {
   const btn = document.getElementById('pr-btn');
   btn.disabled = true; btn.textContent = 'Сохраняем…';
 
+  // 1) Серверный апдейт
   const d = await safeApi('client_update', { name, email, address, comment });
   if (d.ok) {
     setAuth(getAuthToken(), d.client);
@@ -5666,6 +5322,8 @@ async function doProfileSave(e) {
     setTimeout(closeAuth, 700);
     return;
   }
+
+  // 2) Локальный апдейт
   if (d.offline) {
     const cur = getCurrentClient();
     if (cur) {
@@ -5694,10 +5352,12 @@ function prefillFormFromAuth() {
   set('f-name',  c.name);
   set('f-phone', c.phone);
   set('f-addr',  c.address);
+  // Можно подставить и комментарий в плейсхолдер при желании
 }
 
+// Mini-prompt после анонимного заказа
 function showRegPrompt() {
-  if (getCurrentClient()) return;
+  if (getCurrentClient()) return;  // уже залогинен — пропускаем
   document.getElementById('reg-prompt').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -5706,41 +5366,118 @@ function closeRegPrompt() {
   document.body.style.overflow = '';
 }
 
-// На загрузке: если есть токен — подтянем данные клиента
+// При загрузке: подтянем актуальные данные клиента, если токен есть
 (async function initAuth() {
   refreshHeaderAuth();
   const tok = getAuthToken();
   if (!tok) { prefillFormFromAuth(); return; }
+  // Локальные токены начинаются на "local-" — не ходим на сервер
   if (tok.startsWith('local-')) { prefillFormFromAuth(); return; }
   const d = await safeApi('client_me');
   if (d.ok && d.client) setAuth(tok, d.client);
-  else if (!d.offline && !d.ok) setAuth('', null);
+  else if (!d.offline && !d.ok) setAuth('', null);   // токен невалиден — выкидываем
   prefillFormFromAuth();
 })();
 
-// Промокод: лёгкая валидация при вводе
-(function () {
-  const promo = document.getElementById('f-promo');
-  if (!promo) return;
-  const msg = document.getElementById('f-promo-msg');
-  const codes = {
-    VESNA:  { label: '−10% на сезонные работы' },
-    DACHA:  { label: '−5% на любую заявку' },
-    'ДАЧА': { label: '−5% на любую заявку' },
-  };
-  promo.addEventListener('input', () => {
-    const c = (promo.value || '').trim().toUpperCase();
-    if (!c) { msg.style.display = 'none'; return; }
-    msg.style.display = 'block';
-    if (codes[c]) {
-      msg.style.color = '#15803D';
-      msg.innerHTML = `✅ Промокод применён · <strong>${c}</strong> · ${codes[c].label}`;
+// ════════════════════════════════════════════════════════════════════
+// АДМИН — вкладка «Клиенты»
+// ════════════════════════════════════════════════════════════════════
+let adminClientsCache = [];
+
+async function renderAdminClients() {
+  const c = document.getElementById('admin-clients');
+  if (!c) return;
+  c.innerHTML = '<div class="empty-state">Загружаем…</div>';
+  const q = (document.getElementById('ad-clients-q')?.value || '').trim();
+  let list = [];
+  let isLocal = false;
+  try {
+    const url = '/api/api.php?action=admin_clients&pass=' + encodeURIComponent('vizbu2026') + (q ? '&q=' + encodeURIComponent(q) : '');
+    const r = await fetch(url);
+    const txt = await r.text();
+    const trim = txt.trim();
+    if (trim && (trim[0] === '{' || trim[0] === '[')) {
+      const d = JSON.parse(trim);
+      if (d && d.ok) list = d.clients || [];
     } else {
-      msg.style.color = '#B45309';
-      msg.innerHTML = `⏳ Проверим промокод <strong>${c}</strong> при оформлении`;
+      isLocal = true;
     }
-  });
-})();
+  } catch { isLocal = true; }
+  if (isLocal) {
+    // fallback на локально зарегистрированных в этом браузере
+    let locals = [];
+    try { locals = JSON.parse(localStorage.getItem('vizbu_local_clients') || '[]'); } catch {}
+    list = locals.map(x => ({
+      id: x.id, name: x.name, phone: x.phone, email: x.email,
+      address: x.address, comment: x.comment, orders_count: 0,
+      created_at: x.createdAt ? Math.floor(new Date(x.createdAt).getTime()/1000) : null,
+    }));
+    if (q) {
+      const ql = q.toLowerCase();
+      list = list.filter(x => (x.name||'').toLowerCase().includes(ql) ||
+                              (x.phone||'').includes(q) ||
+                              (x.email||'').toLowerCase().includes(ql));
+    }
+  }
+  adminClientsCache = list;
+
+  const cnt = document.getElementById('cl-cnt');
+  if (cnt) {
+    if (list.length) { cnt.textContent = list.length; cnt.style.display = 'inline-block'; }
+    else { cnt.style.display = 'none'; }
+  }
+
+  if (!list.length) {
+    c.innerHTML = '<div class="empty-state">📭 Зарегистрированных клиентов пока нет.' +
+      (isLocal ? '<br/><small>(демо-режим без бэкенда — здесь видны только клиенты из этого браузера)</small>' : '<br/>Они появятся здесь, когда кто-то заполнит форму регистрации на сайте.') +
+      '</div>';
+    return;
+  }
+  const banner = isLocal ? '<div class="auth-msg" style="background:#FEF3E7;color:#B45309;margin-bottom:10px;">⚠️ Демо-режим: бэкенд /api/api.php не отвечает. Показаны клиенты только из этого браузера.</div>' : '';
+  c.innerHTML = banner + `
+    <table class="ad-clients-table">
+      <thead><tr>
+        <th>#</th><th>Имя</th><th>Телефон</th><th>Email</th><th>Адрес</th><th>Заказов</th><th>Создан</th><th></th>
+      </tr></thead>
+      <tbody>
+        ${list.map(cl => {
+          const created = cl.created_at ? new Date(cl.created_at * 1000).toLocaleString('ru-RU') : '';
+          return `<tr>
+            <td>${cl.id}</td>
+            <td><strong>${escapeHtml(cl.name || '')}</strong>${cl.comment ? '<br/><small style="color:var(--muted);">' + escapeHtml(cl.comment) + '</small>' : ''}</td>
+            <td><a href="tel:${escapeHtml(cl.phone || '')}">${escapeHtml(cl.phone || '')}</a></td>
+            <td>${escapeHtml(cl.email || '')}</td>
+            <td>${escapeHtml(cl.address || '')}</td>
+            <td>${cl.orders_count || 0}</td>
+            <td>${created}</td>
+            <td><button onclick="deleteClient(${cl.id})" style="background:none;border:none;color:#dc2626;cursor:pointer;font-size:1rem;" title="Удалить">🗑</button></td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+async function deleteClient(id) {
+  if (!confirm('Удалить клиента? Его заявки сохранятся, но "отвяжутся".')) return;
+  try {
+    await fetch('/api/api.php?action=admin_client_delete&pass=' + encodeURIComponent('vizbu2026'), {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ id })
+    });
+  } catch {}
+  renderAdminClients();
+}
+
+function exportClientsCsv() {
+  // Просто откроем url — браузер скачает файл
+  const url = '/api/api.php?action=admin_clients_csv&pass=' + encodeURIComponent('vizbu2026');
+  window.open(url, '_blank');
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[ch]);
+}
 </script>
 </body>
 </html>
